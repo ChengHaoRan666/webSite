@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace 要和 mapper 接口的全类名保持一致-->
+<!--id 要和mapper 接口中的方法保持一致-->
+<mapper namespace="com.chr.website.mapper.userMapper">
+    <!--查-->
+    <select id="getAll">
+        select * from t_user;
+    </select>
+</mapper>

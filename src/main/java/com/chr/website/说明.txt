@@ -1,0 +1,9 @@
+config：配置文件类
+controller：SpringMVC 的控制器
+dao：数据访问层接口
+entity：实体类
+exception：异常处理
+interceptor：拦截器
+mapper：Mybatis 的 Mapper 接口
+service：业务逻辑层
+utils：工具类
