@@ -17,7 +17,7 @@ import java.util.List;
 public class index {
     @RequestMapping("/")
     public String index() {
-        return "index";
+        return "Home/index";
     }
 
     @Autowired
