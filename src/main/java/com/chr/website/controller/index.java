@@ -15,4 +15,23 @@ public class index {
         return "index";
     }
 
+    @RequestMapping("/a")
+    public String a() {
+        return "blank";
+    }
+
+    @RequestMapping("/b")
+    public String b() {
+        return "checkout";
+    }
+
+    @RequestMapping("/c")
+    public String c() {
+        return "product";
+    }
+
+    @RequestMapping("/d")
+    public String d() {
+        return "store";
+    }
 }
