@@ -30,7 +30,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public ITemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setPrefix("/WEB-INF/views/");
+        templateResolver.setPrefix("/views/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode("HTML");
         templateResolver.setCharacterEncoding("UTF-8");
