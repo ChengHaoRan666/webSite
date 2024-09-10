@@ -1,4 +1,4 @@
-<!--商店页-->
+<!--商店搜索页-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Electro - HTML Ecommerce Template</title>
+    <title>商品搜索页</title>
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -43,13 +43,13 @@
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
-                <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+                <li><a href="#"><i class="fa fa-phone"></i> 181 3312 6910</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> 2640708884@qq.com</a></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i> 许昌学院</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                <li><a href="#"><i class="fa fa-dollar"></i> 余额</a></li>
+                <li><a href="#"><i class="fa fa-user-o"></i> 我的账户</a></li>
             </ul>
         </div>
     </div>
@@ -76,12 +76,12 @@
                     <div class="header-search">
                         <form>
                             <select class="input-select">
-                                <option value="0">All Categories</option>
-                                <option value="1">Category 01</option>
-                                <option value="1">Category 02</option>
+                                <option value="0">所有类别</option>
+                                <option value="1">类别一</option>
+                                <option value="1">类别二</option>
                             </select>
-                            <input class="input" placeholder="Search here">
-                            <button class="search-btn">Search</button>
+                            <input class="input" placeholder="点击搜索">
+                            <button class="search-btn">搜索</button>
                         </form>
                     </div>
                 </div>
@@ -94,50 +94,54 @@
                         <div>
                             <a href="#">
                                 <i class="fa fa-heart-o"></i>
-                                <span>Your Wishlist</span>
-                                <div class="qty">2</div>
+                                <span>收藏</span>
+                                <div class="qty">21</div>
                             </a>
                         </div>
                         <!-- /Wishlist -->
 
-                        <!-- Cart -->
+                        <!-- 购物车下拉菜单 -->
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
-                                <span>Your Cart</span>
-                                <div class="qty">3</div>
+                                <span>购物车</span>
+                                <div class="qty">12</div>
                             </a>
                             <div class="cart-dropdown">
                                 <div class="cart-list">
+                                    <!--第一个商品-->
                                     <div class="product-widget">
                                         <div class="product-img">
                                             <img src="/website/static/img/product01.png" alt="">
                                         </div>
                                         <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+                                            <h3 class="product-name"><a href="#">产品名称</a></h3>
+                                            <h4 class="product-price"><span class="qty">1x</span>￥980.00</h4>
                                         </div>
                                         <button class="delete"><i class="fa fa-close"></i></button>
                                     </div>
 
+                                    <!--第二个商品-->
                                     <div class="product-widget">
                                         <div class="product-img">
                                             <img src="/website/static/img/product02.png" alt="">
                                         </div>
                                         <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+                                            <h3 class="product-name"><a href="#">产品名称</a></h3>
+                                            <h4 class="product-price"><span class="qty">3x</span>￥980.00</h4>
                                         </div>
                                         <button class="delete"><i class="fa fa-close"></i></button>
                                     </div>
                                 </div>
+
+                                <!--购物车摘要-->
                                 <div class="cart-summary">
-                                    <small>3 Item(s) selected</small>
-                                    <h5>SUBTOTAL: $2940.00</h5>
+                                    <small>已选择 3 件商品</small>
+                                    <h5>总价：￥100</h5>
                                 </div>
                                 <div class="cart-btns">
-                                    <a href="#">View Cart</a>
-                                    <a href="#">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="#">查看购物车</a>
+                                    <a href="#">结账 <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -171,13 +175,12 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Hot Deals</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Laptops</a></li>
-                <li><a href="#">Smartphones</a></li>
-                <li><a href="#">Cameras</a></li>
-                <li><a href="#">Accessories</a></li>
+                <li><a href="#">主页</a></li>
+                <li><a href="#">热销</a></li>
+                <li><a href="#">笔记本电脑</a></li>
+                <li><a href="#">智能手机</a></li>
+                <li><a href="#">相机</a></li>
+                <li><a href="#">配件</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -186,27 +189,6 @@
     <!-- /container -->
 </nav>
 <!-- /NAVIGATION -->
-
-<!-- BREADCRUMB -->
-<div id="breadcrumb" class="section">
-    <!-- container -->
-    <div class="container">
-        <!-- row -->
-        <div class="row">
-            <div class="col-md-12">
-                <ul class="breadcrumb-tree">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">All Categories</a></li>
-                    <li><a href="#">Accessories</a></li>
-                    <li class="active">Headphones (227,490 Results)</li>
-                </ul>
-            </div>
-        </div>
-        <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
-<!-- /BREADCRUMB -->
 
 <!-- SECTION -->
 <div class="section">
@@ -218,14 +200,14 @@
             <div id="aside" class="col-md-3">
                 <!-- aside Widget -->
                 <div class="aside">
-                    <h3 class="aside-title">Categories</h3>
+                    <h3 class="aside-title">类别</h3>
                     <div class="checkbox-filter">
 
                         <div class="input-checkbox">
                             <input type="checkbox" id="category-1">
                             <label for="category-1">
                                 <span></span>
-                                Laptops
+                                笔记本电脑
                                 <small>(120)</small>
                             </label>
                         </div>
@@ -234,7 +216,7 @@
                             <input type="checkbox" id="category-2">
                             <label for="category-2">
                                 <span></span>
-                                Smartphones
+                                手机
                                 <small>(740)</small>
                             </label>
                         </div>
@@ -243,7 +225,7 @@
                             <input type="checkbox" id="category-3">
                             <label for="category-3">
                                 <span></span>
-                                Cameras
+                                相机
                                 <small>(1450)</small>
                             </label>
                         </div>
@@ -252,26 +234,8 @@
                             <input type="checkbox" id="category-4">
                             <label for="category-4">
                                 <span></span>
-                                Accessories
+                                配件
                                 <small>(578)</small>
-                            </label>
-                        </div>
-
-                        <div class="input-checkbox">
-                            <input type="checkbox" id="category-5">
-                            <label for="category-5">
-                                <span></span>
-                                Laptops
-                                <small>(120)</small>
-                            </label>
-                        </div>
-
-                        <div class="input-checkbox">
-                            <input type="checkbox" id="category-6">
-                            <label for="category-6">
-                                <span></span>
-                                Smartphones
-                                <small>(740)</small>
                             </label>
                         </div>
                     </div>
@@ -280,7 +244,7 @@
 
                 <!-- aside Widget -->
                 <div class="aside">
-                    <h3 class="aside-title">Price</h3>
+                    <h3 class="aside-title">价格</h3>
                     <div class="price-filter">
                         <div id="price-slider"></div>
                         <div class="input-number price-min">
@@ -300,13 +264,13 @@
 
                 <!-- aside Widget -->
                 <div class="aside">
-                    <h3 class="aside-title">Brand</h3>
+                    <h3 class="aside-title">品牌</h3>
                     <div class="checkbox-filter">
                         <div class="input-checkbox">
                             <input type="checkbox" id="brand-1">
                             <label for="brand-1">
                                 <span></span>
-                                SAMSUNG
+                                三星
                                 <small>(578)</small>
                             </label>
                         </div>
@@ -314,7 +278,7 @@
                             <input type="checkbox" id="brand-2">
                             <label for="brand-2">
                                 <span></span>
-                                LG
+                                xxx
                                 <small>(125)</small>
                             </label>
                         </div>
@@ -322,7 +286,7 @@
                             <input type="checkbox" id="brand-3">
                             <label for="brand-3">
                                 <span></span>
-                                SONY
+                                xxx
                                 <small>(755)</small>
                             </label>
                         </div>
@@ -330,7 +294,7 @@
                             <input type="checkbox" id="brand-4">
                             <label for="brand-4">
                                 <span></span>
-                                SAMSUNG
+                                xxx
                                 <small>(578)</small>
                             </label>
                         </div>
@@ -338,7 +302,7 @@
                             <input type="checkbox" id="brand-5">
                             <label for="brand-5">
                                 <span></span>
-                                LG
+                                xxx
                                 <small>(125)</small>
                             </label>
                         </div>
@@ -346,7 +310,7 @@
                             <input type="checkbox" id="brand-6">
                             <label for="brand-6">
                                 <span></span>
-                                SONY
+                                xxx
                                 <small>(755)</small>
                             </label>
                         </div>
@@ -356,16 +320,16 @@
 
                 <!-- aside Widget -->
                 <div class="aside">
-                    <h3 class="aside-title">Top selling</h3>
+                    <h3 class="aside-title">热销</h3>
                     <div class="product-widget">
                         <div class="product-img">
                             <img src="/website/static/img/product01.png" alt="">
                         </div>
                         <div class="product-body">
-                            <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00
-                                <del class="product-old-price">$990.00</del>
+                            <p class="product-category">类别</p>
+                            <h3 class="product-name"><a href="#">产品名称</a></h3>
+                            <h4 class="product-price">￥980.00
+                                <del class="product-old-price">￥990.00</del>
                             </h4>
                         </div>
                     </div>
@@ -375,10 +339,10 @@
                             <img src="/website/static/img/product02.png" alt="">
                         </div>
                         <div class="product-body">
-                            <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00
-                                <del class="product-old-price">$990.00</del>
+                            <p class="product-category">类别</p>
+                            <h3 class="product-name"><a href="#">产品名称</a></h3>
+                            <h4 class="product-price">￥980.00
+                                <del class="product-old-price">￥990.00</del>
                             </h4>
                         </div>
                     </div>
@@ -388,10 +352,10 @@
                             <img src="/website/static/img/product03.png" alt="">
                         </div>
                         <div class="product-body">
-                            <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00
-                                <del class="product-old-price">$990.00</del>
+                            <p class="product-category">类别</p>
+                            <h3 class="product-name"><a href="#">产品名称</a></h3>
+                            <h4 class="product-price">￥980.00
+                                <del class="product-old-price">￥990.00</del>
                             </h4>
                         </div>
                     </div>
@@ -406,19 +370,20 @@
                 <div class="store-filter clearfix">
                     <div class="store-sort">
                         <label>
-                            Sort By:
+                           排序方式:
                             <select class="input-select">
-                                <option value="0">Popular</option>
-                                <option value="1">Position</option>
+                                <option value="0">方式一</option>
+                                <option value="1">方式二</option>
                             </select>
                         </label>
 
                         <label>
-                            Show:
+                            每页:
                             <select class="input-select">
                                 <option value="0">20</option>
                                 <option value="1">50</option>
                             </select>
+                            条
                         </label>
                     </div>
                     <ul class="store-grid">
@@ -441,10 +406,10 @@
                                 </div>
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00
-                                    <del class="product-old-price">$990.00</del>
+                                <p class="product-category">类别</p>
+                                <h3 class="product-name"><a href="#">产品名称</a></h3>
+                                <h4 class="product-price">￥980.00
+                                    <del class="product-old-price">￥990.00</del>
                                 </h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
@@ -454,16 +419,16 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                                 <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">加入收藏</span>
                                     </button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">进行比较</span>
                                     </button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                             </div>
                         </div>
                     </div>
@@ -479,10 +444,10 @@
                                 </div>
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00
-                                    <del class="product-old-price">$990.00</del>
+                                <p class="product-category">类别</p>
+                                <h3 class="product-name"><a href="#">产品名称</a></h3>
+                                <h4 class="product-price">￥980.00
+                                    <del class="product-old-price">￥990.00</del>
                                 </h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
@@ -492,16 +457,16 @@
                                     <i class="fa fa-star-o"></i>
                                 </div>
                                 <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">加入收藏</span>
                                     </button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">进行比较</span>
                                     </button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                             </div>
                         </div>
                     </div>
@@ -516,24 +481,24 @@
                                 <img src="/website/static/img/product03.png" alt="">
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00
-                                    <del class="product-old-price">$990.00</del>
+                                <p class="product-category">类别</p>
+                                <h3 class="product-name"><a href="#">产品名称</a></h3>
+                                <h4 class="product-price">￥980.00
+                                    <del class="product-old-price">￥990.00</del>
                                 </h4>
                                 <div class="product-rating">
                                 </div>
                                 <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">加入收藏</span>
                                     </button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">进行比较</span>
                                     </button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                             </div>
                         </div>
                     </div>
@@ -548,24 +513,24 @@
                                 <img src="/website/static/img/product04.png" alt="">
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00
-                                    <del class="product-old-price">$990.00</del>
+                                <p class="product-category">类别</p>
+                                <h3 class="product-name"><a href="#">产品名称</a></h3>
+                                <h4 class="product-price">￥980.00
+                                    <del class="product-old-price">￥990.00</del>
                                 </h4>
                                 <div class="product-rating">
                                 </div>
                                 <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">加入收藏</span>
                                     </button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">进行比较</span>
                                     </button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                             </div>
                         </div>
                     </div>
@@ -580,24 +545,24 @@
                                 <img src="/website/static/img/product05.png" alt="">
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00
-                                    <del class="product-old-price">$990.00</del>
+                                <p class="product-category">类别</p>
+                                <h3 class="product-name"><a href="#">产品名称</a></h3>
+                                <h4 class="product-price">￥980.00
+                                    <del class="product-old-price">￥990.00</del>
                                 </h4>
                                 <div class="product-rating">
                                 </div>
                                 <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">加入收藏</span>
                                     </button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">进行比较</span>
                                     </button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                             </div>
                         </div>
                     </div>
@@ -610,10 +575,10 @@
                                 <img src="/website/static/img/product06.png" alt="">
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00
-                                    <del class="product-old-price">$990.00</del>
+                                <p class="product-category">类别</p>
+                                <h3 class="product-name"><a href="#">产品名称</a></h3>
+                                <h4 class="product-price">￥980.00
+                                    <del class="product-old-price">￥990.00</del>
                                 </h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
@@ -623,16 +588,16 @@
                                     <i class="fa fa-star-o"></i>
                                 </div>
                                 <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">加入收藏</span>
                                     </button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">进行比较</span>
                                     </button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                             </div>
                         </div>
                     </div>
@@ -647,10 +612,10 @@
                                 <img src="/website/static/img/product07.png" alt="">
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00
-                                    <del class="product-old-price">$990.00</del>
+                                <p class="product-category">类别</p>
+                                <h3 class="product-name"><a href="#">产品名称</a></h3>
+                                <h4 class="product-price">￥980.00
+                                    <del class="product-old-price">￥990.00</del>
                                 </h4>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
@@ -660,16 +625,16 @@
                                     <i class="fa fa-star"></i>
                                 </div>
                                 <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">加入收藏</span>
                                     </button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">进行比较</span>
                                     </button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                             </div>
                         </div>
                     </div>
@@ -682,24 +647,24 @@
                                 <img src="/website/static/img/product08.png" alt="">
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00
-                                    <del class="product-old-price">$990.00</del>
+                                <p class="product-category">类别</p>
+                                <h3 class="product-name"><a href="#">产品名称</a></h3>
+                                <h4 class="product-price">￥980.00
+                                    <del class="product-old-price">￥990.00</del>
                                 </h4>
                                 <div class="product-rating">
                                 </div>
                                 <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">加入收藏</span>
                                     </button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">进行比较</span>
                                     </button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                             </div>
                         </div>
                     </div>
@@ -714,24 +679,24 @@
                                 <img src="/website/static/img/product09.png" alt="">
                             </div>
                             <div class="product-body">
-                                <p class="product-category">Category</p>
-                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                <h4 class="product-price">$980.00
-                                    <del class="product-old-price">$990.00</del>
+                                <p class="product-category">类别</p>
+                                <h3 class="product-name"><a href="#">产品名称</a></h3>
+                                <h4 class="product-price">￥980.00
+                                    <del class="product-old-price">￥990.00</del>
                                 </h4>
                                 <div class="product-rating">
                                 </div>
                                 <div class="product-btns">
-                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span>
+                                    <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">加入收藏</span>
                                     </button>
-                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span>
+                                    <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">进行比较</span>
                                     </button>
-                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span>
+                                    <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
                                     </button>
                                 </div>
                             </div>
                             <div class="add-to-cart">
-                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
                             </div>
                         </div>
                     </div>
@@ -741,7 +706,7 @@
 
                 <!-- store bottom filter -->
                 <div class="store-filter clearfix">
-                    <span class="store-qty">Showing 20-100 products</span>
+                    <span class="store-qty">显示 x - x 页</span>
                     <ul class="store-pagination">
                         <li class="active">1</li>
                         <li><a href="#">2</a></li>
@@ -768,25 +733,20 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="newsletter">
-                    <p>Sign Up for the <strong>NEWSLETTER</strong></p>
+                    <p>成为 <strong>会员</strong></p>
                     <form>
-                        <input class="input" type="email" placeholder="Enter Your Email">
-                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
+                        <input class="input" type="email" placeholder="输入邮箱">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> 注册</button>
                     </form>
                     <ul class="newsletter-follow">
                         <li>
-                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-qq"></i></a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                            <a href="#"><i class="fa fa-weixin"></i></a>
                         </li>
                     </ul>
+                </div>
                 </div>
             </div>
         </div>
@@ -806,26 +766,25 @@
             <div class="row">
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
-                        <h3 class="footer-title">About Us</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                            ut.</p>
+                        <h3 class="footer-title">关于我们</h3>
+                        <p>介绍</p>
                         <ul class="footer-links">
-                            <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-                            <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                            <li><a href="#"><i class="fa fa-map-marker"></i>许昌学院</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i>181 3312 6910</a></li>
+                            <li><a href="#"><i class="fa fa-envelope-o"></i>2640708884@qq.com</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
-                        <h3 class="footer-title">Categories</h3>
+                        <h3 class="footer-title">类别</h3>
                         <ul class="footer-links">
-                            <li><a href="#">Hot deals</a></li>
-                            <li><a href="#">Laptops</a></li>
-                            <li><a href="#">Smartphones</a></li>
-                            <li><a href="#">Cameras</a></li>
-                            <li><a href="#">Accessories</a></li>
+                            <li><a href="#">热门交易</a></li>
+                            <li><a href="#">笔记本电脑</a></li>
+                            <li><a href="#">智能手机</a></li>
+                            <li><a href="#">相机</a></li>
+                            <li><a href="#">配件</a></li>
                         </ul>
                     </div>
                 </div>
@@ -834,26 +793,26 @@
 
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
-                        <h3 class="footer-title">Information</h3>
+                        <h3 class="footer-title">咨询</h3>
                         <ul class="footer-links">
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Orders and Returns</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">关于我们</a></li>
+                            <li><a href="#">联系我们</a></li>
+                            <li><a href="#">隐私政策</a></li>
+                            <li><a href="#">订单和退货</a></li>
+                            <li><a href="#">条款与条件</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
-                        <h3 class="footer-title">Service</h3>
+                        <h3 class="footer-title">服务</h3>
                         <ul class="footer-links">
-                            <li><a href="#">My Account</a></li>
-                            <li><a href="#">View Cart</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
-                            <li><a href="#">Help</a></li>
+                            <li><a href="#">我的账户</a></li>
+                            <li><a href="#">查看购物车</a></li>
+                            <li><a href="#">愿望清单</a></li>
+                            <li><a href="#">我的订单</a></li>
+                            <li><a href="#">帮助</a></li>
                         </ul>
                     </div>
                 </div>
