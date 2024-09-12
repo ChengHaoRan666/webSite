@@ -34,4 +34,14 @@ public class index {
     public String d() {
         return "store";
     }
+
+    @RequestMapping("/e")
+    public String e() {
+        return "register";
+    }
+
+    @RequestMapping("/f")
+    public String f() {
+        return "login";
+    }
 }
