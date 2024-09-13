@@ -56,7 +56,7 @@ public class SpringConfig {
         sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
         // 设置类型别名对应的包
         sqlSessionFactoryBean.setTypeAliasesPackage("com.chr.website.entity");
-        // 设置设置映射文件的路径，若映射文件所在路径和mapper接口所在路径一致，则不需要设置
+        // 设置映射文件的路径，若映射文件所在路径和mapper接口所在路径一致，则不需要设置
         sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("mappers/*Mapper.xml"));
         // 设置下划线映射为驼峰
         Properties properties = new Properties();

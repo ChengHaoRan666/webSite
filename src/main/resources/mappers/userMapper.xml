@@ -3,11 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--namespace 要和 mapper 接口的全类名保持一致-->
-<!--id 要和mapper 接口中的方法保持一致-->
 <mapper namespace="com.chr.website.mapper.userMapper">
-    <!--查-->
-    <select id="getAll">
-        select * from t_user;
-    </select>
+    <!--增-->
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
+        insert into users values (null, #{user.username}, #{user.password}, #{user.email}, #{user.phone}, #{user.date},
+        #{user.lestDate});
+    </insert>
+
+    <!--删-->
+    <delete id="deleteUser">
+        delete from users where UserID = #{id}
+    </delete>
+
+    <!--改-->
+    <update id="updateUser">
+        update users set Username =
+        #{newUser.username},Password=#{newUser.password},Email=#{newUser.email},PhoneNumber=#{newUser.phone},RegistrationDate=#{newUser.date},LastLoginDate=#{newUser.lestDate}
+        where UserID = #{newUser.id};
+    </update>
+
+    <!--通过 id 查一个-->
+
+
+    <!--查全部-->
+
 </mapper>

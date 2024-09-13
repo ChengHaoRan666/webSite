@@ -1,7 +1,9 @@
 package com.chr.website.controller;
 
+import com.chr.website.entity.user;
+import com.chr.website.mapper.userMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -11,38 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class index {
+
+    @Autowired
+    private userMapper userMapper;
+
     @RequestMapping("/")
-    public String index(Model model) {
+    public String index() {
+        System.out.println(userMapper.updateUser(new user()));
         return "index";
     }
 
-    @RequestMapping("/a")
-    public String a() {
-        return "blank";
-    }
-
-    @RequestMapping("/b")
-    public String b() {
-        return "checkout";
-    }
-
-    @RequestMapping("/c")
-    public String c() {
-        return "product";
-    }
-
-    @RequestMapping("/d")
-    public String d() {
-        return "store";
-    }
-
-    @RequestMapping("/e")
-    public String e() {
-        return "register";
-    }
-
-    @RequestMapping("/f")
-    public String f() {
-        return "login";
-    }
 }
