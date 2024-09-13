@@ -1,9 +1,7 @@
 package com.chr.website.mapper;
 
 import com.chr.website.entity.user;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
