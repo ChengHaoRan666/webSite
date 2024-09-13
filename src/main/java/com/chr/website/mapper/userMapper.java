@@ -36,7 +36,7 @@ public interface userMapper {
      * @param newUser
      * @return 改变行数
      */
-    int updateUser(@Param("newUser") user newUser);
+    int updateUser(@Param("id") Integer id, @Param("newUser") user newUser);
 
     /**
      * 通过 id 查询用户信息

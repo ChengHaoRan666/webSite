@@ -3,7 +3,7 @@ package com.chr.website.entity;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * @Author: 程浩然
@@ -24,12 +24,13 @@ public class user {
     public user() {
     }
 
-    public user(String username, String password, String email, String phone, Date date) {
+    public user(String username, String password, String email, String phone, Date date, Date lestDate) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.date = date;
+        this.lestDate = lestDate;
     }
 
     @Override

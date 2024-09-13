@@ -19,7 +19,7 @@
     <update id="updateUser">
         update users set Username =
         #{newUser.username},Password=#{newUser.password},Email=#{newUser.email},PhoneNumber=#{newUser.phone},RegistrationDate=#{newUser.date},LastLoginDate=#{newUser.lestDate}
-        where UserID = #{newUser.id};
+        where UserID = #{id};
     </update>
 
     <!--通过 id 查一个-->
