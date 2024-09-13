@@ -1,4 +1,4 @@
-<!--注册页-->
+<!--个人首页-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>注册页</title>
+    <title>个人首页</title>
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -48,8 +48,7 @@
                 <li><a href="#"><i class="fa fa-map-marker"></i> 许昌学院</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-dollar"></i> 余额</a></li>
-                <li><a href="#"><i class="fa fa-user-o"></i> 我的账户</a></li>
+                <li><a href="#"><i class="fa fa-user-o"></i> 登录/注册</a></li>
             </ul>
         </div>
     </div>
@@ -95,7 +94,7 @@
                             <a href="#">
                                 <i class="fa fa-heart-o"></i>
                                 <span>收藏</span>
-                                <div class="qty">0</div>
+                                <div class="qty">21</div>
                             </a>
                         </div>
                         <!-- /Wishlist -->
@@ -105,8 +104,45 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>购物车</span>
-                                <div class="qty">0</div>
+                                <div class="qty">12</div>
                             </a>
+                            <div class="cart-dropdown">
+                                <div class="cart-list">
+                                    <!--第一个商品-->
+                                    <div class="product-widget">
+                                        <div class="product-img">
+                                            <img src="/website/static/img/product01.png" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <h3 class="product-name"><a href="#">产品名称</a></h3>
+                                            <h4 class="product-price"><span class="qty">1x</span>￥980.00</h4>
+                                        </div>
+                                        <button class="delete"><i class="fa fa-close"></i></button>
+                                    </div>
+
+                                    <!--第二个商品-->
+                                    <div class="product-widget">
+                                        <div class="product-img">
+                                            <img src="/website/static/img/product02.png" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <h3 class="product-name"><a href="#">产品名称</a></h3>
+                                            <h4 class="product-price"><span class="qty">3x</span>￥980.00</h4>
+                                        </div>
+                                        <button class="delete"><i class="fa fa-close"></i></button>
+                                    </div>
+                                </div>
+
+                                <!--购物车摘要-->
+                                <div class="cart-summary">
+                                    <small>已选择 3 件商品</small>
+                                    <h5>总价：￥100</h5>
+                                </div>
+                                <div class="cart-btns">
+                                    <a href="#">查看购物车</a>
+                                    <a href="#">结账 <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
                         </div>
                         <!-- /Cart -->
 
@@ -153,49 +189,12 @@
 </nav>
 <!-- /NAVIGATION -->
 <!--TODO-->
-
-<div class="section">
-    <div class="container">
-    </div>
-</div>
-<div style="display: grid;place-items: center">
-    <div class="col-md-5 order-details ">
-        <h2 class="order-submit">注册</h2><br>
-        <div class="input-checkbox ">
-            <div class="billing-details">
-                <div class="form-group">
-                    <input class="input" type="text" name="name" placeholder="用户名">
-                </div>
-                <div class="form-group">
-                    <input class="input" type="text" name="password" placeholder="密码">
-                </div>
-                <div class="form-group">
-                    <input class="input" type="text" name="password2" placeholder="再次输入密码">
-                </div>
-                <div class="form-group">
-                    <input class="input" type="text" name="Verification_code" placeholder="验证码">
-                </div>
-                <div class="form-group">
-                    <input class="input" type="text" name="emil" placeholder="电子邮箱">
-                </div>
-                <div class="form-group">
-                    <input class="input" type="text" name="cell-phone" placeholder="手机号">
-                </div>
-                <div class="form-group">
-                    <input class="input" type="text" name="address" placeholder="地址">
-                </div>
-            </div>
-            <div class="input-checkbox">
-                <input type="checkbox" id="terms">
-                <label for="terms">
-                    <span></span>
-                    我已阅读并接收<a href="#">条款和条件</a>
-                </label>
-            </div>
-        </div>
-        <a href="#" class="primary-btn order-submit">注册</a>
-    </div>
-</div>
+修改个人信息
+查看全部订单
+查看收藏
+查看购物车
+待评价
+待收货
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -208,6 +207,36 @@
     <!-- /container -->
 </div>
 <!-- /SECTION -->
+
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <p>成为 <strong>会员</strong></p>
+                    <form>
+                        <input class="input" type="email" placeholder="输入邮箱">
+                        <button class="newsletter-btn"><i class="fa fa-envelope"></i> 注册</button>
+                    </form>
+                    <ul class="newsletter-follow">
+                        <li>
+                            <a href="#"><i class="fa fa-qq"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-weixin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
 
 
 <!-- FOOTER -->
