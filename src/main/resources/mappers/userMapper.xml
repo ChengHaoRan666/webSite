@@ -10,21 +10,40 @@
         #{user.lestDate});
     </insert>
 
-    <!--删-->
+    <!--通过 id 删-->
     <delete id="deleteUser">
         delete from users where UserID = #{id}
     </delete>
 
-    <!--改-->
+    <!--通过 id 改-->
     <update id="updateUser">
         update users set Username =
         #{newUser.username},Password=#{newUser.password},Email=#{newUser.email},PhoneNumber=#{newUser.phone},RegistrationDate=#{newUser.date},LastLoginDate=#{newUser.lestDate}
         where UserID = #{id};
     </update>
 
-    <!--通过 id 查一个-->
+    <resultMap id="userMapper" type="user">
+        <id property="id" column="UserID"/>
+        <result property="username" column="Username"/>
+        <result property="password" column="Password"/>
+        <result property="email" column="Email"/>
+        <result property="phone" column="PhoneNumber"/>
+        <result property="date" column="RegistrationDate"/>
+        <result property="lestDate" column="LastLoginDate"/>
+    </resultMap>
 
+    <!--通过 id 查一个-->
+    <select id="selectUserById" resultMap="userMapper">
+        select * from users where UserID= #{id};
+    </select>
 
     <!--查全部-->
+    <select id="selectUserAll" resultMap="userMapper">
+        select * from users;
+    </select>
 
+    <!--通过用户名查多个-->
+    <select id="selectUserByUsername" resultMap="userMapper">
+        select * from users where Username = #{username};
+    </select>
 </mapper>

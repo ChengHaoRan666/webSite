@@ -39,17 +39,21 @@ public interface userMapper {
     int updateUser(@Param("id") Integer id, @Param("newUser") user newUser);
 
     /**
-     * 通过 id 查询用户信息
-     *
+     * 通过 用户名 username 查询用户信息
+     */
+    List<user> selectUserByUsername(@Param("username") String username);
+
+    /**
+     * 通过 id 查询单个用户信息
      * @param id
      * @return
      */
-    user insertUserById(@Param("id") Integer id);
+    user selectUserById(@Param("id") Integer id);
 
     /**
      * 查询所有用户信息
      *
      * @return
      */
-    List<user> insertUserAll();
+    List<user> selectUserAll();
 }
