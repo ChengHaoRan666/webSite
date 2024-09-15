@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chr.website.mapper.productMapper">
+    <!--增-->
+    <insert id="addProduct">
+        insert into Products values (
+        null, #{product.name},#{product.productStoreID}, #{product.description}, #{product.price}, #{product.stockQuantity}, #{product.categoryId}, #{product.imageUrl}, #{product.listedDate}, #{product.status}
+        )
+    </insert>
+    <!--删-->
+    <delete id="deleteProduct">
+        delete from products where ProductID = #{id}
+    </delete>
+    <!--改-->
+    <update id="updateProduct">
+        update products set
+        ProductName = #{product.name},
+        ProductStoreID = #{product.productStoreID},
+        Description = #{product.description},
+        Price = #{product.price},
+        StockQuantity = #{product.stockQuantity},
+        CategoryID = #{product.categoryId},
+        ImageURL = #{product.imageUrl},
+        ListedDate = #{product.listedDate},
+        Status = #{product.status}
+    </update>
+
+    <resultMap id="productMapper" type="product">
+        <id property="id" column="ProductID"/>
+        <result property="name" column="ProductName"/>
+        <result property="productStoreID" column="ProductStoreID"/>
+        <result property="description" column="Description"/>
+        <result property="price" column="Price"/>
+        <result property="stockQuantity" column="StockQuantity"/>
+        <result property="categoryId" column="CategoryID"/>
+        <result property="imageUrl" column="ImageURL"/>
+        <result property="listedDate" column="ListedDate"/>
+        <result property="status" column="Status"/>
+    </resultMap>
+
+    <!--查一个-->
+    <select id="selectProductById" resultMap="productMapper">
+        select * from products where ProductID = #{id};
+    </select>
+
+    <!--查全部-->
+    <select id="selectProductAll" resultMap="productMapper">
+        select * from products;
+    </select>
+</mapper>

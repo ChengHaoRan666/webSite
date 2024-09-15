@@ -11,18 +11,17 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 public class seller {
-    Integer id;
-    String name;
-    String password;
-    String Description;
-    String email;
-    String phone;
+    private Integer id;
+    private String name;
+    private String password;
+    private String Description;
+    private String email;
+    private String phone;
 
     public seller() {
     }
 
-    public seller(Integer id, String name, String password, String description, String email, String phone) {
-        this.id = id;
+    public seller(String name, String password, String description, String email, String phone) {
         this.name = name;
         this.password = password;
         Description = description;
