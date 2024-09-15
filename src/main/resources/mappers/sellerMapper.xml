@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.chr.website.mapper.sellerMapper">
+    <!--增 int addSeller(@Param("seller") seller seller);-->
+    <insert id="addSeller">
+        insert into sellers values
+        (null,#{seller.name},#{seller.password},#{seller.Description},#{seller.email},#{seller.phone})
+    </insert>
+    <!--删 int deleteSeller(@Param("id") Integer id);-->
+    <delete id="deleteSeller">
+        delete from sellers where SellerID = #{id}
+    </delete>
+    <!--改 int updateSeller(@Param("id") Integer id, @Param("newSeller") seller newseller);-->
+    <update id="updateSeller">
+        update sellers set
+        SellerName = #{newSeller.name},
+        Password=#{newSeller.password},
+        Description=#{newSeller.description},
+        Email=#{newSeller.email},
+        PhoneNumber=#{newSeller.phone}
+        where SellerID = #{id};
+    </update>
+
+    <resultMap id="sellerMapper" type="seller">
+        <id property="id" column="SellerID"/>
+        <result property="name" column="SellerName"/>
+        <result property="password" column="Password"/>
+        <result property="Description" column="Description"/>
+        <result property="email" column="Email"/>
+        <result property="phone" column="PhoneNumber"/>
+    </resultMap>
+
+    <!--查一个 seller selectSellerById(@Param("id") Integer id);-->
+    <select id="selectSellerById" resultMap="sellerMapper">
+        select * from sellers where SellerID= #{id};
+    </select>
+
+    <!-- 查全部 List<seller> selectSellerAll();-->
+    <select id="selectSellerAll" resultMap="sellerMapper">
+        select * from sellers;
+    </select>
+</mapper>
