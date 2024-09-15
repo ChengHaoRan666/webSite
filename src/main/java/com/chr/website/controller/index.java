@@ -6,7 +6,6 @@ import com.chr.website.entity.user;
 import com.chr.website.mapper.productMapper;
 import com.chr.website.mapper.sellerMapper;
 import com.chr.website.mapper.userMapper;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,10 +36,11 @@ public class index {
     public String test1() {
         // 增
         userMapper.addUser(new user("name1", "password1", "email1", "phone1", new Date(), new Date()));
+        userMapper.addUser(new user("name1", "password1", "email1", "phone1", new Date(), new Date()));
         // 删
         userMapper.deleteUser(1);
         // 改
-        userMapper.updateUser(1, new user("name2", "password2", "email2", "phone2", new Date(), new Date()));
+        userMapper.updateUser(2, new user("name2", "password2", "email2", "phone2", new Date(), new Date()));
         // 通过name查
         System.out.println(userMapper.selectUserByUsername("name2"));
         // 通过 id 查
@@ -53,6 +53,7 @@ public class index {
     @RequestMapping("/test2")
     public String test2() {
         // 增
+        sellerMapper.addSeller(new seller("name1", "password1", "description1", "email1", "phone1"));
         sellerMapper.addSeller(new seller("name1", "password1", "description1", "email1", "phone1"));
         // 删
         sellerMapper.deleteSeller(1);
@@ -69,6 +70,7 @@ public class index {
     @RequestMapping("/test3")
     public String test3() {
         // 增
+        productMapper.addProduct(new product("name1", 1, "描述1", 19.9, 100, 1, "www.url.com", new Date(), "0"));
         productMapper.addProduct(new product("name1", 1, "描述1", 19.9, 100, 1, "www.url.com", new Date(), "0"));
         // 删
         productMapper.deleteProduct(1);
