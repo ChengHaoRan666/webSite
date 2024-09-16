@@ -27,6 +27,9 @@ public class index {
     @Autowired
     private paymentMapper paymentMapper;
 
+    @Autowired
+    private reviewMapper reviewMapper;
+
     @RequestMapping("/")
     public String index() {
         return "index";
@@ -112,6 +115,20 @@ public class index {
         System.out.println(paymentMapper.selectPaymentById(2));
         // 查用户全部
         System.out.println(paymentMapper.selectPaymentByUserId(1));
+        return "index";
+    }
+
+
+    @RequestMapping("/test6")
+    public String test6() {
+        // 增
+        reviewMapper.addReview(new review(1, 1, 5, "评论内容1", new Date()));
+        reviewMapper.addReview(new review(1, 1, 4, "评论内容2", new Date()));
+        reviewMapper.addReview(new review(1, 1, 3, "评论内容3", new Date()));
+        reviewMapper.addReview(new review(1, 1, 2, "评论内容4", new Date()));
+        reviewMapper.addReview(new review(1, 1, 1, "评论内容5", new Date()));
+        // 查一个
+        System.out.println(reviewMapper.selectReviewByproductId(1));
         return "index";
     }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chr.website.mapper.reviewMapper">
+    <!--增 int addReview(@Param("review") review review);-->
+    <insert id="addReview">
+        insert into reviews values (null, #{review.productId}, #{review.userId}, #{review.rating}, #{review.comment},
+        #{review.reviewTime});
+    </insert>
+
+    <resultMap id="reviewMapper" type="review">
+        <id property="reviewId" column="ReviewID"/>
+        <result property="productId" column="ProductID"/>
+        <result property="userId" column="UserID"/>
+        <result property="rating" column="Rating"/>
+        <result property="comment" column="Comment"/>
+        <result property="reviewTime" column="ReviewTime"/>
+    </resultMap>
+
+    <!--查 List<payment> selectReviewByproductId(@Param("productId") Integer productId);-->
+    <select id="selectReviewByproductId" resultMap="reviewMapper">
+        select * from Reviews where ProductID = #{productId};
+    </select>
+</mapper>
