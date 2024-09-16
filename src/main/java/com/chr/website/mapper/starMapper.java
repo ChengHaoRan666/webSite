@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @Author: 程浩然
  * @Create: 2024/9/16 - 11:35
- * @Description:
+ * @Description: 收藏表
  */
 @Component
 public interface starMapper {

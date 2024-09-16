@@ -1,9 +1,7 @@
 package com.chr.website.controller;
 
 import com.chr.website.entity.*;
-import com.chr.website.mapper.cartMapper;
-import com.chr.website.mapper.reviewMapper;
-import com.chr.website.mapper.starMapper;
+import com.chr.website.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,27 +11,29 @@ import java.util.Date;
 /**
  * @Author: 程浩然
  * @Create: 2024/9/16 - 12:01
- * @Description:
+ * @Description: Mapper 接口测试
  */
 @Controller
 public class MapperTest {
 
     @Autowired
-    private com.chr.website.mapper.userMapper userMapper;
+    private userMapper userMapper;
     @Autowired
-    private com.chr.website.mapper.sellerMapper sellerMapper;
+    private sellerMapper sellerMapper;
     @Autowired
-    private com.chr.website.mapper.productMapper productMapper;
+    private productMapper productMapper;
     @Autowired
-    private com.chr.website.mapper.orderMapper orderMapper;
+    private orderMapper orderMapper;
     @Autowired
-    private com.chr.website.mapper.paymentMapper paymentMapper;
+    private paymentMapper paymentMapper;
     @Autowired
     private reviewMapper reviewMapper;
     @Autowired
     private cartMapper cartMapper;
     @Autowired
     private starMapper starMapper;
+
+
 
     @RequestMapping("/test1")
     public String test1() {
