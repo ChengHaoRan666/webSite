@@ -1,4 +1,3 @@
-use ssm;
 # 用户表
 CREATE TABLE Users
 (
@@ -64,12 +63,13 @@ CREATE TABLE Orders
     ShippingDate    DATETIME COMMENT '发货时间',
     DeliveryDate    DATETIME COMMENT '收货时间',
     # 用户 id 外键
-    CONSTRAINT fk_UserID FOREIGN KEY (UserID) REFERENCES Users (UserID),
+        CONSTRAINT fk_UserID FOREIGN KEY (UserID) REFERENCES Users (UserID),
     # 商品 id 外键
-    CONSTRAINT fk_ProductID FOREIGN KEY (ProductID) REFERENCES Products (ProductID),
+        CONSTRAINT fk_ProductID FOREIGN KEY (ProductID) REFERENCES Products (ProductID),
     # 商家 id 外键
-    CONSTRAINT fk_ProductStoreID FOREIGN KEY (SellerID) REFERENCES sellers (SellerID)
+        CONSTRAINT fk_ProductStoreID FOREIGN KEY (SellerID) REFERENCES sellers (SellerID)
 );
+
 
 # 订单支付信息表
 CREATE TABLE Payments
@@ -111,10 +111,11 @@ CREATE TABLE Carts
     CONSTRAINT fk_Carts_UserID FOREIGN KEY (UserID) REFERENCES Users (UserID)
 );
 
+
 # 收藏表
 CREATE TABLE stars
 (
-    StarsID   INT PRIMARY KEY AUTO_INCREMENT COMMENT '收藏ID，主键，自增',
+    StarID   INT PRIMARY KEY AUTO_INCREMENT COMMENT '收藏ID，主键，自增',
     UserID    INT NOT NULL COMMENT '用户ID',
     ProductID INT NOT NULL COMMENT '商品ID',
     Quantity  INT NOT NULL COMMENT '商品数量',
