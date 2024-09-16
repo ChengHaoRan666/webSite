@@ -1,13 +1,7 @@
 package com.chr.website.controller;
 
-import com.chr.website.entity.order;
-import com.chr.website.entity.product;
-import com.chr.website.entity.seller;
-import com.chr.website.entity.user;
-import com.chr.website.mapper.orderMapper;
-import com.chr.website.mapper.productMapper;
-import com.chr.website.mapper.sellerMapper;
-import com.chr.website.mapper.userMapper;
+import com.chr.website.entity.*;
+import com.chr.website.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +24,8 @@ public class index {
     private productMapper productMapper;
     @Autowired
     private orderMapper orderMapper;
+    @Autowired
+    private paymentMapper paymentMapper;
 
     @RequestMapping("/")
     public String index() {
@@ -101,6 +97,21 @@ public class index {
         System.out.println(orderMapper.selectOrderByUserId(1));
         // 查商家全部
         System.out.println(orderMapper.selectOrderBySellerID(1));
+        return "index";
+    }
+
+    @RequestMapping("/test5")
+    public String test5() {
+        // 增
+        paymentMapper.addPayment(new payment(7, 1, 19.9, "0", "0", new Date()));
+        paymentMapper.addPayment(new payment(7, 1, 29.9, "0", "0", new Date()));
+        paymentMapper.addPayment(new payment(7, 1, 39.9, "0", "0", new Date()));
+        // 删
+        paymentMapper.deletePayment(1);
+        // 查一个
+        System.out.println(paymentMapper.selectPaymentById(2));
+        // 查用户全部
+        System.out.println(paymentMapper.selectPaymentByUserId(1));
         return "index";
     }
 }

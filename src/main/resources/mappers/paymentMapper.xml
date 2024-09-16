@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chr.website.mapper.paymentMapper">
+    <!--增 int addPayment(@Param("payment") payment payment);-->
+    <insert id="addPayment">
+        insert into payments values (null, #{payment.orderId}, #{payment.userId}, #{payment.paymentAmount},
+        #{payment.paymentMethod}, #{payment.paymentStatus}, #{payment.paymentTime});
+    </insert>
+
+    <!--删 int deletePayment(@Param("id") Integer id);-->
+    <delete id="deletePayment">
+        delete from payments where PaymentID = #{id};
+    </delete>
+
+    <resultMap id="paymentMapper" type="payment">
+        <id property="id" column="PaymentID"/>
+        <result property="orderId" column="OrderID"/>
+        <result property="userId" column="UserID"/>
+        <result property="paymentAmount" column="PaymentAmount"/>
+        <result property="paymentMethod" column="PaymentMethod"/>
+        <result property="paymentStatus" column="PaymentStatus"/>
+        <result property="paymentTime" column="PaymentTime"/>
+    </resultMap>
+
+    <!--查单个 payment selectPaymentById(@Param("id") Integer id);-->
+    <select id="selectPaymentById" resultMap="paymentMapper">
+        select * from payments where PaymentID = #{id};
+    </select>
+
+    <!--查多个 List<payment> selectPaymentByUserId(@Param("userId") Integer userId);-->
+    <select id="selectPaymentByUserId" resultMap="paymentMapper">
+        select * from payments where UserID = #{userId};
+
+    </select>
+</mapper>
