@@ -1,8 +1,10 @@
 package com.chr.website.controller;
 
+import com.chr.website.entity.order;
 import com.chr.website.entity.product;
 import com.chr.website.entity.seller;
 import com.chr.website.entity.user;
+import com.chr.website.mapper.orderMapper;
 import com.chr.website.mapper.productMapper;
 import com.chr.website.mapper.sellerMapper;
 import com.chr.website.mapper.userMapper;
@@ -26,6 +28,8 @@ public class index {
     private sellerMapper sellerMapper;
     @Autowired
     private productMapper productMapper;
+    @Autowired
+    private orderMapper orderMapper;
 
     @RequestMapping("/")
     public String index() {
@@ -80,6 +84,23 @@ public class index {
         System.out.println(productMapper.selectProductById(2));
         // 查全部
         System.out.println(productMapper.selectProductAll());
+        return "index";
+    }
+
+    @RequestMapping("/test4")
+    public String test4() {
+        // 增
+        orderMapper.addOrder(new order(1, 1, 1, 99.99, "deliveryAddress1", "recipientName1", "recipientPhone1", "1", new Date(), new Date(), new Date(), new Date()));
+        orderMapper.addOrder(new order(1, 1, 1, 19.99, "deliveryAddress2", "recipientName2", "recipientPhone2", "1", new Date(), new Date(), new Date(), new Date()));
+        orderMapper.addOrder(new order(1, 1, 1, 19.99, "deliveryAddress3", "recipientName3", "recipientPhone3", "1", new Date(), new Date(), new Date(), new Date()));
+        // 删
+        orderMapper.deleteOrder(6);
+        // 查一个
+        System.out.println(orderMapper.selectOrderById(7));
+        // 查用户全部
+        System.out.println(orderMapper.selectOrderByUserId(1));
+        // 查商家全部
+        System.out.println(orderMapper.selectOrderBySellerID(1));
         return "index";
     }
 }

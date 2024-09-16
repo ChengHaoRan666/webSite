@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.chr.website.mapper.orderMapper">
+    <!--增 int addOrder(@Param("order") order order);-->
+    <insert id="addOrder">
+        insert into orders values (
+        null, #{order.userId}, #{order.productId}, #{order.sellerId}, #{order.totalAmount}, #{order.deliveryAddress},
+        #{order.recipientName}, #{order.recipientPhone}, #{order.orderStatus}, #{order.orderDate}, #{order.paymentDate},
+        #{order.shippingDate}, #{order.deliveryDate}
+        )
+    </insert>
+
+    <!--删 int deleteOrder(@Param("id") Integer id);-->
+    <delete id="deleteOrder">
+        delete from orders where OrderID = #{id}
+    </delete>
+
+    <resultMap id="orderMapper" type="order">
+        <id property="id" column="OrderID"/>
+        <result property="userId" column="UserID"/>
+        <result property="productId" column="ProductID"/>
+        <result property="sellerId" column="SellerID"/>
+        <result property="totalAmount" column="TotalAmount"/>
+        <result property="deliveryAddress" column="DeliveryAddress"/>
+        <result property="recipientName" column="RecipientName"/>
+        <result property="recipientPhone" column="RecipientPhone"/>
+        <result property="orderStatus" column="OrderStatus"/>
+        <result property="orderDate" column="OrderDate"/>
+        <result property="paymentDate" column="PaymentDate"/>
+        <result property="shippingDate" column="ShippingDate"/>
+        <result property="deliveryDate" column="DeliveryDate"/>
+    </resultMap>
+
+    <!--根据订单id查询单条 order selectOrderById(@Param("id") Integer id);-->
+    <select id="selectOrderById" resultMap="orderMapper">
+        select * from Orders where OrderID = #{id}
+    </select>
+
+    <!-- 根据用户id查询多条 List<order> selectOrderByUserId(@Param("userId") Integer userId);-->
+    <select id="selectOrderByUserId" resultMap="orderMapper">
+        select * from Orders where UserID = #{userId}
+    </select>
+
+    <!-- 根据商家id查询多条 List<order> selectOrderBySellerID(@Param("sellerId") Integer sellerId);-->
+    <select id="selectOrderBySellerID" resultMap="orderMapper">
+        select * from Orders where SellerID = #{sellerId}
+    </select>
+</mapper>
