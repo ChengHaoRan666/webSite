@@ -13,6 +13,6 @@ public class index {
 
     @RequestMapping("/")
     public String index() {
-        return "index";
+        return "login";
     }
 }
