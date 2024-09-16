@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chr.website.mapper.starMapper">
+    <!--增 int addStar(@Param("star") star star);-->
+    <insert id="addStar">
+        insert into stars values (null, #{star.UserID}, #{star.ProductID}, #{star.Quantity});
+    </insert>
+    <!--删 int deleteStar(@Param("StarID") Integer StarID);-->
+    <delete id="deleteStar">
+        delete from stars where StarID = #{StarID};
+    </delete>
+    <!--改 int updateStar(@Param("StarID") Integer starID, @Param("star") star star);-->
+    <update id="updateStar">
+        update stars set UserID = #{star.UserID}, ProductID = #{star.ProductID}, Quantity = #{star.Quantity} where StarID = #{StarID};
+    </update>
+
+    <resultMap id="starMapper" type="star">
+        <id property="StarID" column="StarID"/>
+        <result property="UserID" column="UserID"/>
+        <result property="ProductID" column="ProductID"/>
+        <result property="Quantity" column="Quantity"/>
+    </resultMap>
+
+    <!--查 List<star> selectStar();-->
+    <select id="selectStar" resultMap="starMapper">
+        select * from stars;
+    </select>
+</mapper>

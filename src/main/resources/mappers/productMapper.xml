@@ -26,6 +26,7 @@
         ImageURL = #{product.imageUrl},
         ListedDate = #{product.listedDate},
         Status = #{product.status}
+        where ProductID = #{id};
     </update>
 
     <resultMap id="productMapper" type="product">

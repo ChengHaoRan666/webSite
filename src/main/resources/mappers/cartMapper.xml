@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chr.website.mapper.cartMapper">
+    <!--增 int addCart(@Param("cart") cart cart);-->
+    <insert id="addCart">
+        insert into carts values (null, #{cart.UserID}, #{cart.ProductID}, #{cart.Quantity});
+    </insert>
+    <!--删 int deleteCart(@Param("CartID") Integer CartID);-->
+    <delete id="deleteCart">
+        delete from carts where CartID = #{CartID};
+    </delete>
+    <!--改 int updateCart(@Param("CartID") Integer cartID, @Param("cart") cart cart);-->
+    <update id="updateCart">
+        update carts set UserID = #{cart.UserID}, ProductID = #{cart.ProductID}, Quantity = #{cart.Quantity} where CartID = #{CartID};
+    </update>
+
+    <resultMap id="cartMapper" type="cart">
+        <id property="CartID" column="CartID"/>
+        <result property="UserID" column="UserID"/>
+        <result property="ProductID" column="ProductID"/>
+        <result property="Quantity" column="Quantity"/>
+    </resultMap>
+
+    <!--查 List<cart> selectCart();-->
+    <select id="selectCart" resultMap="cartMapper">
+        select * from carts;
+    </select>
+</mapper>
