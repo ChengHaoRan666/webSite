@@ -41,6 +41,6 @@
 
     <!-- 查全部 List<seller> selectSellerAll();-->
     <select id="selectSellerAll" resultMap="sellerMapper">
-        select * from sellers;
+        select * from sellers
     </select>
 </mapper>
