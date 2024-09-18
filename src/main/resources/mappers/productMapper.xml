@@ -7,7 +7,8 @@
     <!--增-->
     <insert id="addProduct">
         insert into Products values (
-        null, #{product.name},#{product.productStoreID}, #{product.description}, #{product.price}, #{product.stockQuantity}, #{product.categoryId}, #{product.imageUrl}, #{product.listedDate}, #{product.status}
+        null, #{product.name},#{product.productStoreID}, #{product.description}, #{product.price},
+        #{product.stockQuantity}, #{product.categoryId}, #{product.imageUrl}, #{product.listedDate}, #{product.status}
         )
     </insert>
     <!--删-->
@@ -50,5 +51,20 @@
     <!--查全部-->
     <select id="selectProductAll" resultMap="productMapper">
         select * from products;
+    </select>
+
+    <!--查价格区间 List<product> selectProductByPrice(@Param("max") Double max, @Param("min") Double min);-->
+    <select id="selectProductByPrice" resultMap="productMapper">
+        select * from products where Price between #{min} and #{max}
+    </select>
+
+    <!--查各分类数量 Integer getCount(@Param("CategoryID") Integer CategoryID);-->
+    <select id="getCount" resultType="Integer">
+        select COUNT(*) from products where CategoryID = #{CategoryID}
+    </select>
+
+    <!--根据分类和价格区间搜索  List<product> selectProductByPriceAndCategoryID(@Param("CategoryID") Integer CategoryID, @Param("max") Double max, @Param("min") Double min);-->
+    <select id="selectProductByPriceAndCategoryID" resultMap="productMapper">
+        select * from products where CategoryID = #{CategoryID} and Price between #{min} and #{max}
     </select>
 </mapper>

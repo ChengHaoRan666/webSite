@@ -85,6 +85,13 @@ public class DaoTest {
         System.out.println(productDao.selectProductById(2));
         // 查全部
         System.out.println(productDao.selectProductAll());
+        // 查价格区间
+        System.out.println("价格区间"+productDao.selectProductByPrice(100.0, 10.0));
+        // 查各分类数量
+        System.out.println("分类数量"+productDao.getCount(1));
+        // 根据分类和价格区间搜索
+        System.out.println("两者相加的查询结果"+productDao.selectProductByPriceAndCategoryID(1, 100.0, 10.0));
+
         return "index";
     }
 
@@ -102,6 +109,8 @@ public class DaoTest {
         System.out.println(orderDao.selectOrderByUserId(1));
         // 查商家全部
         System.out.println(orderDao.selectOrderBySellerID(1));
+        // 查数量
+        System.out.println("数量为：" + orderDao.getNumber(1));
         return "index";
     }
 
@@ -164,6 +173,8 @@ public class DaoTest {
         starDao.updateStar(2, new star(1, 1, 5));
         // 查
         System.out.println(starDao.selectStar());
+        // 查用户收藏数量
+        System.out.println(starDao.getNumber(1));
         return "index";
     }
 }

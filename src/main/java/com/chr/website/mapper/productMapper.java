@@ -37,4 +37,19 @@ public interface productMapper {
      * 查全部
      */
     List<product> selectProductAll();
+
+    /**
+     * 查价格区间
+     */
+    List<product> selectProductByPrice(@Param("max") Double max, @Param("min") Double min);
+
+    /**
+     * 查各分类数量
+     */
+    Integer getCount(@Param("CategoryID") Integer CategoryID);
+
+    /**
+     * 根据分类和价格区间搜索
+     */
+    List<product> selectProductByPriceAndCategoryID(@Param("CategoryID") Integer CategoryID, @Param("max") Double max, @Param("min") Double min);
 }

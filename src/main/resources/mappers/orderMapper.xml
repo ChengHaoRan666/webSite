@@ -49,4 +49,8 @@
     <select id="selectOrderBySellerID" resultMap="orderMapper">
         select * from Orders where SellerID = #{sellerId}
     </select>
+
+    <select id="getNumber" resultType="Integer">
+        select count(*) from Orders where UserID = #{userId}
+    </select>
 </mapper>

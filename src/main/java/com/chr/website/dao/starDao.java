@@ -45,4 +45,11 @@ public class starDao {
     public List<star> selectStar() {
         return starMapper.selectStar();
     }
+
+    /**
+     * 获取用户订单数量
+     */
+    public Integer getNumber(Integer userId) {
+        return starMapper.getNumber(1);
+    }
 }

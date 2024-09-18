@@ -51,4 +51,26 @@ public class productDao {
     public List<product> selectProductAll() {
         return productMapper.selectProductAll();
     }
+
+    /**
+     * 查价格区间
+     */
+    public List<product> selectProductByPrice(Double max, Double min) {
+        return productMapper.selectProductByPrice(max, min);
+    }
+
+    /**
+     * 查各分类数量
+     */
+    public Integer getCount(Integer CategoryID) {
+        return productMapper.getCount(CategoryID);
+    }
+
+    /**
+     * 根据分类和价格区间搜索
+     */
+    public List<product> selectProductByPriceAndCategoryID(Integer CategoryID, Double max, Double min) {
+        return productMapper.selectProductByPriceAndCategoryID(CategoryID, max, min);
+    }
+
 }

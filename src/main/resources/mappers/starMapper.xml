@@ -28,4 +28,8 @@
     <select id="selectStar" resultMap="starMapper">
         select * from stars;
     </select>
+
+    <select id="getNumber" resultType="Integer">
+        select count(*) from stars where UserID = #{userId}
+    </select>
 </mapper>

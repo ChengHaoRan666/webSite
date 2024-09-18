@@ -48,7 +48,7 @@
                 <li><a href="#"><i class="fa fa-map-marker"></i> 许昌学院</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-user-o"></i> 登录/注册</a></li>
+                <li><a th:href="@{/login}"><i class="fa fa-user-o"></i> 登录/注册</a></li>
             </ul>
         </div>
     </div>
@@ -73,7 +73,8 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
+                        <!--TODO 搜索表单提交-->
+                        <form method="get" name="search" th:action="@{/TODO}">
                             <select class="input-select">
                                 <option value="0">所有类别</option>
                                 <option value="1">电脑</option>
@@ -96,7 +97,8 @@
                             <a th:href="@{/personalHomepage}">
                                 <i class="fa fa-heart-o"></i>
                                 <span>收藏</span>
-                                <div class="qty" th:text="${a}"></div>
+                                <!--TODO 收藏数目-->
+                                <div class="qty" th:text="${TODO}"></div>
                             </a>
                         </div>
                         <!-- /Wishlist -->
@@ -106,7 +108,8 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>购物车</span>
-                                <div class="qty">12</div>
+                                <!--TODO 购物车数目-->
+                                <div class="qty" th:text="${TODO}"></div>
                             </a>
                             <div class="cart-dropdown">
                                 <div class="cart-list">

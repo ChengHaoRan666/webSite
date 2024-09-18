@@ -37,4 +37,9 @@ public interface orderMapper {
      * 根据商家id查询所有商家订单
      */
     List<order> selectOrderBySellerID(@Param("sellerId") Integer sellerId);
+
+    /**
+     * 获取用户订单数量
+     */
+    Integer getNumber(@Param("userId")Integer userId);
 }

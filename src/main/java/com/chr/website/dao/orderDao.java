@@ -51,4 +51,11 @@ public class orderDao {
     public List<order> selectOrderBySellerID(Integer sellerId) {
         return orderMapper.selectOrderBySellerID(sellerId);
     }
+
+    /**
+     * 获取用户订单数量
+     */
+    public Integer getNumber(Integer userId) {
+        return orderMapper.getNumber(userId);
+    }
 }

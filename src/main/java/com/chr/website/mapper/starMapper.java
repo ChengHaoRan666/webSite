@@ -32,4 +32,9 @@ public interface starMapper {
      * 查
      */
     List<star> selectStar();
+
+    /**
+     * 获取用户收藏数量
+     */
+    Integer getNumber(Integer userId);
 }
