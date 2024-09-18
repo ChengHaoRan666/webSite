@@ -1,6 +1,9 @@
 package com.chr.website.service;
 
+import com.chr.website.entity.product;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author: 程浩然
@@ -12,50 +15,50 @@ public interface pageService {
     /**
      * 主页商品展示
      */
-    Integer indexShow();
+    List<product> indexShow();
 
     /**
      * 商品搜索
      */
-    Integer search();
+    List<product> search();
 
     /**
      * 查看收藏
      */
-    Integer collectShow();
+    List<product> collectShow();
 
     /**
      * 查看购物车
      */
-    Integer cartShow();
+    List<product> cartShow();
 
     /**
      * 查看订单
      */
-    Integer orderShow();
+    List<product> orderShow();
 
     /**
      * 查看未收货
      */
-    Integer receivedShow();
+    List<product> receivedShow();
 
     /**
      * 商品详情页展示
      */
-    Integer commodityShow();
+    product commodityShow();
 
     /**
      * 由商品类别进行查询
      */
-    Integer showProductByCategoryID(Integer id);
+    List<product> showProductByCategoryID(Integer id);
 
     /**
      * 由价格区间进行查询
      */
-    Integer showProductByPrice(Integer min, Integer max);
+    List<product> showProductByPrice(Integer min, Integer max);
 
     /**
      * 由商品类别和价格区间进行查询
      */
-    Integer showProductByPriceAndCategoryID(Integer id, Integer min, Integer max);
+    List<product> showProductByPriceAndCategoryID(Integer id, Integer min, Integer max);
 }

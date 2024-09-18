@@ -13,16 +13,20 @@ public interface loginService {
     /**
      * 用户登录
      */
-    Integer login(user user);
+    Integer login(String username, String password1, String password2, String phone, String code);
 
     /**
      * 用户注册
      */
-    Integer register(user user);
+    Integer register(String username,String password1,String password2,String code,String email,String phone);
 
     /**
      * 修改个人信息
      */
-    Integer ModifyInformation();
+    Integer ModifyInformation(Integer id, user user);
 
+    /**
+     * 注销用户
+     */
+    Integer logoff(Integer id);
 }

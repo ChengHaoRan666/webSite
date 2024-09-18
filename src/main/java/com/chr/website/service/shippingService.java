@@ -1,5 +1,7 @@
 package com.chr.website.service;
 
+import com.chr.website.entity.payment;
+import com.chr.website.entity.product;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
@@ -14,20 +16,25 @@ public interface shippingService {
     /**
      * 创建订单
      */
-    Integer orderCreate(Order order);
+    Integer orderCreate(Integer id, product product);
+
+    /**
+     * 创建支付信息
+     */
+    payment orderPayment(Order order);
 
     /**
      * 添加到购物车
      */
-    Integer addCart();
+    Integer addCart(product product);
 
     /**
      * 加入收藏
      */
-    Integer addStar();
+    Integer addStar(product product);
 
     /**
      * 进行比较
      */
-    Integer compare();
+    Integer compare(product product);
 }

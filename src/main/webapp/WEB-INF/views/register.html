@@ -168,13 +168,14 @@
                     <input class="input" type="text" name="name" placeholder="用户名">
                 </div>
                 <div class="form-group">
-                    <input class="input" type="text" name="password" placeholder="密码">
+                    <input class="input" name="password" placeholder="密码" type="password">
                 </div>
                 <div class="form-group">
-                    <input class="input" type="text" name="password2" placeholder="再次输入密码">
+                    <input class="input" name="password2" placeholder="再次输入密码" type="password">
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display: flex;">
                     <input class="input" type="text" name="Verification_code" placeholder="验证码">
+                    <button class="btn" type="button">获取验证码</button>
                 </div>
                 <div class="form-group">
                     <input class="input" type="text" name="emil" placeholder="电子邮箱">
@@ -182,15 +183,12 @@
                 <div class="form-group">
                     <input class="input" type="text" name="cell-phone" placeholder="手机号">
                 </div>
-                <div class="form-group">
-                    <input class="input" type="text" name="address" placeholder="地址">
-                </div>
             </div>
             <div class="input-checkbox">
                 <input type="checkbox" id="terms">
                 <label for="terms">
                     <span></span>
-                    我已阅读并接收<a href="#">条款和条件</a>
+                    我已阅读并接收<a href="#" style="color:red;">条款和条件</a>
                 </label>
             </div>
         </div>
@@ -223,8 +221,6 @@
     <!-- /container -->
 </div>
 <!-- /SECTION -->
-
-
 
 
 <!-- FOOTER -->

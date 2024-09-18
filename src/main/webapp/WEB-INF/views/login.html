@@ -133,34 +133,40 @@
 
 
 <!--TODO-->
-
 <div class="section">
     <div class="container">
     </div>
 </div>
+
 <div style="display: grid;place-items: center">
     <div class="col-md-5 order-details ">
-
         <div class="input-checkbox ">
+            没有账户？ 去<a style="color: blue" th:href="@{/register}">注册</a><br><br>
+
             <div class="billing-details">
                 <div class="form-group">
                     <input class="input" type="text" name="name" placeholder="用户名">
                 </div>
                 <div class="form-group">
-                    <input class="input" type="text" name="password" placeholder="密码">
+                    <input class="input" name="password" placeholder="密码" type="password">
                 </div>
                 <div class="form-group">
-                    <input class="input" type="text" name="password2" placeholder="再次输入密码">
+                    <input class="input" name="password2" placeholder="再次输入密码" type="password">
                 </div>
                 <div class="form-group">
+                    <input class="input" name="phone" placeholder="手机号" type="text">
+                </div>
+                <div class="form-group" style="display: flex;">
                     <input class="input" type="text" name="Verification_code" placeholder="验证码">
+                    <button class="btn" type="button">获取验证码</button>
                 </div>
+
             </div>
             <div class="input-checkbox">
                 <input type="checkbox" id="terms">
                 <label for="terms">
                     <span></span>
-                    我已阅读并接收<a href="#">条款和条件</a>
+                    我已阅读并接收<a href="#" style="color: red">条款和条件</a>
                 </label>
             </div>
         </div>

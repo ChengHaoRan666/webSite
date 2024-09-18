@@ -60,4 +60,14 @@ public class index {
     public String index10() {
         return "store";
     }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @RequestMapping("/register")
+    public String register() {
+        return "register";
+    }
 }
