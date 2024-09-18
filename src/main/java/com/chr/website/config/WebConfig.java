@@ -1,12 +1,16 @@
 package com.chr.website.config;
 
+import com.chr.website.interceptor.loginInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
@@ -70,13 +74,14 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     /**
-     * 配置拦截器
+     * 配置拦截器<br>
+     * addInterceptor(): 添加拦截器<br>
+     * addPathPatterns(): 添加拦截路径<br>
+     * excludePathPatterns(): 移除拦截路径<br>
+     * registry.addInterceptor(拦截器).addPathPatterns("/");<br>
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        // addInterceptor(): 添加拦截器
-        // addPathPatterns(): 添加拦截路径
-        // excludePathPatterns(): 移除拦截路径
-//        registry.addInterceptor(拦截器).addPathPatterns("/");
+        registry.addInterceptor(new loginInterceptor()).addPathPatterns("/*").excludePathPatterns("/login").excludePathPatterns("/");
     }
 }
