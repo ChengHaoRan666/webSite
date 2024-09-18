@@ -73,4 +73,10 @@ public class productDao {
         return productMapper.selectProductByPriceAndCategoryID(CategoryID, max, min);
     }
 
+    /**
+     * 根据分类查询
+     */
+    public List<product> selectProductByCategoryID(Integer id) {
+        return productMapper.selectProductByCategoryID(id);
+    }
 }

@@ -52,4 +52,9 @@ public interface productMapper {
      * 根据分类和价格区间搜索
      */
     List<product> selectProductByPriceAndCategoryID(@Param("CategoryID") Integer CategoryID, @Param("max") Double max, @Param("min") Double min);
+
+    /**
+     * 根据类别搜索
+     */
+    List<product> selectProductByCategoryID(@Param("CategoryID") Integer CategoryID);
 }

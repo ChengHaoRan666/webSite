@@ -67,4 +67,8 @@
     <select id="selectProductByPriceAndCategoryID" resultMap="productMapper">
         select * from products where CategoryID = #{CategoryID} and Price between #{min} and #{max}
     </select>
+
+    <select id="selectProductByCategoryID" resultMap="productMapper">
+        select * from products where CategoryID = #{CategoryID}
+    </select>
 </mapper>
