@@ -62,7 +62,6 @@ public class sellerServiceImpl implements sellerService {
         for (seller seller : sellers) {
             if (username.equals(seller.getName()) && password1.equals(seller.getPassword())) {
                 return seller.getId();
-
             }
         }
         return -4;
