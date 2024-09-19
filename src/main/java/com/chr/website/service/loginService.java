@@ -1,6 +1,5 @@
 package com.chr.website.service;
 
-import com.chr.website.entity.user;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,12 +17,12 @@ public interface loginService {
     /**
      * 用户注册
      */
-    Integer register(String username,String password1,String password2,String code,String email,String phone);
+    Integer register(String username, String password1, String password2, String code, String email, String phone);
 
     /**
      * 修改个人信息
      */
-    Integer ModifyInformation(Integer id, user user);
+    public Integer ModifyInformation(Integer id, String username, String password1, String password2, String code, String email, String phone);
 
     /**
      * 注销用户
