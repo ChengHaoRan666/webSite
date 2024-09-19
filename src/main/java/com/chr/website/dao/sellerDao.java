@@ -13,7 +13,7 @@ import java.util.List;
  * @Description: 商家表
  */
 @Component
-public class sellerDao {
+public class sellerDao implements sellerMapper{
     @Autowired
     private sellerMapper sellerMapper;
 

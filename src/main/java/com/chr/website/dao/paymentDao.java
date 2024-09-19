@@ -13,7 +13,7 @@ import java.util.List;
  * @Description: payment 表
  */
 @Component
-public class paymentDao {
+public class paymentDao implements paymentMapper{
     @Autowired
     private paymentMapper paymentMapper;
 

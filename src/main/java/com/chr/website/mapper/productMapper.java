@@ -38,6 +38,10 @@ public interface productMapper {
      */
     List<product> selectProductAll();
 
+    /**
+     * 根据商家id查询商品
+     */
+    List<product> selectProductByProductStoreID(@Param("ProductStoreID") Integer ProductStoreID);
 
     /**
      * 查各分类数量

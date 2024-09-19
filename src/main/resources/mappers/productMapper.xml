@@ -58,6 +58,11 @@
         select COUNT(*) from products where CategoryID = #{CategoryID}
     </select>
 
+    <!--根据商家id查询商品 List<product> selectProductByProductStoreID(Integer ProductStoreID);-->
+    <select id="selectProductByProductStoreID" resultMap="productMapper">
+        select * from products where ProductStoreID = #{ProductStoreID}
+    </select>
+
     <!--关键词，商品类别，价格区间，三个搜索条件可有可无进行搜索-->
     <select id="search" resultMap="productMapper">
         select * from Products where 1 = 1

@@ -1,7 +1,7 @@
 package com.chr.website.service;
 
+import com.chr.website.entity.order;
 import com.chr.website.entity.product;
-import com.chr.website.entity.seller;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,27 +15,32 @@ import java.util.List;
 @Service
 public interface sellerService {
     /**
+     * 商家登录
+     */
+    Integer sellerLogin(String username, String password1, String password2, String phone, String code);
+
+    /**
      * 商家注册
      */
-    Integer sellerRegister(seller seller);
+    Integer sellerRegister(Integer Id, String sellerName, String brief);
 
     /**
      * 商家管理商品
      */
-    List<product> manage();
+    List<product> manage(Integer sellerId);
 
     /**
      * 商家管理订单
      */
-    Integer orderManage();
+    List<order> orderManage(Integer sellerId);
 
     /**
      * 修改商家信息
      */
-    Integer sellerModifyInformation();
+    Integer sellerModifyInformation(Integer sellerId, String sellerName, String password1, String password2, String code, String Description, String email, String phone);
 
     /**
      * 商家注销
      */
-    Integer sellerLogoff();
+    Integer sellerLogoff(Integer sellerId);
 }

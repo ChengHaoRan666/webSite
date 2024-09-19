@@ -13,22 +13,22 @@ import java.util.List;
  * @Description: 评价表
  */
 @Component
-public class reviewDao {
+public class reviewDao implements reviewMapper{
     @Autowired
-    private reviewMapper reviewmapper;
+    private reviewMapper reviewMapper;
 
     /**
      * 增
      */
     public int addReview(review review) {
-        return reviewmapper.addReview(review);
+        return reviewMapper.addReview(review);
     }
 
     /**
      * 通过商品id查找
      */
     public List<review> selectReviewByproductId(Integer productId) {
-        return reviewmapper.selectReviewByproductId(productId);
+        return reviewMapper.selectReviewByproductId(productId);
     }
 
 }

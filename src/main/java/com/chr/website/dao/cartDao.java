@@ -13,7 +13,7 @@ import java.util.List;
  * @Description: 购物车
  */
 @Component
-public class cartDao {
+public class cartDao implements cartMapper {
     @Autowired
     private cartMapper cartMapper;
 

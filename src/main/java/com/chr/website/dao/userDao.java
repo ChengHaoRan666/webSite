@@ -13,7 +13,7 @@ import java.util.List;
  * @Description: 用户表
  */
 @Component
-public class userDao {
+public class userDao implements userMapper {
     @Autowired
     private userMapper userMapper;
 

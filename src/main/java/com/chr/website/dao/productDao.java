@@ -2,6 +2,7 @@ package com.chr.website.dao;
 
 import com.chr.website.entity.product;
 import com.chr.website.mapper.productMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @Description: 商品表
  */
 @Component
-public class productDao {
+public class productDao implements productMapper {
     @Autowired
     private productMapper productMapper;
 
@@ -44,6 +45,14 @@ public class productDao {
     public product selectProductById(Integer id) {
         return productMapper.selectProductById(id);
     }
+
+    /**
+     * 根据商家id查询商品
+     */
+    public List<product> selectProductByProductStoreID(@Param("ProductStoreID") Integer ProductStoreID) {
+        return productMapper.selectProductByProductStoreID(ProductStoreID);
+    }
+
 
     /**
      * 查全部

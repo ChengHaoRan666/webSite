@@ -13,7 +13,7 @@ import java.util.List;
  * @Description: 收藏表
  */
 @Component
-public class starDao {
+public class starDao implements starMapper {
 
     @Autowired
     private starMapper starMapper;
