@@ -85,12 +85,8 @@ public class MapperTest {
         System.out.println(productMapper.selectProductById(2));
         // 查全部
         System.out.println(productMapper.selectProductAll());
-        // 查价格区间
-        System.out.println("价格区间" + productMapper.selectProductByPrice(100.0, 10.0));
         // 查各分类数量
         System.out.println("分类数量" + productMapper.getCount(1));
-        // 根据分类和价格区间搜索
-        System.out.println("两者相加的查询结果" + productMapper.selectProductByPriceAndCategoryID(1,100.0, 10.0 ));
         return "index";
     }
 
@@ -155,7 +151,7 @@ public class MapperTest {
         // 改
         cartMapper.updateCart(2, new cart(1, 1, 5));
         // 查
-        System.out.println(cartMapper.selectCart());
+        System.out.println(cartMapper.selectCart(1));
         return "index";
     }
 
@@ -171,7 +167,7 @@ public class MapperTest {
         // 改
         starMapper.updateStar(2, new star(1, 1, 5));
         // 查
-        System.out.println(starMapper.selectStar());
+        System.out.println(starMapper.selectStar(1));
         // 查用户收藏数量
         System.out.println(starMapper.getNumber(1));
         return "index";

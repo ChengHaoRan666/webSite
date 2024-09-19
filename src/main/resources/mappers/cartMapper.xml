@@ -24,8 +24,8 @@
         <result property="Quantity" column="Quantity"/>
     </resultMap>
 
-    <!--查 List<cart> selectCart();-->
+    <!--查  List<cart> selectCart(@Param("UserId") Integer userId);-->
     <select id="selectCart" resultMap="cartMapper">
-        select * from carts;
+        select * from carts where UserID = #{UserId};
     </select>
 </mapper>

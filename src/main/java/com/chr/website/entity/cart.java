@@ -1,10 +1,15 @@
 package com.chr.website.entity;
 
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
 /**
  * @Author: 程浩然
  * @Create: 2024/9/16 - 11:01
  * @Description: 购物车
  */
+@Data
+@Component
 public class cart {
     private Integer CartID;
     private Integer UserID;

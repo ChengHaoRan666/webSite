@@ -4,6 +4,7 @@ import com.chr.website.entity.product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 程浩然
@@ -13,52 +14,37 @@ import java.util.List;
 @Service
 public interface pageService {
     /**
-     * 主页商品展示
+     * 获取全部商品用于首页展示
      */
     List<product> indexShow();
 
     /**
-     * 商品搜索
+     * 获取收藏的商品
      */
-    List<product> search();
+    Map<product, Integer> collectShow(Integer id);
 
     /**
-     * 查看收藏
+     * 获取购物车中的商品
      */
-    List<product> collectShow();
+    Map<product, Integer> cartShow(Integer id);
 
     /**
-     * 查看购物车
+     * 获取订单中的商品
      */
-    List<product> cartShow();
+    Map<product, Integer> orderShow(Integer id);
 
     /**
-     * 查看订单
+     * 查看订单中为收货的商品
      */
-    List<product> orderShow();
+    Map<product, Integer> receivedShow(Integer id);
 
     /**
-     * 查看未收货
+     * 获取单个商品
      */
-    List<product> receivedShow();
+    product commodityShow(Integer id);
 
     /**
-     * 商品详情页展示
+     * 关键词，商品类别，价格区间，三个搜索条件可有可无进行搜索
      */
-    product commodityShow();
-
-    /**
-     * 由商品类别进行查询
-     */
-    List<product> showProductByCategoryID(Integer id);
-
-    /**
-     * 由价格区间进行查询
-     */
-    List<product> showProductByPrice(Integer min, Integer max);
-
-    /**
-     * 由商品类别和价格区间进行查询
-     */
-    List<product> showProductByPriceAndCategoryID(Integer id, Integer min, Integer max);
+    List<product> search(String keyword, Integer CategoryId, Integer min, Integer max);
 }

@@ -31,5 +31,5 @@ public interface cartMapper {
     /**
      * 查
      */
-    List<cart> selectCart();
+    List<cart> selectCart(@Param("UserId") Integer userId);
 }

@@ -1,5 +1,6 @@
 package com.chr.website.entity;
 
+import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.Date;
  * @Create: 2024/9/16 - 8:28
  * @Description: 订单
  */
+@Data
 @Component
 public class order {
     private Integer id;

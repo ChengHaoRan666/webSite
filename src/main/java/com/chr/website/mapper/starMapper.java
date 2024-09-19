@@ -31,7 +31,7 @@ public interface starMapper {
     /**
      * 查
      */
-    List<star> selectStar();
+    List<star> selectStar( @Param("UserID") Integer userId);
 
     /**
      * 获取用户收藏数量

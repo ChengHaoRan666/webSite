@@ -53,13 +53,6 @@ public class productDao {
     }
 
     /**
-     * 查价格区间
-     */
-    public List<product> selectProductByPrice(Double max, Double min) {
-        return productMapper.selectProductByPrice(max, min);
-    }
-
-    /**
      * 查各分类数量
      */
     public Integer getCount(Integer CategoryID) {
@@ -67,16 +60,9 @@ public class productDao {
     }
 
     /**
-     * 根据分类和价格区间搜索
+     * 关键词，商品类别，价格区间，三个搜索条件可有可无进行搜索
      */
-    public List<product> selectProductByPriceAndCategoryID(Integer CategoryID, Double max, Double min) {
-        return productMapper.selectProductByPriceAndCategoryID(CategoryID, max, min);
-    }
-
-    /**
-     * 根据分类查询
-     */
-    public List<product> selectProductByCategoryID(Integer id) {
-        return productMapper.selectProductByCategoryID(id);
+    public List<product> search(String keyword, Integer CategoryId, Integer min, Integer max) {
+        return productMapper.search(keyword, CategoryId, min, max);
     }
 }

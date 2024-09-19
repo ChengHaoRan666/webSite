@@ -1,5 +1,8 @@
 package com.chr.website.entity;
 
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 /**
@@ -7,6 +10,9 @@ import java.util.Date;
  * @Create: 2024/9/16 - 10:02
  * @Description: 评价表
  */
+@Data
+@Component
+
 public class review {
     private Integer reviewId;
     private Integer productId;

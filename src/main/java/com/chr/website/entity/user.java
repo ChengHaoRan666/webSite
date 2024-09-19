@@ -12,6 +12,7 @@ import java.util.Date;
  */
 @Data
 @Component
+
 public class user {
     private Integer id;
     private String username;

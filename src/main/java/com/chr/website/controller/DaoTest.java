@@ -85,12 +85,8 @@ public class DaoTest {
         System.out.println(productDao.selectProductById(2));
         // 查全部
         System.out.println(productDao.selectProductAll());
-        // 查价格区间
-        System.out.println("价格区间"+productDao.selectProductByPrice(100.0, 10.0));
         // 查各分类数量
-        System.out.println("分类数量"+productDao.getCount(1));
-        // 根据分类和价格区间搜索
-        System.out.println("两者相加的查询结果"+productDao.selectProductByPriceAndCategoryID(1, 100.0, 10.0));
+        System.out.println("分类数量" + productDao.getCount(1));
 
         return "index";
     }
@@ -156,7 +152,7 @@ public class DaoTest {
         // 改
         cartDao.updateCart(2, new cart(1, 1, 5));
         // 查
-        System.out.println(cartDao.selectCart());
+        System.out.println(cartDao.selectCart(1));
         return "index";
     }
 
@@ -172,9 +168,27 @@ public class DaoTest {
         // 改
         starDao.updateStar(2, new star(1, 1, 5));
         // 查
-        System.out.println(starDao.selectStar());
+        System.out.println(starDao.selectStar(1));
         // 查用户收藏数量
         System.out.println(starDao.getNumber(1));
+        return "index";
+    }
+
+    @RequestMapping("doTest9")
+    public String test9() {
+        // 根据关键词查找
+        System.out.println("关键词   " + productDao.search("1", null, null, null));
+        // 根据商品分类查找
+        System.out.println("商品分类   " + productDao.search(null, 1, null, null));
+        // 根据商品价格区间查找
+        System.out.println("商品价格区间    " + productDao.search(null, null, 1, 100));
+        // 根据关键词，商品分类查找
+        System.out.println("关键词    商品分类     " + productDao.search("1", 1, null, null));
+        // 根据关键词，价格区间查找
+        System.out.println("关键词     价格区间   " + productDao.search("1", null, 1, 100));
+        // 根据商品分类，价格区间查找
+        System.out.println("商品分类  价格区间    " + productDao.search(null, 1, 1, 100));
+
         return "index";
     }
 }

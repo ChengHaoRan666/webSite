@@ -42,8 +42,8 @@ public class starDao {
     /**
      * 查
      */
-    public List<star> selectStar() {
-        return starMapper.selectStar();
+    public List<star> selectStar(Integer userId) {
+        return starMapper.selectStar(userId);
     }
 
     /**

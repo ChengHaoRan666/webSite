@@ -1,5 +1,8 @@
 package com.chr.website.entity;
 
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 /**
@@ -7,6 +10,9 @@ import java.util.Date;
  * @Create: 2024/9/16 - 9:31
  * @Description: 支付信息表
  */
+@Data
+@Component
+
 public class payment {
     private Integer id;
     private Integer orderId;

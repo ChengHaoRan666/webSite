@@ -41,7 +41,7 @@ public class cartDao {
     /**
      * 查
      */
-    public List<cart> selectCart() {
-        return cartMapper.selectCart();
+    public List<cart> selectCart(Integer userId) {
+        return cartMapper.selectCart(userId);
     }
 }

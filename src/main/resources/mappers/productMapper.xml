@@ -53,22 +53,25 @@
         select * from products;
     </select>
 
-    <!--查价格区间 List<product> selectProductByPrice(@Param("max") Double max, @Param("min") Double min);-->
-    <select id="selectProductByPrice" resultMap="productMapper">
-        select * from products where Price between #{min} and #{max}
-    </select>
-
     <!--查各分类数量 Integer getCount(@Param("CategoryID") Integer CategoryID);-->
     <select id="getCount" resultType="Integer">
         select COUNT(*) from products where CategoryID = #{CategoryID}
     </select>
 
-    <!--根据分类和价格区间搜索  List<product> selectProductByPriceAndCategoryID(@Param("CategoryID") Integer CategoryID, @Param("max") Double max, @Param("min") Double min);-->
-    <select id="selectProductByPriceAndCategoryID" resultMap="productMapper">
-        select * from products where CategoryID = #{CategoryID} and Price between #{min} and #{max}
-    </select>
-
-    <select id="selectProductByCategoryID" resultMap="productMapper">
-        select * from products where CategoryID = #{CategoryID}
+    <!--关键词，商品类别，价格区间，三个搜索条件可有可无进行搜索-->
+    <select id="search" resultMap="productMapper">
+        select * from Products where 1 = 1
+        <if test="CategoryId != '' and CategoryId != null">
+            and CategoryID = #{CategoryId}
+        </if>
+        <if test="min != '' and min != null">
+            and Price >= #{min}
+        </if>
+        <if test="max != '' and max != null">
+            and Price &lt;= #{max}
+        </if>
+        <if test="keyword != '' and keyword != null">
+            and ProductName like "%"#{keyword}"%"
+        </if>
     </select>
 </mapper>

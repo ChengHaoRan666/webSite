@@ -1,5 +1,6 @@
 package com.chr.website.entity;
 
+import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import java.util.Date;
  * @Description: 商品
  */
 @Component
+@Data
 public class product {
     private Integer id;
     private String name;

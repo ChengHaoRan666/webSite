@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
+
 public class seller {
     private Integer id;
     private String name;

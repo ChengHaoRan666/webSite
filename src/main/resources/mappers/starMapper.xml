@@ -24,9 +24,9 @@
         <result property="Quantity" column="Quantity"/>
     </resultMap>
 
-    <!--查 List<star> selectStar();-->
+    <!--查 List<star> selectStar( @Param("UserID") Integer userId);-->
     <select id="selectStar" resultMap="starMapper">
-        select * from stars;
+        select * from stars where UserID = #{UserID};
     </select>
 
     <select id="getNumber" resultType="Integer">

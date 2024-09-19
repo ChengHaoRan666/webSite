@@ -38,10 +38,6 @@ public interface productMapper {
      */
     List<product> selectProductAll();
 
-    /**
-     * 查价格区间
-     */
-    List<product> selectProductByPrice(@Param("max") Double max, @Param("min") Double min);
 
     /**
      * 查各分类数量
@@ -49,12 +45,10 @@ public interface productMapper {
     Integer getCount(@Param("CategoryID") Integer CategoryID);
 
     /**
-     * 根据分类和价格区间搜索
+     * 关键词，商品类别，价格区间，三个搜索条件可有可无进行搜索
      */
-    List<product> selectProductByPriceAndCategoryID(@Param("CategoryID") Integer CategoryID, @Param("max") Double max, @Param("min") Double min);
-
-    /**
-     * 根据类别搜索
-     */
-    List<product> selectProductByCategoryID(@Param("CategoryID") Integer CategoryID);
+    List<product> search(@Param("keyword") String keyword,
+                         @Param("CategoryId") Integer CategoryId,
+                         @Param("min") Integer min,
+                         @Param("max") Integer max);
 }
