@@ -1,4 +1,4 @@
-package com.chr.website.controller;
+package com.chr.website.controller.test;
 
 import com.chr.website.entity.*;
 import com.chr.website.mapper.*;

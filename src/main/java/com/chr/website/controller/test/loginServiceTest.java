@@ -1,4 +1,4 @@
-package com.chr.website.controller;
+package com.chr.website.controller.test;
 
 import com.chr.website.service.Impl.loginServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
