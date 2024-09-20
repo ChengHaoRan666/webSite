@@ -34,7 +34,6 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 </head>
 <body>
 <!-- HEADER -->
@@ -248,10 +247,10 @@
                     <h3 class="title">新产品</h3>
                     <div class="section-nav">
                         <ul class="section-tab-nav tab-nav">
-                            <li class="active"><a data-toggle="tab" href="#tab1">电脑</a></li>
-                            <li><a data-toggle="tab" href="#tab1">手机</a></li>
-                            <li><a data-toggle="tab" href="#tab1">相机</a></li>
-                            <li><a data-toggle="tab" href="#tab1">配件</a></li>
+                            <li class="active"><a data-toggle="tab" href="#tab11">电脑</a></li>
+                            <li><a data-toggle="tab" href="#tab12">手机</a></li>
+                            <li><a data-toggle="tab" href="#tab13">相机</a></li>
+                            <li><a data-toggle="tab" href="#tab14">配件</a></li>
                         </ul>
                     </div>
                 </div>
@@ -262,18 +261,18 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="products-tabs">
-
-                        <!-- tab -->
-                        <div id="tab1" class="tab-pane active">
-                            <div class="products-slick" data-nav="#slick-nav-1">
+                        <!-- tab11 电脑 默认-->
+                        <div class="tab-pane active " id="tab11">
+                            <div class="products-slick" data-nav="#slick-nav-11">
 
                                 <!-- product -->
-                                <div class="product" th:each="product : ${session.products}">
+                                <div class="product" th:each="product : ${session.newProducts1}">
                                     <div class="product-img">
                                         <img alt="" th:src="${product.imageUrl}">
                                     </div>
                                     <div class="product-body">
-                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">类别</p>
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
+                                            类别</p>
                                         <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
                                         <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
                                         <div class="product-rating">
@@ -281,7 +280,6 @@
                                         </div>
 
                                         <div class="product-btns">
-                                            <!-- 按钮逻辑可以根据实际需要实现 -->
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
                                             <button class="add-to-compare"><i class="fa fa-exchange"></i><span
@@ -299,11 +297,129 @@
                                 <!-- /product -->
 
                             </div>
-                            <div id="slick-nav-1" class="products-slick-nav"></div>
+                            <div class="products-slick-nav" id="slick-nav-11"></div>
                         </div>
-                        <!-- /tab -->
-                        <!--TODO-->
+                        <!-- /tab11 -->
 
+                        <!-- tab12  手机-->
+                        <div class="tab-pane" id="tab12">
+                            <div class="products-slick" data-nav="#slick-nav-12">
+
+                                <!-- product -->
+                                <div class="product" th:each="product : ${session.newProducts2}">
+                                    <div class="product-img">
+                                        <img alt="" th:src="${product.imageUrl}">
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
+                                            类别</p>
+                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
+                                        <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
+                                        <div class="product-rating">
+                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
+                                        </div>
+
+                                        <div class="product-btns">
+                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                                    class="tooltipp">加入收藏</span></button>
+                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
+                                                    class="tooltipp">进行比较</span></button>
+                                            <button class="quick-view"><i class="fa fa-eye"></i><span
+                                                    class="tooltipp">查看</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="add-to-cart">
+                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /product -->
+
+                            </div>
+                            <div class="products-slick-nav" id="slick-nav-12"></div>
+                        </div>
+                        <!-- /tab12 -->
+
+                        <!-- tab13 相机 -->
+                        <div class="tab-pane" id="tab13">
+                            <div class="products-slick" data-nav="#slick-nav-13">
+
+                                <!-- product -->
+                                <div class="product" th:each="product : ${session.newProducts3}">
+                                    <div class="product-img">
+                                        <img alt="" th:src="${product.imageUrl}">
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
+                                            类别</p>
+                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
+                                        <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
+                                        <div class="product-rating">
+                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
+                                        </div>
+
+                                        <div class="product-btns">
+                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                                    class="tooltipp">加入收藏</span></button>
+                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
+                                                    class="tooltipp">进行比较</span></button>
+                                            <button class="quick-view"><i class="fa fa-eye"></i><span
+                                                    class="tooltipp">查看</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="add-to-cart">
+                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /product -->
+
+                            </div>
+                            <div class="products-slick-nav" id="slick-nav-13"></div>
+                        </div>
+                        <!-- /tab13 -->
+
+                        <!-- tab14 配件-->
+                        <div class="tab-pane" id="tab14">
+                            <div class="products-slick" data-nav="#slick-nav-14">
+
+                                <!-- product -->
+                                <div class="product" th:each="product : ${session.newProducts4}">
+                                    <div class="product-img">
+                                        <img alt="" th:src="${product.imageUrl}">
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
+                                            类别</p>
+                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
+                                        <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
+                                        <div class="product-rating">
+                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
+                                        </div>
+
+                                        <div class="product-btns">
+                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                                    class="tooltipp">加入收藏</span></button>
+                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
+                                                    class="tooltipp">进行比较</span></button>
+                                            <button class="quick-view"><i class="fa fa-eye"></i><span
+                                                    class="tooltipp">查看</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="add-to-cart">
+                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /product -->
+
+                            </div>
+                            <div class="products-slick-nav" id="slick-nav-14"></div>
+                        </div>
+                        <!-- /tab14 -->
                     </div>
                 </div>
             </div>
@@ -327,32 +443,33 @@
                     <ul class="hot-deal-countdown">
                         <li>
                             <div>
-                                <h3><!--TODO--></h3>
+                                <h3 class="countdown-days">0</h3>
                                 <span>Days</span>
                             </div>
                         </li>
                         <li>
                             <div>
-                                <h3><!--TODO--></h3>
+                                <h3 class="countdown-hours">0</h3>
                                 <span>Hours</span>
                             </div>
                         </li>
                         <li>
                             <div>
-                                <h3><!--TODO--></h3>
+                                <h3 class="countdown-minutes">0</h3>
                                 <span>Mins</span>
                             </div>
                         </li>
                         <li>
                             <div>
-                                <h3><!--TODO--></h3>
+                                <h3 class="countdown-seconds">0</h3>
                                 <span>Secs</span>
                             </div>
                         </li>
                     </ul>
+
                     <h2 class="text-uppercase">本周交易排行榜</h2>
                     <p>部分系列高达 50% 折扣</p>
-                    <a class="primary-btn cta-btn" href="#">Shop now</a>
+                    <a class="primary-btn cta-btn" href="#col">Shop now</a>
                 </div>
             </div>
         </div>
@@ -362,6 +479,7 @@
 </div>
 <!-- /HOT DEAL SECTION -->
 
+
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -370,15 +488,15 @@
         <div class="row">
 
             <!-- section title -->
-            <div class="col-md-12">
+            <div class="col-md-12" id="col">
                 <div class="section-title">
-                    <h3 class="title">畅销榜单</h3>
+                    <h3 class="title">畅销榜单（前20名）</h3>
                     <div class="section-nav">
                         <ul class="section-tab-nav tab-nav">
-                            <li class="active"><a data-toggle="tab" href="#tab2">电脑</a></li>
-                            <li><a data-toggle="tab" href="#tab2">手机</a></li>
-                            <li><a data-toggle="tab" href="#tab2">相机</a></li>
-                            <li><a data-toggle="tab" href="#tab2">配件</a></li>
+                            <li class="active"><a data-toggle="tab" href="#tab21">电脑</a></li>
+                            <li><a data-toggle="tab" href="#tab22">手机</a></li>
+                            <li><a data-toggle="tab" href="#tab23">相机</a></li>
+                            <li><a data-toggle="tab" href="#tab24">配件</a></li>
                         </ul>
                     </div>
                 </div>
@@ -389,37 +507,31 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="products-tabs">
-                        <!-- tab -->
-                        <div id="tab2" class="tab-pane fade in active">
-                            <div class="products-slick" data-nav="#slick-nav-2">
+                        <!-- tab21 电脑 默认-->
+                        <div class="tab-pane active " id="tab21">
+                            <div class="products-slick" data-nav="#slick-nav-21">
+
                                 <!-- product -->
-                                <div class="product">
+                                <div class="product" th:each="product : ${session.TotalBestsellerProducts1}">
                                     <div class="product-img">
-                                        <img src="/website/static/img/product06.png" alt="">
-                                        <div class="product-label">
-                                            <span class="sale">-30%</span>
-                                            <span class="new">NEW</span>
-                                        </div>
+                                        <img alt="" th:src="${product.imageUrl}">
                                     </div>
                                     <div class="product-body">
-                                        <p class="product-category">类别</p>
-                                        <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                        <h4 class="product-price">￥980.00
-                                            <del class="product-old-price">￥990.00</del>
-                                        </h4>
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
+                                            类别</p>
+                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
+                                        <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
                                         <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
                                         </div>
+
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
                                             <button class="add-to-compare"><i class="fa fa-exchange"></i><span
                                                     class="tooltipp">进行比较</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
+                                            <button class="quick-view"><i class="fa fa-eye"></i><span
+                                                    class="tooltipp">查看</span>
                                             </button>
                                         </div>
                                     </div>
@@ -430,146 +542,132 @@
                                 </div>
                                 <!-- /product -->
 
-                                <!-- product -->
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="/website/static/img/product07.png" alt="">
-                                        <div class="product-label">
-                                            <span class="new">NEW</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">类别</p>
-                                        <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                        <h4 class="product-price">￥980.00
-                                            <del class="product-old-price">￥990.00</del>
-                                        </h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                                                    class="tooltipp">加入收藏</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">进行比较</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- /product -->
-
-                                <!-- product -->
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="/website/static/img/product08.png" alt="">
-                                        <div class="product-label">
-                                            <span class="sale">-30%</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">类别</p>
-                                        <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                        <h4 class="product-price">￥980.00
-                                            <del class="product-old-price">￥990.00</del>
-                                        </h4>
-                                        <div class="product-rating">
-                                        </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                                                    class="tooltipp">加入收藏</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">进行比较</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- /product -->
-
-                                <!-- product -->
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="/website/static/img/product09.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">类别</p>
-                                        <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                        <h4 class="product-price">￥980.00
-                                            <del class="product-old-price">￥990.00</del>
-                                        </h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                                                    class="tooltipp">加入收藏</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">进行比较</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- /product -->
-
-                                <!-- product -->
-                                <div class="product">
-                                    <div class="product-img">
-                                        <img src="/website/static/img/product01.png" alt="">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category">类别</p>
-                                        <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                        <h4 class="product-price">￥980.00
-                                            <del class="product-old-price">￥990.00</del>
-                                        </h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                                                    class="tooltipp">加入收藏</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">进行比较</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- /product -->
                             </div>
-                            <div id="slick-nav-2" class="products-slick-nav"></div>
+                            <div class="products-slick-nav" id="slick-nav-21"></div>
                         </div>
-                        <!-- /tab -->
+                        <!-- /tab21 -->
+
+                        <!-- tab22 手机-->
+                        <div class="tab-pane" id="tab22">
+                            <div class="products-slick" data-nav="#slick-nav-22">
+
+                                <!-- product -->
+                                <div class="product" th:each="product : ${session.TotalBestsellerProducts2}">
+                                    <div class="product-img">
+                                        <img alt="" th:src="${product.imageUrl}">
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
+                                            类别</p>
+                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
+                                        <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
+                                        <div class="product-rating">
+                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
+                                        </div>
+
+                                        <div class="product-btns">
+                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                                    class="tooltipp">加入收藏</span></button>
+                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
+                                                    class="tooltipp">进行比较</span></button>
+                                            <button class="quick-view"><i class="fa fa-eye"></i><span
+                                                    class="tooltipp">查看</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="add-to-cart">
+                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /product -->
+
+                            </div>
+                            <div class="products-slick-nav" id="slick-nav-22"></div>
+                        </div>
+                        <!-- /tab22 -->
+
+                        <!-- tab23 相机-->
+                        <div class="tab-pane" id="tab23">
+                            <div class="products-slick" data-nav="#slick-nav-23">
+
+                                <!-- product -->
+                                <div class="product" th:each="product : ${session.TotalBestsellerProducts3}">
+                                    <div class="product-img">
+                                        <img alt="" th:src="${product.imageUrl}">
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
+                                            类别</p>
+                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
+                                        <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
+                                        <div class="product-rating">
+                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
+                                        </div>
+
+                                        <div class="product-btns">
+                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                                    class="tooltipp">加入收藏</span></button>
+                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
+                                                    class="tooltipp">进行比较</span></button>
+                                            <button class="quick-view"><i class="fa fa-eye"></i><span
+                                                    class="tooltipp">查看</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="add-to-cart">
+                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /product -->
+
+                            </div>
+                            <div class="products-slick-nav" id="slick-nav-23"></div>
+                        </div>
+                        <!-- /tab23 -->
+
+
+                        <!-- tab23 配件-->
+                        <div class="tab-pane" id="tab24">
+                            <div class="products-slick" data-nav="#slick-nav-24">
+
+                                <!-- product -->
+                                <div class="product" th:each="product : ${session.TotalBestsellerProducts4}">
+                                    <div class="product-img">
+                                        <img alt="" th:src="${product.imageUrl}">
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
+                                            类别</p>
+                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
+                                        <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
+                                        <div class="product-rating">
+                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
+                                        </div>
+
+                                        <div class="product-btns">
+                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                                    class="tooltipp">加入收藏</span></button>
+                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
+                                                    class="tooltipp">进行比较</span></button>
+                                            <button class="quick-view"><i class="fa fa-eye"></i><span
+                                                    class="tooltipp">查看</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="add-to-cart">
+                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /product -->
+
+                            </div>
+                            <div class="products-slick-nav" id="slick-nav-24"></div>
+                        </div>
+                        <!-- /tab24 -->
+
                     </div>
                 </div>
             </div>
@@ -581,15 +679,18 @@
 </div>
 <!-- /SECTION -->
 
+<!--TODO-->
+
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
     <div class="container">
         <!-- row -->
         <div class="row">
+            <!--电脑-->
             <div class="col-md-4 col-xs-6">
                 <div class="section-title">
-                    <h4 class="title">畅销榜单</h4>
+                    <h4 class="title">畅销榜单 - 电脑</h4>
                     <div class="section-nav">
                         <div id="slick-nav-3" class="products-slick-nav"></div>
                     </div>
@@ -692,9 +793,11 @@
                 </div>
             </div>
 
+
+            <!--手机-->
             <div class="col-md-4 col-xs-6">
                 <div class="section-title">
-                    <h4 class="title">畅销榜单</h4>
+                    <h4 class="title">畅销榜单 - 手机</h4>
                     <div class="section-nav">
                         <div id="slick-nav-4" class="products-slick-nav"></div>
                     </div>
@@ -797,11 +900,11 @@
                 </div>
             </div>
 
-            <div class="clearfix visible-sm visible-xs"></div>
 
+            <!--相机-->
             <div class="col-md-4 col-xs-6">
                 <div class="section-title">
-                    <h4 class="title">畅销榜单</h4>
+                    <h4 class="title">畅销榜单 - 相机</h4>
                     <div class="section-nav">
                         <div id="slick-nav-5" class="products-slick-nav"></div>
                     </div>
@@ -1018,6 +1121,8 @@
 <script src="/website/static/js/nouislider.min.js"></script>
 <script src="/website/static/js/jquery.zoom.min.js"></script>
 <script src="/website/static/js/main.js"></script>
+<script src="/website/static/js/time.js"></script>
+
 
 </body>
 </html>
