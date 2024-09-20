@@ -1,17 +1,12 @@
 package com.chr.website.service.Impl;
 
-import com.chr.website.dao.cartDao;
-import com.chr.website.dao.orderDao;
-import com.chr.website.dao.productDao;
-import com.chr.website.dao.starDao;
-import com.chr.website.entity.cart;
-import com.chr.website.entity.order;
-import com.chr.website.entity.product;
-import com.chr.website.entity.star;
+import com.chr.website.dao.*;
+import com.chr.website.entity.*;
 import com.chr.website.service.pageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +25,9 @@ public class pageServiceImpl implements pageService {
     private cartDao cartDao; // 购物车表
     @Autowired
     private orderDao orderDao; // 订单表
+    @Autowired
+    private reviewDao reviewDao; // 评价表
+
 
     /**
      * 获取全部商品用于首页展示
@@ -114,5 +112,28 @@ public class pageServiceImpl implements pageService {
     @Override
     public List<product> search(String keyword, Integer CategoryId, Integer min, Integer max) {
         return productDao.search(keyword, CategoryId, min, max);
+    }
+
+    /**
+     * 获取商品评分
+     */
+    @Override
+    public List<Integer> getRating(Integer productId) {
+        List<review> reviews = reviewDao.selectReviewByproductId(productId);
+        List<Integer> list = new ArrayList<>();
+        for (review review : reviews) list.add(review.getRating());
+        return list;
+    }
+
+
+    /**
+     * 获取商品评价
+     */
+    @Override
+    public List<String> getComment(Integer productId) {
+        List<review> reviews = reviewDao.selectReviewByproductId(productId);
+        List<String> list = new ArrayList<>();
+        for (review review : reviews) list.add(review.getComment());
+        return list;
     }
 }
