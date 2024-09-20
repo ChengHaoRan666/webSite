@@ -1,7 +1,8 @@
 package com.chr.website.service;
 
-import com.chr.website.entity.payment;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author: 程浩然
@@ -14,12 +15,7 @@ public interface shippingService {
     /**
      * 创建订单
      */
-    Integer orderCreate(Integer id, Integer productId);
-
-    /**
-     * 创建支付信息
-     */
-    payment orderPayment(Integer orderId);
+    void orderCreate(String name, String phone, String DeliveryAddress, Integer Userid, List<Integer> productIds);
 
     /**
      * 添加到购物车

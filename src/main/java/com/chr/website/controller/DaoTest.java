@@ -25,8 +25,6 @@ public class DaoTest {
     @Autowired
     private orderDao orderDao;
     @Autowired
-    private paymentDao paymentDao;
-    @Autowired
     private reviewDao reviewDao;
     @Autowired
     private cartDao cartDao;
@@ -110,20 +108,6 @@ public class DaoTest {
         return "index";
     }
 
-    @RequestMapping("daoTest5")
-    public String test5() {
-        // 增
-        paymentDao.addPayment(new payment(1, 1, 19.9, "0", "0", new Date()));
-        paymentDao.addPayment(new payment(1, 1, 29.9, "0", "0", new Date()));
-        paymentDao.addPayment(new payment(1, 1, 39.9, "0", "0", new Date()));
-        // 删
-        paymentDao.deletePayment(3);
-        // 查一个
-        System.out.println(paymentDao.selectPaymentById(2));
-        // 查用户全部
-        System.out.println(paymentDao.selectPaymentByUserId(1));
-        return "index";
-    }
 
 
     @RequestMapping("daoTest6")

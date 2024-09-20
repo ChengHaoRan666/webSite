@@ -25,8 +25,6 @@ public class MapperTest {
     @Autowired
     private orderMapper orderMapper;
     @Autowired
-    private paymentMapper paymentMapper;
-    @Autowired
     private reviewMapper reviewMapper;
     @Autowired
     private cartMapper cartMapper;
@@ -109,20 +107,7 @@ public class MapperTest {
         return "index";
     }
 
-    @RequestMapping("/test5")
-    public String test5() {
-        // 增
-        paymentMapper.addPayment(new payment(1, 1, 19.9, "0", "0", new Date()));
-        paymentMapper.addPayment(new payment(1, 1, 29.9, "0", "0", new Date()));
-        paymentMapper.addPayment(new payment(1, 1, 39.9, "0", "0", new Date()));
-        // 删
-        paymentMapper.deletePayment(3);
-        // 查一个
-        System.out.println(paymentMapper.selectPaymentById(2));
-        // 查用户全部
-        System.out.println(paymentMapper.selectPaymentByUserId(1));
-        return "index";
-    }
+
 
 
     @RequestMapping("/test6")

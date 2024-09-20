@@ -1,29 +1,37 @@
 package com.chr.website.service.Impl;
 
-import com.chr.website.entity.payment;
+import com.chr.website.dao.orderDao;
+import com.chr.website.dao.productDao;
+import com.chr.website.entity.order;
+import com.chr.website.entity.product;
 import com.chr.website.service.shippingService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: 程浩然
  * @Create: 2024/9/18 - 16:00
  */
 public class shippingServiceImpl implements shippingService {
-    /**
-     * 创建订单
-     *
-     */
-    @Override
-    public Integer orderCreate(Integer id, Integer productId) {
-        return null;
-    }
+    @Autowired
+    private orderDao orderDao;
+    @Autowired
+    private productDao productDao;
+
 
     /**
-     * 创建支付信息
+     * 创建订单
      */
     @Override
-    public payment orderPayment(Integer orderId) {
-        return null;
+    public void orderCreate(String name, String phone, String DeliveryAddress, Integer Userid, List<Integer> productIds) {
+        for (Integer productId : productIds) {
+            product product = productDao.selectProductById(productId);
+            orderDao.addOrder(new order(Userid, productId, product.getProductStoreID(), product.getPrice(), DeliveryAddress, name, phone, "1", new Date(), null, null, null));
+        }
     }
+
 
     /**
      * 添加到购物车

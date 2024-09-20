@@ -205,42 +205,16 @@
                         <h3 class="title">账单</h3>
                     </div>
                     <div class="form-group">
-                        <input class="input" type="text" name="name" placeholder="姓名">
+                        <input class="input" name="name" placeholder="收件人姓名" type="text">
                     </div>
                     <div class="form-group">
-                        <input class="input" type="text" name="cell-phone" placeholder="手机号">
+                        <input class="input" name="cell-phone" placeholder="收件人手机号" type="text">
                     </div>
                     <div class="form-group">
-                        <input class="input" type="text" name="address" placeholder="地址">
+                        <input class="input" name="address" placeholder="收件人详细地址" type="text">
                     </div>
                 </div>
                 <!-- /Billing Details -->
-
-                <!-- Shiping Details -->
-                <div class="shiping-details">
-                    <div class="section-title">
-                        <h3 class="title">Shiping address</h3>
-                    </div>
-                    <div class="input-checkbox">
-                        <input type="checkbox" id="shiping-address">
-                        <label for="shiping-address">
-                            <span></span>
-                            寄往不同地方？
-                        </label>
-                        <div class="caption">
-                            <div class="form-group">
-                                <input class="input" type="text" name="name" placeholder="姓名">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="cell-phone" placeholder="手机号">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="address" placeholder="地址">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /Shiping Details -->
 
                 <!-- Order notes -->
                 <div class="order-notes">
@@ -261,14 +235,18 @@
                     </div>
                     <div class="order-products">
                         <div class="order-col">
+                            <img height="50" src="/website/static/img/shop01.png" width="80">
                             <div>1x 产品名称</div>
                             <div>￥980.00</div>
                         </div>
+                        <br>
                         <div class="order-col">
+                            <img height="50" src="/website/static/img/shop01.png" width="80">
                             <div>2x 产品名称</div>
                             <div>￥980.00</div>
                         </div>
                     </div>
+                    <br>
                     <div class="order-col">
                         <div>运费</div>
                         <div><strong>免费</strong></div>
@@ -283,21 +261,13 @@
                         <input type="radio" name="payment" id="payment-1">
                         <label for="payment-1">
                             <span></span>
-                            银行卡支付
+                            微信支付
                         </label>
                     </div>
                     <span></span>
                     <div class="input-radio">
                         <input type="radio" name="payment" id="payment-2">
                         <label for="payment-2">
-                            <span></span>
-                            微信支付
-                        </label>
-                    </div>
-                    <span></span>
-                    <div class="input-radio">
-                        <input type="radio" name="payment" id="payment-3">
-                        <label for="payment-3">
                             <span></span>
                             支付宝支付
                         </label>
