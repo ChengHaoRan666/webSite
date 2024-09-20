@@ -126,6 +126,4 @@ public class index {
         System.out.println(keyWord + "  " + CategoryId);
         return "store";
     }
-
-
 }
