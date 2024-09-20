@@ -62,7 +62,7 @@ public class pageServiceImpl implements pageService {
         for (cart cart : carts) {
             product product = productDao.selectProductById(cart.getProductID());
             if (map.containsKey(product)) map.put(product, map.get(product) + cart.getQuantity());
-            else map.put(product, 1);
+            else map.put(product, cart.getQuantity());
         }
         return map;
     }

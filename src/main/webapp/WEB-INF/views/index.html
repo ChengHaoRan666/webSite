@@ -110,16 +110,22 @@
                             </a>
                             <div class="cart-dropdown">
                                 <div class="cart-list">
-                                    <!--第一个商品-->
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="/website/static/img/product01.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                            <h4 class="product-price"><span class="qty">1x</span>￥980.00</h4>
+                                    <!-- 商品循环展示开始 -->
+                                    <div th:each="entry : ${session.cartMap}">
+                                        <div class="product-widget">
+                                            <div class="product-img">
+                                                <img alt="" th:src="@{${entry.key.imageUrl}}">
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-name"><a th:href="@{/product/{id}(id=${entry.key.id})}" th:text="${entry.key.name}">产品名称</a></h3>
+                                                <h4 class="product-price">
+                                                    <span class="qty" th:text="${entry.value} + 'x'">1x</span>
+                                                    <span th:text="'￥' + ${entry.key.price}">￥980.00</span>
+                                                </h4>
+                                            </div>
                                         </div>
                                     </div>
+                                    <!-- 商品循环展示结束 -->
                                 </div>
 
                                 <!--购物车摘要-->
@@ -490,15 +496,7 @@
             <!-- section title -->
             <div class="col-md-12" id="col">
                 <div class="section-title">
-                    <h3 class="title">畅销榜单（前20名）</h3>
-                    <div class="section-nav">
-                        <ul class="section-tab-nav tab-nav">
-                            <li class="active"><a data-toggle="tab" href="#tab21">电脑</a></li>
-                            <li><a data-toggle="tab" href="#tab22">手机</a></li>
-                            <li><a data-toggle="tab" href="#tab23">相机</a></li>
-                            <li><a data-toggle="tab" href="#tab24">配件</a></li>
-                        </ul>
-                    </div>
+                    <h3 class="title">畅销榜单</h3>
                 </div>
             </div>
             <!-- /section title -->
@@ -507,12 +505,12 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="products-tabs">
-                        <!-- tab21 电脑 默认-->
-                        <div class="tab-pane active " id="tab21">
-                            <div class="products-slick" data-nav="#slick-nav-21">
+                        <!-- tab2  默认-->
+                        <div class="tab-pane active ">
+                            <div class="products-slick" data-nav="#slick-nav-2">
 
                                 <!-- product -->
-                                <div class="product" th:each="product : ${session.TotalBestsellerProducts1}">
+                                <div class="product" th:each="product : ${session.TotalBestsellerProducts}">
                                     <div class="product-img">
                                         <img alt="" th:src="${product.imageUrl}">
                                     </div>
@@ -543,130 +541,8 @@
                                 <!-- /product -->
 
                             </div>
-                            <div class="products-slick-nav" id="slick-nav-21"></div>
+                            <div class="products-slick-nav" id="slick-nav-2"></div>
                         </div>
-                        <!-- /tab21 -->
-
-                        <!-- tab22 手机-->
-                        <div class="tab-pane" id="tab22">
-                            <div class="products-slick" data-nav="#slick-nav-22">
-
-                                <!-- product -->
-                                <div class="product" th:each="product : ${session.TotalBestsellerProducts2}">
-                                    <div class="product-img">
-                                        <img alt="" th:src="${product.imageUrl}">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
-                                            类别</p>
-                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
-                                        <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
-                                        </div>
-
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                                                    class="tooltipp">加入收藏</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">进行比较</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span
-                                                    class="tooltipp">查看</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- /product -->
-
-                            </div>
-                            <div class="products-slick-nav" id="slick-nav-22"></div>
-                        </div>
-                        <!-- /tab22 -->
-
-                        <!-- tab23 相机-->
-                        <div class="tab-pane" id="tab23">
-                            <div class="products-slick" data-nav="#slick-nav-23">
-
-                                <!-- product -->
-                                <div class="product" th:each="product : ${session.TotalBestsellerProducts3}">
-                                    <div class="product-img">
-                                        <img alt="" th:src="${product.imageUrl}">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
-                                            类别</p>
-                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
-                                        <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
-                                        </div>
-
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                                                    class="tooltipp">加入收藏</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">进行比较</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span
-                                                    class="tooltipp">查看</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- /product -->
-
-                            </div>
-                            <div class="products-slick-nav" id="slick-nav-23"></div>
-                        </div>
-                        <!-- /tab23 -->
-
-
-                        <!-- tab23 配件-->
-                        <div class="tab-pane" id="tab24">
-                            <div class="products-slick" data-nav="#slick-nav-24">
-
-                                <!-- product -->
-                                <div class="product" th:each="product : ${session.TotalBestsellerProducts4}">
-                                    <div class="product-img">
-                                        <img alt="" th:src="${product.imageUrl}">
-                                    </div>
-                                    <div class="product-body">
-                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
-                                            类别</p>
-                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
-                                        <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
-                                        </div>
-
-                                        <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
-                                                    class="tooltipp">加入收藏</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">进行比较</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span
-                                                    class="tooltipp">查看</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="add-to-cart">
-                                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- /product -->
-
-                            </div>
-                            <div class="products-slick-nav" id="slick-nav-24"></div>
-                        </div>
-                        <!-- /tab24 -->
 
                     </div>
                 </div>
@@ -679,7 +555,6 @@
 </div>
 <!-- /SECTION -->
 
-<!--TODO-->
 
 <!-- SECTION -->
 <div class="section">
@@ -687,6 +562,7 @@
     <div class="container">
         <!-- row -->
         <div class="row">
+
             <!--电脑-->
             <div class="col-md-4 col-xs-6">
                 <div class="section-title">
@@ -697,98 +573,27 @@
                 </div>
 
                 <div class="products-widget-slick" data-nav="#slick-nav-3">
-                    <div>
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product07.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product08.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
+                    <div th:each="group, groupStat : ${#arrays.toArray(#numbers.sequence(0, #lists.size(session.BestsellerProducts1) / 3))}">
+                        <div class="products-group">
+                            <div th:each="product, productStat : ${session.BestsellerProducts1}"
+                                 th:if="${(productStat.index / 3) == groupStat.index}">
+                                <div class="product-widget">
+                                    <!-- 产品信息 -->
+                                    <div class="product-img">
+                                        <img alt="" th:src="${product.imageUrl}">
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">类别</p>
+                                        <h3 class="product-name">
+                                            <a href="#" th:text="${product.name}">产品名称</a>
+                                        </h3>
+                                        <h4 class="product-price" th:text="'￥' + ${product.price}">
+                                            价格
+                                        </h4>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product09.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- product widget -->
-                    </div>
-
-                    <div>
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product01.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product02.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product03.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- product widget -->
                     </div>
                 </div>
             </div>
@@ -804,98 +609,27 @@
                 </div>
 
                 <div class="products-widget-slick" data-nav="#slick-nav-4">
-                    <div>
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product04.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product05.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
+                    <div th:each="group, groupStat : ${#arrays.toArray(#numbers.sequence(0, #lists.size(session.BestsellerProducts2) / 3))}">
+                        <div class="products-group">
+                            <div th:each="product, productStat : ${session.BestsellerProducts2}"
+                                 th:if="${(productStat.index / 3) == groupStat.index}">
+                                <div class="product-widget">
+                                    <!-- 产品信息 -->
+                                    <div class="product-img">
+                                        <img alt="" th:src="${product.imageUrl}">
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">类别</p>
+                                        <h3 class="product-name">
+                                            <a href="#" th:text="${product.name}">产品名称</a>
+                                        </h3>
+                                        <h4 class="product-price" th:text="'￥' + ${product.price}">
+                                            价格
+                                        </h4>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product06.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- product widget -->
-                    </div>
-
-                    <div>
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product07.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product08.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product09.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- product widget -->
                     </div>
                 </div>
             </div>
@@ -911,98 +645,27 @@
                 </div>
 
                 <div class="products-widget-slick" data-nav="#slick-nav-5">
-                    <div>
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product01.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product02.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
+                    <div th:each="group, groupStat : ${#arrays.toArray(#numbers.sequence(0, #lists.size(session.BestsellerProducts3) / 3))}">
+                        <div class="products-group">
+                            <div th:each="product, productStat : ${session.BestsellerProducts3}"
+                                 th:if="${(productStat.index / 3) == groupStat.index}">
+                                <div class="product-widget">
+                                    <!-- 产品信息 -->
+                                    <div class="product-img">
+                                        <img alt="" th:src="${product.imageUrl}">
+                                    </div>
+                                    <div class="product-body">
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">类别</p>
+                                        <h3 class="product-name">
+                                            <a href="#" th:text="${product.name}">产品名称</a>
+                                        </h3>
+                                        <h4 class="product-price" th:text="'￥' + ${product.price}">
+                                            价格
+                                        </h4>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product03.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- product widget -->
-                    </div>
-
-                    <div>
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product04.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product05.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- /product widget -->
-
-                        <!-- product widget -->
-                        <div class="product-widget">
-                            <div class="product-img">
-                                <img src="/website/static/img/product06.png" alt="">
-                            </div>
-                            <div class="product-body">
-                                <p class="product-category">类别</p>
-                                <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                <h4 class="product-price">￥980.00
-                                    <del class="product-old-price">￥990.00</del>
-                                </h4>
-                            </div>
-                        </div>
-                        <!-- product widget -->
                     </div>
                 </div>
             </div>
@@ -1021,6 +684,7 @@
     <!-- /container -->
 </div>
 <!-- /NEWSLETTER -->
+
 
 <!-- FOOTER -->
 <footer id="footer">
@@ -1046,11 +710,11 @@
                     <div class="footer">
                         <h3 class="footer-title">类别</h3>
                         <ul class="footer-links">
-                            <li><a href="#">热门交易</a></li>
-                            <li><a href="#">电脑</a></li>
-                            <li><a href="#">手机</a></li>
-                            <li><a href="#">相机</a></li>
-                            <li><a href="#">配件</a></li>
+                            <li><a th:href="@{/search?CategoryId=1}">热门交易</a></li>
+                            <li><a th:href="@{/search?CategoryId=2}">电脑</a></li>
+                            <li><a th:href="@{/search?CategoryId=3}">手机</a></li>
+                            <li><a th:href="@{/search?CategoryId=4}">相机</a></li>
+                            <li><a th:href="@{/search?CategoryId=5}">配件</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1064,7 +728,6 @@
                             <li><a href="#">关于我们</a></li>
                             <li><a href="#">联系我们</a></li>
                             <li><a href="#">隐私政策</a></li>
-                            <li><a href="#">订单和退货</a></li>
                             <li><a href="#">条款与条件</a></li>
                         </ul>
                     </div>

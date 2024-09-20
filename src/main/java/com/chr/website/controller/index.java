@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,16 +48,24 @@ public class index {
         // 获取收藏列表，购物车列表
         Map<product, Integer> starMap = pageService.collectShow((Integer) session.getAttribute("userId"));
         Map<product, Integer> cartMap = pageService.cartShow((Integer) session.getAttribute("userId"));
-        // 获取四个种类的 新产品 商品列表
+
+        // 获取四个种类的 新产品 商品列表（每个大小限制为40）
         List<product> newProducts1 = pageService.search(null, 1, null, null);
         List<product> newProducts2 = pageService.search(null, 2, null, null);
         List<product> newProducts3 = pageService.search(null, 3, null, null);
         List<product> newProducts4 = pageService.search(null, 4, null, null);
-        // 获取四个种类的 总畅销榜单 商品列表
-        List<product> TotalBestsellerProducts1 = pageService.search(null, 1, null, null);
-        List<product> TotalBestsellerProducts2 = pageService.search(null, 2, null, null);
-        List<product> TotalBestsellerProducts3 = pageService.search(null, 3, null, null);
-        List<product> TotalBestsellerProducts4 = pageService.search(null, 4, null, null);
+        // 进行排序，取前40
+        newProducts1 = newProducts1.stream().sorted(Comparator.comparing(product::getListedDate).reversed()).limit(40).toList();
+        newProducts2 = newProducts2.stream().sorted(Comparator.comparing(product::getListedDate).reversed()).limit(40).toList();
+        newProducts3 = newProducts3.stream().sorted(Comparator.comparing(product::getListedDate).reversed()).limit(40).toList();
+        newProducts4 = newProducts4.stream().sorted(Comparator.comparing(product::getListedDate).reversed()).limit(40).toList();
+
+        //TODO 获取商品列表总畅销榜单（每个大小限制为20）
+        List<product> TotalBestsellerProducts = pageService.indexShow();
+        //TODO 获取四个种类的 各个畅销榜单 商品列表（每个大小限制为30）
+        List<product> BestsellerProducts1 = pageService.search(null, 1, null, null);
+        List<product> BestsellerProducts2 = pageService.search(null, 2, null, null);
+        List<product> BestsellerProducts3 = pageService.search(null, 3, null, null);
 
         // 加入 session 域中
         // 新商品榜单
@@ -65,13 +74,16 @@ public class index {
         session.setAttribute("newProducts3", newProducts3);
         session.setAttribute("newProducts4", newProducts4);
         // 总商品畅销榜单
-        session.setAttribute("TotalBestsellerProducts1", TotalBestsellerProducts1);
-        session.setAttribute("TotalBestsellerProducts2", TotalBestsellerProducts2);
-        session.setAttribute("TotalBestsellerProducts3", TotalBestsellerProducts3);
-        session.setAttribute("TotalBestsellerProducts4", TotalBestsellerProducts4);
+        session.setAttribute("TotalBestsellerProducts", TotalBestsellerProducts);
+        // 各个商品畅销榜单
+        session.setAttribute("BestsellerProducts1", BestsellerProducts1);
+        session.setAttribute("BestsellerProducts2", BestsellerProducts2);
+        session.setAttribute("BestsellerProducts3", BestsellerProducts3);
         // 购物车，收藏数量
         session.setAttribute("starCount", starMap.size());
         session.setAttribute("cartCount", cartMap.size());
+        // 购物车列表
+        session.setAttribute("cartMap", cartMap);
         // 添加产品类别映射
         model.addAttribute("categoryMap", populateCategoryMap());
         return "index";
