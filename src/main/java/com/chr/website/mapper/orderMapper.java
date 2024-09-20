@@ -24,6 +24,12 @@ public interface orderMapper {
     int deleteOrder(@Param("id") Integer id);
 
     /**
+     * 修改订单状态
+     */
+    int updateOrderStatus(@Param("id") Integer id,@Param("OrderStatus") String OrderStatus);
+
+
+    /**
      * 根据订单id查询订单
      */
     order selectOrderById(@Param("id") Integer id);

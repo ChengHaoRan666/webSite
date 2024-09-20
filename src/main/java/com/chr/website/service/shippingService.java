@@ -20,25 +20,20 @@ public interface shippingService {
     /**
      * 添加到购物车
      */
-    Integer addCart(Integer productId);
+    void addCart(Integer userId, Integer productId, Integer quantity);
 
     /**
      * 加入收藏
      */
-    Integer addStar(Integer productId);
-
-    /**
-     * 进行比较
-     */
-    Integer compare(Integer productId);
+    void addStar(Integer userId, Integer productId, Integer quantity);
 
     /**
      * 评价商品
      */
-    Integer evaluate(Integer productId);
+    void evaluate(Integer userId, Integer productId, Integer rating, String comment);
 
     /**
      * 确认收货
      */
-    Integer delivery(Integer productId);
+    void delivery(Integer id, Integer productId);
 }

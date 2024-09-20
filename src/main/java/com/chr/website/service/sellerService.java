@@ -35,6 +35,11 @@ public interface sellerService {
     List<order> orderManage(Integer sellerId);
 
     /**
+     * 商家订单发货
+     */
+    void orderSend(Integer orderId);
+
+    /**
      * 修改商家信息
      */
     Integer sellerModifyInformation(Integer sellerId, String sellerName, String password1, String password2, String code, String Description, String email, String phone);

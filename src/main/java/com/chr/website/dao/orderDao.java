@@ -13,7 +13,7 @@ import java.util.List;
  * @Description: 订单表
  */
 @Component
-public class orderDao implements orderMapper{
+public class orderDao implements orderMapper {
     @Autowired
     private orderMapper orderMapper;
 
@@ -29,6 +29,13 @@ public class orderDao implements orderMapper{
      */
     public int deleteOrder(Integer id) {
         return orderMapper.deleteOrder(id);
+    }
+
+    /**
+     * 修改订单状态
+     */
+    public int updateOrderStatus(Integer id, String OrderStatus) {
+        return orderMapper.updateOrderStatus(id, OrderStatus);
     }
 
     /**
