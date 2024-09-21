@@ -288,7 +288,7 @@
                                                 th:text="${product.name}">产品名称</a></h3>
                                         <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
                                         <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                            <button class="add-to-wishlist"  th:data-id="${product.id}"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
                                             <button class="quick-view">
                                                 <a th:href="@{/product/{id}(id=${product.id})}"
@@ -328,7 +328,7 @@
                                         <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
 
                                         <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                            <button class="add-to-wishlist"  th:data-id="${product.id}"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
                                             <button class="quick-view">
                                                 <a th:href="@{/product/{id}(id=${product.id})}"
@@ -368,7 +368,7 @@
                                         <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
 
                                         <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                            <button class="add-to-wishlist"  th:data-id="${product.id}"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
                                             <button class="quick-view">
                                                 <a th:href="@{/product/{id}(id=${product.id})}"
@@ -407,7 +407,7 @@
                                         <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
 
                                         <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                            <button class="add-to-wishlist"  th:data-id="${product.id}"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
                                             <button class="quick-view">
                                                 <a th:href="@{/product/{id}(id=${product.id})}"
@@ -536,7 +536,7 @@
                                         </div>
 
                                         <div class="product-btns">
-                                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                                            <button class="add-to-wishlist"   th:data-id="${productAndRanting.product.id}"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
                                             <button class="quick-view">
                                                 <a th:href="@{/product/{id}(id=${productAndRanting.product.id})}"
@@ -808,6 +808,7 @@
 <script src="/website/static/js/jquery.zoom.min.js"></script>
 <script src="/website/static/js/main.js"></script>
 <script src="/website/static/js/time.js"></script>
+<script src="/website/static/js/addStar.js"></script>
 
 
 </body>

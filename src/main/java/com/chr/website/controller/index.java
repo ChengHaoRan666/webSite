@@ -5,10 +5,12 @@ import com.chr.website.service.Impl.pageServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
@@ -123,6 +125,13 @@ public class index {
     }
 
 
+    @RequestMapping("/add")
+    public ResponseEntity<String> add(@RequestParam("productId") String productId) {
+        System.out.println(productId);
+        System.out.println("11111111111111111111");
+        return ResponseEntity.ok("成功");
+    }
+
     /**
      * 登录页面
      */
@@ -148,6 +157,4 @@ public class index {
     public String starShow() {
         return "star";
     }
-
-
 }
