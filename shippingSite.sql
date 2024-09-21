@@ -1,3 +1,22 @@
+use ssm;
+
+drop table carts;
+
+drop table orders;
+
+drop table reviews;
+
+drop table sellers;
+
+drop table stars;
+
+drop table products;
+
+drop table categories;
+
+drop table users;
+
+
 # 用户表
 CREATE TABLE Users
 (
@@ -41,8 +60,7 @@ CREATE TABLE Products
     CategoryID     INT COMMENT '商品分类id',
     ImageURL       VARCHAR(2550) COMMENT '图片url',
     ListedDate     DATE COMMENT '上架日期',
-    Status         ENUM ('0', '1', '2') NOT NULL COMMENT '状态：特价，现售，预售',
-    CONSTRAINT fk_CategoryID FOREIGN KEY (CategoryID) REFERENCES Categories (CategoryID)
+    Status         ENUM ('0', '1', '2') NOT NULL COMMENT '状态：特价，现售，预售'
 );
 
 
@@ -61,29 +79,13 @@ CREATE TABLE Orders
     OrderDate       DATETIME                  NOT NULL COMMENT '下单时间',
     PaymentDate     DATETIME COMMENT '支付时间',
     ShippingDate    DATETIME COMMENT '发货时间',
-    DeliveryDate    DATETIME COMMENT '收货时间',
-    # 用户 id 外键
-        CONSTRAINT fk_UserID FOREIGN KEY (UserID) REFERENCES Users (UserID),
-    # 商品 id 外键
-        CONSTRAINT fk_ProductID FOREIGN KEY (ProductID) REFERENCES Products (ProductID),
-    # 商家 id 外键
-        CONSTRAINT fk_ProductStoreID FOREIGN KEY (SellerID) REFERENCES sellers (SellerID)
+    DeliveryDate    DATETIME COMMENT '收货时间'
 );
 
 
-# 订单支付信息表
-CREATE TABLE Payments
-(
-    PaymentID     INT PRIMARY KEY AUTO_INCREMENT COMMENT '支付ID，主键，自增',
-    OrderID       INT                  NOT NULL COMMENT '订单ID',
-    UserID        INT                  NOT NULL COMMENT '用户ID',
-    PaymentAmount DECIMAL(10, 2)       NOT NULL COMMENT '支付金额',
-    PaymentMethod ENUM ('0', '1')      NOT NULL COMMENT '支付方式：支付宝，微信支付',
-    PaymentStatus ENUM ('0', '1', '2') NOT NULL COMMENT '支付状态：待处理，已完成，失败，已退款',
-    PaymentTime   DATETIME             NOT NULL COMMENT '支付时间',
-    CONSTRAINT fk_OrderID FOREIGN KEY (OrderID) REFERENCES orders (OrderID),
-    CONSTRAINT fk_Payments_UserID FOREIGN KEY (UserID) REFERENCES Users (UserID)
-);
+update Orders set
+    OrderStatus = '2'
+where OrderID = 1;
 
 
 # 评价表
@@ -94,9 +96,7 @@ CREATE TABLE Reviews
     UserID     INT      NOT NULL COMMENT '用户ID',
     Rating     INT      NOT NULL COMMENT '评分',
     Comment    TEXT COMMENT '评论内容',
-    ReviewTime DATETIME NOT NULL COMMENT '评论时间',
-    CONSTRAINT fk_Reviews_ProductID FOREIGN KEY (ProductID) REFERENCES Products (ProductID),
-    CONSTRAINT fk_Reviews_UserID FOREIGN KEY (UserID) REFERENCES Users (UserID)
+    ReviewTime DATETIME NOT NULL COMMENT '评论时间'
 );
 
 
@@ -106,28 +106,53 @@ CREATE TABLE Carts
     CartID    INT PRIMARY KEY AUTO_INCREMENT COMMENT '购物车ID，主键，自增',
     UserID    INT NOT NULL COMMENT '用户ID',
     ProductID INT NOT NULL COMMENT '商品ID',
-    Quantity  INT NOT NULL COMMENT '商品数量',
-    CONSTRAINT fk_Carts_ProductID FOREIGN KEY (ProductID) REFERENCES Products (ProductID),
-    CONSTRAINT fk_Carts_UserID FOREIGN KEY (UserID) REFERENCES Users (UserID)
+    Quantity  INT NOT NULL COMMENT '商品数量'
 );
 
 
 # 收藏表
 CREATE TABLE stars
 (
-    StarID   INT PRIMARY KEY AUTO_INCREMENT COMMENT '收藏ID，主键，自增',
+    StarID    INT PRIMARY KEY AUTO_INCREMENT COMMENT '收藏ID，主键，自增',
     UserID    INT NOT NULL COMMENT '用户ID',
     ProductID INT NOT NULL COMMENT '商品ID',
-    Quantity  INT NOT NULL COMMENT '商品数量',
-    CONSTRAINT fk_stars_ProductID FOREIGN KEY (ProductID) REFERENCES Products (ProductID),
-    CONSTRAINT fk_stars_UserID FOREIGN KEY (UserID) REFERENCES Users (UserID)
+    Quantity  INT NOT NULL COMMENT '商品数量'
 );
 
 
 
 insert into Categories (CategoryName)
-values ('笔记本电脑'),
-       ('智能手机'),
+values ('电脑'),
+       ('手机'),
        ('相机'),
        ('配件');
 
+
+insert into Products
+values (null, '1', 1, '描述1', 19.9, 100, 1, 'url1', null, '1'),
+       (null, '2', 1, '描述1', 19.9, 100, 1, 'url1', null, '1'),
+       (null, '3', 1, '描述1', 19.9, 100, 1, 'url1', null, '1'),
+       (null, '4', 1, '描述1', 19.9, 100, 1, 'url1', null, '1'),
+       (null, '5', 1, '描述1', 19.9, 100, 1, 'url1', null, '1'),
+       (null, '6', 1, '描述1', 19.9, 100, 1, 'url1', null, '1'),
+       (null, '7', 1, '描述1', 19.9, 100, 1, 'url1', null, '1'),
+       (null, '8', 1, '描述1', 19.9, 100, 1, 'url1', null, '1'),
+       (null, '9', 1, '描述1', 19.9, 100, 1, 'url1', null, '1'),
+       (null, '10', 1, '描述1', 19.9, 100, 1, 'url1', null, '1'),
+       (null, '11', 1, '描述1', 19.9, 100, 1, 'url1', null, '1'),
+       (null, '12', 1, '描述1', 19.9, 100, 1, 'url1', null, '1'),
+       (null, '13', 1, '描述1', 19.9, 100, 1, 'url1', null, '1'),
+       (null, '14', 1, '描述1', 119.9, 100, 1, 'url1', null, '1'),
+       (null, '15', 1, '描述1', 119.9, 100, 1, 'url1', null, '1'),
+       (null, '16', 1, '描述1', 119.9, 100, 1, 'url1', null, '1'),
+       (null, '17', 1, '描述1', 119.9, 100, 1, 'url1', null, '1'),
+       (null, '18', 1, '描述1', 19.9, 100, 2, 'url1', null, '1'),
+       (null, '19', 1, '描述1', 19.9, 100, 2, 'url1', null, '1'),
+       (null, '20', 1, '描述1', 19.9, 100, 2, 'url1', null, '1'),
+       (null, '21', 1, '描述1', 19.9, 100, 2, 'url1', null, '1'),
+       (null, '22', 1, '描述1', 19.9, 100, 2, 'url1', null, '1'),
+       (null, '23', 1, '描述1', 19.9, 100, 2, 'url1', null, '1'),
+       (null, '24', 1, '描述1', 19.9, 100, 2, 'url1', null, '1'),
+       (null, '25', 1, '描述1', 19.9, 100, 2, 'url1', null, '1'),
+       (null, '26', 1, '描述1', 19.9, 100, 2, 'url1', null, '1'),
+       (null, '27', 1, '描述1', 19.9, 100, 2, 'url1', null, '1');

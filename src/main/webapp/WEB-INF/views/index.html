@@ -117,7 +117,9 @@
                                                 <img alt="" th:src="@{${entry.key.imageUrl}}">
                                             </div>
                                             <div class="product-body">
-                                                <h3 class="product-name"><a th:href="@{/product/{id}(id=${entry.key.id})}" th:text="${entry.key.name}">产品名称</a></h3>
+                                                <h3 class="product-name"><a
+                                                        th:href="@{/product/{id}(id=${entry.key.id})}"
+                                                        th:text="${entry.key.name}">产品名称</a></h3>
                                                 <h4 class="product-price">
                                                     <span class="qty" th:text="${entry.value} + 'x'">1x</span>
                                                     <span th:text="'￥' + ${entry.key.price}">￥980.00</span>
@@ -281,10 +283,6 @@
                                             类别</p>
                                         <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
                                         <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
-                                        </div>
-
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
@@ -321,9 +319,6 @@
                                             类别</p>
                                         <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
                                         <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
-                                        </div>
 
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
@@ -361,9 +356,6 @@
                                             类别</p>
                                         <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
                                         <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
-                                        </div>
 
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
@@ -401,9 +393,6 @@
                                             类别</p>
                                         <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
                                         <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
-                                        <div class="product-rating">
-                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
-                                        </div>
 
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
@@ -510,17 +499,27 @@
                             <div class="products-slick" data-nav="#slick-nav-2">
 
                                 <!-- product -->
-                                <div class="product" th:each="product : ${session.TotalBestsellerProducts}">
+                                <div class="product" th:each="productAndRanting : ${session.productAndRantings}">
                                     <div class="product-img">
-                                        <img alt="" th:src="${product.imageUrl}">
+                                        <img alt="" th:src="${productAndRanting.product.imageUrl}">
                                     </div>
                                     <div class="product-body">
-                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
+                                        <p class="product-category"
+                                           th:text="${categoryMap.get(productAndRanting.product.categoryId)}">
                                             类别</p>
-                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
-                                        <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
+                                        <h3 class="product-name"><a href="#"
+                                                                    th:text="${productAndRanting.product.name}">产品名称</a>
+                                        </h3>
+                                        <h4 class="product-price" th:text="${productAndRanting.product.price}">
+                                            ￥980.00</h4>
                                         <div class="product-rating">
-                                            <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, 5)}"></i>
+                                            <!-- 检查ranting是否大于-1，如果是，则显示星形图标 -->
+                                            <th:block th:if="${productAndRanting.ranting} > 0">
+                                                <i class="fa fa-star"
+                                                   th:each="star : ${#numbers.sequence(1, productAndRanting.ranting)}"></i>
+                                            </th:block>
+                                            <!-- 如果ranting小于或等于-1，则显示“暂无评分” -->
+                                            <span th:if="${productAndRanting.ranting} == -1">暂无评分</span>
                                         </div>
 
                                         <div class="product-btns">
@@ -583,7 +582,8 @@
                                         <img alt="" th:src="${product.imageUrl}">
                                     </div>
                                     <div class="product-body">
-                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">类别</p>
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
+                                            类别</p>
                                         <h3 class="product-name">
                                             <a href="#" th:text="${product.name}">产品名称</a>
                                         </h3>
@@ -619,7 +619,8 @@
                                         <img alt="" th:src="${product.imageUrl}">
                                     </div>
                                     <div class="product-body">
-                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">类别</p>
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
+                                            类别</p>
                                         <h3 class="product-name">
                                             <a href="#" th:text="${product.name}">产品名称</a>
                                         </h3>
@@ -655,7 +656,8 @@
                                         <img alt="" th:src="${product.imageUrl}">
                                     </div>
                                     <div class="product-body">
-                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">类别</p>
+                                        <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
+                                            类别</p>
                                         <h3 class="product-name">
                                             <a href="#" th:text="${product.name}">产品名称</a>
                                         </h3>

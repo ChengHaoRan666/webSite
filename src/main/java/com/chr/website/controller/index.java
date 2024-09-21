@@ -3,6 +3,7 @@ package com.chr.website.controller;
 import com.chr.website.entity.product;
 import com.chr.website.service.Impl.pageServiceImpl;
 import jakarta.servlet.http.HttpSession;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: 程浩然
@@ -39,6 +37,23 @@ public class index {
         return categoryMap;
     }
 
+    private List<productAndRanting> sortByRantingAndSun(List<product> products, int n) {
+        List<productAndRanting> productAndRantings = new ArrayList<>();
+        for (product product : products) {
+            List<Integer> ratings = pageService.getRating(product.getId());
+            Integer rating = -1;
+            if (!ratings.isEmpty()) {
+                int size = ratings.size();
+                int sun = ratings.stream().mapToInt(Integer::intValue).sum();
+                rating = sun / size;
+            }
+            productAndRantings.add(new productAndRanting(product, rating));
+        }
+        productAndRantings.sort((o1, o2) -> o2.ranting - o1.ranting);
+        // 删除20名之后的
+        if (productAndRantings.size() > n) productAndRantings.subList(n, productAndRantings.size()).clear();
+        return productAndRantings;
+    }
 
     /**
      * 主页
@@ -60,12 +75,20 @@ public class index {
         newProducts3 = newProducts3.stream().sorted(Comparator.comparing(product::getListedDate).reversed()).limit(40).toList();
         newProducts4 = newProducts4.stream().sorted(Comparator.comparing(product::getListedDate).reversed()).limit(40).toList();
 
-        //TODO 获取商品列表总畅销榜单（每个大小限制为20）
-        List<product> TotalBestsellerProducts = pageService.indexShow();
-        //TODO 获取四个种类的 各个畅销榜单 商品列表（每个大小限制为30）
-        List<product> BestsellerProducts1 = pageService.search(null, 1, null, null);
-        List<product> BestsellerProducts2 = pageService.search(null, 2, null, null);
-        List<product> BestsellerProducts3 = pageService.search(null, 3, null, null);
+        // 获取商品列表总畅销榜单（每个大小限制为20）
+        List<productAndRanting> productAndRantings = sortByRantingAndSun(pageService.indexShow(), 20);
+
+        // 获取四个种类的 各个畅销榜单 商品列表（每个大小限制为30）
+        List<product> BestsellerProducts1 = new ArrayList<>();
+        for (productAndRanting productAndRanting : sortByRantingAndSun(pageService.search(null, 1, null, null), 30))
+            BestsellerProducts1.add(productAndRanting.product);
+        List<product> BestsellerProducts2 = new ArrayList<>();
+        for (productAndRanting productAndRanting : sortByRantingAndSun(pageService.search(null, 2, null, null), 30))
+            BestsellerProducts2.add(productAndRanting.product);
+        List<product> BestsellerProducts3 = new ArrayList<>();
+        for (productAndRanting productAndRanting : sortByRantingAndSun(pageService.search(null, 3, null, null), 30))
+            BestsellerProducts3.add(productAndRanting.product);
+
 
         // 加入 session 域中
         // 新商品榜单
@@ -74,7 +97,7 @@ public class index {
         session.setAttribute("newProducts3", newProducts3);
         session.setAttribute("newProducts4", newProducts4);
         // 总商品畅销榜单
-        session.setAttribute("TotalBestsellerProducts", TotalBestsellerProducts);
+        session.setAttribute("productAndRantings", productAndRantings);
         // 各个商品畅销榜单
         session.setAttribute("BestsellerProducts1", BestsellerProducts1);
         session.setAttribute("BestsellerProducts2", BestsellerProducts2);
@@ -87,6 +110,17 @@ public class index {
         // 添加产品类别映射
         model.addAttribute("categoryMap", populateCategoryMap());
         return "index";
+    }
+
+    @Data
+    private class productAndRanting {
+        product product;
+        Integer ranting;
+
+        public productAndRanting(product product, Integer ranting) {
+            this.product = product;
+            this.ranting = ranting;
+        }
     }
 
 
