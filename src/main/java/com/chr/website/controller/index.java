@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
@@ -60,6 +59,8 @@ public class index {
      */
     @RequestMapping("/")
     public String index(HttpSession session, Model model) {
+        session.setAttribute("userId", 1);
+
         // 获取收藏列表，购物车列表
         Map<product, Integer> starMap = pageService.collectShow((Integer) session.getAttribute("userId"));
         Map<product, Integer> cartMap = pageService.cartShow((Integer) session.getAttribute("userId"));
@@ -141,6 +142,7 @@ public class index {
         return "cart";
     }
 
+
     /**
      * 收藏页面
      */
@@ -149,15 +151,5 @@ public class index {
         return "star";
     }
 
-    /**
-     * 搜索结果页面
-     */
-    @RequestMapping("/search")
-    public String search(
-            @RequestParam(value = "keyWord", required = false) String keyWord,
-            @RequestParam(value = "CategoryId", required = false) String CategoryId
-    ) {
-        System.out.println(keyWord + "  " + CategoryId);
-        return "store";
-    }
+
 }

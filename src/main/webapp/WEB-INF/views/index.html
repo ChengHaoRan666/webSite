@@ -118,6 +118,7 @@
                                             </div>
                                             <div class="product-body">
                                                 <h3 class="product-name"><a
+                                                        th:method="get"
                                                         th:href="@{/product/{id}(id=${entry.key.id})}"
                                                         th:text="${entry.key.name}">产品名称</a></h3>
                                                 <h4 class="product-price">
@@ -281,13 +282,14 @@
                                     <div class="product-body">
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
                                             类别</p>
-                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
+                                        <h3 class="product-name"><a
+                                                th:href="@{/product/{id}(id=${product.id})}"
+                                                th:method="get"
+                                                th:text="${product.name}">产品名称</a></h3>
                                         <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">进行比较</span></button>
                                             <button class="quick-view"><i class="fa fa-eye"></i><span
                                                     class="tooltipp">查看</span>
                                             </button>
@@ -317,14 +319,15 @@
                                     <div class="product-body">
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
                                             类别</p>
-                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
+                                        <h3 class="product-name"><a
+                                                th:href="@{/product/{id}(id=${product.id})}"
+                                                th:method="get"
+                                                th:text="${product.name}">产品名称</a></h3>
                                         <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
 
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">进行比较</span></button>
                                             <button class="quick-view"><i class="fa fa-eye"></i><span
                                                     class="tooltipp">查看</span>
                                             </button>
@@ -354,14 +357,15 @@
                                     <div class="product-body">
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
                                             类别</p>
-                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
+                                        <h3 class="product-name"><a
+                                                th:href="@{/product/{id}(id=${product.id})}"
+                                                th:method="get"
+                                                th:text="${product.name}">产品名称</a></h3>
                                         <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
 
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">进行比较</span></button>
                                             <button class="quick-view"><i class="fa fa-eye"></i><span
                                                     class="tooltipp">查看</span>
                                             </button>
@@ -391,14 +395,14 @@
                                     <div class="product-body">
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
                                             类别</p>
-                                        <h3 class="product-name"><a href="#" th:text="${product.name}">产品名称</a></h3>
+                                        <h3 class="product-name"><a th:href="@{/product/{id}(id=${product.id})}"
+                                                                    th:method="get"
+                                                                    th:text="${product.name}">产品名称</a></h3>
                                         <h4 class="product-price" th:text="${product.price}">￥980.00</h4>
 
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">进行比较</span></button>
                                             <button class="quick-view"><i class="fa fa-eye"></i><span
                                                     class="tooltipp">查看</span>
                                             </button>
@@ -507,7 +511,8 @@
                                         <p class="product-category"
                                            th:text="${categoryMap.get(productAndRanting.product.categoryId)}">
                                             类别</p>
-                                        <h3 class="product-name"><a href="#"
+                                        <h3 class="product-name"><a th:href="@{/product/{id}(id=${productAndRanting.product.id})}"
+                                                                    th:method="get"
                                                                     th:text="${productAndRanting.product.name}">产品名称</a>
                                         </h3>
                                         <h4 class="product-price" th:text="${productAndRanting.product.price}">
@@ -525,8 +530,6 @@
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
-                                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span
-                                                    class="tooltipp">进行比较</span></button>
                                             <button class="quick-view"><i class="fa fa-eye"></i><span
                                                     class="tooltipp">查看</span>
                                             </button>
@@ -585,7 +588,10 @@
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
                                             类别</p>
                                         <h3 class="product-name">
-                                            <a href="#" th:text="${product.name}">产品名称</a>
+                                            <a
+                                                    th:href="@{/product/{id}(id=${product.id})}"
+                                                    th:method="get"
+                                                    th:text="${product.name}">产品名称</a>
                                         </h3>
                                         <h4 class="product-price" th:text="'￥' + ${product.price}">
                                             价格
@@ -622,7 +628,9 @@
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
                                             类别</p>
                                         <h3 class="product-name">
-                                            <a href="#" th:text="${product.name}">产品名称</a>
+                                            <a th:href="@{/product/{id}(id=${product.id})}"
+                                               th:method="get"
+                                               th:text="${product.name}">产品名称</a>
                                         </h3>
                                         <h4 class="product-price" th:text="'￥' + ${product.price}">
                                             价格
@@ -659,7 +667,10 @@
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
                                             类别</p>
                                         <h3 class="product-name">
-                                            <a href="#" th:text="${product.name}">产品名称</a>
+                                            <a
+                                                    th:href="@{/product/{id}(id=${product.id})}"
+                                                    th:method="get"
+                                                    th:text="${product.name}">产品名称</a>
                                         </h3>
                                         <h4 class="product-price" th:text="'￥' + ${product.price}">
                                             价格
