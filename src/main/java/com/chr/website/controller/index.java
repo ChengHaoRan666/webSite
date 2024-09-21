@@ -59,8 +59,6 @@ public class index {
      */
     @RequestMapping("/")
     public String index(HttpSession session, Model model) {
-        session.setAttribute("userId", 1);
-
         // 获取收藏列表，购物车列表
         Map<product, Integer> starMap = pageService.collectShow((Integer) session.getAttribute("userId"));
         Map<product, Integer> cartMap = pageService.cartShow((Integer) session.getAttribute("userId"));

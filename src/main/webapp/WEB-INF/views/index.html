@@ -114,7 +114,7 @@
                                     <div th:each="entry : ${session.cartMap}">
                                         <div class="product-widget">
                                             <div class="product-img">
-                                                <img alt="" th:src="@{${entry.key.imageUrl}}">
+                                                <img alt="" th:src="@{${entry.key.imageUrl.split(';')[0]}}">
                                             </div>
                                             <div class="product-body">
                                                 <h3 class="product-name"><a
@@ -277,7 +277,7 @@
                                 <!-- product -->
                                 <div class="product" th:each="product : ${session.newProducts1}">
                                     <div class="product-img">
-                                        <img alt="" th:src="${product.imageUrl}">
+                                        <img alt="" th:src="${product.imageUrl.split(';')[0]}">
                                     </div>
                                     <div class="product-body">
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
@@ -290,8 +290,10 @@
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span
-                                                    class="tooltipp">查看</span>
+                                            <button class="quick-view">
+                                                <a th:href="@{/product/{id}(id=${product.id})}"
+                                                      th:method="get"><i class="fa fa-eye"></i></a>
+                                                <span class="tooltipp">查看</span>
                                             </button>
                                         </div>
                                     </div>
@@ -314,7 +316,7 @@
                                 <!-- product -->
                                 <div class="product" th:each="product : ${session.newProducts2}">
                                     <div class="product-img">
-                                        <img alt="" th:src="${product.imageUrl}">
+                                        <img alt="" th:src="${product.imageUrl.split(';')[0]}">
                                     </div>
                                     <div class="product-body">
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
@@ -328,8 +330,10 @@
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span
-                                                    class="tooltipp">查看</span>
+                                            <button class="quick-view">
+                                                <a th:href="@{/product/{id}(id=${product.id})}"
+                                                   th:method="get"><i class="fa fa-eye"></i></a>
+                                                <span class="tooltipp">查看</span>
                                             </button>
                                         </div>
                                     </div>
@@ -352,7 +356,7 @@
                                 <!-- product -->
                                 <div class="product" th:each="product : ${session.newProducts3}">
                                     <div class="product-img">
-                                        <img alt="" th:src="${product.imageUrl}">
+                                        <img alt="" th:src="${product.imageUrl.split(';')[0]}">
                                     </div>
                                     <div class="product-body">
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
@@ -366,8 +370,10 @@
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span
-                                                    class="tooltipp">查看</span>
+                                            <button class="quick-view">
+                                                <a th:href="@{/product/{id}(id=${product.id})}"
+                                                   th:method="get"><i class="fa fa-eye"></i></a>
+                                                <span class="tooltipp">查看</span>
                                             </button>
                                         </div>
                                     </div>
@@ -390,7 +396,7 @@
                                 <!-- product -->
                                 <div class="product" th:each="product : ${session.newProducts4}">
                                     <div class="product-img">
-                                        <img alt="" th:src="${product.imageUrl}">
+                                        <img alt="" th:src="${product.imageUrl.split(';')[0]}">
                                     </div>
                                     <div class="product-body">
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
@@ -403,8 +409,10 @@
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span
-                                                    class="tooltipp">查看</span>
+                                            <button class="quick-view">
+                                                <a th:href="@{/product/{id}(id=${product.id})}"
+                                                   th:method="get"><i class="fa fa-eye"></i></a>
+                                                <span class="tooltipp">查看</span>
                                             </button>
                                         </div>
                                     </div>
@@ -505,7 +513,7 @@
                                 <!-- product -->
                                 <div class="product" th:each="productAndRanting : ${session.productAndRantings}">
                                     <div class="product-img">
-                                        <img alt="" th:src="${productAndRanting.product.imageUrl}">
+                                        <img alt="" th:src="${productAndRanting.product.imageUrl.split(';')[0]}">
                                     </div>
                                     <div class="product-body">
                                         <p class="product-category"
@@ -518,7 +526,7 @@
                                         <h4 class="product-price" th:text="${productAndRanting.product.price}">
                                             ￥980.00</h4>
                                         <div class="product-rating">
-                                            <!-- 检查ranting是否大于-1，如果是，则显示星形图标 -->
+                                            <!-- 检查ranting是否大于0，如果是，则显示星形图标 -->
                                             <th:block th:if="${productAndRanting.ranting} > 0">
                                                 <i class="fa fa-star"
                                                    th:each="star : ${#numbers.sequence(1, productAndRanting.ranting)}"></i>
@@ -530,8 +538,10 @@
                                         <div class="product-btns">
                                             <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
                                                     class="tooltipp">加入收藏</span></button>
-                                            <button class="quick-view"><i class="fa fa-eye"></i><span
-                                                    class="tooltipp">查看</span>
+                                            <button class="quick-view">
+                                                <a th:href="@{/product/{id}(id=${productAndRanting.product.id})}"
+                                                   th:method="get"><i class="fa fa-eye"></i></a>
+                                                <span class="tooltipp">查看</span>
                                             </button>
                                         </div>
                                     </div>
@@ -582,7 +592,7 @@
                                 <div class="product-widget">
                                     <!-- 产品信息 -->
                                     <div class="product-img">
-                                        <img alt="" th:src="${product.imageUrl}">
+                                        <img alt="" th:src="${product.imageUrl.split(';')[0]}">
                                     </div>
                                     <div class="product-body">
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
@@ -622,7 +632,7 @@
                                 <div class="product-widget">
                                     <!-- 产品信息 -->
                                     <div class="product-img">
-                                        <img alt="" th:src="${product.imageUrl}">
+                                        <img alt="" th:src="${product.imageUrl.split(';')[0]}">
                                     </div>
                                     <div class="product-body">
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
@@ -661,7 +671,7 @@
                                 <div class="product-widget">
                                     <!-- 产品信息 -->
                                     <div class="product-img">
-                                        <img alt="" th:src="${product.imageUrl}">
+                                        <img alt="" th:src="${product.imageUrl.split(';')[0]}">
                                     </div>
                                     <div class="product-body">
                                         <p class="product-category" th:text="${categoryMap.get(product.categoryId)}">
