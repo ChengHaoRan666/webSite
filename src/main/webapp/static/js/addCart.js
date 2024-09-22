@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // 获取所有具有 'add-to-cart' 类的元素
-    var wishlistButtons = document.getElementsByClassName('add-to-cart');
+    // 获取所有具有 'add-to-cart-btn' 类的元素
+    var wishlistButtons = document.getElementsByClassName('add-to-cart-btn');
 
     Array.from(wishlistButtons).forEach(function (button) {
         button.addEventListener('click', function () {
@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     alert('发生错误：' + xhr.statusText);
                 }
             };
-
             xhr.send();
         });
     });
