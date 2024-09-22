@@ -2,9 +2,11 @@ package com.chr.website.controller;
 
 import com.chr.website.entity.product;
 import com.chr.website.service.Impl.pageServiceImpl;
+import com.chr.website.service.Impl.shippingServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +25,8 @@ import java.util.*;
 public class index {
     @Autowired
     private pageServiceImpl pageService;
-
+    @Autowired
+    private shippingServiceImpl shippingService;
 
     /**
      * 产品类别映射
@@ -125,11 +128,15 @@ public class index {
     }
 
 
-    @RequestMapping("/add")
-    public ResponseEntity<String> add(@RequestParam("productId") String productId) {
-        System.out.println(productId);
-        System.out.println("11111111111111111111");
-        return ResponseEntity.ok("成功");
+    @RequestMapping("/addStar")
+    public ResponseEntity<String> add(@RequestParam("productId") Integer productId, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        } else {
+            shippingService.addStar(userId,productId,1);
+            return ResponseEntity.ok("成功");
+        }
     }
 
     /**
