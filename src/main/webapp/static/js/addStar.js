@@ -14,7 +14,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     window.location.href = '/website/login';
                 } else if (xhr.status === 200) {
                     // 收藏成功，可以在这里更新UI
-                    alert('收藏成功');
+                    var icon = button.querySelector('.fa');
+                    if (icon) {
+                        icon.classList.remove('fa-heart-o');
+                        icon.classList.add('fa-heart');
+                        icon.style.color = 'red';
+                    }
+                    // 更改按钮的提示文本
+                    var tooltipp = button.querySelector('.tooltipp');
+                    if (tooltipp) {
+                        tooltipp.textContent = '已收藏';
+                    }
                 } else {
                     // 其他错误处理
                     alert('发生错误：' + xhr.statusText);

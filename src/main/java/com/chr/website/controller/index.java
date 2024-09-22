@@ -109,7 +109,8 @@ public class index {
         // 购物车，收藏数量
         session.setAttribute("starCount", starMap.size());
         session.setAttribute("cartCount", cartMap.size());
-        // 购物车列表
+        // 收藏，购物车列表
+        session.setAttribute("starMap", starMap);
         session.setAttribute("cartMap", cartMap);
         // 添加产品类别映射
         model.addAttribute("categoryMap", populateCategoryMap());
@@ -134,7 +135,7 @@ public class index {
         if (userId == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
         } else {
-            shippingService.addStar(userId,productId,1);
+            shippingService.addStar(userId, productId, 1);
             return ResponseEntity.ok("成功");
         }
     }
