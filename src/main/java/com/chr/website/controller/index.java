@@ -64,6 +64,7 @@ public class index {
      */
     @RequestMapping("/")
     public String index(HttpSession session, Model model) {
+        session.setAttribute("userId", 1);
         // 获取收藏列表，购物车列表
         Map<product, Integer> starMap = pageService.collectShow((Integer) session.getAttribute("userId"));
         Map<product, Integer> cartMap = pageService.cartShow((Integer) session.getAttribute("userId"));
@@ -119,7 +120,7 @@ public class index {
 
     /**
      * 判断商品是否收藏了
-     * */
+     */
     @RequestMapping("/isStarred")
     public ResponseEntity<?> isProductStarred(@RequestParam("productId") Integer productId, HttpSession session) {
         // 调用服务层方法检查产品是否已被收藏
@@ -146,8 +147,11 @@ public class index {
     }
 
 
+    /**
+     * 商品添加收藏
+     */
     @RequestMapping("/addStar")
-    public ResponseEntity<String> add(@RequestParam("productId") Integer productId, HttpSession session) {
+    public ResponseEntity<String> addStar(@RequestParam("productId") Integer productId, HttpSession session) {
         Integer userId = (Integer) session.getAttribute("userId");
         if (userId == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
@@ -156,6 +160,24 @@ public class index {
             return ResponseEntity.ok("成功");
         }
     }
+
+    /**
+     * 商品添加购物车
+     */
+    @RequestMapping("/addCart")
+    public ResponseEntity<String> addCart(@RequestParam("productId") Integer productId, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        System.out.println(productId);
+        System.out.println(userId);
+        if (userId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        } else {
+            System.out.println(productId);
+            shippingService.addCart(userId, productId, 1);
+            return ResponseEntity.ok("成功");
+        }
+    }
+
 
     /**
      * 登录页面
