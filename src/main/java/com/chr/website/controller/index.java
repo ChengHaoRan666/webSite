@@ -41,6 +41,9 @@ public class index {
         return categoryMap;
     }
 
+    /**
+     * 将 products 进行排序，获取前 n 名
+     */
     private List<productAndRanting> sortByRantingAndSun(List<product> products, int n) {
         List<productAndRanting> productAndRantings = new ArrayList<>();
         for (product product : products) {
@@ -64,7 +67,6 @@ public class index {
      */
     @RequestMapping("/")
     public String index(HttpSession session, Model model) {
-        session.setAttribute("userId", 1);
         // 获取收藏列表，购物车列表
         Map<product, Integer> starMap = pageService.collectShow((Integer) session.getAttribute("userId"));
         Map<product, Integer> cartMap = pageService.cartShow((Integer) session.getAttribute("userId"));
@@ -146,7 +148,6 @@ public class index {
         }
     }
 
-
     /**
      * 商品添加收藏
      */
@@ -179,29 +180,6 @@ public class index {
     }
 
 
-    /**
-     * 登录页面
-     */
-    @RequestMapping("/login")
-    public String login() {
-        return "login";
-    }
 
 
-    /**
-     * 购物车页面
-     */
-    @RequestMapping("/cartShow")
-    public String cartShow() {
-        return "cart";
-    }
-
-
-    /**
-     * 收藏页面
-     */
-    @RequestMapping("/starShow")
-    public String starShow() {
-        return "star";
-    }
 }

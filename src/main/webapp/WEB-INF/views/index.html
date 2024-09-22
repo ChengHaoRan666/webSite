@@ -47,7 +47,14 @@
                 <li><a href="#"><i class="fa fa-map-marker"></i> 许昌学院</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a th:href="@{/login}"><i class="fa fa-user-o"></i> 登录/注册</a></li>
+                <th:block th:if="${session.userId != null}">
+                    <li><a th:href="@{/profile}"><i class="fa fa-user"></i> 个人中心</a></li>
+                </th:block>
+                <th:block th:unless="${session.userId != null}">
+                    <li><a th:href="@{/login}"><i class="fa fa-user-o"></i> 登录/注册</a></li>
+                </th:block>
+
+
             </ul>
         </div>
     </div>
@@ -300,7 +307,8 @@
                                         </div>
                                     </div>
                                     <div class="add-to-cart">
-                                        <button class="add-to-cart-btn" th:data-id="${product.id}"><i class="fa fa-shopping-cart"></i> 加入购物车
+                                        <button class="add-to-cart-btn" th:data-id="${product.id}"><i
+                                                class="fa fa-shopping-cart"></i> 加入购物车
                                         </button>
                                     </div>
                                 </div>
