@@ -1,12 +1,13 @@
 package com.chr.website.controller;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @Author: 程浩然
  * @Create: 2024/9/22 - 10:40
- * @Description: 登录和注册
+ * @Description: 用户登录和注册
  */
 @Controller
 public class login {
@@ -14,7 +15,8 @@ public class login {
      * 登录页面
      */
     @RequestMapping("/login")
-    public String login() {
+    public String login(HttpSession session) {
+        session.setAttribute("userId", 1);
         return "login";
     }
 
