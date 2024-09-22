@@ -117,6 +117,23 @@ public class index {
         return "index";
     }
 
+    /**
+     * 判断商品是否收藏了
+     * */
+    @RequestMapping("/isStarred")
+    public ResponseEntity<?> isProductStarred(@RequestParam("productId") Integer productId, HttpSession session) {
+        // 调用服务层方法检查产品是否已被收藏
+        boolean isStarred = pageService.collectShow((Integer) session.getAttribute("userId")).keySet().stream().anyMatch(product -> Objects.equals(product.getId(), productId));
+        // 创建响应体
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("isStarred", isStarred);
+        // 返回响应
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * 内部类，商品和它的评分
+     */
     @Data
     private class productAndRanting {
         product product;
