@@ -30,11 +30,5 @@ public class CartAndStar {
     }
 
 
-    /**
-     * 个人中心页面
-     */
-    @RequestMapping("/profile")
-    public String profileShow() {
-        return "personalHomepage";
-    }
+
 }
