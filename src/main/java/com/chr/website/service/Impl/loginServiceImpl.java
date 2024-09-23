@@ -26,9 +26,14 @@ public class loginServiceImpl implements loginService {
      * 手机号格式错误  -2<br>
      * 验证码错误   -3<br>
      * 密码错误  -4<br>
+     * 有空的  -5<br>
      */
     @Override
     public Integer login(String username, String password1, String password2, String phone, String code, String codeTrue) {
+        // 格式错误
+        if (username.isEmpty() || password1.isEmpty() || password2.isEmpty() || phone.isEmpty() || code.isEmpty() || codeTrue.isEmpty()) {
+            return -5;
+        }
         // 两次密码不对
         if (!Objects.equals(password1, password2)) {
             return -1;
@@ -64,9 +69,14 @@ public class loginServiceImpl implements loginService {
      * 手机号格式错误 -2<br>
      * 验证码错误 -3 <br>
      * 用户名重复  -4<br>
+     * 有空的  -5<br>
      */
     @Override
     public Integer register(String username, String password1, String password2, String code, String codeTrue, String email, String phone) {
+        // 格式错误
+        if (username.isEmpty() || password1.isEmpty() || email.isEmpty() || password2.isEmpty() || phone.isEmpty() || code.isEmpty() || codeTrue.isEmpty()) {
+            return -5;
+        }
         // 两次密码不对
         if (!Objects.equals(password1, password2)) {
             return -1;
@@ -102,9 +112,13 @@ public class loginServiceImpl implements loginService {
      * 手机号格式错误 -2<br>
      * 验证码错误 -3 <br>
      * 密码错误 -4<br>
+     * 有空的   -5<br>
      */
     @Override
     public Integer ModifyInformation(Integer id, String username, String password1, String password2, String code, String codeTrue, String email, String phone) {
+        if (username.isEmpty() || password1.isEmpty() || email.isEmpty() || password2.isEmpty() || phone.isEmpty() || code.isEmpty() || codeTrue.isEmpty()) {
+            return -5;
+        }
         // 两次密码不对
         if (!Objects.equals(password1, password2)) {
             return -1;

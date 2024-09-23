@@ -17,7 +17,7 @@ public interface sellerService {
     /**
      * 商家登录
      */
-    Integer sellerLogin(String username, String password1, String password2, String phone, String code);
+    Integer sellerLogin(String username, String password1, String password2, String phone, String code,String codeTrue);
 
     /**
      * 商家注册

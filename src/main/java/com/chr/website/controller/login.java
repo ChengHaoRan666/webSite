@@ -35,11 +35,7 @@ public class login {
                         @RequestParam("phone") String phone,
                         @RequestParam("Verification_code") String inputVerificationCode
     ) {
-        // 格式错误
-        if (name.isEmpty() || password.isEmpty() || phone.isEmpty() || inputVerificationCode.isEmpty()) {
-            session.setAttribute("loginEx", 0);
-            return "login";
-        }
+
         String codeTrue = loginUtil.getVerificationCode(phone);
         Integer i = loginService.login(name, password, password, phone, inputVerificationCode, codeTrue);
         switch (i) {
@@ -52,6 +48,8 @@ public class login {
             case -3:
                 session.setAttribute("loginEx", 1);
                 return "login";
+            case -5:
+                session.setAttribute("loginEx", 0);
             default:
                 session.setAttribute("userId", i);
         }

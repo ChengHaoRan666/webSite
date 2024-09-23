@@ -37,8 +37,12 @@ public class sellerServiceImpl implements sellerService {
      * 手机号格式错误  -2<br>
      * 验证码错误   -3<br>
      * 密码错误  -4<br>
+     * 有空  -5<br>
      */
-    public Integer sellerLogin(String username, String password1, String password2, String phone, String code) {
+    public Integer sellerLogin(String username, String password1, String password2, String phone, String code, String codeTrue) {
+        if (username.isEmpty() || password1.isEmpty() || password2.isEmpty() || phone.isEmpty() || code.isEmpty() || codeTrue.isEmpty()) {
+            return -5;
+        }
         // 两次密码不对
         if (!Objects.equals(password1, password2)) {
             return -1;
@@ -53,8 +57,7 @@ public class sellerServiceImpl implements sellerService {
                 return -2;
             }
         }
-        // 验证码错误 TODO
-        if (code != "") {
+        if (!code.equals(codeTrue)) {
             return -3;
         }
 
@@ -116,10 +119,19 @@ public class sellerServiceImpl implements sellerService {
 
 
     /**
-     * 修改商家信息
+     * 修改商家信息<br>
+     * 成功修改  0<br>
+     * 密码不对   -1<br>
+     * 手机号格式错误  -2<br>
+     * 验证码错误   -3<br>
+     * 密码错误  -4<br>
+     * 有空  -5<br>
      */
     @Override
     public Integer sellerModifyInformation(Integer sellerId, String sellerName, String password1, String password2, String code, String codeTrue, String Description, String email, String phone) {
+        if (sellerId == 0 || sellerName.isEmpty() || password1.isEmpty() || password2.isEmpty() || Description.isEmpty() || code.isEmpty() || codeTrue.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+            return -5;
+        }
         // 两次密码不对
         if (!Objects.equals(password1, password2)) {
             return -1;
