@@ -42,7 +42,7 @@ public interface sellerService {
     /**
      * 修改商家信息
      */
-    Integer sellerModifyInformation(Integer sellerId, String sellerName, String password1, String password2, String code, String Description, String email, String phone);
+    Integer sellerModifyInformation(Integer sellerId, String sellerName, String password1, String password2, String code,String codeTrue, String Description, String email, String phone);
 
     /**
      * 商家注销

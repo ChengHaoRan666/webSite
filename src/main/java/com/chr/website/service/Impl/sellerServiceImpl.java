@@ -119,7 +119,7 @@ public class sellerServiceImpl implements sellerService {
      * 修改商家信息
      */
     @Override
-    public Integer sellerModifyInformation(Integer sellerId, String sellerName, String password1, String password2, String code, String Description, String email, String phone) {
+    public Integer sellerModifyInformation(Integer sellerId, String sellerName, String password1, String password2, String code, String codeTrue, String Description, String email, String phone) {
         // 两次密码不对
         if (!Objects.equals(password1, password2)) {
             return -1;
@@ -134,8 +134,7 @@ public class sellerServiceImpl implements sellerService {
                 return -2;
             }
         }
-        // 验证码错误 TODO
-        if (code != "") {
+        if (!code.equals(codeTrue)) {
             return -3;
         }
         sellerDao.updateSeller(sellerId, new seller(sellerName, password1, Description, email, phone));

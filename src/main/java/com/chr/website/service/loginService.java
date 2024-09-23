@@ -12,17 +12,17 @@ public interface loginService {
     /**
      * 用户登录
      */
-    Integer login(String username, String password1, String password2, String phone, String code);
+    Integer login(String username, String password1, String password2, String phone, String code,String codeTrue);
 
     /**
      * 用户注册
      */
-    Integer register(String username, String password1, String password2, String code, String email, String phone);
+    Integer register(String username, String password1, String password2, String code,String codeTrue, String email, String phone);
 
     /**
      * 修改个人信息
      */
-    public Integer ModifyInformation(Integer id, String username, String password1, String password2, String code, String email, String phone);
+    public Integer ModifyInformation(Integer id, String username, String password1, String password2, String code,String codeTrue, String email, String phone);
 
     /**
      * 注销用户

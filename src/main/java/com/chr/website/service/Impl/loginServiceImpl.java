@@ -28,7 +28,7 @@ public class loginServiceImpl implements loginService {
      * 密码错误  -4<br>
      */
     @Override
-    public Integer login(String username, String password1, String password2, String phone, String code) {
+    public Integer login(String username, String password1, String password2, String phone, String code, String codeTrue) {
         // 两次密码不对
         if (!Objects.equals(password1, password2)) {
             return -1;
@@ -43,8 +43,7 @@ public class loginServiceImpl implements loginService {
                 return -2;
             }
         }
-        // 验证码错误 TODO
-        if (code != "") {
+        if (!code.equals(codeTrue)) {
             return -3;
         }
         List<user> users = userDao.selectUserAll();
@@ -67,7 +66,7 @@ public class loginServiceImpl implements loginService {
      * 用户名重复  -4<br>
      */
     @Override
-    public Integer register(String username, String password1, String password2, String code, String email, String phone) {
+    public Integer register(String username, String password1, String password2, String code, String codeTrue, String email, String phone) {
         // 两次密码不对
         if (!Objects.equals(password1, password2)) {
             return -1;
@@ -82,13 +81,12 @@ public class loginServiceImpl implements loginService {
                 return -2;
             }
         }
-        // 验证码错误 TODO
-        if (code != "") {
+        if (!code.equals(codeTrue)) {
             return -3;
         }
         List<user> users = userDao.selectUserAll();
-        for(user user:users){
-            if(user.getUsername().equals(username)){
+        for (user user : users) {
+            if (user.getUsername().equals(username)) {
                 return -4;
             }
         }
@@ -106,7 +104,7 @@ public class loginServiceImpl implements loginService {
      * 密码错误 -4<br>
      */
     @Override
-    public Integer ModifyInformation(Integer id, String username, String password1, String password2, String code, String email, String phone) {
+    public Integer ModifyInformation(Integer id, String username, String password1, String password2, String code, String codeTrue, String email, String phone) {
         // 两次密码不对
         if (!Objects.equals(password1, password2)) {
             return -1;
@@ -121,8 +119,7 @@ public class loginServiceImpl implements loginService {
                 return -2;
             }
         }
-        // 验证码错误 TODO
-        if (code != "") {
+        if (!code.equals(codeTrue)) {
             return -3;
         }
         user user = userDao.selectUserById(id);
