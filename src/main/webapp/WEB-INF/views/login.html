@@ -48,7 +48,12 @@
                 <li><a href="#"><i class="fa fa-map-marker"></i> 许昌学院</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-user-o"></i> 登录/注册</a></li>
+                <th:block th:if="${session.userId != null}">
+                    <li><a th:href="@{/profile}"><i class="fa fa-user"></i> 个人中心</a></li>
+                </th:block>
+                <th:block th:unless="${session.userId != null}">
+                    <li><a th:href="@{/login}"><i class="fa fa-user-o"></i> 登录/注册</a></li>
+                </th:block>
             </ul>
         </div>
     </div>
@@ -63,7 +68,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a class="logo" href="index.html">
+                        <a class="logo" th:href="@{/}">
                             <img src="/website/static/img/logo.png" alt="">
                         </a>
                     </div>
@@ -73,15 +78,16 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
-                            <select class="input-select">
+                        <form method="get" name="search" th:action="@{/search}">
+                            <select class="input-select" name="CategoryId">
                                 <option value="0">所有类别</option>
-                                <option value="1">电脑</option>
-                                <option value="2">手机</option>
+                                <option value="1">热销</option>
+                                <option value="2">电脑</option>
+                                <option value="3">手机</option>
                                 <option value="4">相机</option>
                                 <option value="5">配件</option>
                             </select>
-                            <input class="input" placeholder="点击搜索">
+                            <input class="input" name="keyWord" placeholder="点击输入">
                             <button class="search-btn">搜索</button>
                         </form>
                     </div>
@@ -208,6 +214,7 @@
 </div>
 <!-- /NEWSLETTER -->
 
+
 <!-- FOOTER -->
 <footer id="footer">
     <!-- top footer -->
@@ -232,11 +239,11 @@
                     <div class="footer">
                         <h3 class="footer-title">类别</h3>
                         <ul class="footer-links">
-                            <li><a href="#">热门交易</a></li>
-                            <li><a href="#">电脑</a></li>
-                            <li><a href="#">手机</a></li>
-                            <li><a href="#">相机</a></li>
-                            <li><a href="#">配件</a></li>
+                            <li><a th:href="@{/search?CategoryId=1}">热门交易</a></li>
+                            <li><a th:href="@{/search?CategoryId=2}">电脑</a></li>
+                            <li><a th:href="@{/search?CategoryId=3}">手机</a></li>
+                            <li><a th:href="@{/search?CategoryId=4}">相机</a></li>
+                            <li><a th:href="@{/search?CategoryId=5}">配件</a></li>
                         </ul>
                     </div>
                 </div>
@@ -250,7 +257,6 @@
                             <li><a href="#">关于我们</a></li>
                             <li><a href="#">联系我们</a></li>
                             <li><a href="#">隐私政策</a></li>
-                            <li><a href="#">订单和退货</a></li>
                             <li><a href="#">条款与条件</a></li>
                         </ul>
                     </div>
@@ -299,6 +305,7 @@
     <!-- /bottom footer -->
 </footer>
 <!-- /FOOTER -->
+
 
 <!-- jQuery Plugins -->
 <script src="/website/static/js/jquery.min.js"></script>
