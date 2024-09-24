@@ -3,6 +3,8 @@ package com.chr.website.controller;
 import com.chr.website.entity.product;
 import com.chr.website.service.Impl.pageServiceImpl;
 import com.chr.website.service.Impl.shippingServiceImpl;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +68,15 @@ public class index {
      * 主页
      */
     @RequestMapping("/")
-    public String index(HttpSession session, Model model) {
+    public String index(HttpServletResponse response, HttpSession session, Model model) {
+        // 设置 Cookie 存活时间
+        Cookie cookie = new Cookie("JSESSIONID", session.getId());
+        cookie.setMaxAge(60 * 60 * 24 * 7); // 设置Cookie有效期为7天
+        cookie.setHttpOnly(true); // 提高安全性
+        cookie.setSecure(true); // 如果使用HTTPS，则设置为true
+        response.addCookie(cookie);
+
+
         // 获取收藏列表，购物车列表
         Map<product, Integer> starMap = pageService.collectShow((Integer) session.getAttribute("userId"));
         Map<product, Integer> cartMap = pageService.cartShow((Integer) session.getAttribute("userId"));
@@ -178,8 +188,6 @@ public class index {
             return ResponseEntity.ok("成功");
         }
     }
-
-
 
 
 }

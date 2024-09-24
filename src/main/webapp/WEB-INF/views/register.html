@@ -1,6 +1,6 @@
 <!--注册页-->
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,7 +48,12 @@
                 <li><a href="#"><i class="fa fa-map-marker"></i> 许昌学院</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-user-o"></i> 登录/注册</a></li>
+                <th:block th:if="${session.userId != null}">
+                    <li><a th:href="@{/profile}"><i class="fa fa-user"></i> 个人中心</a></li>
+                </th:block>
+                <th:block th:unless="${session.userId != null}">
+                    <li><a th:href="@{/login}"><i class="fa fa-user-o"></i> 登录/注册</a></li>
+                </th:block>
             </ul>
         </div>
     </div>
@@ -63,7 +68,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a class="logo" th:href="@{/}">
                             <img src="/website/static/img/logo.png" alt="">
                         </a>
                     </div>
@@ -93,7 +98,7 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="#">
+                            <a th:href="@{/starShow}">
                                 <i class="fa fa-heart-o"></i>
                                 <span>收藏</span>
                                 <div class="qty">0</div>
@@ -139,12 +144,12 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li><a href="#">主页</a></li>
-                <li><a href="#">热销</a></li>
-                <li><a href="#">电脑</a></li>
-                <li><a href="#">手机</a></li>
-                <li><a href="#">相机</a></li>
-                <li><a href="#">配件</a></li>
+                <li><a th:href="@{/}">主页</a></li>
+                <li><a th:href="@{/search?CategoryId=1}">热销</a></li>
+                <li><a th:href="@{/search?CategoryId=2}">电脑</a></li>
+                <li><a th:href="@{/search?CategoryId=3}">手机</a></li>
+                <li><a th:href="@{/search?CategoryId=4}">相机</a></li>
+                <li><a th:href="@{/search?CategoryId=5}">配件</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -153,7 +158,7 @@
     <!-- /container -->
 </nav>
 <!-- /NAVIGATION -->
-<!--TODO-->
+
 
 <div class="section">
     <div class="container">
@@ -163,38 +168,53 @@
     <div class="col-md-5 order-details ">
         <h2 class="order-submit">注册</h2><br>
         <div class="input-checkbox ">
-            <div class="billing-details">
-                <div class="form-group">
-                    <input class="input" type="text" name="name" placeholder="用户名">
-                </div>
-                <div class="form-group">
-                    <input class="input" name="password" placeholder="密码" type="password">
-                </div>
-                <div class="form-group">
-                    <input class="input" name="password2" placeholder="再次输入密码" type="password">
-                </div>
-                <div class="form-group" style="display: flex;">
-                    <input class="input" type="text" name="Verification_code" placeholder="验证码">
-                    <button class="btn" type="button">获取验证码</button>
-                </div>
-                <div class="form-group">
-                    <input class="input" type="text" name="emil" placeholder="电子邮箱">
-                </div>
-                <div class="form-group">
-                    <input class="input" type="text" name="cell-phone" placeholder="手机号">
-                </div>
+
+            <div th:switch="${session.registerEx}">
+                <p th:case="1">两次密码不对</p>
+                <p th:case="2">手机号格式错误</p>
+                <p th:case="3">验证码错误</p>
+                <p th:case="4">输入错误</p>
+                <p th:case="*">输入信息：</p>
             </div>
-            <div class="input-checkbox">
-                <input type="checkbox" id="terms">
-                <label for="terms">
-                    <span></span>
-                    我已阅读并接收<a href="#" style="color:red;">条款和条件</a>
-                </label>
-            </div>
+            <form id="registerForm" method="post" name="login" th:action="@{/register}">
+                <div class="billing-details">
+                    <div class="form-group">
+                        <input class="input" name="name" placeholder="用户名" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="input" name="password" placeholder="密码" type="password">
+                    </div>
+                    <div class="form-group">
+                        <input class="input" name="password2" placeholder="再次输入密码" type="password">
+                    </div>
+                    <div class="form-group" style="display: flex;">
+                        <input class="input" name="Verification_code" placeholder="验证码" type="text">
+                        <button class="btn" type="button">获取验证码</button>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" name="emil" placeholder="电子邮箱" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="input" name="phone" placeholder="手机号" type="text">
+                    </div>
+                </div>
+                <div class="input-checkbox">
+                    <input id="terms" type="checkbox">
+                    <label for="terms">
+                        <span></span>
+                        我已阅读并接收<a href="#" style="color: red">条款和条件</a>
+                    </label>
+                    <!-- 添加一个用于显示错误消息的元素 -->
+                    <div id="termsError" style="color: red; display: none;">请同意条款和条件才能登录。</div>
+                </div>
+                <a class="primary-btn order-submit" href="#" id="registerSubmitBtn">注册</a>
+            </form>
         </div>
-        <a href="#" class="primary-btn order-submit">注册</a>
+
     </div>
 </div>
+
+
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -247,11 +267,11 @@
                     <div class="footer">
                         <h3 class="footer-title">类别</h3>
                         <ul class="footer-links">
-                            <li><a href="#">热门交易</a></li>
-                            <li><a href="#">电脑</a></li>
-                            <li><a href="#">手机</a></li>
-                            <li><a href="#">相机</a></li>
-                            <li><a href="#">配件</a></li>
+                            <li><a th:href="@{/search?CategoryId=1}">热门交易</a></li>
+                            <li><a th:href="@{/search?CategoryId=2}">电脑</a></li>
+                            <li><a th:href="@{/search?CategoryId=3}">手机</a></li>
+                            <li><a th:href="@{/search?CategoryId=4}">相机</a></li>
+                            <li><a th:href="@{/search?CategoryId=5}">配件</a></li>
                         </ul>
                     </div>
                 </div>
@@ -265,7 +285,6 @@
                             <li><a href="#">关于我们</a></li>
                             <li><a href="#">联系我们</a></li>
                             <li><a href="#">隐私政策</a></li>
-                            <li><a href="#">订单和退货</a></li>
                             <li><a href="#">条款与条件</a></li>
                         </ul>
                     </div>
@@ -315,6 +334,7 @@
 </footer>
 <!-- /FOOTER -->
 
+
 <!-- jQuery Plugins -->
 <script src="/website/static/js/jquery.min.js"></script>
 <script src="/website/static/js/bootstrap.min.js"></script>
@@ -322,6 +342,7 @@
 <script src="/website/static/js/nouislider.min.js"></script>
 <script src="/website/static/js/jquery.zoom.min.js"></script>
 <script src="/website/static/js/main.js"></script>
+<script src="/website/static/js/register.js"></script>
 
 </body>
 </html>

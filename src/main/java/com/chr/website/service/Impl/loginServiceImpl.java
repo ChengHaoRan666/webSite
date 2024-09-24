@@ -51,9 +51,9 @@ public class loginServiceImpl implements loginService {
         if (!code.equals(codeTrue)) {
             return -3;
         }
-        List<user> users = userDao.selectUserAll();
+        List<user> users = userDao.selectUserByUsername(username);
         for (user user : users) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password1)) {
+            if (user.getPassword().equals(password1)) {
                 // 修改最后登录时间
                 userDao.updateUser(user.getId(), new user(user.getUsername(), user.getPassword(), user.getEmail(), user.getPhone(), user.getDate(), new Date()));
                 return user.getId();
@@ -68,8 +68,7 @@ public class loginServiceImpl implements loginService {
      * 两次密码不对 -1 <br>
      * 手机号格式错误 -2<br>
      * 验证码错误 -3 <br>
-     * 用户名重复  -4<br>
-     * 有空的  -5<br>
+     * 有空的  -4<br>
      */
     @Override
     public Integer register(String username, String password1, String password2, String code, String codeTrue, String email, String phone) {
@@ -91,14 +90,9 @@ public class loginServiceImpl implements loginService {
                 return -2;
             }
         }
+        // 验证码错误
         if (!code.equals(codeTrue)) {
             return -3;
-        }
-        List<user> users = userDao.selectUserAll();
-        for (user user : users) {
-            if (user.getUsername().equals(username)) {
-                return -4;
-            }
         }
         userDao.addUser(new user(username, password1, email, phone, new Date(), null));
         return 0;
