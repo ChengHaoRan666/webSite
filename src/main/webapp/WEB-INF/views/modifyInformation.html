@@ -1,35 +1,32 @@
-<!--结账页-->
-<!--TODO 显示订单编号
-         支付页面，收款码，确认支付按钮，取消支付按钮（取消支付后订单还存在）
--->
+<!--修改个人信息页-->
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>订单页</title>
+    <title>修改个人信息页</title>
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="/website/static/css/bootstrap.min.css"/>
+    <link href="/website/static/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
     <!-- Slick -->
-    <link type="text/css" rel="stylesheet" href="/website/static/css/slick.css"/>
-    <link type="text/css" rel="stylesheet" href="/website/static/css/slick-theme.css"/>
+    <link href="/website/static/css/slick.css" rel="stylesheet" type="text/css"/>
+    <link href="/website/static/css/slick-theme.css" rel="stylesheet" type="text/css"/>
 
     <!-- nouislider -->
-    <link type="text/css" rel="stylesheet" href="/website/static/css/nouislider.min.css"/>
+    <link href="/website/static/css/nouislider.min.css" rel="stylesheet" type="text/css"/>
 
     <!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="/website/static/css/font-awesome.min.css">
+    <link href="/website/static/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="/website/static/css/style.css"/>
+    <link href="/website/static/css/style.css" rel="stylesheet" type="text/css"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,7 +48,12 @@
                 <li><a href="#"><i class="fa fa-map-marker"></i> 许昌学院</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-user-o"></i> 登录/注册</a></li>
+                <th:block th:if="${session.userId != null}">
+                    <li><a th:href="@{/profile}"><i class="fa fa-user"></i> 个人中心</a></li>
+                </th:block>
+                <th:block th:unless="${session.userId != null}">
+                    <li><a th:href="@{/login}"><i class="fa fa-user-o"></i> 登录/注册</a></li>
+                </th:block>
             </ul>
         </div>
     </div>
@@ -66,8 +68,8 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
-                            <img src="/website/static/img/logo.png" alt="">
+                        <a class="logo" th:href="@{/}">
+                            <img alt="" src="/website/static/img/logo.png">
                         </a>
                     </div>
                 </div>
@@ -96,56 +98,51 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="#">
+                            <a th:href="@{/starShow}">
                                 <i class="fa fa-heart-o"></i>
                                 <span>收藏</span>
-                                <div class="qty">21</div>
+                                <div class="qty" th:text="${session.starCount}"></div>
                             </a>
                         </div>
                         <!-- /Wishlist -->
 
                         <!-- 购物车下拉菜单 -->
                         <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                            <a aria-expanded="true" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>购物车</span>
-                                <div class="qty">12</div>
+                                <div class="qty" th:text="${session.cartCount}"></div>
                             </a>
                             <div class="cart-dropdown">
                                 <div class="cart-list">
-                                    <!--第一个商品-->
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="/website/static/img/product01.png" alt="">
+                                    <!-- 商品循环展示开始 -->
+                                    <div th:each="entry : ${session.cartMap}">
+                                        <div class="product-widget">
+                                            <div class="product-img">
+                                                <img alt="" th:src="@{${entry.key.imageUrl.split(';')[0]}}">
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-name"><a
+                                                        th:href="@{/product/{id}(id=${entry.key.id})}"
+                                                        th:method="get"
+                                                        th:text="${entry.key.name}">产品名称</a></h3>
+                                                <h4 class="product-price">
+                                                    <span class="qty" th:text="${entry.value} + 'x'">1x</span>
+                                                    <span th:text="'￥' + ${entry.key.price}">￥980.00</span>
+                                                </h4>
+                                            </div>
                                         </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                            <h4 class="product-price"><span class="qty">1x</span>￥980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
                                     </div>
-
-                                    <!--第二个商品-->
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="/website/static/img/product02.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                            <h4 class="product-price"><span class="qty">3x</span>￥980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
+                                    <!-- 商品循环展示结束 -->
                                 </div>
 
                                 <!--购物车摘要-->
                                 <div class="cart-summary">
-                                    <small>已选择 3 件商品</small>
-                                    <h5>总价：￥100</h5>
+                                    <small th:text="|已选择 ${session.cartCount} 件商品|"></small>
                                 </div>
                                 <div class="cart-btns">
-                                    <a href="#">查看购物车</a>
-                                    <a href="#">结账 <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a th:href="@{/cartShow}">查看购物车</a>
+                                    <a th:href="@{/cartShow}">结账 <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -179,12 +176,12 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li><a href="#">主页</a></li>
-                <li><a href="#">热销</a></li>
-                <li><a href="#">电脑</a></li>
-                <li><a href="#">手机</a></li>
-                <li><a href="#">相机</a></li>
-                <li><a href="#">配件</a></li>
+                <li><a th:href="@{/}">主页</a></li>
+                <li><a th:href="@{/search?CategoryId=1}">热销</a></li>
+                <li><a th:href="@{/search?CategoryId=2}">电脑</a></li>
+                <li><a th:href="@{/search?CategoryId=3}">手机</a></li>
+                <li><a th:href="@{/search?CategoryId=4}">相机</a></li>
+                <li><a th:href="@{/search?CategoryId=5}">配件</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -194,98 +191,68 @@
 </nav>
 <!-- /NAVIGATION -->
 
+
+<div class="section">
+    <div class="container">
+    </div>
+</div>
+<div style="display: grid;place-items: center">
+    <div class="col-md-5 order-details ">
+        <h2 class="order-submit">修改个人信息</h2><br>
+        <div class="input-checkbox ">
+
+            <div th:switch="${session.modifyEx}">
+                <p th:case="1">两次密码不对</p>
+                <p th:case="2">手机号格式错误</p>
+                <p th:case="3">验证码错误</p>
+                <p th:case="4">输入错误</p>
+                <p th:case="*">输入信息：</p>
+            </div>
+            <form id="registerForm" method="post" name="login" th:action="@{/modify}">
+                <div class="billing-details">
+                    <div class="form-group">
+                        <input class="input" name="name" placeholder="用户名" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="input" name="password" placeholder="密码" type="password">
+                    </div>
+                    <div class="form-group">
+                        <input class="input" name="password2" placeholder="再次输入密码" type="password">
+                    </div>
+                    <div class="form-group" style="display: flex;">
+                        <input class="input" name="Verification_code" placeholder="验证码" type="text">
+                        <button class="btn" type="button">获取验证码</button>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" name="emil" placeholder="电子邮箱" type="text">
+                    </div>
+                    <div class="form-group">
+                        <input class="input" name="phone" placeholder="手机号" type="text">
+                    </div>
+                </div>
+                <div class="input-checkbox">
+                    <input id="terms" type="checkbox">
+                    <label for="terms">
+                        <span></span>
+                        我已阅读并接收<a href="#" style="color: red">条款和条件</a>
+                    </label>
+                    <!-- 添加一个用于显示错误消息的元素 -->
+                    <div id="termsError" style="color: red; display: none;">请同意条款和条件才能登录。</div>
+                </div>
+                <a class="primary-btn order-submit" href="#" id="registerSubmitBtn">注册</a>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
     <div class="container">
         <!-- row -->
         <div class="row">
-
-            <div class="col-md-7">
-                <!-- Billing Details -->
-                <div class="billing-details">
-                    <div class="section-title">
-                        <h3 class="title">账单</h3>
-                    </div>
-                    <div class="form-group">
-                        <input class="input" name="name" placeholder="收件人姓名" type="text">
-                    </div>
-                    <div class="form-group">
-                        <input class="input" name="cell-phone" placeholder="收件人手机号" type="text">
-                    </div>
-                    <div class="form-group">
-                        <input class="input" name="address" placeholder="收件人详细地址" type="text">
-                    </div>
-                </div>
-                <!-- /Billing Details -->
-
-                <!-- Order notes -->
-                <div class="order-notes">
-                    <textarea class="input" placeholder="备注"></textarea>
-                </div>
-                <!-- /Order notes -->
-            </div>
-
-            <!-- Order Details -->
-            <div class="col-md-5 order-details">
-                <div class="section-title text-center">
-                    <h3 class="title">您的订单</h3>
-                </div>
-                <div class="order-summary">
-                    <div class="order-col">
-                        <div><strong>产品总计</strong></div>
-                        <div><strong>金额</strong></div>
-                    </div>
-                    <div class="order-products">
-                        <div class="order-col">
-                            <img height="50" src="/website/static/img/shop01.png" width="80">
-                            <div>1x 产品名称</div>
-                            <div>￥980.00</div>
-                        </div>
-                        <br>
-                        <div class="order-col">
-                            <img height="50" src="/website/static/img/shop01.png" width="80">
-                            <div>2x 产品名称</div>
-                            <div>￥980.00</div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="order-col">
-                        <div>运费</div>
-                        <div><strong>免费</strong></div>
-                    </div>
-                    <div class="order-col">
-                        <div><strong>总价</strong></div>
-                        <div><strong class="order-total">￥2940.00</strong></div>
-                    </div>
-                </div>
-                <div class="payment-method">
-                    <div class="input-radio">
-                        <input type="radio" name="payment" id="payment-1">
-                        <label for="payment-1">
-                            <span></span>
-                            微信支付
-                        </label>
-                    </div>
-                    <span></span>
-                    <div class="input-radio">
-                        <input type="radio" name="payment" id="payment-2">
-                        <label for="payment-2">
-                            <span></span>
-                            支付宝支付
-                        </label>
-                    </div>
-                </div>
-                <div class="input-checkbox">
-                    <input type="checkbox" id="terms">
-                    <label for="terms">
-                        <span></span>
-                        我已阅读并接收<a href="#">条款和条件</a>
-                    </label>
-                </div>
-                <a href="#" class="primary-btn order-submit">提交订单</a>
-            </div>
-            <!-- /Order Details -->
         </div>
         <!-- /row -->
     </div>
@@ -294,14 +261,19 @@
 <!-- /SECTION -->
 
 
-<!-- NEWSLETTER -->
-<div id="newsletter" class="section">
+<!-- SECTION -->
+<div class="section">
     <!-- container -->
-    <div class="col-md-12">
+    <div class="container" content="col-md-12">
+        <!-- row -->
+        <div class="row">
+        </div>
+        <!-- /row -->
     </div>
     <!-- /container -->
 </div>
-<!-- /NEWSLETTER -->
+<!-- /SECTION -->
+
 
 <!-- FOOTER -->
 <footer id="footer">
@@ -327,11 +299,11 @@
                     <div class="footer">
                         <h3 class="footer-title">类别</h3>
                         <ul class="footer-links">
-                            <li><a href="#">热门交易</a></li>
-                            <li><a href="#">电脑</a></li>
-                            <li><a href="#">手机</a></li>
-                            <li><a href="#">相机</a></li>
-                            <li><a href="#">配件</a></li>
+                            <li><a th:href="@{/search?CategoryId=1}">热门交易</a></li>
+                            <li><a th:href="@{/search?CategoryId=2}">电脑</a></li>
+                            <li><a th:href="@{/search?CategoryId=3}">手机</a></li>
+                            <li><a th:href="@{/search?CategoryId=4}">相机</a></li>
+                            <li><a th:href="@{/search?CategoryId=5}">配件</a></li>
                         </ul>
                     </div>
                 </div>
@@ -345,7 +317,6 @@
                             <li><a href="#">关于我们</a></li>
                             <li><a href="#">联系我们</a></li>
                             <li><a href="#">隐私政策</a></li>
-                            <li><a href="#">订单和退货</a></li>
                             <li><a href="#">条款与条件</a></li>
                         </ul>
                     </div>
@@ -371,7 +342,7 @@
     <!-- /top footer -->
 
     <!-- bottom footer -->
-    <div id="bottom-footer" class="section">
+    <div class="section" id="bottom-footer">
         <div class="container">
             <!-- row -->
             <div class="row">
@@ -395,6 +366,7 @@
 </footer>
 <!-- /FOOTER -->
 
+
 <!-- jQuery Plugins -->
 <script src="/website/static/js/jquery.min.js"></script>
 <script src="/website/static/js/bootstrap.min.js"></script>
@@ -402,6 +374,7 @@
 <script src="/website/static/js/nouislider.min.js"></script>
 <script src="/website/static/js/jquery.zoom.min.js"></script>
 <script src="/website/static/js/main.js"></script>
+<script src="/website/static/js/register.js"></script>
 
 </body>
 </html>

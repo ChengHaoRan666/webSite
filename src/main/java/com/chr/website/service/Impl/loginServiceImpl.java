@@ -144,7 +144,7 @@ public class loginServiceImpl implements loginService {
     public Integer logoff(Integer id) {
         try {
             userDao.deleteUser(id);
-            return 0;
+            return 1;
         } catch (Exception e) {
             return 0;
         }

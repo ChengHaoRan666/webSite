@@ -124,8 +124,8 @@
                                             </div>
                                             <div class="product-body">
                                                 <h3 class="product-name"><a
-                                                        th:href="@{/product/{id}(id=${entry.key.id})}"
                                                         th:method="get"
+                                                        th:href="@{/product/{id}(id=${entry.key.id})}"
                                                         th:text="${entry.key.name}">产品名称</a></h3>
                                                 <h4 class="product-price">
                                                     <span class="qty" th:text="${entry.value} + 'x'">1x</span>
@@ -205,14 +205,16 @@
     <!-- /container -->
 </div>
 <!-- /SECTION -->
-<h4><a href="#">修改个人信息</a></h4>
-<h4><a href="#">查看全部订单</a></h4>
-<h4><a href="#">查看收藏</a></h4>
-<h4><a href="#">查看购物车</a></h4>
-<h4><a href="#">待收货</a></h4>
-<h4><a href="#">查看全部订单</a></h4>
-<h4><a href="#">注册店铺</a></h4>
-
+<ul>
+    <li><h4><a th:href="@{/modify}">修改个人信息</a></h4></li>
+    <li><h4><a href="#">查看全部订单</a></h4></li>
+    <li><h4><a href="#">查看收藏</a></h4></li>
+    <li><h4><a href="#">查看购物车</a></h4></li>
+    <li><h4><a href="#">待收货</a></h4></li>
+    <li><h4><a href="#">注册店铺</a></h4></li>
+    <li><h4><a href="#">退出登录</a></h4></li>
+    <li><h4><a href="#">注销账户</a></h4></li>
+</ul>
 
 
 <br><br><br><br>
