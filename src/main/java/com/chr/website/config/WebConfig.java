@@ -1,6 +1,7 @@
 package com.chr.website.config;
 
 import com.chr.website.interceptor.loginInterceptor;
+import com.chr.website.interceptor.sellerInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -82,6 +83,7 @@ public class WebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new loginInterceptor()).addPathPatterns("/*").excludePathPatterns("/login").excludePathPatterns("/register").excludePathPatterns("/").excludePathPatterns("/addStar").excludePathPatterns("/addCart");
+        registry.addInterceptor(new loginInterceptor()).addPathPatterns("/*").excludePathPatterns("/login").excludePathPatterns("/register").excludePathPatterns("/").excludePathPatterns("/addStar").excludePathPatterns("/addCart").excludePathPatterns("/sellerProfile");
+        registry.addInterceptor(new sellerInterceptor()).addPathPatterns("/sellerProfile");
     }
 }

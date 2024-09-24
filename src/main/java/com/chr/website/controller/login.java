@@ -1,6 +1,7 @@
 package com.chr.website.controller;
 
 import com.chr.website.service.Impl.loginServiceImpl;
+import com.chr.website.service.Impl.sellerServiceImpl;
 import com.chr.website.utils.loginUtil;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class login {
     @Autowired
     private loginServiceImpl loginService;
-
+    @Autowired
+    private sellerServiceImpl sellerService;
 
     /**
      * 登录页面
@@ -35,9 +37,13 @@ public class login {
                         @RequestParam("phone") String phone,
                         @RequestParam("Verification_code") String inputVerificationCode
     ) {
-
         String codeTrue = loginUtil.getVerificationCode(phone);
         Integer i = loginService.login(name, password, password, phone, inputVerificationCode, codeTrue);
+        Integer j = sellerService.sellerLogin(name, password, password, phone, inputVerificationCode, codeTrue);
+        if (j > 0) {
+            session.setAttribute("sellerId", j);
+            return "redirect:/sellerProfile";
+        }
         switch (i) {
             case -1, -4:
                 session.setAttribute("loginEx", 2);
@@ -81,21 +87,13 @@ public class login {
         switch (i) {
             case 0:
                 return "login";
-            case -1:
-                session.setAttribute("registerEx", 1);
-                return "register";
-            case -2:
-                session.setAttribute("registerEx", 2);
-                return "register";
-            case -3:
-                session.setAttribute("registerEx", 3);
-                return "register";
-            case -4:
-                session.setAttribute("registerEx", 4);
+            case -1, -2, -3, -4:
+                session.setAttribute("registerEx", -i);
                 return "register";
         }
         return "register";
     }
+
 
     /**
      * 个人中心页面
@@ -103,5 +101,14 @@ public class login {
     @RequestMapping("/profile")
     public String profileShow() {
         return "personalHomepage";
+    }
+
+
+    /**
+     * 商家页面
+     */
+    @RequestMapping("/sellerProfile")
+    public String sellerShow() {
+        return "merchantHomepage";
     }
 }
