@@ -31,14 +31,13 @@ public class homepage {
 
     /*
     <div th:switch="${session.modifyEx}">
-                <p th:case="1">两次密码不对</p>
-                <p th:case="2">手机号格式错误</p>
-                <p th:case="3">验证码错误</p>
-                <p th:case="4">输入错误</p>
-                <p th:case="*">输入信息：</p>
-            </div>
+        <p th:case="1">两次密码不对</p>
+        <p th:case="2">手机号格式错误</p>
+        <p th:case="3">验证码错误</p>
+        <p th:case="4">输入错误</p>
+        <p th:case="*">输入信息：</p>
+    </div>
      */
-
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public String modify() {
 
