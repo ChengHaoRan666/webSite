@@ -62,9 +62,8 @@ public class homepage {
         return "modifyInformation";
     }
 
-    /*
-    TODO 查看（购物车，订单，收藏）商品
-     */
+
+    // TODO 查看（购物车，订单，收藏）商品
 
     /**
      * 注册店铺
@@ -96,7 +95,7 @@ public class homepage {
     @RequestMapping("/loginOff")
     public String loginOff(HttpSession session) {
         session.removeAttribute("userId");
-        return "index";
+        return "redirect:/";
     }
 
 
@@ -106,7 +105,8 @@ public class homepage {
     @RequestMapping("/loginOut")
     public String loginOut(HttpSession session) {
         Integer id = (Integer) session.getAttribute("userId");
+        session.removeAttribute("userId");
         loginService.logoff(id);
-        return "index";
+        return "redirect:/";
     }
 }
