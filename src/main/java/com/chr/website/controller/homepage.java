@@ -1,14 +1,21 @@
 package com.chr.website.controller;
 
+import com.chr.website.entity.product;
 import com.chr.website.service.Impl.loginServiceImpl;
+import com.chr.website.service.Impl.pageServiceImpl;
 import com.chr.website.service.Impl.sellerServiceImpl;
 import com.chr.website.utils.loginUtil;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: 程浩然
@@ -21,6 +28,8 @@ public class homepage {
     private loginServiceImpl loginService;
     @Autowired
     private sellerServiceImpl sellerService;
+    @Autowired
+    private pageServiceImpl pageService;
 
     /**
      * 个人中心页面
@@ -64,11 +73,30 @@ public class homepage {
 
 
     /**
-     * 查看（购物车，订单，收藏，待收货）商品
+     * 产品类别映射
+     */
+    @ModelAttribute("categoryMap")
+    public Map<Integer, String> populateCategoryMap() {
+        Map<Integer, String> categoryMap = new HashMap<>();
+        categoryMap.put(1, "电脑");
+        categoryMap.put(2, "手机");
+        categoryMap.put(3, "相机");
+        categoryMap.put(4, "配件");
+        return categoryMap;
+    }
+
+
+    /**
+     * TODO 查看（购物车，订单，收藏，待收货）商品
      */
     @RequestMapping("/view")
-    public String view(@RequestParam("id") Integer id) {
-        System.out.println(id);
+    public String view(Model model, HttpSession session, @RequestParam("id") Integer id) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        String[] tmp = new String[]{"订单", "收藏", "购物车", "待收货"};
+        Map<product, Integer>[] maps = new Map[]{pageService.orderShow(userId), pageService.collectShow((userId)), pageService.cartShow(userId), pageService.receivedShow(userId)};
+        session.setAttribute("tableName", tmp[id - 1]);
+        session.setAttribute("tableVal", maps[id - 1]);
+        model.addAttribute("categoryMap", populateCategoryMap());
         return "personView";
     }
 

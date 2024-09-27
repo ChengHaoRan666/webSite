@@ -193,30 +193,27 @@
 </nav>
 <!-- /NAVIGATION -->
 <br><br>
+
 <table class="table">
-    <caption class="caption"><h2>我的表格<br><br></h2></caption>
+    <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
     <thead>
     <tr>
-        <th style="text-align:center">姓名</th>
-        <th style="text-align:center">职位</th>
-        <th style="text-align:center">公司</th>
+        <th style="text-align:center">商品名称</th>
+        <th style="text-align:center">数量</th>
+        <th style="text-align:center">单价</th>
+        <th style="text-align:center">金额</th>
+        <th style="text-align:center">分类</th>
+        <th style="text-align:center">操作</th>
     </tr>
     </thead>
     <tbody style="text-align:center">
-    <tr>
-        <td>张三</td>
-        <td>软件工程师</td>
-        <td>腾讯</td>
-    </tr>
-    <tr>
-        <td>李四</td>
-        <td>数据分析师</td>
-        <td>阿里巴巴</td>
-    </tr>
-    <tr>
-        <td>王五</td>
-        <td>产品经理</td>
-        <td>字节跳动</td>
+    <tr th:each="item : ${session.tableVal}">
+        <td th:text="${item.key.name}">商品名称</td>
+        <td th:text="${item.value}">数量</td>
+        <td th:text="${item.key.price}">单价</td>
+        <td th:text="${item.key.price}">金额</td>
+        <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
+        <td>操作</td>
     </tr>
     </tbody>
 </table>

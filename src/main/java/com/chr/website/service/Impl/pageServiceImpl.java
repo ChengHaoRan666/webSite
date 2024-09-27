@@ -83,7 +83,7 @@ public class pageServiceImpl implements pageService {
     }
 
     /**
-     * 查看订单中为收货的商品
+     * 查看订单中未收货的商品
      */
     @Override
     public Map<product, Integer> receivedShow(Integer id) {
