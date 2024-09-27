@@ -22,6 +22,10 @@ public interface orderMapper {
      * 删
      */
     int deleteOrder(@Param("id") Integer id);
+    /**
+     * 根据用户id删订单表
+     */
+    int deleteOrderByUserId(@Param("userId") Integer userId);
 
     /**
      * 修改订单状态

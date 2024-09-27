@@ -18,6 +18,10 @@
     <delete id="deleteOrder">
         delete from orders where OrderID = #{id}
     </delete>
+<!--删 int deleteOrderByUserId(@Param("userId") Integer userId);-->
+    <delete id="deleteOrderByUserId">
+        delete from orders where UserID = #{userId}
+    </delete>
 <!--修改订单状态 int updateOrderStatus(Integer id, String OrderStatus);-->
     <update id="updateOrderStatus">
         update Orders set

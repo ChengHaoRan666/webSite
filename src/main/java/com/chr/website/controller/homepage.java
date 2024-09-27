@@ -89,4 +89,24 @@ public class homepage {
             return "login";
         }
     }
+
+    /**
+     * 退出登录
+     */
+    @RequestMapping("/loginOff")
+    public String loginOff(HttpSession session) {
+        session.removeAttribute("userId");
+        return "index";
+    }
+
+
+    /**
+     * 注销账户
+     */
+    @RequestMapping("/loginOut")
+    public String loginOut(HttpSession session) {
+        Integer id = (Integer) session.getAttribute("userId");
+        loginService.logoff(id);
+        return "index";
+    }
 }

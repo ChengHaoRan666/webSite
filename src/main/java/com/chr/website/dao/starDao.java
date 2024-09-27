@@ -33,6 +33,14 @@ public class starDao implements starMapper {
     }
 
     /**
+     * 根据用户id删收藏
+     */
+    @Override
+    public int deleteStarByUserId(Integer userId) {
+        return starMapper.deleteStarByUserId(userId);
+    }
+
+    /**
      * 改
      */
     public int updateStar(Integer starID, star star) {

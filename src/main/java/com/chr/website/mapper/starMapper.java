@@ -22,6 +22,10 @@ public interface starMapper {
      * 删
      */
     int deleteStar(@Param("StarID") Integer StarID);
+    /**
+     * 根据用户id删收藏
+     */
+    int deleteStarByUserId(@Param("userId") Integer userId);
 
     /**
      * 改

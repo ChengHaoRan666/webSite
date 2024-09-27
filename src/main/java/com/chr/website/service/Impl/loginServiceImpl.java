@@ -1,5 +1,8 @@
 package com.chr.website.service.Impl;
 
+import com.chr.website.dao.cartDao;
+import com.chr.website.dao.orderDao;
+import com.chr.website.dao.starDao;
 import com.chr.website.dao.userDao;
 import com.chr.website.entity.user;
 import com.chr.website.service.loginService;
@@ -18,6 +21,12 @@ import java.util.Objects;
 public class loginServiceImpl implements loginService {
     @Autowired
     private userDao userDao;
+    @Autowired
+    private cartDao cartDao;
+    @Autowired
+    private starDao starDao;
+    @Autowired
+    private orderDao orderDao;
 
     /**
      * 用户登录 <br>
@@ -137,18 +146,13 @@ public class loginServiceImpl implements loginService {
 
     /**
      * 注销用户<br>
-     * 成功返回 1 <br>
-     * 失败返回 0 <br>
      */
     @Override
-    public Integer logoff(Integer id) {
-        try {
-            userDao.deleteUser(id);
-            return 1;
-        } catch (Exception e) {
-            return 0;
-        }
+    public void logoff(Integer id) {
+        userDao.deleteUser(id);
+        cartDao.deleteCartByUserId(id);
+        orderDao.deleteOrderByUserId(id);
+        starDao.deleteStarByUserId(id);
     }
-
 }
 

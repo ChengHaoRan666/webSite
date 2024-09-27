@@ -12,6 +12,10 @@
     <delete id="deleteStar">
         delete from stars where StarID = #{StarID};
     </delete>
+<!--删除 int deleteStarByUserId(@Param("userId") Integer userId);-->
+    <delete id="deleteStarByUserId">
+        delete from stars where UserID = #{userId};
+    </delete>
     <!--改 int updateStar(@Param("StarID") Integer starID, @Param("star") star star);-->
     <update id="updateStar">
         update stars set UserID = #{star.UserID}, ProductID = #{star.ProductID}, Quantity = #{star.Quantity} where StarID = #{StarID};

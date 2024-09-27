@@ -12,9 +12,15 @@
     <delete id="deleteCart">
         delete from carts where CartID = #{CartID};
     </delete>
+    <!--删 int deleteCartByUserId(@Param("userId") Integer userId);-->
+    <delete id="deleteCartByUserId">
+        delete from carts where UserID = #{userId};
+    </delete>
+
     <!--改 int updateCart(@Param("CartID") Integer cartID, @Param("cart") cart cart);-->
     <update id="updateCart">
-        update carts set UserID = #{cart.UserID}, ProductID = #{cart.ProductID}, Quantity = #{cart.Quantity} where CartID = #{CartID};
+        update carts set UserID = #{cart.UserID}, ProductID = #{cart.ProductID}, Quantity = #{cart.Quantity} where
+        CartID = #{CartID};
     </update>
 
     <resultMap id="cartMapper" type="cart">
