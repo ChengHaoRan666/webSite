@@ -63,7 +63,14 @@ public class homepage {
     }
 
 
-    // TODO 查看（购物车，订单，收藏，待收货）商品
+    /**
+     * 查看（购物车，订单，收藏，待收货）商品
+     */
+    @RequestMapping("/view")
+    public String view(@RequestParam("id") Integer id) {
+        System.out.println(id);
+        return "personView";
+    }
 
     /**
      * 注册店铺
