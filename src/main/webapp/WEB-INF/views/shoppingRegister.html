@@ -48,7 +48,12 @@
                 <li><a href="#"><i class="fa fa-map-marker"></i> 许昌学院</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-user-o"></i> 登录/注册</a></li>
+                <th:block th:if="${session.userId != null}">
+                    <li><a th:href="@{/profile}"><i class="fa fa-user"></i> 个人中心</a></li>
+                </th:block>
+                <th:block th:unless="${session.userId != null}">
+                    <li><a th:href="@{/login}"><i class="fa fa-user-o"></i> 登录/注册</a></li>
+                </th:block>
             </ul>
         </div>
     </div>
@@ -63,7 +68,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a class="logo" th:href="@{/}">
                             <img src="/website/static/img/logo.png" alt="">
                         </a>
                     </div>
@@ -73,15 +78,16 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
-                            <select class="input-select">
+                        <form method="get" name="search" th:action="@{/search}">
+                            <select class="input-select" name="CategoryId">
                                 <option value="0">所有类别</option>
-                                <option value="1">电脑</option>
+                                <option value="1">热销</option>
+                                <option value="2">电脑</option>
                                 <option value="3">手机</option>
                                 <option value="4">相机</option>
                                 <option value="5">配件</option>
                             </select>
-                            <input class="input" placeholder="点击搜索">
+                            <input class="input" name="keyWord" placeholder="点击输入">
                             <button class="search-btn">搜索</button>
                         </form>
                     </div>
@@ -93,10 +99,10 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="#">
+                            <a th:href="@{/starShow}">
                                 <i class="fa fa-heart-o"></i>
                                 <span>收藏</span>
-                                <div class="qty">0</div>
+                                <div class="qty" th:text="${session.starCount}"></div>
                             </a>
                         </div>
                         <!-- /Wishlist -->
@@ -106,8 +112,40 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>购物车</span>
-                                <div class="qty">0</div>
+                                <div class="qty" th:text="${session.cartCount}"></div>
                             </a>
+                            <div class="cart-dropdown">
+                                <div class="cart-list">
+                                    <!-- 商品循环展示开始 -->
+                                    <div th:each="entry : ${session.cartMap}">
+                                        <div class="product-widget">
+                                            <div class="product-img">
+                                                <img alt="" th:src="@{${entry.key.imageUrl.split(';')[0]}}">
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-name"><a
+                                                        th:href="@{/product/{id}(id=${entry.key.id})}"
+                                                        th:method="get"
+                                                        th:text="${entry.key.name}">产品名称</a></h3>
+                                                <h4 class="product-price">
+                                                    <span class="qty" th:text="${entry.value} + 'x'">1x</span>
+                                                    <span th:text="'￥' + ${entry.key.price}">￥980.00</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 商品循环展示结束 -->
+                                </div>
+
+                                <!--购物车摘要-->
+                                <div class="cart-summary">
+                                    <small th:text="|已选择 ${session.cartCount} 件商品|"></small>
+                                </div>
+                                <div class="cart-btns">
+                                    <a th:href="@{/cartShow}">查看购物车</a>
+                                    <a th:href="@{/cartShow}">结账 <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
                         </div>
                         <!-- /Cart -->
 
@@ -139,12 +177,12 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li><a href="#">主页</a></li>
-                <li><a href="#">热销</a></li>
-                <li><a href="#">电脑</a></li>
-                <li><a href="#">手机</a></li>
-                <li><a href="#">相机</a></li>
-                <li><a href="#">配件</a></li>
+                <li><a th:href="@{/}">主页</a></li>
+                <li><a th:href="@{/search?CategoryId=1}">热销</a></li>
+                <li><a th:href="@{/search?CategoryId=2}">电脑</a></li>
+                <li><a th:href="@{/search?CategoryId=3}">手机</a></li>
+                <li><a th:href="@{/search?CategoryId=4}">相机</a></li>
+                <li><a th:href="@{/search?CategoryId=5}">配件</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -153,33 +191,45 @@
     <!-- /container -->
 </nav>
 <!-- /NAVIGATION -->
-<!--TODO-->
 
 <div class="section">
     <div class="container">
     </div>
 </div>
+
 <div style="display: grid;place-items: center">
     <div class="col-md-5 order-details ">
         <h2 class="order-submit">申请店铺</h2><br>
-        <div class="input-checkbox ">
-            <div class="billing-details">
-                <div class="form-group">
-                    <input class="input" name="name" placeholder="店铺名" type="text">
+        <div class="input-checkbox">
+            <div th:switch="${session.shoppingRegisterEx}">
+                <p th:case="1">两次密码不对</p>
+                <p th:case="2">手机号格式错误</p>
+                <p th:case="3">验证码错误</p>
+                <p th:case="4">输入错误</p>
+                <p th:case="*">输入信息：</p>
+            </div>
+            <form id="shoppingRegisterForm" method="post" name="shoppingRegister" th:action="@{/shoppingRegister}">
+                <div class="billing-details">
+                    <div class="form-group">
+                        <input class="input" name="name" placeholder="店铺名" type="text">
+                    </div>
+                    <textarea class="input" name="brief" placeholder="店铺简介"></textarea>
                 </div>
-                <textarea class="input" name="brief" placeholder="店铺简介"></textarea>
-            </div>
-            <div class="input-checkbox">
-                <input type="checkbox" id="terms">
-                <label for="terms">
-                    <span></span>
-                    我已阅读并接收<a href="#">条款和条件</a>
-                </label>
-            </div>
+                <div class="input-checkbox">
+                    <input id="terms" type="checkbox">
+                    <label for="terms">
+                        <span></span>
+                        我已阅读并接收<a href="#" style="color: red">条款和条件</a>
+                    </label>
+                    <!-- 添加一个用于显示错误消息的元素 -->
+                    <div id="termsError" style="color: red; display: none;">请同意条款和条件才能申请。</div>
+                </div>
+                <a class="primary-btn order-submit" href="#" id="shoppingRegisterSubmitBtn">申请</a>
+            </form>
         </div>
-        <a href="#" class="primary-btn order-submit">注册</a>
     </div>
 </div>
+
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -232,11 +282,11 @@
                     <div class="footer">
                         <h3 class="footer-title">类别</h3>
                         <ul class="footer-links">
-                            <li><a href="#">热门交易</a></li>
-                            <li><a href="#">电脑</a></li>
-                            <li><a href="#">手机</a></li>
-                            <li><a href="#">相机</a></li>
-                            <li><a href="#">配件</a></li>
+                            <li><a th:href="@{/search?CategoryId=1}">热门交易</a></li>
+                            <li><a th:href="@{/search?CategoryId=2}">电脑</a></li>
+                            <li><a th:href="@{/search?CategoryId=3}">手机</a></li>
+                            <li><a th:href="@{/search?CategoryId=4}">相机</a></li>
+                            <li><a th:href="@{/search?CategoryId=5}">配件</a></li>
                         </ul>
                     </div>
                 </div>
@@ -250,7 +300,6 @@
                             <li><a href="#">关于我们</a></li>
                             <li><a href="#">联系我们</a></li>
                             <li><a href="#">隐私政策</a></li>
-                            <li><a href="#">订单和退货</a></li>
                             <li><a href="#">条款与条件</a></li>
                         </ul>
                     </div>
@@ -300,6 +349,7 @@
 </footer>
 <!-- /FOOTER -->
 
+
 <!-- jQuery Plugins -->
 <script src="/website/static/js/jquery.min.js"></script>
 <script src="/website/static/js/bootstrap.min.js"></script>
@@ -307,6 +357,8 @@
 <script src="/website/static/js/nouislider.min.js"></script>
 <script src="/website/static/js/jquery.zoom.min.js"></script>
 <script src="/website/static/js/main.js"></script>
+<script src="/website/static/js/shoppingRegister.js"></script>
+
 
 </body>
 </html>

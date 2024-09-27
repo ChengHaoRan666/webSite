@@ -73,11 +73,7 @@ public class sellerServiceImpl implements sellerService {
 
     /**
      * 商家注册<br>
-     * 两次密码不对  -1<br>
-     * 手机号错误 -2<br>
-     * 验证码错误 -3<br>
-     * 店铺名重复 -4<br>
-     * 成功注册  0<br>
+     * 店铺名重复  -4<br>
      */
     @Override
     public Integer sellerRegister(Integer Id, String sellerName, String brief) {

@@ -208,7 +208,7 @@
                 <p th:case="4">输入错误</p>
                 <p th:case="*">输入信息：</p>
             </div>
-            <form id="registerForm" method="post" name="login" th:action="@{/modify}">
+            <form id="registerForm" method="post" name="register" th:action="@{/modify}">
                 <div class="billing-details">
                     <div class="form-group">
                         <input class="input" name="name" placeholder="用户名" type="text">
@@ -237,9 +237,9 @@
                         我已阅读并接收<a href="#" style="color: red">条款和条件</a>
                     </label>
                     <!-- 添加一个用于显示错误消息的元素 -->
-                    <div id="termsError" style="color: red; display: none;">请同意条款和条件才能登录。</div>
+                    <div id="termsError" style="color: red; display: none;">请同意条款和条件才能修改。</div>
                 </div>
-                <a class="primary-btn order-submit" href="#" id="registerSubmitBtn">注册</a>
+                <a class="primary-btn order-submit" href="#" id="registerSubmitBtn">修改</a>
             </form>
         </div>
 
