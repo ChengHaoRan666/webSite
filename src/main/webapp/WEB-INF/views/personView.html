@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>页</title>
+    <title th:text="${session.tableName}"></title>
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -193,30 +193,108 @@
 </nav>
 <!-- /NAVIGATION -->
 <br><br>
+<div th:switch="${session.tableName}">
+    <!--订单-->
+    <table class="table" th:case="订单">
+        <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
+        <thead>
+        <tr>
+            <th style="text-align:center">商品名称</th>
+            <th style="text-align:center">数量</th>
+            <th style="text-align:center">单价</th>
+            <th style="text-align:center">金额</th>
+            <th style="text-align:center">分类</th>
+            <th style="text-align:center">操作</th>
+        </tr>
+        </thead>
+        <tbody style="text-align:center">
+        <tr th:each="item : ${session.tableVal}">
+            <td th:text="${item.key.name}">商品名称</td>
+            <td th:text="${item.value}">数量</td>
+            <td th:text="${item.key.price}">单价</td>
+            <td th:text="${item.key.price}">金额</td>
+            <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
+            <td>操作</td>
+        </tr>
+        </tbody>
+    </table>
 
-<table class="table">
-    <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
-    <thead>
-    <tr>
-        <th style="text-align:center">商品名称</th>
-        <th style="text-align:center">数量</th>
-        <th style="text-align:center">单价</th>
-        <th style="text-align:center">金额</th>
-        <th style="text-align:center">分类</th>
-        <th style="text-align:center">操作</th>
-    </tr>
-    </thead>
-    <tbody style="text-align:center">
-    <tr th:each="item : ${session.tableVal}">
-        <td th:text="${item.key.name}">商品名称</td>
-        <td th:text="${item.value}">数量</td>
-        <td th:text="${item.key.price}">单价</td>
-        <td th:text="${item.key.price}">金额</td>
-        <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
-        <td>操作</td>
-    </tr>
-    </tbody>
-</table>
+    <!--收藏-->
+    <table class="table" th:case="收藏">
+        <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
+        <thead>
+        <tr>
+            <th style="text-align:center">商品名称</th>
+            <th style="text-align:center">数量</th>
+            <th style="text-align:center">单价</th>
+            <th style="text-align:center">金额</th>
+            <th style="text-align:center">分类</th>
+            <th style="text-align:center">操作</th>
+        </tr>
+        </thead>
+        <tbody style="text-align:center">
+        <tr th:each="item : ${session.tableVal}">
+            <td th:text="${item.key.name}">商品名称</td>
+            <td th:text="${item.value}">数量</td>
+            <td th:text="${item.key.price}">单价</td>
+            <td th:text="${item.key.price}">金额</td>
+            <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
+            <td>操作</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--购物车-->
+    <table class="table" th:case="购物车">
+        <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
+        <thead>
+        <tr>
+            <th style="text-align:center">商品名称</th>
+            <th style="text-align:center">数量</th>
+            <th style="text-align:center">单价</th>
+            <th style="text-align:center">金额</th>
+            <th style="text-align:center">分类</th>
+            <th style="text-align:center">操作</th>
+        </tr>
+        </thead>
+        <tbody style="text-align:center">
+        <tr th:each="item : ${session.tableVal}">
+            <td th:text="${item.key.name}">商品名称</td>
+            <td th:text="${item.value}">数量</td>
+            <td th:text="${item.key.price}">单价</td>
+            <td th:text="${item.key.price}">金额</td>
+            <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
+            <td>操作</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--待收货-->
+    <table class="table" th:case="待收货">
+        <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
+        <thead>
+        <tr>
+            <th style="text-align:center">商品名称</th>
+            <th style="text-align:center">数量</th>
+            <th style="text-align:center">单价</th>
+            <th style="text-align:center">金额</th>
+            <th style="text-align:center">分类</th>
+            <th style="text-align:center">操作</th>
+        </tr>
+        </thead>
+        <tbody style="text-align:center">
+        <tr th:each="item : ${session.tableVal}">
+            <td th:text="${item.key.name}">商品名称</td>
+            <td th:text="${item.value}">数量</td>
+            <td th:text="${item.key.price}">单价</td>
+            <td th:text="${item.key.price}">金额</td>
+            <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
+            <td>操作</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
 
 
 <!-- SECTION -->

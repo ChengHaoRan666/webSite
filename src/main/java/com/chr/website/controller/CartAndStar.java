@@ -17,7 +17,7 @@ public class CartAndStar {
      */
     @RequestMapping("/cartShow")
     public String cartShow() {
-        return "cart";
+        return "forward:/view?id=3";
     }
 
 
@@ -26,7 +26,7 @@ public class CartAndStar {
      */
     @RequestMapping("/starShow")
     public String starShow() {
-        return "star";
+        return "forward:view?id=2";
     }
 
 
