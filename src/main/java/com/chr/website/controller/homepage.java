@@ -86,19 +86,6 @@ public class homepage {
     }
 
 
-    /**
-     * TODO 查看（购物车，订单，收藏，待收货）商品
-     */
-    @RequestMapping("/view")
-    public String view(Model model, HttpSession session, @RequestParam("id") Integer id) {
-        Integer userId = (Integer) session.getAttribute("userId");
-        String[] tmp = new String[]{"订单", "收藏", "购物车", "待收货"};
-        Map<product, Integer>[] maps = new Map[]{pageService.orderShow(userId), pageService.collectShow((userId)), pageService.cartShow(userId), pageService.receivedShow(userId)};
-        session.setAttribute("tableName", tmp[id - 1]);
-        session.setAttribute("tableVal", maps[id - 1]);
-        model.addAttribute("categoryMap", populateCategoryMap());
-        return "personView";
-    }
 
     /**
      * 注册店铺
@@ -143,5 +130,23 @@ public class homepage {
         session.removeAttribute("userId");
         loginService.logoff(id);
         return "redirect:/";
+    }
+
+    /*
+     * TODO 查看（购物车，订单，收藏，待收货）商品
+     * TODO 照片
+     * TODO 收藏不需要数量，总价，查看，删除功能
+     * TODO 批量操作（加购物车，删除）
+     * TODO 购物车 批量操作（结账）
+     */
+    @RequestMapping("/view")
+    public String view(Model model, HttpSession session, @RequestParam("id") Integer id) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        String[] tmp = new String[]{"订单", "收藏", "购物车", "待收货"};
+        Map<product, Integer>[] maps = new Map[]{pageService.orderShow(userId), pageService.collectShow((userId)), pageService.cartShow(userId), pageService.receivedShow(userId)};
+        session.setAttribute("tableName", tmp[id - 1]);
+        session.setAttribute("tableVal", maps[id - 1]);
+        model.addAttribute("categoryMap", populateCategoryMap());
+        return "personView";
     }
 }

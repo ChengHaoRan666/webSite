@@ -193,107 +193,145 @@
 </nav>
 <!-- /NAVIGATION -->
 <br><br>
+
 <div th:switch="${session.tableName}">
     <!--订单-->
-    <table class="table" th:case="订单">
-        <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
-        <thead>
-        <tr>
-            <th style="text-align:center">商品名称</th>
-            <th style="text-align:center">数量</th>
-            <th style="text-align:center">单价</th>
-            <th style="text-align:center">金额</th>
-            <th style="text-align:center">分类</th>
-            <th style="text-align:center">操作</th>
-        </tr>
-        </thead>
-        <tbody style="text-align:center">
-        <tr th:each="item : ${session.tableVal}">
-            <td th:text="${item.key.name}">商品名称</td>
-            <td th:text="${item.value}">数量</td>
-            <td th:text="${item.key.price}">单价</td>
-            <td th:text="${item.key.price}">金额</td>
-            <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
-            <td>操作</td>
-        </tr>
-        </tbody>
-    </table>
+    <div th:case="订单">
+        <table class="table">
+            <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
+            <thead>
+            <tr>
+                <th style="text-align:center"></th>
+                <th style="text-align:center">商品名称</th>
+                <th style="text-align:center">数量</th>
+                <th style="text-align:center">单价</th>
+                <th style="text-align:center">金额</th>
+                <th style="text-align:center">分类</th>
+                <th style="text-align:center">操作</th>
+            </tr>
+            </thead>
+            <tbody style="text-align:center">
+            <tr th:each="item : ${session.tableVal}">
+                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}" th:value="${item.key.id}" type="checkbox"/></td>
+                <td th:text="${item.key.name}">商品名称</td>
+                <td th:text="${item.value}">数量</td>
+                <td th:text="${item.key.price}">单价</td>
+                <td th:text="${#numbers.formatDecimal(item.key.price * item.value, 1, 2)}">总金额</td>
+                <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
+                <td>操作</td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            已选择 <span>0</span> 件，共 <span>0.00</span> 元
+        </div>
+        <button>删除</button>
+        <button class="selectAllButton">全选</button>
+        <button>加入购物车</button>
+    </div>
 
     <!--收藏-->
-    <table class="table" th:case="收藏">
-        <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
-        <thead>
-        <tr>
-            <th style="text-align:center">商品名称</th>
-            <th style="text-align:center">数量</th>
-            <th style="text-align:center">单价</th>
-            <th style="text-align:center">金额</th>
-            <th style="text-align:center">分类</th>
-            <th style="text-align:center">操作</th>
-        </tr>
-        </thead>
-        <tbody style="text-align:center">
-        <tr th:each="item : ${session.tableVal}">
-            <td th:text="${item.key.name}">商品名称</td>
-            <td th:text="${item.value}">数量</td>
-            <td th:text="${item.key.price}">单价</td>
-            <td th:text="${item.key.price}">金额</td>
-            <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
-            <td>操作</td>
-        </tr>
-        </tbody>
-    </table>
-
+    <div th:case="收藏">
+        <table class="table">
+            <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
+            <thead>
+            <tr>
+                <th style="text-align:center"></th>
+                <th style="text-align:center">商品名称</th>
+                <th style="text-align:center">数量</th>
+                <th style="text-align:center">单价</th>
+                <th style="text-align:center">金额</th>
+                <th style="text-align:center">分类</th>
+                <th style="text-align:center">操作</th>
+            </tr>
+            </thead>
+            <tbody style="text-align:center">
+            <tr th:each="item : ${session.tableVal}">
+                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}" th:value="${item.key.id}" type="checkbox"/></td>
+                <td th:text="${item.key.name}">商品名称</td>
+                <td th:text="${item.value}">数量</td>
+                <td th:text="${item.key.price}">单价</td>
+                <td th:text="${#numbers.formatDecimal(item.key.price * item.value, 1, 2)}">总金额</td>
+                <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
+                <td>操作</td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            已选择 <span>0</span> 件，共 <span>0.00</span> 元
+        </div>
+        <button>删除</button>
+        <button class="selectAllButton">全选</button>
+        <button>加入购物车</button>
+    </div>
     <!--购物车-->
-    <table class="table" th:case="购物车">
-        <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
-        <thead>
-        <tr>
-            <th style="text-align:center">商品名称</th>
-            <th style="text-align:center">数量</th>
-            <th style="text-align:center">单价</th>
-            <th style="text-align:center">金额</th>
-            <th style="text-align:center">分类</th>
-            <th style="text-align:center">操作</th>
-        </tr>
-        </thead>
-        <tbody style="text-align:center">
-        <tr th:each="item : ${session.tableVal}">
-            <td th:text="${item.key.name}">商品名称</td>
-            <td th:text="${item.value}">数量</td>
-            <td th:text="${item.key.price}">单价</td>
-            <td th:text="${item.key.price}">金额</td>
-            <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
-            <td>操作</td>
-        </tr>
-        </tbody>
-    </table>
-
+    <div th:case="购物车">
+        <table class="table">
+            <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
+            <thead>
+            <tr>
+                <th style="text-align:center"></th>
+                <th style="text-align:center">商品名称</th>
+                <th style="text-align:center">数量</th>
+                <th style="text-align:center">单价</th>
+                <th style="text-align:center">金额</th>
+                <th style="text-align:center">分类</th>
+                <th style="text-align:center">操作</th>
+            </tr>
+            </thead>
+            <tbody style="text-align:center">
+            <tr th:each="item : ${session.tableVal}">
+                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}" th:value="${item.key.id}" type="checkbox"/></td>
+                <td th:text="${item.key.name}">商品名称</td>
+                <td th:text="${item.value}">数量</td>
+                <td th:text="${item.key.price}">单价</td>
+                <td th:text="${#numbers.formatDecimal(item.key.price * item.value, 1, 2)}">总金额</td>
+                <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
+                <td>操作</td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            已选择 <span>0</span> 件，共 <span>0.00</span> 元
+        </div>
+        <button>删除</button>
+        <button class="selectAllButton">全选</button>
+        <button>加入购物车</button>
+    </div>
     <!--待收货-->
-    <table class="table" th:case="待收货">
-        <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
-        <thead>
-        <tr>
-            <th style="text-align:center">商品名称</th>
-            <th style="text-align:center">数量</th>
-            <th style="text-align:center">单价</th>
-            <th style="text-align:center">金额</th>
-            <th style="text-align:center">分类</th>
-            <th style="text-align:center">操作</th>
-        </tr>
-        </thead>
-        <tbody style="text-align:center">
-        <tr th:each="item : ${session.tableVal}">
-            <td th:text="${item.key.name}">商品名称</td>
-            <td th:text="${item.value}">数量</td>
-            <td th:text="${item.key.price}">单价</td>
-            <td th:text="${item.key.price}">金额</td>
-            <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
-            <td>操作</td>
-        </tr>
-        </tbody>
-    </table>
-
+    <div th:case="待收货">
+        <table class="table">
+            <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
+            <thead>
+            <tr>
+                <th style="text-align:center"></th>
+                <th style="text-align:center">商品名称</th>
+                <th style="text-align:center">数量</th>
+                <th style="text-align:center">单价</th>
+                <th style="text-align:center">金额</th>
+                <th style="text-align:center">分类</th>
+                <th style="text-align:center">操作</th>
+            </tr>
+            </thead>
+            <tbody style="text-align:center">
+            <tr th:each="item : ${session.tableVal}">
+                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}" th:value="${item.key.id}" type="checkbox"/></td>
+                <td th:text="${item.key.name}">商品名称</td>
+                <td th:text="${item.value}">数量</td>
+                <td th:text="${item.key.price}">单价</td>
+                <td th:text="${#numbers.formatDecimal(item.key.price * item.value, 1, 2)}">总金额</td>
+                <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
+                <td>操作</td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            已选择 <span>0</span> 件，共 <span>0.00</span> 元
+        </div>
+        <button>删除</button>
+        <button class="selectAllButton">全选</button>
+        <button>加入购物车</button>
+    </div>
 </div>
 
 
@@ -410,6 +448,6 @@
 <script src="/website/static/js/nouislider.min.js"></script>
 <script src="/website/static/js/jquery.zoom.min.js"></script>
 <script src="/website/static/js/main.js"></script>
-
+<script src="/website/static/js/persionView.js"></script>
 </body>
 </html>
