@@ -21,6 +21,21 @@ document.addEventListener('DOMContentLoaded', function () {
         // 更新显示
         document.querySelector('div > span:first-child').textContent = totalItems;
         document.querySelector('div > span:last-child').textContent = totalPrice.toFixed(2);
+
+        // 更新全选按钮的文本
+        updateSelectAllButtonText();
+    }
+
+    // 更新全选按钮的文本
+    function updateSelectAllButtonText() {
+        var checkboxes = document.querySelectorAll('.selectItem');
+        var allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+        var selectAllButton = document.querySelector('.selectAllButton');
+        if (allChecked) {
+            selectAllButton.textContent = '全不选';
+        } else {
+            selectAllButton.textContent = '全选';
+        }
     }
 
     // 为每个复选框添加事件监听器
@@ -28,18 +43,19 @@ document.addEventListener('DOMContentLoaded', function () {
         checkbox.addEventListener('change', updateSelectedItems);
     });
 
-    // 全选按钮的事件监听器
-    var selectAllButtons = document.querySelectorAll('.selectAllButton');
-    selectAllButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            // 获取所有复选框
-            var checkboxes = document.querySelectorAll('.selectItem');
-            // 遍历并将所有复选框设置为选中状态
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = true;
-            });
-            // 更新显示选中的商品数量和金额
-            updateSelectedItems();
+    // 全选/全不选按钮的事件监听器
+    var selectAllButton = document.querySelector('.selectAllButton');
+    selectAllButton.addEventListener('click', function() {
+        // 获取所有复选框
+        var checkboxes = document.querySelectorAll('.selectItem');
+        var allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+
+        // 遍历并将所有复选框设置为相反的选中状态
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = !allChecked;
         });
+
+        // 更新显示选中的商品数量和金额
+        updateSelectedItems();
     });
 });
