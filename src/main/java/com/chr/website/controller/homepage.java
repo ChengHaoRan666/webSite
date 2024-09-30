@@ -1,6 +1,5 @@
 package com.chr.website.controller;
 
-import com.chr.website.entity.product;
 import com.chr.website.service.Impl.loginServiceImpl;
 import com.chr.website.service.Impl.pageServiceImpl;
 import com.chr.website.service.Impl.sellerServiceImpl;
@@ -86,7 +85,6 @@ public class homepage {
     }
 
 
-
     /**
      * 注册店铺
      */
@@ -143,7 +141,7 @@ public class homepage {
     public String view(Model model, HttpSession session, @RequestParam("id") Integer id) {
         Integer userId = (Integer) session.getAttribute("userId");
         String[] tmp = new String[]{"订单", "收藏", "购物车", "待收货"};
-        Map<product, Integer>[] maps = new Map[]{pageService.orderShow(userId), pageService.collectShow((userId)), pageService.cartShow(userId), pageService.receivedShow(userId)};
+        Map[] maps = new Map[]{pageService.orderShow(userId), pageService.collectShow((userId)), pageService.cartShow(userId), pageService.receivedShow(userId)};
         session.setAttribute("tableName", tmp[id - 1]);
         session.setAttribute("tableVal", maps[id - 1]);
         model.addAttribute("categoryMap", populateCategoryMap());
