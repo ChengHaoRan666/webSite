@@ -6,13 +6,12 @@ import com.chr.website.service.Impl.sellerServiceImpl;
 import com.chr.website.utils.loginUtil;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -147,4 +146,17 @@ public class homepage {
         model.addAttribute("categoryMap", populateCategoryMap());
         return "personView";
     }
+
+    /**
+     * 删除
+     * */
+    @RequestMapping(value = "/delete-item", method = RequestMethod.POST)
+    public ResponseEntity<?> deleteItem(@RequestBody Map<String, String> request) {
+        String itemId = request.get("itemId");
+        String tableName = request.get("tableName");
+        System.out.println(itemId + " " + tableName);
+
+        return ResponseEntity.ok().body(Collections.singletonMap("message", "删除成功"));
+    }
+
 }

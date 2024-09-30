@@ -198,7 +198,7 @@
     <!--订单-->
     <!--收藏-->
     <div th:case="收藏">
-        <table class="table">
+        <table class="table" data-table-name=2>
             <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
             <thead>
             <tr>
@@ -220,8 +220,8 @@
                 <td th:text="${#numbers.formatDecimal(item.key.price * item.value, 1, 2)}">总金额</td>
                 <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
                 <td>
-                    <button class="deleteButton">删除</button>
-                    <button class="addShoppingCartButton">删除</button>
+                    <button class="deleteButton" th:data-id="${item.key.id}">删除</button>
+                    <button class="addShoppingCartButton">添加到购物车</button>
                 </td>
             </tr>
             </tbody>

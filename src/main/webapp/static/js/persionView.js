@@ -26,6 +26,43 @@ document.addEventListener('DOMContentLoaded', function () {
         updateSelectAllButtonText();
     }
 
+    // 为每个删除按钮添加事件监听器
+    document.querySelectorAll('.deleteButton').forEach(function(button) {
+        button.addEventListener('click', function() {
+            // 获取商品ID
+            var itemId = this.getAttribute('data-id');
+            // 获取表名，通过自定义属性data-table-name
+            var tableName = this.closest('.table').getAttribute('data-table-name');
+
+            // 发起AJAX请求到后端
+            fetch('/website/delete-item', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ itemId: itemId, tableName: tableName })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // 处理响应，例如显示一个消息
+                    console.log(data.message);
+                    // 删除前端表格行
+                    var row = this.parentNode.parentNode;
+                    row.parentNode.removeChild(row);
+                    // 更新选中商品数量和金额
+                    updateSelectedItems();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+
     // 更新全选按钮的文本
     function updateSelectAllButtonText() {
         var checkboxes = document.querySelectorAll('.selectItem');
@@ -45,13 +82,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 全选/全不选按钮的事件监听器
     var selectAllButton = document.querySelector('.selectAllButton');
-    selectAllButton.addEventListener('click', function () {
+    selectAllButton.addEventListener('click', function() {
         // 获取所有复选框
         var checkboxes = document.querySelectorAll('.selectItem');
         var allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
 
         // 遍历并将所有复选框设置为相反的选中状态
-        checkboxes.forEach(function (checkbox) {
+        checkboxes.forEach(function(checkbox) {
             checkbox.checked = !allChecked;
         });
 
