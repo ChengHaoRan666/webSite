@@ -105,13 +105,6 @@ public class sellerServiceImpl implements sellerService {
         return orderDao.selectOrderBySellerID(sellerId);
     }
 
-    /**
-     * 商家订单发货
-     */
-    @Override
-    public void orderSend(Integer orderId) {
-        orderDao.updateOrderStatus(orderId, "2");
-    }
 
 
     /**

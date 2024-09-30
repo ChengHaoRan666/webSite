@@ -22,6 +22,7 @@ public interface orderMapper {
      * 删
      */
     int deleteOrder(@Param("id") Integer id);
+
     /**
      * 根据用户id删订单表
      */
@@ -30,8 +31,12 @@ public interface orderMapper {
     /**
      * 修改订单状态
      */
-    int updateOrderStatus(@Param("id") Integer id,@Param("OrderStatus") String OrderStatus);
+    int updateOrderStatus(@Param("userId") Integer id, @Param("productId") Integer productId, @Param("OrderStatus") String OrderStatus);
 
+    /**
+     * 通过userId和 ProductID删除
+     */
+    int deleteByUserIdProductId(@Param("userId") Integer userId, @Param("ProductId") Integer ProductId);
 
     /**
      * 根据订单id查询订单
@@ -51,5 +56,5 @@ public interface orderMapper {
     /**
      * 获取用户订单数量
      */
-    Integer getNumber(@Param("userId")Integer userId);
+    Integer getNumber(@Param("userId") Integer userId);
 }

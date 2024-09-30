@@ -68,7 +68,31 @@ public class shippingServiceImpl implements shippingService {
      * 确认收货
      */
     @Override
-    public void delivery(Integer id, Integer productId) {
-        orderDao.updateOrderStatus(id, productId + "");
+    public void delivery(Integer userId, Integer productId, String OrderStatus) {
+        orderDao.updateOrderStatus(userId, productId, OrderStatus);
+    }
+
+    /**
+     * 根据用户id和商品id删除订单
+     */
+    @Override
+    public void deleteOrderByUserIdProductId(Integer userId, Integer productId) {
+        orderDao.deleteByUserIdProductId(userId, productId);
+    }
+
+    /**
+     * 根据用户id和商品id删除收藏
+     */
+    @Override
+    public void deleteStarByUserIdProductId(Integer userId, Integer productId) {
+        starDao.deleteStarByUserIdProductId(userId, productId);
+    }
+
+    /**
+     * 根据用户id和商品id删除购物车
+     */
+    @Override
+    public void deleteCarByUserIdProductId(Integer userId, Integer productId) {
+        cartDao.deleteCartByUserIdProductId(userId, productId);
     }
 }

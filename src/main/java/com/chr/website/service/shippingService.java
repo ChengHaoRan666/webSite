@@ -35,5 +35,23 @@ public interface shippingService {
     /**
      * 确认收货
      */
-    void delivery(Integer id, Integer productId);
+    void delivery(Integer userId, Integer productId,String OrderStatus);
+
+    /**
+     * 根据用户id和商品id删除订单
+     */
+    void deleteOrderByUserIdProductId(Integer userId, Integer productId);
+
+    /**
+     * 根据用户id和商品id删除收藏
+     */
+    void deleteStarByUserIdProductId(Integer userId, Integer productId);
+
+
+    /**
+     * 根据用户id和商品id删除购物车
+     */
+    void deleteCarByUserIdProductId(Integer userId, Integer productId);
+
+
 }

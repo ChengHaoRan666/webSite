@@ -3,6 +3,7 @@ package com.chr.website.controller;
 import com.chr.website.service.Impl.loginServiceImpl;
 import com.chr.website.service.Impl.pageServiceImpl;
 import com.chr.website.service.Impl.sellerServiceImpl;
+import com.chr.website.service.Impl.shippingServiceImpl;
 import com.chr.website.utils.loginUtil;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class homepage {
     private sellerServiceImpl sellerService;
     @Autowired
     private pageServiceImpl pageService;
+    @Autowired
+    private shippingServiceImpl shippingService;
 
     /**
      * 个人中心页面
@@ -149,13 +152,27 @@ public class homepage {
 
     /**
      * 删除
-     * */
+     */
     @RequestMapping(value = "/delete-item", method = RequestMethod.POST)
-    public ResponseEntity<?> deleteItem(@RequestBody Map<String, String> request) {
-        String itemId = request.get("itemId");
-        String tableName = request.get("tableName");
+    public ResponseEntity<?> deleteItem(HttpSession session, @RequestBody Map<String, String> request) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        Integer itemId = Integer.valueOf(request.get("itemId"));
+        Integer tableName = Integer.valueOf(request.get("tableName"));
         System.out.println(itemId + " " + tableName);
-
+        switch (tableName) {
+            case 1:
+                shippingService.deleteOrderByUserIdProductId(userId, itemId);
+                break;
+            case 2:
+                shippingService.deleteStarByUserIdProductId(userId, itemId);
+                break;
+            case 3:
+                shippingService.deleteCarByUserIdProductId(userId, itemId);
+                break;
+            case 4:
+                shippingService.delivery(userId, itemId, "3");
+                break;
+        }
         return ResponseEntity.ok().body(Collections.singletonMap("message", "删除成功"));
     }
 

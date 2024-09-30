@@ -22,10 +22,16 @@ public interface starMapper {
      * 删
      */
     int deleteStar(@Param("StarID") Integer StarID);
+
     /**
      * 根据用户id删收藏
      */
     int deleteStarByUserId(@Param("userId") Integer userId);
+
+    /**
+     * 通过用户id和商品id删
+     */
+    public int deleteStarByUserIdProductId(@Param("userId") Integer userId, @Param("productId") Integer productId);
 
     /**
      * 改
@@ -35,7 +41,7 @@ public interface starMapper {
     /**
      * 查
      */
-    List<star> selectStar( @Param("UserID") Integer userId);
+    List<star> selectStar(@Param("UserID") Integer userId);
 
     /**
      * 获取用户收藏数量

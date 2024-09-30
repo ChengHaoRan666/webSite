@@ -17,6 +17,12 @@
         delete from carts where UserID = #{userId};
     </delete>
 
+
+    <!--int deleteCartByUserIdProductId(@Param("userId") Integer userId, @Param("ProductId") Integer ProductId);-->
+    <delete id="deleteCartByUserIdProductId">
+        delete from carts where UserID = #{userId} and ProductID=#{ProductId}
+    </delete>
+
     <!--改 int updateCart(@Param("CartID") Integer cartID, @Param("cart") cart cart);-->
     <update id="updateCart">
         update carts set UserID = #{cart.UserID}, ProductID = #{cart.ProductID}, Quantity = #{cart.Quantity} where

@@ -30,6 +30,11 @@ public interface cartMapper {
     int deleteCartByUserId(@Param("userId") Integer userId);
 
     /**
+     * 根据用户id和商品id删
+     */
+    int deleteCartByUserIdProductId(@Param("userId") Integer userId, @Param("ProductId") Integer ProductId);
+
+    /**
      * 改
      */
     int updateCart(@Param("CartID") Integer cartID, @Param("cart") cart cart);

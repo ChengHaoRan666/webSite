@@ -32,6 +32,13 @@ public class orderDao implements orderMapper {
     }
 
     /**
+     * 通过用户id和商品id删除
+     */
+    public int deleteByUserIdProductId(Integer userId, Integer productId) {
+        return orderMapper.deleteByUserIdProductId(userId, productId);
+    }
+
+    /**
      * 根据用户id删订单表
      */
     @Override
@@ -42,8 +49,8 @@ public class orderDao implements orderMapper {
     /**
      * 修改订单状态
      */
-    public int updateOrderStatus(Integer id, String OrderStatus) {
-        return orderMapper.updateOrderStatus(id, OrderStatus);
+    public int updateOrderStatus(Integer userId, Integer productId, String OrderStatus) {
+        return orderMapper.updateOrderStatus(userId, productId, OrderStatus);
     }
 
     /**

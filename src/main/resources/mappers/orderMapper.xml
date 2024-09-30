@@ -18,16 +18,20 @@
     <delete id="deleteOrder">
         delete from orders where OrderID = #{id}
     </delete>
-<!--删 int deleteOrderByUserId(@Param("userId") Integer userId);-->
+    <!--删 int deleteOrderByUserId(@Param("userId") Integer userId);-->
     <delete id="deleteOrderByUserId">
         delete from orders where UserID = #{userId}
     </delete>
-<!--修改订单状态 int updateOrderStatus(Integer id, String OrderStatus);-->
+    <!--修改订单状态     int updateOrderStatus(@Param("userId") Integer id, @Param("productId") Integer productId, @Param("OrderStatus") String OrderStatus);-->
     <update id="updateOrderStatus">
         update Orders set
         OrderStatus = #{OrderStatus}
-        where OrderID = #{id};
+        where UserID= #{userId} and ProductID=#{productId}
     </update>
+    <!--int deleteByUserIdProductId(@Param("userId") Integer userId,@Param("ProductId") String ProductId);-->
+    <delete id="deleteByUserIdProductId">
+        delete from orders where UserID = #{userId} and ProductID = #{ProductId}
+    </delete>
 
     <resultMap id="orderMapper" type="order">
         <id property="id" column="OrderID"/>
