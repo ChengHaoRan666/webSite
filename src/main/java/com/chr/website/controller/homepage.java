@@ -132,12 +132,8 @@ public class homepage {
         return "redirect:/";
     }
 
-    /*
-     * TODO 查看（购物车，订单，收藏，待收货）商品
-     * TODO 照片
-     * TODO 收藏不需要数量，总价，查看，删除功能
-     * TODO 批量操作（加购物车，删除）
-     * TODO 购物车 批量操作（结账）
+    /**
+     * 查看（购物车，订单，收藏，待收货）商品
      */
     @RequestMapping("/view")
     public String view(Model model, HttpSession session, @RequestParam("id") Integer id) {
@@ -176,4 +172,14 @@ public class homepage {
         return ResponseEntity.ok().body(Collections.singletonMap("message", "删除成功"));
     }
 
+    /**
+     * 加入购物车
+     */
+    @RequestMapping("/add-to-cart")
+    public ResponseEntity<?> addToCart(HttpSession session, @RequestBody Map<String, String> request) {
+        Integer itemId = Integer.valueOf(request.get("itemId"));
+        Integer userId = (Integer) session.getAttribute("userId");
+        shippingService.addCart(userId, itemId, 1);
+        return ResponseEntity.ok().body(Collections.singletonMap("message", "添加成功"));
+    }
 }
