@@ -107,6 +107,7 @@ public class homepage {
             session.setAttribute("shoppingRegisterEx", -4);
             return "shoppingRegister";
         } else {
+            loginOut(session);
             return "login";
         }
     }
