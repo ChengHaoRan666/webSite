@@ -175,7 +175,7 @@ public class homepage {
     /**
      * 加入购物车
      */
-    @RequestMapping("/add-to-cart")
+    @RequestMapping(value = "/add-to-cart", method = RequestMethod.POST)
     public ResponseEntity<?> addToCart(HttpSession session, @RequestBody Map<String, String> request) {
         Integer itemId = Integer.valueOf(request.get("itemId"));
         Integer userId = (Integer) session.getAttribute("userId");
