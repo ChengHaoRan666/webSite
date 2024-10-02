@@ -140,16 +140,19 @@
                 <th style="text-align:center">单价</th>
                 <th style="text-align:center">金额</th>
                 <th style="text-align:center">分类</th>
+                <th style="text-align:center">订单状态</th>
                 <th style="text-align:center">操作</th>
             </tr>
             </thead>
             <tbody style="text-align:center">
             <tr th:each="item : ${session.tableVal}">
-                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}" th:value="${item.key.id}" type="checkbox"/></td>
+                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}"
+                           th:value="${item.key.id}" type="checkbox"/></td>
                 <td th:text="${item.key.name}">商品名称</td>
                 <td th:text="${item.value}">数量</td>
                 <td th:text="${item.key.price}">单价</td>
                 <td th:text="${#numbers.formatDecimal(item.key.price * item.value, 1, 2)}">总金额</td>
+                <td>订单状态</td><!--TODO-->
                 <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
                 <td>
                     <button class="deleteButton" th:data-id="${item.key.id}">删除</button>
@@ -179,7 +182,8 @@
             </thead>
             <tbody style="text-align:center">
             <tr th:each="item : ${session.tableVal}">
-                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}" th:value="${item.key.id}" type="checkbox"/></td>
+                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}"
+                           th:value="${item.key.id}" type="checkbox"/></td>
                 <td th:text="${item.key.name}">商品名称</td>
                 <td th:text="${item.key.price}">单价</td>
                 <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
@@ -215,7 +219,8 @@
             </thead>
             <tbody style="text-align:center">
             <tr th:each="item : ${session.tableVal}">
-                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}" th:value="${item.key.id}" type="checkbox"/></td>
+                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}"
+                           th:value="${item.key.id}" type="checkbox"/></td>
                 <td th:text="${item.key.name}">商品名称</td>
                 <td th:text="${item.value}">数量</td>
                 <td th:text="${item.key.price}">单价</td>
@@ -223,6 +228,7 @@
                 <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
                 <td>
                     <button class="deleteButton" th:data-id="${item.key.id}">删除</button>
+                    <button>结算</button><!--TODO-->
                 </td>
             </tr>
             </tbody>
@@ -232,9 +238,10 @@
         </div>
         <button class="deleteMore">删除</button>
         <button class="selectAllButton">全选</button>
+        <button>一起结算</button><!--TODO-->
     </div>
 
-    <!--待收货-->
+    <!--TODO 待收货 和一起结算一样，将商品的id传到后端-->
     <div th:case="待收货">
         <table class="table" data-table-name=4>
             <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
@@ -251,7 +258,8 @@
             </thead>
             <tbody style="text-align:center">
             <tr th:each="item : ${session.tableVal}">
-                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}" th:value="${item.key.id}" type="checkbox"/></td>
+                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}"
+                           th:value="${item.key.id}" type="checkbox"/></td>
                 <td th:text="${item.key.name}">商品名称</td>
                 <td th:text="${item.value}">数量</td>
                 <td th:text="${item.key.price}">单价</td>
