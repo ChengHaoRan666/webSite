@@ -140,7 +140,6 @@
                 <th style="text-align:center">单价</th>
                 <th style="text-align:center">金额</th>
                 <th style="text-align:center">分类</th>
-                <th style="text-align:center">订单状态</th>
                 <th style="text-align:center">操作</th>
             </tr>
             </thead>
@@ -227,7 +226,7 @@
                 <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
                 <td>
                     <button class="deleteButton" th:data-id="${item.key.id}">删除</button>
-                    <button class="">结算</button><!--TODO-->
+                    <button class="settlementButton">结算</button><!--TODO-->
                 </td>
             </tr>
             </tbody>
@@ -237,7 +236,7 @@
         </div>
         <button class="deleteMore">删除</button>
         <button class="selectAllButton">全选</button>
-        <button>一起结算</button><!--TODO-->
+        <button class="settlementAllButton">一起结算</button><!--TODO-->
     </div>
 
     <!--TODO 待收货 和一起结算一样，将商品的id传到后端-->
@@ -265,7 +264,7 @@
                 <td th:text="${#numbers.formatDecimal(item.key.price * item.value, 1, 2)}">总金额</td>
                 <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
                 <td>
-                    <button class="deleteButton" th:data-id="${item.key.id}">确认收货</button>
+                    <button class="deleteButton">确认收货</button><!--TODO-->
                 </td>
             </tr>
             </tbody>
@@ -273,7 +272,7 @@
         <div>
             已选择 <span>0</span> 件，共 <span>0.00</span> 元
         </div>
-        <button class="deleteMore">确认收货</button>
+        <button class="deleteMore">一起确认收货</button><!--TODO-->
         <button class="selectAllButton">全选</button>
     </div>
 </div>
@@ -392,6 +391,8 @@
 <script src="/website/static/js/nouislider.min.js"></script>
 <script src="/website/static/js/jquery.zoom.min.js"></script>
 <script src="/website/static/js/main.js"></script>
-<script src="/website/static/js/persionView.js"></script>
+<script src="/website/static/js/personDelete.js"></script>
+<script src="/website/static/js/personSettle.js"></script>
+<script src="/website/static/js/personAddCart.js"></script>
 </body>
 </html>

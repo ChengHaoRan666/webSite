@@ -155,7 +155,6 @@ public class homepage {
         Integer userId = (Integer) session.getAttribute("userId");
         Integer itemId = Integer.valueOf(request.get("itemId"));
         Integer tableName = Integer.valueOf(request.get("tableName"));
-        System.out.println(itemId + " " + tableName);
         switch (tableName) {
             case 1:
                 shippingService.deleteOrderByUserIdProductId(userId, itemId);
@@ -182,5 +181,15 @@ public class homepage {
         Integer userId = (Integer) session.getAttribute("userId");
         shippingService.addCart(userId, itemId, 1);
         return ResponseEntity.ok().body(Collections.singletonMap("message", "添加成功"));
+    }
+
+    /**
+     * 结算
+     */
+    @RequestMapping(value = "/settle", method = RequestMethod.POST)
+    public ResponseEntity<?> settle(HttpSession session, @RequestBody Map<String, Object> payload) {
+        System.out.println("11111111111111111111111111111111111");
+        System.out.println(payload.get("itemIds"));
+        return ResponseEntity.ok().body(Collections.singletonMap("message", "结算成功"));
     }
 }
