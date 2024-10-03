@@ -153,7 +153,6 @@
                 <td th:text="${item.key.price}">单价</td>
                 <td th:text="${#numbers.formatDecimal(item.key.price * item.value, 1, 2)}">总金额</td>
                 <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
-                <td>订单状态</td><!--TODO-->
                 <td>
                     <button class="deleteButton" th:data-id="${item.key.id}">删除</button>
                 </td>
@@ -228,7 +227,7 @@
                 <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
                 <td>
                     <button class="deleteButton" th:data-id="${item.key.id}">删除</button>
-                    <button>结算</button><!--TODO-->
+                    <button class="">结算</button><!--TODO-->
                 </td>
             </tr>
             </tbody>
