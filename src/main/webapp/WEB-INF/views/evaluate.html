@@ -1,4 +1,5 @@
-<!--查看购物车，订单，收藏，待收货商品页-->
+<!--评价页-->
+<!--TODO 跳转到评价页后确认收货-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -7,7 +8,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title th:text="${session.tableName}"></title>
+    <title>评价页</title>
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -27,7 +28,6 @@
 
     <!-- Custom stlylesheet -->
     <link href="/website/static/css/style.css" rel="stylesheet" type="text/css"/>
-
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -94,6 +94,73 @@
                     </div>
                 </div>
                 <!-- /SEARCH BAR -->
+
+                <!-- ACCOUNT -->
+                <div class="col-md-3 clearfix">
+                    <div class="header-ctn">
+                        <!-- Wishlist -->
+                        <div>
+                            <a th:href="@{/starShow}">
+                                <i class="fa fa-heart-o"></i>
+                                <span>收藏</span>
+                                <div class="qty" th:text="${session.starCount}"></div>
+                            </a>
+                        </div>
+                        <!-- /Wishlist -->
+
+                        <!-- 购物车下拉菜单 -->
+                        <div class="dropdown">
+                            <a aria-expanded="true" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span>购物车</span>
+                                <div class="qty" th:text="${session.cartCount}"></div>
+                            </a>
+                            <div class="cart-dropdown">
+                                <div class="cart-list">
+                                    <!-- 商品循环展示开始 -->
+                                    <div th:each="entry : ${session.cartMap}">
+                                        <div class="product-widget">
+                                            <div class="product-img">
+                                                <img alt="" th:src="@{${entry.key.imageUrl.split(';')[0]}}">
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-name"><a
+                                                        th:href="@{/product/{id}(id=${entry.key.id})}"
+                                                        th:method="get"
+                                                        th:text="${entry.key.name}">产品名称</a></h3>
+                                                <h4 class="product-price">
+                                                    <span class="qty" th:text="${entry.value} + 'x'">1x</span>
+                                                    <span th:text="'￥' + ${entry.key.price}">￥980.00</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 商品循环展示结束 -->
+                                </div>
+
+                                <!--购物车摘要-->
+                                <div class="cart-summary">
+                                    <small th:text="|已选择 ${session.cartCount} 件商品|"></small>
+                                </div>
+                                <div class="cart-btns">
+                                    <a th:href="@{/cartShow}">查看购物车</a>
+                                    <a th:href="@{/cartShow}">结账 <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Cart -->
+
+                        <!-- Menu Toogle -->
+                        <div class="menu-toggle">
+                            <a href="#">
+                                <i class="fa fa-bars"></i>
+                                <span>Menu</span>
+                            </a>
+                        </div>
+                        <!-- /Menu Toogle -->
+                    </div>
+                </div>
+                <!-- /ACCOUNT -->
             </div>
             <!-- row -->
         </div>
@@ -125,156 +192,23 @@
     <!-- /container -->
 </nav>
 <!-- /NAVIGATION -->
-<br><br>
 
-<div th:switch="${session.tableName}">
-    <!--订单-->
-    <div th:case="订单">
-        <table class="table" data-table-name=1>
-            <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
-            <thead>
-            <tr>
-                <th style="text-align:center"></th>
-                <th style="text-align:center">商品名称</th>
-                <th style="text-align:center">数量</th>
-                <th style="text-align:center">单价</th>
-                <th style="text-align:center">金额</th>
-                <th style="text-align:center">分类</th>
-                <th style="text-align:center">操作</th>
-            </tr>
-            </thead>
-            <tbody style="text-align:center">
-            <tr th:each="item : ${session.tableVal}">
-                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}"
-                           th:value="${item.key.id}" type="checkbox"/></td>
-                <td th:text="${item.key.name}">商品名称</td>
-                <td th:text="${item.value}">数量</td>
-                <td th:text="${item.key.price}">单价</td>
-                <td th:text="${#numbers.formatDecimal(item.key.price * item.value, 1, 2)}">总金额</td>
-                <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
-                <td>
-                    <button class="deleteButton" th:data-id="${item.key.id}">删除</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div>
-            已选择 <span>0</span> 件，共 <span>0.00</span> 元
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
         </div>
-        <button class="deleteMore">删除</button>
-        <button class="selectAllButton">全选</button>
+        <!-- /row -->
     </div>
-
-    <!--收藏-->
-    <div th:case="收藏">
-        <table class="table" data-table-name=2>
-            <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
-            <thead>
-            <tr>
-                <th style="text-align:center"></th>
-                <th style="text-align:center">商品名称</th>
-                <th style="text-align:center">单价</th>
-                <th style="text-align:center">分类</th>
-                <th style="text-align:center">操作</th>
-            </tr>
-            </thead>
-            <tbody style="text-align:center">
-            <tr th:each="item : ${session.tableVal}">
-                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}"
-                           th:value="${item.key.id}" type="checkbox"/></td>
-                <td th:text="${item.key.name}">商品名称</td>
-                <td th:text="${item.key.price}">单价</td>
-                <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
-                <td>
-                    <button class="deleteButton" th:data-id="${item.key.id}">删除</button>
-                    <button class="addShoppingCartButton">加入购物车</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div>
-            已选择 <span>0</span> 件，共 <span>0.00</span> 元
-        </div>
-        <button class="deleteMore">删除</button>
-        <button class="selectAllButton">全选</button>
-        <button class="addMoreToCart">加入购物车</button>
-    </div>
-
-    <!--购物车-->
-    <div th:case="购物车">
-        <table class="table" data-table-name=3>
-            <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
-            <thead>
-            <tr>
-                <th style="text-align:center"></th>
-                <th style="text-align:center">商品名称</th>
-                <th style="text-align:center">数量</th>
-                <th style="text-align:center">单价</th>
-                <th style="text-align:center">金额</th>
-                <th style="text-align:center">分类</th>
-                <th style="text-align:center">操作</th>
-            </tr>
-            </thead>
-            <tbody style="text-align:center">
-            <tr th:each="item : ${session.tableVal}">
-                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}"
-                           th:value="${item.key.id}" type="checkbox"/></td>
-                <td th:text="${item.key.name}">商品名称</td>
-                <td th:text="${item.value}">数量</td><!--TODO 修改购物车商品数量-->
-                <td th:text="${item.key.price}">单价</td>
-                <td th:text="${#numbers.formatDecimal(item.key.price * item.value, 1, 2)}">总金额</td>
-                <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
-                <td>
-                    <button class="deleteButton" th:data-id="${item.key.id}">删除</button>
-                    <button class="settlementButton">结算</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div>
-            已选择 <span>0</span> 件，共 <span>0.00</span> 元
-        </div>
-        <button class="deleteMore">删除</button>
-        <button class="selectAllButton">全选</button>
-        <button class="settlementAllButton">一起结算</button>
-    </div>
-
-    <div th:case="待收货">
-        <table class="table" data-table-name=4>
-            <caption class="caption"><h2 th:text="${session.tableName}">我的表格<br><br></h2></caption>
-            <thead>
-            <tr>
-                <th style="text-align:center"></th>
-                <th style="text-align:center">商品名称</th>
-                <th style="text-align:center">数量</th>
-                <th style="text-align:center">单价</th>
-                <th style="text-align:center">金额</th>
-                <th style="text-align:center">分类</th>
-                <th style="text-align:center">操作</th>
-            </tr>
-            </thead>
-            <tbody style="text-align:center">
-            <tr th:each="item : ${session.tableVal}">
-                <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}"
-                           th:value="${item.key.id}" type="checkbox"/></td>
-                <td th:text="${item.key.name}">商品名称</td>
-                <td th:text="${item.value}">数量</td>
-                <td th:text="${item.key.price}">单价</td>
-                <td th:text="${#numbers.formatDecimal(item.key.price * item.value, 1, 2)}">总金额</td>
-                <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
-                <td>
-                    <button class="evaluateButton">确认收货</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div>
-            已选择 <span>0</span> 件，共 <span>0.00</span> 元
-        </div>
-        <button class="evaluateMoreButton">一起确认收货</button>
-        <button class="selectAllButton">全选</button>
-    </div>
+    <!-- /container -->
 </div>
+<!-- /SECTION -->
+
+
+评价页
+
 
 
 <!-- SECTION -->
@@ -383,6 +317,7 @@
 <!-- /FOOTER -->
 
 
+
 <!-- jQuery Plugins -->
 <script src="/website/static/js/jquery.min.js"></script>
 <script src="/website/static/js/bootstrap.min.js"></script>
@@ -390,9 +325,6 @@
 <script src="/website/static/js/nouislider.min.js"></script>
 <script src="/website/static/js/jquery.zoom.min.js"></script>
 <script src="/website/static/js/main.js"></script>
-<script src="/website/static/js/personDelete.js"></script>
-<script src="/website/static/js/personSettle.js"></script>
-<script src="/website/static/js/personAddCart.js"></script>
-<script src="/website/static/js/personReceipt.js"></script>
+
 </body>
 </html>

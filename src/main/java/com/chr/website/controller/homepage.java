@@ -1,5 +1,6 @@
 package com.chr.website.controller;
 
+import com.chr.website.entity.product;
 import com.chr.website.service.Impl.loginServiceImpl;
 import com.chr.website.service.Impl.pageServiceImpl;
 import com.chr.website.service.Impl.sellerServiceImpl;
@@ -12,14 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: 程浩然
  * @Create: 2024/9/24 - 17:22
- * @Description: 主页的操作
+ * @Description: 个人主页的操作
  */
 @Controller
 public class homepage {
@@ -165,9 +164,6 @@ public class homepage {
             case 3:
                 shippingService.deleteCarByUserIdProductId(userId, itemId);
                 break;
-            case 4:
-                shippingService.delivery(userId, itemId, "3");
-                break;
         }
         return ResponseEntity.ok().body(Collections.singletonMap("message", "删除成功"));
     }
@@ -188,8 +184,38 @@ public class homepage {
      */
     @RequestMapping(value = "/settle", method = RequestMethod.POST)
     public ResponseEntity<?> settle(HttpSession session, @RequestBody Map<String, Object> payload) {
-        System.out.println("11111111111111111111111111111111111");
-        System.out.println(payload.get("itemIds"));
+        Integer userId = (Integer) session.getAttribute("userId");
+        List<?> itemIdList = (List<?>) payload.get("itemIds");
+        Set<Integer> settleSet = new HashSet<>();
+        for (Object itemId : itemIdList) {
+            settleSet.add(Integer.parseInt((String) itemId));
+        }
+
+        Map<product, Integer> settleMap = pageService.cartShow(userId);
+
+        // 使用迭代器的remove方法来安全地删除元素
+        settleMap.keySet().removeIf(product -> !settleSet.contains(product.getId()));
+
+        // 将结算商品放入 session 域中
+        session.setAttribute("settleMap", settleMap);
         return ResponseEntity.ok().body(Collections.singletonMap("message", "结算成功"));
+    }
+
+    /**
+     * 确认收货
+     */
+    @RequestMapping(value = "/receipt", method = RequestMethod.POST)
+    public ResponseEntity<?> receipt(HttpSession session, @RequestBody Map<String, Object> payload) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        List<?> itemIdList = (List<?>) payload.get("itemIds");
+        Set<Integer> receiptSet = new HashSet<>();
+        for (Object itemId : itemIdList) {
+            receiptSet.add(Integer.parseInt((String) itemId));
+        }
+        for (Integer itemId : receiptSet)
+            shippingService.delivery(userId, itemId, "3");
+        // 将待评价商品 id 加入 session 域中
+        session.setAttribute("receiptSet", receiptSet);
+        return ResponseEntity.ok().body(Collections.singletonMap("message", "确认收货成功"));
     }
 }

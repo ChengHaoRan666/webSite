@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CartAndStar {
 
-
     /**
      * 购物车页面
      */
@@ -29,6 +28,19 @@ public class CartAndStar {
         return "forward:view?id=2";
     }
 
+    /**
+     * 订单页
+     * */
+    @RequestMapping("/checkout")
+    public String checkout() {
+        return "checkout";
+    }
 
-
+    /**
+     * 评价页
+     * */
+    @RequestMapping("/evaluate")
+    public String evaluate() {
+        return "evaluate";
+    }
 }

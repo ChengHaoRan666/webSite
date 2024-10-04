@@ -1,6 +1,6 @@
 // 定义一个函数，用于发送商品ID列表到后端
 function settleItems(itemIds) {
-    fetch('/website/settle', {
+    fetch('/website/receipt', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -15,17 +15,17 @@ function settleItems(itemIds) {
         })
         .then(data => {
             // 处理响应，例如显示一个消息
-            window.location.href = '/website/checkout';
+            window.location.href = '/website/evaluate';
             // alert('商品结算成功');
         })
         .catch((error) => {
             console.error('Error:', error);
-            alert('结算发生错误');
+            alert('发生错误');
         });
 }
 
-// 单个商品结算
-document.querySelectorAll('.settlementButton').forEach(function (button) {
+// 单个商品确认收货
+document.querySelectorAll('.evaluateButton').forEach(function (button) {
     button.addEventListener('click', function () {
         // 获取商品ID
         var itemId = this.closest('tr').querySelector('.selectItem').value;
@@ -34,8 +34,9 @@ document.querySelectorAll('.settlementButton').forEach(function (button) {
     });
 });
 
+
 // 为一起结算按钮添加事件监听器
-var settlementAllButton = document.querySelector('.settlementAllButton');
+var settlementAllButton = document.querySelector('.evaluateMoreButton');
 settlementAllButton.addEventListener('click', function () {
     // 收集所有选中的商品ID
     var itemIds = Array.from(document.querySelectorAll('.selectItem:checked')).map(function (checkbox) {
