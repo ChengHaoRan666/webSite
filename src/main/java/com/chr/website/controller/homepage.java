@@ -218,4 +218,21 @@ public class homepage {
         session.setAttribute("receiptSet", receiptSet);
         return ResponseEntity.ok().body(Collections.singletonMap("message", "确认收货成功"));
     }
+
+    /**
+     * 修改购物车商品数量
+     */
+    @RequestMapping(value = "/updateQuantity", method = RequestMethod.POST)
+    public String updateQuantity(
+            HttpSession session,
+            @RequestParam("itemId") Integer productId,
+            @RequestParam("quantity") Integer quantity) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        // TODO 在cartDao中加上一个方法：通过 userId和 productId 删除 cart
+        // TODO 删除 userId 的所有 productId
+
+        // TODO 将新的商品 id 加入
+
+        return "personView";
+    }
 }

@@ -220,7 +220,15 @@
                 <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}"
                            th:value="${item.key.id}" type="checkbox"/></td>
                 <td th:text="${item.key.name}">商品名称</td>
-                <td th:text="${item.value}">数量</td><!--TODO 修改购物车商品数量-->
+                <td class="input-number">
+                    <div class="input-number">
+                        <input min="1" style="width: 100px;" th:id="'quantity_' + ${item.key.id}" th:value="${item.value}" type="number"/>
+                        <button class="increase-btn" th:onclick="|updateQuantity(${item.key.id}, 'increase')|" type="button">+</button>
+                        <button class="decrease-btn" th:onclick="|updateQuantity(${item.key.id}, 'decrease')|" type="button">-</button>
+                    </div>
+                </td>
+
+
                 <td th:text="${item.key.price}">单价</td>
                 <td th:text="${#numbers.formatDecimal(item.key.price * item.value, 1, 2)}">总金额</td>
                 <td th:text="${categoryMap.get(item.key.categoryId)}">分类</td>
@@ -394,5 +402,6 @@
 <script src="/website/static/js/personSettle.js"></script>
 <script src="/website/static/js/personAddCart.js"></script>
 <script src="/website/static/js/personReceipt.js"></script>
+<script src="/website/static/js/updateQuantity.js"></script>
 </body>
 </html>
