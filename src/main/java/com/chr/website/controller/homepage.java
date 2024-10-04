@@ -233,6 +233,8 @@ public class homepage {
 
         // TODO 将新的商品 id 加入
 
+
+        System.out.println(userId + " " + productId + " " + quantity);
         return "personView";
     }
 }
