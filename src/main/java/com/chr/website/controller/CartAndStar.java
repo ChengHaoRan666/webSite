@@ -1,7 +1,12 @@
 package com.chr.website.controller;
 
+import com.chr.website.entity.product;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Map;
 
 /**
  * @Author: 程浩然
@@ -28,19 +33,35 @@ public class CartAndStar {
         return "forward:view?id=2";
     }
 
-    /**
-     * 订单页
-     * */
-    @RequestMapping("/checkout")
-    public String checkout() {
-        return "checkout";
-    }
 
     /**
      * 评价页
-     * */
+     */
     @RequestMapping("/evaluate")
     public String evaluate() {
         return "evaluate";
+    }
+
+
+    /**
+     * 订单页
+     */
+    @RequestMapping("/checkout")
+    public String checkout(HttpSession session) {
+        Map<product, Integer> settleMap = (Map<product, Integer>) session.getAttribute("settleMap");
+        System.out.println(settleMap);
+
+        return "checkout";
+    }
+
+
+    /**
+     * 创建订单
+     */
+    @PatchMapping("/CreateOrder")
+    public String CreateOrder() {
+
+
+        return "";
     }
 }
