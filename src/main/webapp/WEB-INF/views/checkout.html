@@ -209,89 +209,88 @@
                         <h3 class="title">账单</h3>
                     </div>
                     <div class="form-group">
-                        <input class="input" name="name" placeholder="收件人姓名" type="text">
+                        <input class="input" id="input_name" name="name" placeholder="收件人姓名" type="text">
                     </div>
                     <div class="form-group">
-                        <input class="input" name="cell-phone" placeholder="收件人手机号" type="text">
+                        <input class="input" id="input_phone" name="cell-phone" placeholder="收件人手机号" type="text">
                     </div>
                     <div class="form-group">
-                        <input class="input" name="address" placeholder="收件人详细地址" type="text">
+                        <input class="input" id="input_address" name="address" placeholder="收件人详细地址" type="text">
+                    </div>
+                    <div class="order-notes">
+                        <textarea class="input" id="input_notes" placeholder="备注"></textarea>
                     </div>
                 </div>
                 <!-- /Billing Details -->
-
-                <!-- Order notes -->
-                <div class="order-notes">
-                    <textarea class="input" placeholder="备注"></textarea>
-                </div>
-                <!-- /Order notes -->
             </div>
 
             <!-- Order Details -->
             <div class="col-md-5 order-details">
-                <form method="post" th:action="@{/CreateOrder}">
-                    <div class="section-title text-center">
-                        <h3 class="title">您的订单</h3>
+                <div class="section-title text-center">
+                    <h3 class="title">您的订单</h3>
+                </div>
+                <div class="order-summary">
+                    <div class="order-col">
+                        <div><strong>产品总计</strong></div>
+                        <div><strong>金额</strong></div>
                     </div>
-                    <div class="order-summary">
-                        <div class="order-col">
-                            <div><strong>产品总计</strong></div>
-                            <div><strong>金额</strong></div>
-                        </div>
-                        <div class="order-products">
-                            <div th:each="settle:${session.settleMap}">
-                                <div class="order-col">
-                                    <img height="50" th:src="@{${settle.key.imageUrl.split(';')[0]}}" width="80">
-                                    <div th:text="${settle.value} +' x '+ ${settle.key.getName()}">1x 产品名称</div>
-                                    <div th:text="'￥' + ${#numbers.formatDecimal(settle.key.price * settle.value,1,2)}">
-                                        ￥980.00
-                                    </div>
+                    <div class="order-products">
+                        <div th:each="settle:${session.settleMap}">
+                            <div class="order-col" th:data-product-id="${settle.key.getId()}">
+                                <input class="product-quantity" th:value="${settle.value}" type="hidden">
+                                <img height="50" th:src="@{${settle.key.imageUrl.split(';')[0]}}" width="80">
+                                <div th:text="${settle.value} +' x '+ ${settle.key.getName()}">1x 产品名称</div>
+                                <div th:text="'￥' + ${#numbers.formatDecimal(settle.key.price * settle.value,1,2)}">
+                                    ￥980.00
                                 </div>
-                                <br>
                             </div>
-                        </div>
-                        <br>
-                        <div class="order-col">
-                            <div>运费</div>
-                            <div><strong>免费</strong></div>
-                        </div>
-                        <div class="order-col">
-                            <div><strong>总价</strong></div>
-                            <div><strong class="order-total"
-                                         th:text="${#numbers.formatDecimal(session.settleCount,1,2)}">￥2940.00</strong>
-                            </div>
+                            <br>
                         </div>
                     </div>
-                    <div class="payment-method">
-                        <div class="input-radio">
-                            <input id="payment-1" name="payment" type="radio">
-                            <label for="payment-1">
-                                <span></span>
-                                微信支付
-                            </label>
-                        </div>
-                        <span></span>
-                        <div class="input-radio">
-                            <input id="payment-2" name="payment" type="radio">
-                            <label for="payment-2">
-                                <span></span>
-                                支付宝支付
-                            </label>
+                    <br>
+                    <div class="order-col">
+                        <div>运费</div>
+                        <div><strong>免费</strong></div>
+                    </div>
+                    <div class="order-col">
+                        <div><strong>总价</strong></div>
+                        <div><strong class="order-total"
+                                     th:text="${#numbers.formatDecimal(session.settleCount,1,2)}">￥1024.00</strong>
                         </div>
                     </div>
-
-                    <div class="input-checkbox">
-                        <input id="terms" type="checkbox">
-                        <label for="terms">
+                </div>
+                <div class="payment-method">
+                    <div class="input-radio">
+                        <input id="WeChatPay" name="payment" type="radio">
+                        <label for="WeChatPay">
                             <span></span>
-                            我已阅读并接收 <a href="#" style="color: red">条款和条件</a>
+                            微信支付
                         </label>
-                        <!-- 添加一个用于显示错误消息的元素 -->
-                        <div id="termsError" style="color: red; display: none;">请同意条款和条件才能登录。</div>
                     </div>
+                    <span></span>
+                    <div class="input-radio">
+                        <input id="AlipayPay" name="payment" type="radio">
+                        <label for="AlipayPay">
+                            <span></span>
+                            支付宝支付
+                        </label>
+                    </div>
+                    <div id="PayError" style="color: red; display: none;">请选择支付方式</div>
+                </div>
 
-                    <a class="primary-btn order-submit" th:href="@{/CreateOrder}">提交订单</a>
-                </form>
+                <div class="input-checkbox">
+                    <input id="terms" type="checkbox">
+                    <label for="terms">
+                        <span></span>
+                        我已阅读并接收 <a href="#" style="color: red">条款和条件</a>
+                    </label>
+                    <!-- 添加一个用于显示错误消息的元素 -->
+                    <div id="termsError" style="color: red; display: none;">请同意条款和条件才能登录。</div>
+                </div>
+                <br>
+                <a class="primary-btn order-submit" id="checkOutBtn" th:href="@{/CreateOrder}">
+                    提交订单
+                </a>
             </div>
             <!-- /Order Details -->
         </div>
@@ -410,6 +409,7 @@
 <script src="/website/static/js/nouislider.min.js"></script>
 <script src="/website/static/js/jquery.zoom.min.js"></script>
 <script src="/website/static/js/main.js"></script>
+<script src="/website/static/js/checkout.js"></script>
 
 </body>
 </html>

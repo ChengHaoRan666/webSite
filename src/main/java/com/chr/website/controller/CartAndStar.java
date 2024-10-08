@@ -1,11 +1,17 @@
 package com.chr.website.controller;
 
+import com.chr.website.dao.orderDao;
+import com.chr.website.entity.order;
 import com.chr.website.entity.product;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -15,6 +21,8 @@ import java.util.Map;
  */
 @Controller
 public class CartAndStar {
+    @Autowired
+    private orderDao orderDao;
 
     /**
      * 购物车页面
@@ -59,10 +67,20 @@ public class CartAndStar {
     /**
      * 创建订单
      */
-    @PatchMapping("/CreateOrder")
-    public String CreateOrder() {
-        System.out.println("1111111111111111111111111111111111111111");
+    @RequestMapping(value = "/CreateOrder", method = RequestMethod.POST)
+    public ResponseEntity<?> CreateOrder(HttpSession session, @RequestBody Map<String, Object> payload) {
+        String name = (String) payload.get("name");
+        String phone = (String) payload.get("phone");
+        String address = (String) payload.get("address");
+        Boolean wechatPay = (Boolean) payload.get("wechatPay");
+        Boolean AlipayPay = (Boolean) payload.get("AlipayPay");
+        Map<Integer, Integer> productIds = (Map<Integer, Integer>) payload.get("products");
+        System.out.println("11111111111111111111111111111111111111111111111111");
+        System.out.println(name + " " + phone + " " + address + " " + wechatPay + " " + AlipayPay);
+        System.out.println("222222222222222222222222222222222222222222222222222");
+        System.out.println(productIds);
 
-        return "index";
+        new order((Integer) session.getAttribute("userId"), )
+        return ResponseEntity.ok().body(Collections.singletonMap("message", "订单生成成功"));
     }
 }
