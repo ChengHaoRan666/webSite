@@ -1,8 +1,8 @@
 package com.chr.website.controller;
 
-import com.chr.website.dao.orderDao;
-import com.chr.website.entity.order;
 import com.chr.website.entity.product;
+import com.chr.website.service.Impl.pageServiceImpl;
+import com.chr.website.service.Impl.shippingServiceImpl;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,9 @@ import java.util.Map;
 @Controller
 public class CartAndStar {
     @Autowired
-    private orderDao orderDao;
+    private shippingServiceImpl shippingService;
+    @Autowired
+    private pageServiceImpl pageService;
 
     /**
      * 购物车页面
@@ -46,7 +48,19 @@ public class CartAndStar {
      * 评价页
      */
     @RequestMapping("/evaluate")
-    public String evaluate() {
+    public String evaluate(HttpSession session) {
+        // 更新数据
+        // 获取收藏列表，购物车列表
+        Map<product, Integer> starMap = pageService.collectShow((Integer) session.getAttribute("userId"));
+        Map<product, Integer> cartMap = pageService.cartShow((Integer) session.getAttribute("userId"));
+
+        // 购物车数量
+        session.setAttribute("starCount", starMap.size());
+        // 收藏数量
+        session.setAttribute("cartCount", cartMap.size());
+        // 收藏，购物车列表
+        session.setAttribute("starMap", starMap);
+        session.setAttribute("cartMap", cartMap);
         return "evaluate";
     }
 
@@ -72,15 +86,10 @@ public class CartAndStar {
         String name = (String) payload.get("name");
         String phone = (String) payload.get("phone");
         String address = (String) payload.get("address");
-        Boolean wechatPay = (Boolean) payload.get("wechatPay");
-        Boolean AlipayPay = (Boolean) payload.get("AlipayPay");
+        String notes = (String) payload.get("notes");
         Map<Integer, Integer> productIds = (Map<Integer, Integer>) payload.get("products");
-        System.out.println("11111111111111111111111111111111111111111111111111");
-        System.out.println(name + " " + phone + " " + address + " " + wechatPay + " " + AlipayPay);
-        System.out.println("222222222222222222222222222222222222222222222222222");
-        System.out.println(productIds);
-
-        new order((Integer) session.getAttribute("userId"), )
+        Integer userId = (Integer) session.getAttribute("userId");
+        shippingService.orderCreate(name, phone, address, notes, userId, productIds);
         return ResponseEntity.ok().body(Collections.singletonMap("message", "订单生成成功"));
     }
 }

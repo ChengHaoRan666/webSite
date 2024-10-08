@@ -2,7 +2,7 @@ package com.chr.website.service;
 
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 程浩然
@@ -15,7 +15,7 @@ public interface shippingService {
     /**
      * 创建订单
      */
-    void orderCreate(String name, String phone, String DeliveryAddress, Integer Userid, List<Integer> productIds);
+    void orderCreate(String name, String phone, String address, String notes, Integer Userid, Map<Integer, Integer> productIdsAndQuantity);
 
     /**
      * 添加到购物车
@@ -35,7 +35,7 @@ public interface shippingService {
     /**
      * 确认收货
      */
-    void delivery(Integer userId, Integer productId,String OrderStatus);
+    void delivery(Integer userId, Integer productId, String OrderStatus);
 
     /**
      * 根据用户id和商品id删除订单

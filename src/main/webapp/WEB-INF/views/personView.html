@@ -144,6 +144,7 @@
             </tr>
             </thead>
             <tbody style="text-align:center">
+            <!--TODO-->
             <tr th:each="item : ${session.tableVal}">
                 <td><input class="selectItem" th:data-price="${item.key.price}" th:data-quantity="${item.value}"
                            th:value="${item.key.id}" type="checkbox"/></td>
@@ -222,9 +223,14 @@
                 <td th:text="${item.key.name}">商品名称</td>
                 <td class="input-number">
                     <div class="input-number">
-                        <input min="1" style="width: 100px;" th:id="'quantity_' + ${item.key.id}" th:value="${item.value}" type="number"/>
-                        <button class="increase-btn" th:onclick="|updateQuantity(${item.key.id}, 'increase')|" type="button">+</button>
-                        <button class="decrease-btn" th:onclick="|updateQuantity(${item.key.id}, 'decrease')|" type="button">-</button>
+                        <input min="1" style="width: 100px;" th:id="'quantity_' + ${item.key.id}"
+                               th:value="${item.value}" type="number"/>
+                        <button class="increase-btn" th:onclick="|updateQuantity(${item.key.id}, 'increase')|"
+                                type="button">+
+                        </button>
+                        <button class="decrease-btn" th:onclick="|updateQuantity(${item.key.id}, 'decrease')|"
+                                type="button">-
+                        </button>
                     </div>
                 </td>
 

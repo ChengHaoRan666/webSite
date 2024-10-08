@@ -4,6 +4,7 @@ import com.chr.website.entity.order;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,7 +17,22 @@ public interface orderMapper {
     /**
      * 增
      */
-    int addOrder(@Param("order") order order);
+    int addOrder(
+            @Param("userId") Integer userId,
+            @Param("productId") Integer productId,
+            @Param("sellerId") Integer sellerId,
+            @Param("quantity") Integer quantity,
+            @Param("totalAmount") Double totalAmount,
+            @Param("deliveryAddress") String deliveryAddress,
+            @Param("recipientName") String recipientName,
+            @Param("recipientPhone") String recipientPhone,
+            @Param("orderStatus") String orderStatus,
+            @Param("notes") String notes,
+            @Param("orderDate") Date orderDate,
+            @Param("paymentDate") Date paymentDate,
+            @Param("shippingDate") Date shippingDate,
+            @Param("deliveryDate") Date deliveryDate
+    );
 
     /**
      * 删

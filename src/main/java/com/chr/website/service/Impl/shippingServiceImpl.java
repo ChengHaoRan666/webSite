@@ -2,13 +2,16 @@ package com.chr.website.service.Impl;
 
 
 import com.chr.website.dao.*;
-import com.chr.website.entity.*;
+import com.chr.website.entity.cart;
+import com.chr.website.entity.product;
+import com.chr.website.entity.review;
+import com.chr.website.entity.star;
 import com.chr.website.service.shippingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: 程浩然
@@ -30,14 +33,20 @@ public class shippingServiceImpl implements shippingService {
     /**
      * 创建订单
      */
+
+
+    /**
+     * 创建订单
+     */
     @Override
-    public void orderCreate(String name, String phone, String DeliveryAddress, Integer Userid, List<Integer> productIds) {
-        for (Integer productId : productIds) {
+    public void orderCreate(String name, String phone, String address, String notes, Integer Userid, Map<Integer, Integer> productIdsAndQuantity) {
+        for (Map.Entry<Integer, Integer> entry : productIdsAndQuantity.entrySet()) {
+            Integer productId = Integer.parseInt(String.valueOf(entry.getKey()));
+            Integer count = Integer.parseInt(String.valueOf(entry.getValue()));
             product product = productDao.selectProductById(productId);
-            orderDao.addOrder(new order(Userid, productId, product.getProductStoreID(), product.getPrice(), DeliveryAddress, name, phone, "1", new Date(), new Date(), null, null));
+            orderDao.addOrder(Userid, productId, product.getProductStoreID(), count, count * product.getPrice(), address, name, phone, "1", notes, new Date(), new Date(), null, null);
         }
     }
-
 
     /**
      * 添加到购物车

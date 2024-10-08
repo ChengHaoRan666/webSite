@@ -17,10 +17,12 @@ public class order {
     private Integer userId;
     private Integer productId;
     private Integer sellerId;
+    private Integer quantity;
     private Double totalAmount;
     private String deliveryAddress;
     private String recipientName;
     private String recipientPhone;
+    private String notes;
     private String orderStatus;
     private Date orderDate;
     private Date paymentDate;
@@ -30,14 +32,16 @@ public class order {
     public order() {
     }
 
-    public order(Integer userId, Integer productId, Integer sellerId, Double totalAmount, String deliveryAddress, String recipientName, String recipientPhone, String orderStatus, Date orderDate, Date paymentDate, Date shippingDate, Date deliveryDate) {
+    public order(Integer userId, Integer productId, Integer sellerId, Integer quantity, Double totalAmount, String deliveryAddress, String recipientName, String recipientPhone, String orderStatus, String notes, Date orderDate, Date paymentDate, Date shippingDate, Date deliveryDate) {
         this.userId = userId;
         this.productId = productId;
         this.sellerId = sellerId;
+        this.quantity = quantity;
         this.totalAmount = totalAmount;
         this.deliveryAddress = deliveryAddress;
         this.recipientName = recipientName;
         this.recipientPhone = recipientPhone;
+        this.notes = notes;
         this.orderStatus = orderStatus;
         this.orderDate = orderDate;
         this.paymentDate = paymentDate;
@@ -52,10 +56,12 @@ public class order {
                 ", userId=" + userId +
                 ", productId=" + productId +
                 ", sellerId=" + sellerId +
+                ", quantity=" + quantity +
                 ", totalAmount=" + totalAmount +
                 ", deliveryAddress='" + deliveryAddress + '\'' +
                 ", recipientName='" + recipientName + '\'' +
                 ", recipientPhone='" + recipientPhone + '\'' +
+                ", notes='" + notes + '\'' +
                 ", orderStatus='" + orderStatus + '\'' +
                 ", orderDate=" + orderDate +
                 ", paymentDate=" + paymentDate +

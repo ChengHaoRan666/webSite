@@ -49,9 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 name: input_name.value,
                 phone: input_phone.value,
                 address: input_address.value,
-                input_notes: input_notes.value,
-                wechatPay: WeChatPay.checked,
-                alipayPay: AlipayPay.checked,
+                notes: input_notes.value,
                 products: productsMap
             })
         }).then(response => {
@@ -62,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
         })
             .then(data => {
                 // 处理响应转到评价页
-                window.location.href = '/website/evaluate';
+                window.location.href = '/website/view?id=1';
                 // alert('订单创建成功');
             })
             .catch((error) => {

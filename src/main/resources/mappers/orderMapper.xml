@@ -5,12 +5,29 @@
 
 
 <mapper namespace="com.chr.website.mapper.orderMapper">
-    <!--增 int addOrder(@Param("order") order order);-->
+    <!--增 -->
+<!--    int addOrder(-->
+<!--    @Param("userId") Integer userId,-->
+<!--    @Param("productId") Integer productId,-->
+<!--    @Param("sellerId") Integer sellerId,-->
+<!--    @Param("quantity") Integer quantity,-->
+<!--    @Param("totalAmount") Double totalAmount,-->
+<!--    @Param("deliveryAddress") String deliveryAddress,-->
+<!--    @Param("recipientName") String recipientName,-->
+<!--    @Param("recipientPhone") String recipientPhone,-->
+<!--    @Param("orderStatus") String orderStatus,-->
+<!--    @Param("notes") String notes,-->
+<!--    @Param("orderDate") Date orderDate,-->
+<!--    @Param("paymentDate") Date paymentDate,-->
+<!--    @Param("shippingDate") Date shippingDate,-->
+<!--    @Param("deliveryDate") Date deliveryDate-->
+<!--    );-->
+
     <insert id="addOrder">
         insert into orders values (
-        null, #{order.userId}, #{order.productId}, #{order.sellerId}, #{order.totalAmount}, #{order.deliveryAddress},
-        #{order.recipientName}, #{order.recipientPhone}, #{order.orderStatus}, #{order.orderDate}, #{order.paymentDate},
-        #{order.shippingDate}, #{order.deliveryDate}
+        null, #{userId}, #{productId}, #{sellerId},#{quantity}, #{totalAmount}, #{deliveryAddress},
+        #{recipientName}, #{recipientPhone},#{notes}, #{orderStatus}, #{orderDate}, #{paymentDate},
+        #{shippingDate}, #{deliveryDate}
         )
     </insert>
 
@@ -38,11 +55,13 @@
         <result property="userId" column="UserID"/>
         <result property="productId" column="ProductID"/>
         <result property="sellerId" column="SellerID"/>
+        <result property="quantity" column="Quantity"/>
         <result property="totalAmount" column="TotalAmount"/>
         <result property="deliveryAddress" column="DeliveryAddress"/>
         <result property="recipientName" column="RecipientName"/>
         <result property="recipientPhone" column="RecipientPhone"/>
         <result property="orderStatus" column="OrderStatus"/>
+        <result property="notes" column="notes"/>
         <result property="orderDate" column="OrderDate"/>
         <result property="paymentDate" column="PaymentDate"/>
         <result property="shippingDate" column="ShippingDate"/>
