@@ -35,7 +35,19 @@ public class homepage {
      * 个人中心页面
      */
     @RequestMapping("/profile")
-    public String profileShow() {
+    public String profileShow(HttpSession session) {
+        // 更新数据
+        // 获取收藏列表，购物车列表
+        Map<product, Integer> starMap = pageService.collectShow((Integer) session.getAttribute("userId"));
+        Map<product, Integer> cartMap = pageService.cartShow((Integer) session.getAttribute("userId"));
+
+        // 购物车数量
+        session.setAttribute("starCount", starMap.size());
+        // 收藏数量
+        session.setAttribute("cartCount", cartMap.size());
+        // 收藏，购物车列表
+        session.setAttribute("starMap", starMap);
+        session.setAttribute("cartMap", cartMap);
         return "personalHomepage";
     }
 
