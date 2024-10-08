@@ -209,9 +209,9 @@ public class homepage {
         Integer userId = (Integer) session.getAttribute("userId");
         List<?> itemIdList = (List<?>) payload.get("itemIds");
         Set<Integer> receiptSet = new HashSet<>();
-        for (Object itemId : itemIdList) {
+        for (Object itemId : itemIdList)
             receiptSet.add(Integer.parseInt((String) itemId));
-        }
+
         for (Integer itemId : receiptSet)
             shippingService.delivery(userId, itemId, "3");
         // 将待评价商品 id 加入 session 域中
@@ -228,13 +228,10 @@ public class homepage {
             @RequestParam("itemId") Integer productId,
             @RequestParam("quantity") Integer quantity) {
         Integer userId = (Integer) session.getAttribute("userId");
-        // TODO 在cartDao中加上一个方法：通过 userId和 productId 删除 cart
-        // TODO 删除 userId 的所有 productId
-
-        // TODO 将新的商品 id 加入
-
-
-        System.out.println(userId + " " + productId + " " + quantity);
+        // 删除 userId 的所有 productId
+        shippingService.deleteCarByUserIdProductId(userId, productId);
+        // 将新的商品 id 加入
+        shippingService.addCart(userId, productId, quantity);
         return "personView";
     }
 }
