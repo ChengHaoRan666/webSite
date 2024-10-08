@@ -196,6 +196,10 @@ public class homepage {
         // 使用迭代器的remove方法来安全地删除元素
         settleMap.keySet().removeIf(product -> !settleSet.contains(product.getId()));
 
+        // 删除购物车中的已结算的商品
+        for (product product : settleMap.keySet())
+            shippingService.deleteCarByUserIdProductId(userId, product.getId());
+
         // 将结算商品放入 session 域中
         session.setAttribute("settleMap", settleMap);
         return ResponseEntity.ok().body(Collections.singletonMap("message", "结算成功"));

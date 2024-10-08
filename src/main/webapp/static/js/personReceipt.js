@@ -1,5 +1,5 @@
 // 定义一个函数，用于发送商品ID列表到后端
-function settleItems(itemIds) {
+function settleItems1(itemIds) {
     fetch('/website/receipt', {
         method: 'POST',
         headers: {
@@ -14,9 +14,9 @@ function settleItems(itemIds) {
             return response.json();
         })
         .then(data => {
-            // 处理响应，例如显示一个消息
+            // 处理响应转到评价页
             window.location.href = '/website/evaluate';
-            // alert('商品结算成功');
+            // alert('商品确认收货成功');
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -30,7 +30,7 @@ document.querySelectorAll('.evaluateButton').forEach(function (button) {
         // 获取商品ID
         var itemId = this.closest('tr').querySelector('.selectItem').value;
         // 调用settleItems函数，传递单个商品ID的数组
-        settleItems([itemId]);
+        settleItems1([itemId]);
     });
 });
 
@@ -43,5 +43,5 @@ settlementAllButton.addEventListener('click', function () {
         return checkbox.value;
     });
     // 调用settleItems函数，传递商品ID列表
-    settleItems(itemIds);
+    settleItems1(itemIds);
 });
