@@ -194,6 +194,7 @@
 </nav>
 <!-- /NAVIGATION -->
 
+
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -228,63 +229,69 @@
 
             <!-- Order Details -->
             <div class="col-md-5 order-details">
-                <div class="section-title text-center">
-                    <h3 class="title">您的订单</h3>
-                </div>
-                <div class="order-summary">
-                    <div class="order-col">
-                        <div><strong>产品总计</strong></div>
-                        <div><strong>金额</strong></div>
+                <form method="post" th:action="@{/CreateOrder}">
+                    <div class="section-title text-center">
+                        <h3 class="title">您的订单</h3>
                     </div>
-                    <div class="order-products">
-                        <!--TODO-->
+                    <div class="order-summary">
                         <div class="order-col">
-                            <img height="50" src="/website/static/img/shop01.png" width="80">
-                            <div>1x 产品名称</div>
-                            <div>￥980.00</div>
+                            <div><strong>产品总计</strong></div>
+                            <div><strong>金额</strong></div>
+                        </div>
+                        <div class="order-products">
+                            <div th:each="settle:${session.settleMap}">
+                                <div class="order-col">
+                                    <img height="50" th:src="@{${settle.key.imageUrl.split(';')[0]}}" width="80">
+                                    <div th:text="${settle.value} +' x '+ ${settle.key.getName()}">1x 产品名称</div>
+                                    <div th:text="'￥' + ${#numbers.formatDecimal(settle.key.price * settle.value,1,2)}">
+                                        ￥980.00
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
                         </div>
                         <br>
                         <div class="order-col">
-                            <img height="50" src="/website/static/img/shop01.png" width="80">
-                            <div>2x 产品名称</div>
-                            <div>￥980.00</div>
+                            <div>运费</div>
+                            <div><strong>免费</strong></div>
+                        </div>
+                        <div class="order-col">
+                            <div><strong>总价</strong></div>
+                            <div><strong class="order-total"
+                                         th:text="${#numbers.formatDecimal(session.settleCount,1,2)}">￥2940.00</strong>
+                            </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="order-col">
-                        <div>运费</div>
-                        <div><strong>免费</strong></div>
-                    </div>
-                    <div class="order-col">
-                        <div><strong>总价</strong></div>
-                        <div><strong class="order-total">￥2940.00</strong></div>
-                    </div>
-                </div>
-                <div class="payment-method">
-                    <div class="input-radio">
-                        <input type="radio" name="payment" id="payment-1">
-                        <label for="payment-1">
-                            <span></span>
-                            微信支付
-                        </label>
-                    </div>
-                    <span></span>
-                    <div class="input-radio">
-                        <input type="radio" name="payment" id="payment-2">
-                        <label for="payment-2">
-                            <span></span>
-                            支付宝支付
-                        </label>
-                    </div>
-                </div>
-                <div class="input-checkbox">
-                    <input type="checkbox" id="terms">
-                    <label for="terms">
+                    <div class="payment-method">
+                        <div class="input-radio">
+                            <input id="payment-1" name="payment" type="radio">
+                            <label for="payment-1">
+                                <span></span>
+                                微信支付
+                            </label>
+                        </div>
                         <span></span>
-                        我已阅读并接收 <a href="#" style="color: red">条款和条件</a>
-                    </label>
-                </div>
-                <a href="#" class="primary-btn order-submit">提交订单</a>
+                        <div class="input-radio">
+                            <input id="payment-2" name="payment" type="radio">
+                            <label for="payment-2">
+                                <span></span>
+                                支付宝支付
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-checkbox">
+                        <input id="terms" type="checkbox">
+                        <label for="terms">
+                            <span></span>
+                            我已阅读并接收 <a href="#" style="color: red">条款和条件</a>
+                        </label>
+                        <!-- 添加一个用于显示错误消息的元素 -->
+                        <div id="termsError" style="color: red; display: none;">请同意条款和条件才能登录。</div>
+                    </div>
+
+                    <a class="primary-btn order-submit" th:href="@{/CreateOrder}">提交订单</a>
+                </form>
             </div>
             <!-- /Order Details -->
         </div>

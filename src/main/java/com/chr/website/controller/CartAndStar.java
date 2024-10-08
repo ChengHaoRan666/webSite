@@ -49,8 +49,9 @@ public class CartAndStar {
     @RequestMapping("/checkout")
     public String checkout(HttpSession session) {
         Map<product, Integer> settleMap = (Map<product, Integer>) session.getAttribute("settleMap");
-        System.out.println(settleMap);
-
+        double settleCount = 0.0;
+        for (product product : settleMap.keySet()) settleCount += product.getPrice() * settleMap.get(product);
+        session.setAttribute("settleCount", settleCount);
         return "checkout";
     }
 
@@ -60,8 +61,8 @@ public class CartAndStar {
      */
     @PatchMapping("/CreateOrder")
     public String CreateOrder() {
+        System.out.println("1111111111111111111111111111111111111111");
 
-
-        return "";
+        return "index";
     }
 }
