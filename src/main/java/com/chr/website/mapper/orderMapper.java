@@ -50,6 +50,11 @@ public interface orderMapper {
     int updateOrderStatus(@Param("userId") Integer id, @Param("productId") Integer productId, @Param("OrderStatus") String OrderStatus);
 
     /**
+     * 修改订单状态
+     */
+    int updateOrderStatusByOrderId(@Param("orderId") Integer orderId, @Param("OrderStatus") String OrderStatus);
+
+    /**
      * 通过userId和 ProductID删除
      */
     int deleteByUserIdProductId(@Param("userId") Integer userId, @Param("ProductId") Integer ProductId);

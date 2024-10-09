@@ -76,7 +76,7 @@ public class pageServiceImpl implements pageService {
         List<String[]> list = new ArrayList<>();
         for (order order : orders) {
             product product = productDao.selectProductById(order.getProductId());
-            list.add(new String[]{String.valueOf(product.getId()), product.getName(), String.valueOf(product.getPrice()), String.valueOf(order.getQuantity()), String.valueOf(order.getTotalAmount()), String.valueOf(product.getCategoryId()), order.getOrderStatus()});
+            list.add(new String[]{String.valueOf(product.getId()), product.getName(), String.valueOf(product.getPrice()), String.valueOf(order.getQuantity()), String.valueOf(order.getTotalAmount()), String.valueOf(product.getCategoryId()), order.getOrderStatus(), String.valueOf(order.getId())});
         }
         return list;
     }
@@ -85,16 +85,16 @@ public class pageServiceImpl implements pageService {
      * 查看订单中未收货的商品
      */
     @Override
-    public Map<product, Integer> receivedShow(Integer id) {
+    public List<String[]> receivedShow(Integer id) {
         List<order> orders = orderDao.selectOrderByUserId(id);
-        Map<product, Integer> map = new HashMap<>();
+        List<String[]> list = new ArrayList<>();
         for (order order : orders) {
             product product = productDao.selectProductById(order.getProductId());
             if (order.getOrderStatus().equals("3")) continue;
-            if (map.containsKey(product)) map.put(product, map.get(product) + 1);
-            else map.put(product, 1);
+            list.add(new String[]{String.valueOf(product.getId()), product.getName(), String.valueOf(product.getPrice()), String.valueOf(order.getQuantity()), String.valueOf(order.getTotalAmount()), String.valueOf(product.getCategoryId()), order.getOrderStatus(), String.valueOf(order.getId())});
+
         }
-        return map;
+        return list;
     }
 
     /**

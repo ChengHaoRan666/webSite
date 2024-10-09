@@ -163,16 +163,22 @@ public class homepage {
     public String view(Model model, HttpSession session, @RequestParam("id") Integer id) {
         Integer userId = (Integer) session.getAttribute("userId");
         // 不是查看订单
-        if (id != 1) {
-            String[] tmp = new String[]{"收藏", "购物车", "待收货"};
-            Map[] maps = new Map[]{pageService.collectShow((userId)), pageService.cartShow(userId), pageService.receivedShow(userId)};
+        if (id == 2 || id == 3) {
+            String[] tmp = new String[]{"收藏", "购物车"};
+            Map[] maps = new Map[]{pageService.collectShow((userId)), pageService.cartShow(userId)};
             session.setAttribute("tableName", tmp[id - 2]);
             session.setAttribute("tableVal", maps[id - 2]);
         }
         // 查看订单
-        else {
+        else if (id == 1) {
             List<String[]> orders = pageService.orderShow(userId);
             session.setAttribute("tableName", "订单");
+            session.setAttribute("tableVal", orders);
+        }
+        // 查看待收货商品
+        else if (id == 4) {
+            List<String[]> orders = pageService.receivedShow(userId);
+            session.setAttribute("tableName", "待收货");
             session.setAttribute("tableVal", orders);
         }
         model.addAttribute("categoryMap", populateCategoryMap());
@@ -190,7 +196,7 @@ public class homepage {
         Integer tableName = Integer.valueOf(request.get("tableName"));
         switch (tableName) {
             case 1:
-                shippingService.deleteOrderByUserIdProductId(userId, itemId);
+                shippingService.deleteOrderByOrderId(itemId);
                 break;
             case 2:
                 shippingService.deleteStarByUserIdProductId(userId, itemId);
@@ -244,14 +250,13 @@ public class homepage {
      */
     @RequestMapping(value = "/receipt", method = RequestMethod.POST)
     public ResponseEntity<?> receipt(HttpSession session, @RequestBody Map<String, Object> payload) {
-        Integer userId = (Integer) session.getAttribute("userId");
         List<?> itemIdList = (List<?>) payload.get("itemIds");
-        Set<Integer> receiptSet = new HashSet<>();
+        List<Integer> receiptSet = new ArrayList<>();
         for (Object itemId : itemIdList)
             receiptSet.add(Integer.parseInt((String) itemId));
 
         for (Integer itemId : receiptSet)
-            shippingService.delivery(userId, itemId, "3");
+            shippingService.delivery(itemId, "3");
         // 将待评价商品 id 加入 session 域中
         session.setAttribute("receiptSet", receiptSet);
         return ResponseEntity.ok().body(Collections.singletonMap("message", "确认收货成功"));

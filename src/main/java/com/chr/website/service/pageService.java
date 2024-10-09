@@ -31,12 +31,12 @@ public interface pageService {
     /**
      * 获取订单中的商品
      */
-    List orderShow(Integer id);
+    List<String[]> orderShow(Integer id);
 
     /**
      * 查看订单中为收货的商品
      */
-    Map<product, Integer> receivedShow(Integer id);
+    List<String[]> receivedShow(Integer id);
 
     /**
      * 获取单个商品

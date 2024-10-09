@@ -45,6 +45,13 @@
         OrderStatus = #{OrderStatus}
         where UserID= #{userId} and ProductID=#{productId}
     </update>
+<!--修改订单状态通过订单id    int updateOrderStatusByOrderId(@Param("orderId") Integer orderId, @Param("OrderStatus") String OrderStatus);-->
+    <update id="updateOrderStatusByOrderId">
+        update Orders set
+        OrderStatus = #{OrderStatus}
+        where OrderID= #{orderId}
+    </update>
+
     <!--int deleteByUserIdProductId(@Param("userId") Integer userId,@Param("ProductId") String ProductId);-->
     <delete id="deleteByUserIdProductId">
         delete from orders where UserID = #{userId} and ProductID = #{ProductId}

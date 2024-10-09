@@ -22,7 +22,7 @@ public class orderDao implements orderMapper {
      * 增
      */
     public int addOrder(Integer userId, Integer productId, Integer sellerId, Integer quantity, Double totalAmount, String deliveryAddress, String recipientName, String recipientPhone, String orderStatus, String notes, Date orderDate, Date paymentDate, Date shippingDate, Date deliveryDate) {
-            return orderMapper.addOrder(userId, productId, sellerId, quantity, totalAmount, deliveryAddress, recipientName, recipientPhone, orderStatus, notes, orderDate, paymentDate, shippingDate, deliveryDate);
+        return orderMapper.addOrder(userId, productId, sellerId, quantity, totalAmount, deliveryAddress, recipientName, recipientPhone, orderStatus, notes, orderDate, paymentDate, shippingDate, deliveryDate);
     }
 
     /**
@@ -52,6 +52,14 @@ public class orderDao implements orderMapper {
      */
     public int updateOrderStatus(Integer userId, Integer productId, String OrderStatus) {
         return orderMapper.updateOrderStatus(userId, productId, OrderStatus);
+    }
+
+    /**
+     * 修改订单状态
+     */
+    @Override
+    public int updateOrderStatusByOrderId(Integer orderId, String OrderStatus) {
+        return orderMapper.updateOrderStatusByOrderId(orderId, OrderStatus);
     }
 
     /**

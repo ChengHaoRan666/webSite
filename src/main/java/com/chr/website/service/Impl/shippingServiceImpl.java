@@ -30,10 +30,6 @@ public class shippingServiceImpl implements shippingService {
     @Autowired
     private reviewDao reviewDao;
 
-    /**
-     * 创建订单
-     */
-
 
     /**
      * 创建订单
@@ -73,6 +69,7 @@ public class shippingServiceImpl implements shippingService {
         reviewDao.addReview(new review(productId, userId, rating, comment, new Date()));
     }
 
+
     /**
      * 确认收货
      */
@@ -82,11 +79,27 @@ public class shippingServiceImpl implements shippingService {
     }
 
     /**
+     * 确认收货
+     */
+    @Override
+    public void delivery(Integer orderId, String OrderStatus) {
+        orderDao.updateOrderStatusByOrderId(orderId, OrderStatus);
+    }
+
+    /**
      * 根据用户id和商品id删除订单
      */
     @Override
     public void deleteOrderByUserIdProductId(Integer userId, Integer productId) {
         orderDao.deleteByUserIdProductId(userId, productId);
+    }
+
+    /**
+     * 通过orderId删除
+     */
+    @Override
+    public void deleteOrderByOrderId(Integer orderId) {
+        orderDao.deleteOrder(orderId);
     }
 
     /**
