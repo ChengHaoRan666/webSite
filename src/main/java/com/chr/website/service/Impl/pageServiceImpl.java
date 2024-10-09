@@ -71,15 +71,14 @@ public class pageServiceImpl implements pageService {
      * 获取订单中的商品
      */
     @Override
-    public Map<product, Integer> orderShow(Integer id) {
+    public List<String[]> orderShow(Integer id) {
         List<order> orders = orderDao.selectOrderByUserId(id);
-        Map<product, Integer> map = new HashMap<>();
+        List<String[]> list = new ArrayList<>();
         for (order order : orders) {
             product product = productDao.selectProductById(order.getProductId());
-            if (map.containsKey(product)) map.put(product, map.get(product) + 1);
-            else map.put(product, 1);
+            list.add(new String[]{String.valueOf(product.getId()), product.getName(), String.valueOf(product.getPrice()), String.valueOf(order.getQuantity()), String.valueOf(order.getTotalAmount()), String.valueOf(product.getCategoryId()), order.getOrderStatus()});
         }
-        return map;
+        return list;
     }
 
     /**

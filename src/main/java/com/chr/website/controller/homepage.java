@@ -97,6 +97,18 @@ public class homepage {
         return categoryMap;
     }
 
+    /**
+     * 订单状态映射
+     */
+    @ModelAttribute("categoryMap")
+    public Map<String, String> orderStatusMap() {
+        Map<String, String> orderStatusMap = new HashMap<>();
+        orderStatusMap.put("0", "待支付");
+        orderStatusMap.put("1", "已支付");
+        orderStatusMap.put("2", "已发货");
+        orderStatusMap.put("3", "已收货");
+        return orderStatusMap;
+    }
 
     /**
      * 注册店铺
@@ -150,11 +162,21 @@ public class homepage {
     @RequestMapping("/view")
     public String view(Model model, HttpSession session, @RequestParam("id") Integer id) {
         Integer userId = (Integer) session.getAttribute("userId");
-        String[] tmp = new String[]{"订单", "收藏", "购物车", "待收货"};
-        Map[] maps = new Map[]{pageService.orderShow(userId), pageService.collectShow((userId)), pageService.cartShow(userId), pageService.receivedShow(userId)};
-        session.setAttribute("tableName", tmp[id - 1]);
-        session.setAttribute("tableVal", maps[id - 1]);
+        // 不是查看订单
+        if (id != 1) {
+            String[] tmp = new String[]{"收藏", "购物车", "待收货"};
+            Map[] maps = new Map[]{pageService.collectShow((userId)), pageService.cartShow(userId), pageService.receivedShow(userId)};
+            session.setAttribute("tableName", tmp[id - 2]);
+            session.setAttribute("tableVal", maps[id - 2]);
+        }
+        // 查看订单
+        else {
+            List<String[]> orders = pageService.orderShow(userId);
+            session.setAttribute("tableName", "订单");
+            session.setAttribute("tableVal", orders);
+        }
         model.addAttribute("categoryMap", populateCategoryMap());
+        model.addAttribute("orderStatusMap", orderStatusMap());
         return "personView";
     }
 

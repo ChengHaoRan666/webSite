@@ -31,7 +31,7 @@ public interface pageService {
     /**
      * 获取订单中的商品
      */
-    Map<product, Integer> orderShow(Integer id);
+    List orderShow(Integer id);
 
     /**
      * 查看订单中为收货的商品
