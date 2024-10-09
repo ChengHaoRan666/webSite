@@ -10,7 +10,9 @@ import com.chr.website.service.shippingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -116,5 +118,17 @@ public class shippingServiceImpl implements shippingService {
     @Override
     public void deleteCarByUserIdProductId(Integer userId, Integer productId) {
         cartDao.deleteCartByUserIdProductId(userId, productId);
+    }
+
+    /**
+     * 通过orderId获取productId
+     */
+    @Override
+    public List<Integer> getProductIdByOrderId(List<Integer> orderIdList) {
+        List<Integer> productIdList = new ArrayList<>();
+        for (Integer orderId : orderIdList) {
+            productIdList.add(orderDao.selectOrderById(orderId).getProductId());
+        }
+        return productIdList;
     }
 }

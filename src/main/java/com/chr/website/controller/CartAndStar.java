@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,6 +62,12 @@ public class CartAndStar {
         // 收藏，购物车列表
         session.setAttribute("starMap", starMap);
         session.setAttribute("cartMap", cartMap);
+
+        // 获取确认收货待评价的订单orderId
+        List<Integer> receiptSet = (List<Integer>) session.getAttribute("receiptSet");
+        // 通过orderId获取商品id
+        List<Integer> productSet = shippingService.getProductIdByOrderId(receiptSet);
+
         return "evaluate";
     }
 

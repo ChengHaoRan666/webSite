@@ -2,6 +2,7 @@ package com.chr.website.service;
 
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,7 +41,7 @@ public interface shippingService {
     /**
      * 确认收货
      */
-    void delivery( Integer orderId, String OrderStatus);
+    void delivery(Integer orderId, String OrderStatus);
 
     /**
      * 根据用户id和商品id删除订单
@@ -64,5 +65,8 @@ public interface shippingService {
      */
     void deleteCarByUserIdProductId(Integer userId, Integer productId);
 
-
+    /**
+     * 通过orderId获取productId
+     */
+    List<Integer> getProductIdByOrderId(List<Integer> orderIdList);
 }
