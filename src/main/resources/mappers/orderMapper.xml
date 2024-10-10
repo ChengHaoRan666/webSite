@@ -6,22 +6,22 @@
 
 <mapper namespace="com.chr.website.mapper.orderMapper">
     <!--增 -->
-<!--    int addOrder(-->
-<!--    @Param("userId") Integer userId,-->
-<!--    @Param("productId") Integer productId,-->
-<!--    @Param("sellerId") Integer sellerId,-->
-<!--    @Param("quantity") Integer quantity,-->
-<!--    @Param("totalAmount") Double totalAmount,-->
-<!--    @Param("deliveryAddress") String deliveryAddress,-->
-<!--    @Param("recipientName") String recipientName,-->
-<!--    @Param("recipientPhone") String recipientPhone,-->
-<!--    @Param("orderStatus") String orderStatus,-->
-<!--    @Param("notes") String notes,-->
-<!--    @Param("orderDate") Date orderDate,-->
-<!--    @Param("paymentDate") Date paymentDate,-->
-<!--    @Param("shippingDate") Date shippingDate,-->
-<!--    @Param("deliveryDate") Date deliveryDate-->
-<!--    );-->
+    <!--    int addOrder(-->
+    <!--    @Param("userId") Integer userId,-->
+    <!--    @Param("productId") Integer productId,-->
+    <!--    @Param("sellerId") Integer sellerId,-->
+    <!--    @Param("quantity") Integer quantity,-->
+    <!--    @Param("totalAmount") Double totalAmount,-->
+    <!--    @Param("deliveryAddress") String deliveryAddress,-->
+    <!--    @Param("recipientName") String recipientName,-->
+    <!--    @Param("recipientPhone") String recipientPhone,-->
+    <!--    @Param("orderStatus") String orderStatus,-->
+    <!--    @Param("notes") String notes,-->
+    <!--    @Param("orderDate") Date orderDate,-->
+    <!--    @Param("paymentDate") Date paymentDate,-->
+    <!--    @Param("shippingDate") Date shippingDate,-->
+    <!--    @Param("deliveryDate") Date deliveryDate-->
+    <!--    );-->
 
     <insert id="addOrder">
         insert into orders values (
@@ -45,7 +45,7 @@
         OrderStatus = #{OrderStatus}
         where UserID= #{userId} and ProductID=#{productId}
     </update>
-<!--修改订单状态通过订单id    int updateOrderStatusByOrderId(@Param("orderId") Integer orderId, @Param("OrderStatus") String OrderStatus);-->
+    <!--修改订单状态通过订单id    int updateOrderStatusByOrderId(@Param("orderId") Integer orderId, @Param("OrderStatus") String OrderStatus);-->
     <update id="updateOrderStatusByOrderId">
         update Orders set
         OrderStatus = #{OrderStatus}
@@ -92,5 +92,10 @@
 
     <select id="getNumber" resultType="Integer">
         select count(*) from Orders where UserID = #{userId}
+    </select>
+
+    <!--  获取已签收未评价的商品通过userid  List<order> getNoEvaluationOrder(@Param("userId") Integer userId);-->
+    <select id="getNoEvaluationOrder" resultMap="orderMapper">
+        select * from orders where UserID = #{userId} and OrderStatus = '3'
     </select>
 </mapper>

@@ -2,10 +2,7 @@ package com.chr.website.service.Impl;
 
 
 import com.chr.website.dao.*;
-import com.chr.website.entity.cart;
-import com.chr.website.entity.product;
-import com.chr.website.entity.review;
-import com.chr.website.entity.star;
+import com.chr.website.entity.*;
 import com.chr.website.service.shippingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -130,5 +127,12 @@ public class shippingServiceImpl implements shippingService {
             productIdList.add(orderDao.selectOrderById(orderId).getProductId());
         }
         return productIdList;
+    }
+
+    /**
+     * 获取已收货未评价订单
+     */
+    public List<order> getNoEvaluationOrder(Integer userId) {
+        return orderDao.getNoEvaluationOrder(userId);
     }
 }

@@ -126,8 +126,9 @@
 </nav>
 <!-- /NAVIGATION -->
 <br><br>
+<div class="col-md-3"></div>
 
-<div th:switch="${session.tableName}">
+<div class="col-md-6" th:switch="${session.tableName}">
     <!--订单-->
     <div th:case="订单">
         <table class="table" data-table-name=1>

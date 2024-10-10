@@ -257,8 +257,6 @@ public class homepage {
 
         for (Integer itemId : receiptSet)
             shippingService.delivery(itemId, "3");
-        // 将待评价商品 id 加入 session 域中
-        session.setAttribute("receiptSet", receiptSet);
         return ResponseEntity.ok().body(Collections.singletonMap("message", "确认收货成功"));
     }
 

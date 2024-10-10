@@ -1,5 +1,6 @@
 package com.chr.website.service;
 
+import com.chr.website.entity.order;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,4 +70,9 @@ public interface shippingService {
      * 通过orderId获取productId
      */
     List<Integer> getProductIdByOrderId(List<Integer> orderIdList);
+
+    /**
+     * 获取已收货未评价订单
+     */
+    public List<order> getNoEvaluationOrder(Integer userId);
 }

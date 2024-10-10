@@ -89,4 +89,12 @@ public class orderDao implements orderMapper {
     public Integer getNumber(Integer userId) {
         return orderMapper.getNumber(userId);
     }
+
+    /**
+     * 获取已签收未评价的商品
+     */
+    @Override
+    public List<order> getNoEvaluationOrder(Integer userId) {
+        return orderMapper.getNoEvaluationOrder(userId);
+    }
 }

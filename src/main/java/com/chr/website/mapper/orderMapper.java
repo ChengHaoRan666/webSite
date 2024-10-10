@@ -78,4 +78,9 @@ public interface orderMapper {
      * 获取用户订单数量
      */
     Integer getNumber(@Param("userId") Integer userId);
+
+    /**
+     * 获取已签收未评价的商品
+     */
+    List<order> getNoEvaluationOrder(@Param("userId") Integer userId);
 }

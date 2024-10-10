@@ -1,32 +1,32 @@
-<!--个人首页-->
+<!--选择评价页-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>个人首页</title>
+    <title>选择评价页</title>
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link type="text/css" rel="stylesheet" href="/website/static/css/bootstrap.min.css"/>
+    <link href="/website/static/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
     <!-- Slick -->
-    <link type="text/css" rel="stylesheet" href="/website/static/css/slick.css"/>
-    <link type="text/css" rel="stylesheet" href="/website/static/css/slick-theme.css"/>
+    <link href="/website/static/css/slick.css" rel="stylesheet" type="text/css"/>
+    <link href="/website/static/css/slick-theme.css" rel="stylesheet" type="text/css"/>
 
     <!-- nouislider -->
-    <link type="text/css" rel="stylesheet" href="/website/static/css/nouislider.min.css"/>
+    <link href="/website/static/css/nouislider.min.css" rel="stylesheet" type="text/css"/>
 
     <!-- Font Awesome Icon -->
-    <link rel="stylesheet" href="/website/static/css/font-awesome.min.css">
+    <link href="/website/static/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Custom stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="/website/static/css/style.css"/>
+    <link href="/website/static/css/style.css" rel="stylesheet" type="text/css"/>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -69,7 +69,7 @@
                 <div class="col-md-3">
                     <div class="header-logo">
                         <a class="logo" th:href="@{/}">
-                            <img src="/website/static/img/logo.png" alt="">
+                            <img alt="" src="/website/static/img/logo.png">
                         </a>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
 
                         <!-- 购物车下拉菜单 -->
                         <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                            <a aria-expanded="true" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>购物车</span>
                                 <div class="qty" th:text="${session.cartCount}"></div>
@@ -124,8 +124,8 @@
                                             </div>
                                             <div class="product-body">
                                                 <h3 class="product-name"><a
-                                                        th:method="get"
                                                         th:href="@{/product/{id}(id=${entry.key.id})}"
+                                                        th:method="get"
                                                         th:text="${entry.key.name}">产品名称</a></h3>
                                                 <h4 class="product-price">
                                                     <span class="qty" th:text="${entry.value} + 'x'">1x</span>
@@ -192,6 +192,52 @@
 </nav>
 <!-- /NAVIGATION -->
 
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+
+<div class="col-md-3"></div>
+
+
+<!--待评价-->
+<div class="col-md-6">
+    <table class="table">
+        <caption class="caption"><h2>待评价<br><br></h2></caption>
+        <thead>
+        <tr>
+            <th style="text-align:center">商品名称</th>
+            <th style="text-align:center">数量</th>
+            <th style="text-align:center">金额</th>
+            <th style="text-align:center">发货时间</th>
+            <th style="text-align:center">签收时间</th>
+            <th style="text-align:center">操作</th>
+        </tr>
+        </thead>
+        <tbody style="text-align:center">
+        <tr th:each="item : ${session.evaluateList}">
+            <td th:text="${item.getProductName()}">商品名称</td>
+            <td th:text="${item.getOrder().getQuantity()}">数量</td>
+            <td th:text="${item.getOrder().getTotalAmount()}">总金额</td>
+            <td th:text="${#dates.format(item.getOrder().getShippingDate(), 'yyyy-MM-dd HH:mm:ss')}">发货时间</td>
+            <td th:text="${#dates.format(item.getOrder().getDeliveryDate(), 'yyyy-MM-dd HH:mm:ss')}">发货时间</td>
+            <td>
+                <button class="evaluateButton">去评价</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 
 <!-- SECTION -->
 <div class="section">
@@ -205,20 +251,8 @@
     <!-- /container -->
 </div>
 <!-- /SECTION -->
-<ul>
-    <li><h4><a th:href="@{/modify}">修改个人信息</a></h4></li>
-    <li><h4><a th:href="@{/view?id=1}">查看全部订单</a></h4></li>
-    <li><h4><a th:href="@{/view?id=2}">查看收藏</a></h4></li>
-    <li><h4><a th:href="@{/view?id=3}">查看购物车</a></h4></li>
-    <li><h4><a th:href="@{/view?id=4}">查看待收货</a></h4></li>
-    <li><h4><a th:href="@{/evaluate}">查看待评价</a></h4></li>
-    <li><h4><a th:href="@{/shoppingRegister}">注册店铺</a></h4></li>
-    <li><h4><a th:href="@{/loginOff}">退出登录</a></h4></li>
-    <li><h4><a th:href="@{/loginOut}">注销账户</a></h4></li>
-</ul>
 
 
-<br><br><br><br>
 <!-- FOOTER -->
 <footer id="footer">
     <!-- top footer -->
@@ -286,7 +320,7 @@
     <!-- /top footer -->
 
     <!-- bottom footer -->
-    <div id="bottom-footer" class="section">
+    <div class="section" id="bottom-footer">
         <div class="container">
             <!-- row -->
             <div class="row">

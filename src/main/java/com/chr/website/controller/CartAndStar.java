@@ -1,9 +1,11 @@
 package com.chr.website.controller;
 
+import com.chr.website.entity.order;
 import com.chr.website.entity.product;
 import com.chr.website.service.Impl.pageServiceImpl;
 import com.chr.website.service.Impl.shippingServiceImpl;
 import jakarta.servlet.http.HttpSession;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +49,7 @@ public class CartAndStar {
 
 
     /**
-     * 评价页
+     * 选择评价页
      */
     @RequestMapping("/evaluate")
     public String evaluate(HttpSession session) {
@@ -62,11 +65,31 @@ public class CartAndStar {
         // 收藏，购物车列表
         session.setAttribute("starMap", starMap);
         session.setAttribute("cartMap", cartMap);
+        Integer userId = (Integer) session.getAttribute("userId");
+        @Data
+        class orderAndProductName {
+            order order;
+            String productName;
 
-        // 获取确认收货待评价的订单orderId
-        List<Integer> receiptSet = (List<Integer>) session.getAttribute("receiptSet");
-        // 通过orderId获取商品id
-        List<Integer> productSet = shippingService.getProductIdByOrderId(receiptSet);
+            public orderAndProductName(com.chr.website.entity.order order, String productName) {
+                this.order = order;
+                this.productName = productName;
+            }
+        }
+        List<orderAndProductName> evaluateList = new ArrayList<>();
+        // 获取确认收货待评价的订单order
+        List<order> receiptSet = shippingService.getNoEvaluationOrder(userId);
+        for (order order : receiptSet)
+            evaluateList.add(new orderAndProductName(order, pageService.commodityShow(order.getProductId()).getName()));
+        session.setAttribute("evaluateList", evaluateList);
+        return "SelectEvaluate";
+    }
+
+    /**
+     * 评价单个商品
+     */
+    @RequestMapping("evaluateSingle")
+    public String evaluateSingle() {
 
         return "evaluate";
     }
