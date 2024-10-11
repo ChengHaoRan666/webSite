@@ -224,7 +224,7 @@
         </tr>
         </thead>
         <tbody style="text-align:center">
-        <tr th:each="item : ${session.evaluateList}">
+        <tr th:attr="data-order-id=${item.getOrder().getId()}" th:each="item : ${session.evaluateList}">
             <td th:text="${item.getProductName()}">商品名称</td>
             <td th:text="${item.getOrder().getQuantity()}">数量</td>
             <td th:text="${item.getOrder().getTotalAmount()}">总金额</td>
@@ -352,6 +352,7 @@
 <script src="/website/static/js/nouislider.min.js"></script>
 <script src="/website/static/js/jquery.zoom.min.js"></script>
 <script src="/website/static/js/main.js"></script>
+<script src="/website/static/js/evalute.js"></script>
 
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -88,12 +89,11 @@ public class CartAndStar {
     /**
      * 评价单个商品
      */
-    @RequestMapping("evaluateSingle")
-    public String evaluateSingle() {
+    @RequestMapping(value = "evaluateSingle"    )
+    public String evaluateSingle(@RequestParam("orderId") Integer orderId) {
 
         return "evaluate";
     }
-
 
     /**
      * 订单页
