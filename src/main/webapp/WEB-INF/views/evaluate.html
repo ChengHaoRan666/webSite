@@ -211,12 +211,15 @@
 
 <div class="col-md-6">
     <div id="review-form">
-        <div>
-        <span>商品名称</span>
-            <span th:text="${orderId}"></span>
+
+        <div class="product-widget">
+            <div>
+                <h3 class="product-name" th:text="${productName}">产品名称</h3>
+            </div>
         </div>
-        <br><br>
-        <form class="review-form">
+        <br>
+
+        <form class="review-form" method="post" th:action="@{/evaluateSingle}">
             <div class="input-rating">
                 <span>评分: </span>
                 <div class="stars">
@@ -227,9 +230,11 @@
                     <input id="star1" name="rating" type="radio" value="1"><label for="star1"></label>
                 </div>
             </div>
-            <textarea class="input" placeholder="多多描述商品和使用感受，更受欢迎哦"
+            <input name="productId" th:value="${productId}" type="hidden">
+            <input name="orderId" th:value="${orderId}" type="hidden">
+            <textarea class="input" name="textarea" placeholder="多多描述商品和使用感受，更受欢迎哦"
                       style="  font-family: 'Arial', sans-serif; font-size: 16px;   line-height: 1.5; color: #333;  text-align: left; padding: 10px; height: 250px"></textarea>
-            <button class="primary-btn">提交</button>
+            <button>提交</button>
         </form>
     </div>
 </div>

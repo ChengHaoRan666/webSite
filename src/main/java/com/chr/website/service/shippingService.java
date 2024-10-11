@@ -35,14 +35,15 @@ public interface shippingService {
     void evaluate(Integer userId, Integer productId, Integer rating, String comment);
 
     /**
-     * 确认收货
+     * 修改订单状态
      */
     void delivery(Integer userId, Integer productId, String OrderStatus);
 
     /**
-     * 确认收货
+     * 修改订单状态
      */
     void delivery(Integer orderId, String OrderStatus);
+
 
     /**
      * 根据用户id和商品id删除订单

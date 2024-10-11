@@ -90,12 +90,30 @@ public class CartAndStar {
     /**
      * 评价单个商品
      */
-    @RequestMapping(value = "evaluateSingle")
-    public String evaluateSingle(Model model, @RequestParam("orderId") Integer orderId) {
+    @RequestMapping(value = "evaluateSingle", method = RequestMethod.GET)
+    public String evaluateSingle1(Model model, @RequestParam("orderId") Integer orderId) {
         product product = pageService.commodityShow(shippingService.getProductIdByOrderId(orderId));
+        model.addAttribute("productName", product.getName());
+        model.addAttribute("productId", product.getId());
         model.addAttribute("orderId", orderId);
         return "evaluate";
     }
+
+    @RequestMapping(value = "evaluateSingle", method = RequestMethod.POST)
+    public String evaluateSingle2(
+            HttpSession session,
+            @RequestParam("rating") Integer rating,
+            @RequestParam("textarea") String comment,
+            @RequestParam("productId") Integer productId,
+            @RequestParam("orderId") Integer orderId
+    ) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        System.out.println(rating + " " + comment + " " + productId + " " + orderId);
+        shippingService.delivery(orderId, "4");
+        shippingService.evaluate(userId, productId, rating, comment);
+        return "forward:/evaluate";
+    }
+
 
     /**
      * 订单页

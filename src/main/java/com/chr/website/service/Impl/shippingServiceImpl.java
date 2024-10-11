@@ -70,7 +70,7 @@ public class shippingServiceImpl implements shippingService {
 
 
     /**
-     * 确认收货
+     * 修改订单状态
      */
     @Override
     public void delivery(Integer userId, Integer productId, String OrderStatus) {
@@ -78,7 +78,7 @@ public class shippingServiceImpl implements shippingService {
     }
 
     /**
-     * 确认收货
+     * 修改订单状态
      */
     @Override
     public void delivery(Integer orderId, String OrderStatus) {
