@@ -184,7 +184,6 @@ public class index {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
         } else {
             number = number == null ? 1 : number;
-            System.out.println(number);
             shippingService.addCart(userId, productId, number);
             return ResponseEntity.ok("成功");
         }

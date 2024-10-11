@@ -224,7 +224,7 @@
                             <!-- 如果ranting小于或等于-1，则显示“暂无评分” -->
                             <span th:if="${search_product_ranting} == -1">暂无评分</span>
                         </div>
-                        <a class="review-link" href="#" th:text="|${reviewList.size()} 条评论|">10 条评论</a>
+                        <a class="review-link" th:text="|${reviewList.size()} 条评论|">10 条评论</a>
                     </div>
                     <div>
                         <h3 class="product-price" th:text="${search_product.getPrice()}">￥980.00</h3>
@@ -252,7 +252,7 @@
                         <div class="qty-label">
                             数量
                             <div class="input-number">
-                                <input type="number" value="1">
+                                <input class="quantity-input" type="number" value="1">
                                 <span class="qty-up">+</span>
                                 <span class="qty-down">-</span>
                             </div>
@@ -264,7 +264,7 @@
 
                     <ul class="product-btns">
                         <button class="add-to-wishlist"
-                                style="border: 2px solid transparent; background-color: transparent; cursor: pointer;"
+                                style="border: 1px solid transparent; background-color: transparent; cursor: pointer;"
                                 th:data-id="${search_product.getId()}">
                             <i class="fa fa-heart-o"></i>
                             <span class="tooltipp">加入收藏</span></button>
@@ -276,11 +276,11 @@
                                th:text="${categoryMap.get(search_product.categoryId)}">类别</a></li>
                     </ul>
 
-                    <!--TODO-->
+                    <!--TODO 分享，点击后将链接放在剪切板上-->
                     <ul class="product-links">
                         <li>分享:</li>
-                        <li><a href="#"><i class="fa fa-qq"></i></a></li>
-                        <li><a href="#"><i class="fa fa-weixin"></i></a></li>
+                        <li><a><i class="fa fa-qq"></i></a></li>
+                        <li><a><i class="fa fa-weixin"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -299,6 +299,7 @@
 
                     <!-- product tab content -->
                     <div class="tab-content">
+                        <!--TODO-->
                         <!-- tab1  -->
                         <div id="tab1" class="tab-pane fade in active">
                             <div class="row">
@@ -667,7 +668,7 @@
 <script src="/website/static/js/jquery.zoom.min.js"></script>
 <script src="/website/static/js/main.js"></script>
 <script src="/website/static/js/addStar.js"></script>
-<script src="/website/static/js/addCart2.js"></script>
+<script src="/website/static/js/addCart.js"></script>
 
 </body>
 </html>
