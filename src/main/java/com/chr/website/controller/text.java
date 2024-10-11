@@ -16,3 +16,13 @@ public class text {
     }
 }
 // (null, '商品2', 1, '描述1', 19.9, 100, 1, 'url1', '2023-01-02', '1');
+
+/*
+
+[productAndRanting(product=product{id=8, name='商品8', productStoreID='1', description='描述8', price=19.9, stockQuantity=100, categoryId=1, imageUrl='url', listedDate=Mon Jan 02 00:00:00 CST 2023, status=1}, ranting=-1),
+productAndRanting(product=product{id=8, name='商品8', productStoreID='1', description='描述8', price=19.9, stockQuantity=100, categoryId=1, imageUrl='url', listedDate=Mon Jan 02 00:00:00 CST 2023, status=1}, ranting=-1),
+productAndRanting(product=product{id=8, name='商品8', productStoreID='1', description='描述8', price=19.9, stockQuantity=100, categoryId=1, imageUrl='url', listedDate=Mon Jan 02 00:00:00 CST 2023, status=1}, ranting=-1),
+productAndRanting(product=product{id=8, name='商品8', productStoreID='1', description='描述8', price=19.9, stockQuantity=100, categoryId=1, imageUrl='url', listedDate=Mon Jan 02 00:00:00 CST 2023, status=1}, ranting=-1)]
+
+
+ */

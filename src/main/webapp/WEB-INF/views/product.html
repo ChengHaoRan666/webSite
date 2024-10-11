@@ -39,7 +39,12 @@
                 <li><a href="#"><i class="fa fa-map-marker"></i> 许昌学院</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="signup.php"><i class="fa fa-user-o"></i> 我的账户</a></li>
+                <th:block th:if="${session.userId != null}">
+                    <li><a th:href="@{/profile}"><i class="fa fa-user"></i> 个人中心</a></li>
+                </th:block>
+                <th:block th:unless="${session.userId != null}">
+                    <li><a th:href="@{/login}"><i class="fa fa-user-o"></i> 登录/注册</a></li>
+                </th:block>
             </ul>
         </div>
     </div>
@@ -54,7 +59,7 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a class="logo" th:href="@{/}">
                             <img src="/website/static/img/logo.png" alt="">
                         </a>
                     </div>
@@ -64,15 +69,16 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
-                            <select class="input-select">
+                        <form method="get" name="search" th:action="@{/search}">
+                            <select class="input-select" name="CategoryId">
                                 <option value="0">所有类别</option>
-                                <option value="1">电脑</option>
+                                <option value="1">热销</option>
+                                <option value="2">电脑</option>
                                 <option value="3">手机</option>
                                 <option value="4">相机</option>
                                 <option value="5">配件</option>
                             </select>
-                            <input class="input" placeholder="点击搜索">
+                            <input class="input" name="keyWord" placeholder="点击输入">
                             <button class="search-btn">搜索</button>
                         </form>
                     </div>
@@ -84,52 +90,51 @@
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="#">
+                            <a th:href="@{/starShow}">
                                 <i class="fa fa-heart-o"></i>
                                 <span>收藏</span>
-                                <div class="qty">2</div>
+                                <div class="qty" th:text="${session.starCount}"></div>
                             </a>
                         </div>
                         <!-- /Wishlist -->
 
-                        <!-- Cart -->
+                        <!-- 购物车下拉菜单 -->
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>购物车</span>
-                                <div class="qty">3</div>
+                                <div class="qty" th:text="${session.cartCount}"></div>
                             </a>
                             <div class="cart-dropdown">
                                 <div class="cart-list">
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="/website/static/img/product01.png" alt="">
+                                    <!-- 商品循环展示开始 -->
+                                    <div th:each="entry : ${session.cartMap}">
+                                        <div class="product-widget">
+                                            <div class="product-img">
+                                                <img alt="" th:src="@{${entry.key.imageUrl.split(';')[0]}}">
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-name"><a
+                                                        th:href="@{/product/{id}(id=${entry.key.id})}"
+                                                        th:method="get"
+                                                        th:text="${entry.key.name}">产品名称</a></h3>
+                                                <h4 class="product-price">
+                                                    <span class="qty" th:text="${entry.value} + 'x'">1x</span>
+                                                    <span th:text="'￥' + ${entry.key.price}">￥980.00</span>
+                                                </h4>
+                                            </div>
                                         </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                            <h4 class="product-price"><span class="qty">1x</span>￥980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
                                     </div>
-
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="/website/static/img/product02.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                            <h4 class="product-price"><span class="qty">3x</span>￥980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
+                                    <!-- 商品循环展示结束 -->
                                 </div>
+
+                                <!--购物车摘要-->
                                 <div class="cart-summary">
-                                    <small>已选择 3 件商品</small>
-                                    <h5>总价：￥100</h5>
+                                    <small th:text="|已选择 ${session.cartCount} 件商品|"></small>
                                 </div>
                                 <div class="cart-btns">
-                                    <a href="#">查看购物车</a>
-                                    <a href="#">结账 <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a th:href="@{/cartShow}">查看购物车</a>
+                                    <a th:href="@{/cartShow}">结账 <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -163,12 +168,12 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li><a href="#">主页</a></li>
-                <li><a href="#">热销</a></li>
-                <li><a href="#">电脑</a></li>
-                <li><a href="#">手机</a></li>
-                <li><a href="#">相机</a></li>
-                <li><a href="#">配件</a></li>
+                <li><a th:href="@{/}">主页</a></li>
+                <li><a th:href="@{/search?CategoryId=1}">热销</a></li>
+                <li><a th:href="@{/search?CategoryId=2}">电脑</a></li>
+                <li><a th:href="@{/search?CategoryId=3}">手机</a></li>
+                <li><a th:href="@{/search?CategoryId=4}">相机</a></li>
+                <li><a th:href="@{/search?CategoryId=5}">配件</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -180,6 +185,7 @@
 
 
 <!-- SECTION -->
+<!--TODO-->
 <div class="section">
     <!-- container -->
     <div class="container">
@@ -496,6 +502,7 @@
 <!-- /SECTION -->
 
 
+<!--相关推荐-->
 <!-- Section -->
 <div class="section">
     <!-- container -->
@@ -510,138 +517,48 @@
             </div>
 
             <!-- product -->
-            <div class="col-md-3 col-xs-6">
+            <div class="col-md-3 col-xs-6" th:each="productAndRanting : ${session.product_recommend}">
                 <div class="product">
                     <div class="product-img">
-                        <img src="/website/static/img/product01.png" alt="">
-                        <div class="product-label">
-                            <span class="sale">-30%</span>
-                        </div>
+                        <img alt="" th:src="${productAndRanting.product.imageUrl.split(';')[0]}">
                     </div>
                     <div class="product-body">
-                        <p class="product-category">类别</p>
-                        <h3 class="product-name"><a href="#">产品名称</a></h3>
-                        <h4 class="product-price">￥980.00
-                            <del class="product-old-price">￥990.00</del>
-                        </h4>
+                        <p class="product-category"
+                           th:text="${categoryMap.get(productAndRanting.product.categoryId)}">
+                            类别</p>
+                        <h3 class="product-name"><a
+                                th:href="@{/product/{id}(id=${productAndRanting.product.id})}"
+                                th:method="get"
+                                th:text="${productAndRanting.product.name}">产品名称</a>
+                        </h3>
+                        <h4 class="product-price" th:text="${productAndRanting.product.price}">
+                            ￥980.00</h4>
                         <div class="product-rating">
+                            <!-- 检查ranting是否大于0，如果是，则显示星形图标 -->
+                            <th:block th:if="${productAndRanting.ranting} > 0">
+                                <i class="fa fa-star"
+                                   th:each="star : ${#numbers.sequence(1, productAndRanting.ranting)}"></i>
+                            </th:block>
+                            <!-- 如果ranting小于或等于-1，则显示“暂无评分” -->
+                            <span th:if="${productAndRanting.ranting} == -1">暂无评分</span>
                         </div>
+
                         <div class="product-btns">
-                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">加入收藏</span>
-                            </button>
-                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">进行比较</span>
-                            </button>
-                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
+                            <button class="add-to-wishlist"
+                                    th:data-id="${productAndRanting.product.id}"><i
+                                    class="fa fa-heart-o"></i><span
+                                    class="tooltipp">加入收藏</span></button>
+                            <button class="quick-view">
+                                <a th:href="@{/product/{id}(id=${productAndRanting.product.id})}"
+                                   th:method="get"><i class="fa fa-eye"></i></a>
+                                <span class="tooltipp">查看</span>
                             </button>
                         </div>
                     </div>
                     <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
-                    </div>
-                </div>
-            </div>
-            <!-- /product -->
-
-            <!-- product -->
-            <div class="col-md-3 col-xs-6">
-                <div class="product">
-                    <div class="product-img">
-                        <img src="/website/static/img/product02.png" alt="">
-                        <div class="product-label">
-                            <span class="new">NEW</span>
-                        </div>
-                    </div>
-                    <div class="product-body">
-                        <p class="product-category">类型</p>
-                        <h3 class="product-name"><a href="#">产品名称</a></h3>
-                        <h4 class="product-price">￥980.00
-                            <del class="product-old-price">￥990.00</del>
-                        </h4>
-                        <div class="product-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="product-btns">
-                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">加入收藏</span>
-                            </button>
-                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">进行比较</span>
-                            </button>
-                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
-                    </div>
-                </div>
-            </div>
-            <!-- /product -->
-
-            <div class="clearfix visible-sm visible-xs"></div>
-
-            <!-- product -->
-            <div class="col-md-3 col-xs-6">
-                <div class="product">
-                    <div class="product-img">
-                        <img src="/website/static/img/product03.png" alt="">
-                    </div>
-                    <div class="product-body">
-                        <p class="product-category">类型</p>
-                        <h3 class="product-name"><a href="#">产品名称</a></h3>
-                        <h4 class="product-price">￥980.00
-                            <del class="product-old-price">￥990.00</del>
-                        </h4>
-                        <div class="product-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                        </div>
-                        <div class="product-btns">
-                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">加入收藏</span>
-                            </button>
-                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">进行比较</span>
-                            </button>
-                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
-                    </div>
-                </div>
-            </div>
-            <!-- /product -->
-
-            <!-- product -->
-            <div class="col-md-3 col-xs-6">
-                <div class="product">
-                    <div class="product-img">
-                        <img src="/website/static/img/product04.png" alt="">
-                    </div>
-                    <div class="product-body">
-                        <p class="product-category">类型</p>
-                        <h3 class="product-name"><a href="#">产品名称</a></h3>
-                        <h4 class="product-price">￥980.00
-                            <del class="product-old-price">￥990.00</del>
-                        </h4>
-                        <div class="product-rating">
-                        </div>
-                        <div class="product-btns">
-                            <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">加入收藏</span>
-                            </button>
-                            <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">进行比较</span>
-                            </button>
-                            <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">查看</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="add-to-cart">
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
+                        <button class="add-to-cart-btn" th:data-id="${productAndRanting.product.id}"><i
+                                class="fa fa-shopping-cart"></i> 加入购物车
+                        </button>
                     </div>
                 </div>
             </div>
@@ -653,6 +570,7 @@
     <!-- /container -->
 </div>
 <!-- /Section -->
+
 
 <!-- SECTION -->
 <div class="section">
@@ -691,11 +609,11 @@
                     <div class="footer">
                         <h3 class="footer-title">类别</h3>
                         <ul class="footer-links">
-                            <li><a href="#">热门交易</a></li>
-                            <li><a href="#">电脑</a></li>
-                            <li><a href="#">手机</a></li>
-                            <li><a href="#">相机</a></li>
-                            <li><a href="#">配件</a></li>
+                            <li><a th:href="@{/search?CategoryId=1}">热门交易</a></li>
+                            <li><a th:href="@{/search?CategoryId=2}">电脑</a></li>
+                            <li><a th:href="@{/search?CategoryId=3}">手机</a></li>
+                            <li><a th:href="@{/search?CategoryId=4}">相机</a></li>
+                            <li><a th:href="@{/search?CategoryId=5}">配件</a></li>
                         </ul>
                     </div>
                 </div>
@@ -709,7 +627,6 @@
                             <li><a href="#">关于我们</a></li>
                             <li><a href="#">联系我们</a></li>
                             <li><a href="#">隐私政策</a></li>
-                            <li><a href="#">订单和退货</a></li>
                             <li><a href="#">条款与条件</a></li>
                         </ul>
                     </div>
@@ -766,6 +683,8 @@
 <script src="/website/static/js/nouislider.min.js"></script>
 <script src="/website/static/js/jquery.zoom.min.js"></script>
 <script src="/website/static/js/main.js"></script>
+<script src="/website/static/js/addStar.js"></script>
+<script src="/website/static/js/addCart.js"></script>
 
 </body>
 </html>
