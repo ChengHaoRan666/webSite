@@ -52,6 +52,21 @@
         where OrderID= #{orderId}
     </update>
 
+
+    <!-- 修改订单收货时间   void updateOrderDeliveryDate(@Param("orderId")Integer orderId, @Param("deliveryDate")Date deliveryDate); -->
+    <update id="updateOrderDeliveryDate">
+        update Orders set
+        DeliveryDate = #{deliveryDate}
+        where OrderID= #{orderId}
+    </update>
+
+    <!-- 修改订单发货时间   void updateOrderShippingDate(@Param("orderId")Integer orderId, @Param("shippingDate")Date shippingDate); -->
+    <update id="updateOrderShippingDate">
+        update Orders set
+        ShippingDate = #{shippingDate}
+        where OrderID= #{orderId}
+    </update>
+
     <!--int deleteByUserIdProductId(@Param("userId") Integer userId,@Param("ProductId") String ProductId);-->
     <delete id="deleteByUserIdProductId">
         delete from orders where UserID = #{userId} and ProductID = #{ProductId}

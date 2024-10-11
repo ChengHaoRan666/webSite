@@ -143,4 +143,20 @@ public class shippingServiceImpl implements shippingService {
     public List<order> getNoEvaluationOrder(Integer userId) {
         return orderDao.getNoEvaluationOrder(userId);
     }
+
+    /**
+     * 设置订单收货时间
+     */
+    @Override
+    public void setOrderDeliveryDate(Integer orderId, Date deliveryDate) {
+        orderDao.updateOrderDeliveryDate(orderId, deliveryDate);
+    }
+
+    /**
+     * 设置订单发货时间
+     */
+    @Override
+    public void setOrderShippingDate(Integer orderId, Date shippingDate) {
+        orderDao.updateOrderShippingDate(orderId, shippingDate);
+    }
 }

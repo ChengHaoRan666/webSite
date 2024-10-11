@@ -255,8 +255,10 @@ public class homepage {
         for (Object itemId : itemIdList)
             receiptSet.add(Integer.parseInt((String) itemId));
 
-        for (Integer itemId : receiptSet)
+        for (Integer itemId : receiptSet) {
             shippingService.delivery(itemId, "3");
+            shippingService.setOrderShippingDate(itemId, new Date());
+        }
         return ResponseEntity.ok().body(Collections.singletonMap("message", "确认收货成功"));
     }
 

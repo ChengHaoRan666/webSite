@@ -83,4 +83,15 @@ public interface orderMapper {
      * 获取已签收未评价的商品
      */
     List<order> getNoEvaluationOrder(@Param("userId") Integer userId);
+
+    /**
+     * 修改订单收货时间
+     */
+    void updateOrderDeliveryDate(@Param("orderId")Integer orderId, @Param("deliveryDate")Date deliveryDate);
+    /**
+     * 修改订单发货时间
+     */
+    void updateOrderShippingDate(@Param("orderId")Integer orderId, @Param("shippingDate")Date shippingDate);
+
+
 }

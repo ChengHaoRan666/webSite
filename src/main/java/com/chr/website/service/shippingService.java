@@ -3,6 +3,7 @@ package com.chr.website.service;
 import com.chr.website.entity.order;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -75,10 +76,20 @@ public interface shippingService {
     /**
      * 通过orderId获取productId
      */
-    public Integer getProductIdByOrderId(Integer orderId);
+    Integer getProductIdByOrderId(Integer orderId);
 
     /**
      * 获取已收货未评价订单
      */
-    public List<order> getNoEvaluationOrder(Integer userId);
+    List<order> getNoEvaluationOrder(Integer userId);
+
+    /**
+     * 设置订单收货时间
+     */
+    void setOrderDeliveryDate(Integer orderId, Date deliveryDate);
+    /**
+     * 设置订单发货时间
+     */
+    void setOrderShippingDate(Integer orderId, Date shippingDate);
+
 }

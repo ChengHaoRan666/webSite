@@ -97,4 +97,20 @@ public class orderDao implements orderMapper {
     public List<order> getNoEvaluationOrder(Integer userId) {
         return orderMapper.getNoEvaluationOrder(userId);
     }
+
+    /**
+     * 修改订单收货时间
+     */
+    @Override
+    public void updateOrderDeliveryDate(Integer orderId, Date deliveryDate) {
+        orderMapper.updateOrderDeliveryDate(orderId, deliveryDate);
+    }
+
+    /**
+     * 修改订单发货时间
+     */
+    @Override
+    public void updateOrderShippingDate(Integer orderId, Date shippingDate) {
+        orderMapper.updateOrderShippingDate(orderId, shippingDate);
+    }
 }
