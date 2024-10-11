@@ -211,7 +211,10 @@
 
 <div class="col-md-6">
     <div id="review-form">
-        <div>商品名称</div>
+        <div>
+        <span>商品名称</span>
+            <span th:text="${orderId}"></span>
+        </div>
         <br><br>
         <form class="review-form">
             <div class="input-rating">

@@ -72,6 +72,11 @@ public interface shippingService {
     List<Integer> getProductIdByOrderId(List<Integer> orderIdList);
 
     /**
+     * 通过orderId获取productId
+     */
+    public Integer getProductIdByOrderId(Integer orderId);
+
+    /**
      * 获取已收货未评价订单
      */
     public List<order> getNoEvaluationOrder(Integer userId);

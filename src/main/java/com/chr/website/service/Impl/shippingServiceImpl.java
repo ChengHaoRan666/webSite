@@ -130,6 +130,14 @@ public class shippingServiceImpl implements shippingService {
     }
 
     /**
+     * 通过orderId获取productId
+     */
+    @Override
+    public Integer getProductIdByOrderId(Integer orderId) {
+        return orderDao.selectOrderById(orderId).getProductId();
+    }
+
+    /**
      * 获取已收货未评价订单
      */
     public List<order> getNoEvaluationOrder(Integer userId) {
