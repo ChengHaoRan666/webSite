@@ -176,12 +176,16 @@ public class index {
      * 商品添加购物车
      */
     @RequestMapping("/addCart")
-    public ResponseEntity<String> addCart(@RequestParam("productId") Integer productId, HttpSession session) {
+    public ResponseEntity<String> addCart(@RequestParam("productId") Integer productId,
+                                          @RequestParam(value = "number", required = false) Integer number,
+                                          HttpSession session) {
         Integer userId = (Integer) session.getAttribute("userId");
         if (userId == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
         } else {
-            shippingService.addCart(userId, productId, 1);
+            number = number == null ? 1 : number;
+            System.out.println(number);
+            shippingService.addCart(userId, productId, number);
             return ResponseEntity.ok("成功");
         }
     }
