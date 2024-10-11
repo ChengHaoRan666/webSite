@@ -129,10 +129,7 @@ public class pageServiceImpl implements pageService {
      * 获取商品评价
      */
     @Override
-    public List<String> getComment(Integer productId) {
-        List<review> reviews = reviewDao.selectReviewByproductId(productId);
-        List<String> list = new ArrayList<>();
-        for (review review : reviews) list.add(review.getComment());
-        return list;
+    public List<review> getComment(Integer productId) {
+        return reviewDao.selectReviewByproductId(productId);
     }
 }

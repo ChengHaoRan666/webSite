@@ -115,8 +115,8 @@
                                             </div>
                                             <div class="product-body">
                                                 <h3 class="product-name"><a
-                                                        th:href="@{/product/{id}(id=${entry.key.id})}"
                                                         th:method="get"
+                                                        th:href="@{/product/{id}(id=${entry.key.id})}"
                                                         th:text="${entry.key.name}">产品名称</a></h3>
                                                 <h4 class="product-price">
                                                     <span class="qty" th:text="${entry.value} + 'x'">1x</span>
@@ -185,7 +185,6 @@
 
 
 <!-- SECTION -->
-<!--TODO-->
 <div class="section">
     <!-- container -->
     <div class="container">
@@ -194,20 +193,8 @@
             <!-- Product main img -->
             <div class="col-md-5 col-md-push-2">
                 <div id="product-main-img">
-                    <div class="product-preview">
-                        <img src="/website/static/img/product01.png" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="/website/static/img/product03.png" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="/website/static/img/product06.png" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="/website/static/img/product08.png" alt="">
+                    <div class="product-preview" th:each="url:${search_product.getImageUrl().split(';')}">
+                        <img alt="" th:src="${url}">
                     </div>
                 </div>
             </div>
@@ -216,20 +203,8 @@
             <!-- Product thumb imgs -->
             <div class="col-md-2  col-md-pull-5">
                 <div id="product-imgs">
-                    <div class="product-preview">
-                        <img src="/website/static/img/product01.png" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="/website/static/img/product03.png" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="/website/static/img/product06.png" alt="">
-                    </div>
-
-                    <div class="product-preview">
-                        <img src="/website/static/img/product08.png" alt="">
+                    <div class="product-preview" th:each="url:${search_product.getImageUrl().split(';')}">
+                        <img alt="" th:src="${url}">
                     </div>
                 </div>
             </div>
@@ -238,28 +213,29 @@
             <!-- Product details -->
             <div class="col-md-5">
                 <div class="product-details">
-                    <h2 class="product-name">产品名称</h2>
+                    <h2 class="product-name" th:text="${search_product.getName()}">产品名称</h2>
                     <div>
                         <div class="product-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
+                            <!-- 检查ranting是否大于0，如果是，则显示星形图标 -->
+                            <th:block th:if="${search_product_ranting} > 0">
+                                <i class="fa fa-star"
+                                   th:each="star : ${#numbers.sequence(1, search_product_ranting)}"></i>
+                            </th:block>
+                            <!-- 如果ranting小于或等于-1，则显示“暂无评分” -->
+                            <span th:if="${search_product_ranting} == -1">暂无评分</span>
                         </div>
-                        <a class="review-link" href="#">10 条评论 | 发布评论</a>
+                        <a class="review-link" href="#" th:text="|${reviewList.size()} 条评论|">10 条评论</a>
                     </div>
                     <div>
-                        <h3 class="product-price">￥980.00
-                            <del class="product-old-price">￥990.00</del>
-                        </h3>
+                        <h3 class="product-price" th:text="${search_product.getPrice()}">￥980.00</h3>
                         <span class="product-available">现货</span>
                     </div>
-                    <p>产品信息介绍</p>
 
+
+                    <!--TODO 选择内容放在描述中，通过属性{值}的形式获取，字符串拆分得到，填入-->
                     <div class="product-options">
                         <label>
-                            尺寸
+                            容量
                             <select class="input-select">
                                 <option value="0">1</option>
                             </select>
@@ -281,35 +257,43 @@
                                 <span class="qty-down">-</span>
                             </div>
                         </div>
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> 加入购物车</button>
+                        <!--TODO 加入购物车和前面的数量联系一起-->
+                        <button class="add-to-cart-btn" th:data-id="${search_product.getId()}"><i
+                                class="fa fa-shopping-cart"></i> 加入购物车
+                        </button>
                     </div>
 
                     <ul class="product-btns">
-                        <li><a href="#"><i class="fa fa-heart-o"></i> 添加到收藏</a></li>
+                        <button class="add-to-wishlist"
+                                style="border: 2px solid transparent; background-color: transparent; cursor: pointer;"
+                                th:data-id="${search_product.getId()}">
+                            <i class="fa fa-heart-o"></i>
+                            <span class="tooltipp">加入收藏</span></button>
                     </ul>
 
                     <ul class="product-links">
                         <li>类别:</li>
-                        <li><a href="#">类别1</a></li>
+                        <li><a th:href="@{/search?CategoryId=} + ${search_product.categoryId+1}"
+                               th:text="${categoryMap.get(search_product.categoryId)}">类别</a></li>
                     </ul>
 
+                    <!--TODO-->
                     <ul class="product-links">
                         <li>分享:</li>
                         <li><a href="#"><i class="fa fa-qq"></i></a></li>
                         <li><a href="#"><i class="fa fa-weixin"></i></a></li>
                     </ul>
-
                 </div>
             </div>
             <!-- /Product details -->
 
-            <!-- Product tab -->
+            <!-- 参数信息 详情 评论-->
             <div class="col-md-12">
                 <div id="product-tab">
                     <!-- product tab nav -->
                     <ul class="tab-nav">
-                        <li class="active"><a data-toggle="tab" href="#tab1">说明</a></li>
-                        <li><a data-toggle="tab" href="#tab2">细节</a></li>
+                        <li class="active"><a data-toggle="tab" href="#tab1">参数信息</a></li>
+                        <li><a data-toggle="tab" href="#tab2">详情</a></li>
                         <li><a data-toggle="tab" href="#tab3">评论</a></li>
                     </ul>
                     <!-- /product tab nav -->
@@ -320,7 +304,7 @@
                         <div id="tab1" class="tab-pane fade in active">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>说明</p>
+                                    <p>参数信息</p>
                                 </div>
                             </div>
                         </div>
@@ -330,7 +314,7 @@
                         <div id="tab2" class="tab-pane fade in">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>细节</p>
+                                    <p>详情</p>
                                 </div>
                             </div>
                         </div>
@@ -493,7 +477,7 @@
                     <!-- /product tab content  -->
                 </div>
             </div>
-            <!-- /product tab -->
+            <!-- /参数信息 详情 评论 -->
         </div>
         <!-- /row -->
     </div>

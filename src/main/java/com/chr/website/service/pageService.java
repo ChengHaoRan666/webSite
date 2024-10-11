@@ -1,6 +1,7 @@
 package com.chr.website.service;
 
 import com.chr.website.entity.product;
+import com.chr.website.entity.review;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,5 +58,5 @@ public interface pageService {
     /**
      * 获取商品评价
      */
-    List<String> getComment(Integer productId);
+    List<review> getComment(Integer productId);
 }

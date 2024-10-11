@@ -178,12 +178,9 @@ public class index {
     @RequestMapping("/addCart")
     public ResponseEntity<String> addCart(@RequestParam("productId") Integer productId, HttpSession session) {
         Integer userId = (Integer) session.getAttribute("userId");
-        System.out.println(productId);
-        System.out.println(userId);
         if (userId == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
         } else {
-            System.out.println(productId);
             shippingService.addCart(userId, productId, 1);
             return ResponseEntity.ok("成功");
         }

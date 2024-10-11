@@ -38,6 +38,22 @@ public class search {
         return categoryMap;
     }
 
+
+    /**
+     * 获取商品的评分
+     */
+    public Integer getRanting(Integer productId) {
+        List<Integer> ratings = pageService.getRating(productId);
+        Integer rating = -1;
+        if (!ratings.isEmpty()) {
+            int size = ratings.size();
+            int sun = ratings.stream().mapToInt(Integer::intValue).sum();
+            rating = sun / size;
+        }
+        return rating;
+    }
+
+
     /**
      * 搜索结果页面
      */
@@ -72,7 +88,21 @@ public class search {
                 this.ranting = ranting;
             }
         }
+        // 更新收藏和购物车红点
+        // 获取收藏列表，购物车列表
+        Map<product, Integer> starMap = pageService.collectShow((Integer) session.getAttribute("userId"));
+        Map<product, Integer> cartMap = pageService.cartShow((Integer) session.getAttribute("userId"));
 
+        // 购物车数量
+        session.setAttribute("starCount", starMap.size());
+        // 收藏数量
+        session.setAttribute("cartCount", cartMap.size());
+        // 收藏，购物车列表
+        session.setAttribute("starMap", starMap);
+        session.setAttribute("cartMap", cartMap);
+
+
+        // 相关推荐
         product product = pageService.commodityShow(productId); // 商品
         Integer categoryId = product.getCategoryId(); // 类型
         // 获取相同类型的商品
@@ -83,20 +113,16 @@ public class search {
 
 
         List<productAndRanting> productAndRantings = new ArrayList<>();
-        for (product product1 : products) {
-            List<Integer> ratings = pageService.getRating(product1.getId());
-            Integer rating = -1;
-            if (!ratings.isEmpty()) {
-                int size = ratings.size();
-                int sun = ratings.stream().mapToInt(Integer::intValue).sum();
-                rating = sun / size;
-            }
-            productAndRantings.add(new productAndRanting(product1, rating));
-        }
+        for (product product1 : products)
+            productAndRantings.add(new productAndRanting(product1, getRanting(product1.getId())));
+
         model.addAttribute("categoryMap", populateCategoryMap());
         session.setAttribute("product_recommend", productAndRantings);
-        System.out.println(productAndRantings);
-        System.out.println("1111111111111111111111111111111111111");
+        // 将商品放入域中
+        model.addAttribute("search_product", product);
+        model.addAttribute("search_product_ranting", getRanting(productId));
+        // 获取商品评论,放入model中
+        model.addAttribute("reviewList", pageService.getComment(productId));
         return "product";
     }
 }
