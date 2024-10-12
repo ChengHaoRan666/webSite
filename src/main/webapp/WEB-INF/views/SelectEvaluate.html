@@ -229,7 +229,7 @@
             <td th:text="${item.getOrder().getQuantity()}">数量</td>
             <td th:text="${item.getOrder().getTotalAmount()}">总金额</td>
             <td th:text="${#dates.format(item.getOrder().getShippingDate(), 'yyyy-MM-dd HH:mm:ss')}">发货时间</td>
-            <td th:text="${#dates.format(item.getOrder().getDeliveryDate(), 'yyyy-MM-dd HH:mm:ss')}">发货时间</td>
+            <td th:text="${#dates.format(item.getOrder().getDeliveryDate(), 'yyyy-MM-dd HH:mm:ss')}">签收时间</td>
             <td>
                 <button class="evaluateButton">去评价</button>
             </td>
