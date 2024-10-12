@@ -223,6 +223,8 @@
                             <th:block th:if="${search_product_ranting} > 0">
                                 <i class="fa fa-star"
                                    th:each="star : ${#numbers.sequence(1, search_product_ranting)}"></i>
+                                <i class="fa fa-star-o"
+                                   th:each="star : ${#numbers.sequence(search_product_ranting + 1, 5)}"></i>
                             </th:block>
                             <!-- 如果ranting小于或等于-1，则显示“暂无评分” -->
                             <span th:if="${search_product_ranting} == -1">暂无评分</span>
@@ -346,22 +348,24 @@
                         <!-- /tab2  -->
 
                         <!-- tab3  -->
-                        <!--TODO-->
                         <div id="tab3" class="tab-pane fade in">
                             <div class="row">
-                                <!-- Rating -->
+                                <!-- 评分 -->
                                 <div class="col-md-3">
                                     <div id="rating">
-                                        <div class="rating-avg">
-                                            <span>4.5</span>
-                                            <div class="rating-stars">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
-                                            </div>
+                                        <div class="rating-avg" style="color:#d10024;">
+                                            <!-- 检查ranting是否大于0，如果是，则显示星形图标 -->
+                                            <th:block th:if="${search_product_ranting} > 0">
+                                                <i class="fa fa-star"
+                                                   th:each="star : ${#numbers.sequence(1, search_product_ranting)}"></i>
+                                                <i class="fa fa-star-o"
+                                                   th:each="star : ${#numbers.sequence(search_product_ranting + 1, 5)}"></i>
+                                            </th:block>
+                                            <!-- 如果ranting小于或等于-1，则显示“暂无评分” -->
+                                            <span th:if="${search_product_ranting} == -1">暂无评分</span>
                                         </div>
+
+                                        <!--TODO-->
                                         <ul class="rating">
                                             <li>
                                                 <div class="rating-stars">
@@ -431,9 +435,9 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <!-- /Rating -->
+                                <!-- /评分 -->
 
-                                <!-- Reviews -->
+                                <!-- 评论 -->
                                 <div class="col-md-6">
                                     <div id="reviews">
                                         <ul class="reviews">
@@ -495,7 +499,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <!-- /Reviews -->
+                                <!-- /评论 -->
                             </div>
                         </div>
                         <!-- /tab3  -->
@@ -548,6 +552,8 @@
                             <th:block th:if="${productAndRanting.ranting} > 0">
                                 <i class="fa fa-star"
                                    th:each="star : ${#numbers.sequence(1, productAndRanting.ranting)}"></i>
+                                <i class="fa fa-star-o"
+                                   th:each="star : ${#numbers.sequence(search_product_ranting + 1, 5)}"></i>
                             </th:block>
                             <!-- 如果ranting小于或等于-1，则显示“暂无评分” -->
                             <span th:if="${productAndRanting.ranting} == -1">暂无评分</span>

@@ -111,6 +111,7 @@ public class search {
         session.setAttribute("product_recommend", productAndRantings);
         // 将商品放入域中
         model.addAttribute("search_product", product);
+        // 商品评分
         model.addAttribute("search_product_ranting", getRanting(productId));
         // 获取商品评论,放入model中
         model.addAttribute("reviewList", pageService.getComment(productId));
@@ -122,6 +123,8 @@ public class search {
         model.addAttribute("attributeMain", main);
         // 将商品信息放入model中
         model.addAttribute("attributeMap", attributeMap);
+        // 商品评分
+        List<Integer> rating = pageService.getRating(productId);
         return "product";
     }
 }
