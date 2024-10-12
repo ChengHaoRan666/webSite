@@ -193,7 +193,8 @@
             <!-- Product main img -->
             <div class="col-md-5 col-md-push-2">
                 <div id="product-main-img">
-                    <div class="product-preview" th:each="url,stat : ${search_product.getImageUrl().split(';')}" th:if="${stat.index < 4}">
+                    <div class="product-preview" th:each="url,stat : ${search_product.getImageUrl().split(';')}"
+                         th:if="${stat.index < 4}">
                         <img alt="" th:src="${url}">
                     </div>
                 </div>
@@ -203,7 +204,8 @@
             <!-- Product thumb imgs -->
             <div class="col-md-2  col-md-pull-5">
                 <div id="product-imgs">
-                    <div class="product-preview" th:each="url,stat : ${search_product.getImageUrl().split(';')}" th:if="${stat.index < 4}">
+                    <div class="product-preview" th:each="url,stat : ${search_product.getImageUrl().split(';')}"
+                         th:if="${stat.index < 4}">
                         <img alt="" th:src="${url}">
                     </div>
                 </div>
@@ -330,17 +332,21 @@
                         <!-- /tab1  -->
 
                         <!-- tab2  -->
-                        <!--TODO-->
                         <div id="tab2" class="tab-pane fade in">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <p>详情</p>
+                                <div class="col-md-12" th:each="url,status:${search_product.getImageUrl().split(';')}"
+                                     th:if="${status.index >= 4}">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-8">
+                                        <img alt="" style="width: 600px;" th:src="${url}">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!-- /tab2  -->
 
                         <!-- tab3  -->
+                        <!--TODO-->
                         <div id="tab3" class="tab-pane fade in">
                             <div class="row">
                                 <!-- Rating -->
