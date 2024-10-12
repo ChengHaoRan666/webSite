@@ -310,10 +310,18 @@
                         <div id="tab1" class="tab-pane fade in active">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <!--TODO-->
-                                    <div th:each="key:${attributeMap.keySet()}">
-                                        <p th:text="${key}">key</p>
-                                        <p th:text="${attributeMap.get(key)}">val</p>
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                        <table border="1" style="border: 2px solid black" width="100%">
+                                            <tr th:each="key,stat : ${attributeMap.keySet()}">
+                                                <td style="font-family: Arial,sans-serif; font-size: 14px;padding: 8px"
+                                                    th:text="${key}">key1
+                                                </td>
+                                                <td style="font-family: Arial,sans-serif; font-size: 14px;padding: 8px"
+                                                    th:text="${attributeMap.get(key)}">val1
+                                                </td>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -321,6 +329,7 @@
                         <!-- /tab1  -->
 
                         <!-- tab2  -->
+                        <!--TODO-->
                         <div id="tab2" class="tab-pane fade in">
                             <div class="row">
                                 <div class="col-md-12">
