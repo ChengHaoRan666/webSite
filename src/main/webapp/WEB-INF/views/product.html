@@ -232,21 +232,16 @@
                     </div>
 
 
-                    <!--TODO 选择内容放在描述中，通过属性{值}的形式获取，字符串拆分得到，填入-->
                     <div class="product-options">
-                        <label>
-                            容量
-                            <select class="input-select">
-                                <option value="0">1</option>
-                            </select>
-                        </label>
-                        <label>
-                            颜色
-                            <select class="input-select">
-                                <option value="0">星耀白</option>
+                        <label style="display: block; margin-bottom: 20px" th:each="key,stat : ${attributeMain.split(',')}" th:for="${'option' + stat.index}">
+                            <span th:text="${key}">key</span>
+                            <select class="input-select" style="width: 150px" th:id="${'option' + stat.index}">
+                                <option th:each="attributeVal, stat : ${attributeMap[__${key}__].split(',')}"
+                                        th:text="${attributeVal}" th:value="${stat.index}"></option>
                             </select>
                         </label>
                     </div>
+
 
                     <div class="add-to-cart">
                         <div class="qty-label">
@@ -257,6 +252,7 @@
                                 <span class="qty-down">-</span>
                             </div>
                         </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <button class="add-to-cart-btn" th:data-id="${search_product.getId()}"><i
                                 class="fa fa-shopping-cart"></i> 加入购物车
                         </button>
@@ -279,8 +275,14 @@
                     <!--TODO 分享，点击后将链接放在剪切板上-->
                     <ul class="product-links">
                         <li>分享:</li>
-                        <li><button style="border: 1px solid transparent; background-color: transparent; cursor: pointer;"><i class="fa fa-qq"></i></button></li>
-                        <li><button style="border: 1px solid transparent; background-color: transparent; cursor: pointer;"><i class="fa fa-weixin"></i></button></li>
+                        <li>
+                            <button style="border: 1px solid transparent; background-color: transparent; cursor: pointer;">
+                                <i class="fa fa-qq"></i></button>
+                        </li>
+                        <li>
+                            <button style="border: 1px solid transparent; background-color: transparent; cursor: pointer;">
+                                <i class="fa fa-weixin"></i></button>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -132,4 +132,22 @@ public class pageServiceImpl implements pageService {
     public List<review> getComment(Integer productId) {
         return reviewDao.selectReviewByproductId(productId);
     }
+
+    /**
+     * 通过商品id获得商品属性
+     */
+    @Override
+    public Map<String, String> getAttribute(String productDescription) {
+        if (productDescription.isEmpty()) return null;
+        // 属性用；分割 其中商品类型是 key={val1,val2...}
+        // 存储容量={12+128,16+256};3C认证={xxxxx};...
+        String[] attributes = productDescription.split(";");
+        Map<String, String> attributeMap = new HashMap<>();
+        for (String attribute : attributes) {
+            String[] tmp = attribute.split("=");
+            // 将属性，类型放入Map
+            attributeMap.put(tmp[0], tmp[1].substring(1, tmp[1].length() - 1));
+        }
+        return attributeMap;
+    }
 }

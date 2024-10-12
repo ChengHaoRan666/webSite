@@ -58,12 +58,7 @@ public class search {
      * 搜索结果页面
      */
     @RequestMapping("/search")
-    public String search(
-            @RequestParam(value = "keyWord", required = false) String keyWord,
-            @RequestParam(value = "CategoryId", required = false) String CategoryId,
-            @RequestParam(value = "price_min", required = false) String price_min,
-            @RequestParam(value = "price_max", required = false) String price_max
-    ) {
+    public String search(@RequestParam(value = "keyWord", required = false) String keyWord, @RequestParam(value = "CategoryId", required = false) String CategoryId, @RequestParam(value = "price_min", required = false) String price_min, @RequestParam(value = "price_max", required = false) String price_max) {
         System.out.println(keyWord + "  " + CategoryId + " " + price_max + " " + price_min);
         return "store";
     }
@@ -72,11 +67,7 @@ public class search {
      * 查看单个商品详情页
      */
     @RequestMapping(value = "/product/{productId}", method = RequestMethod.GET)
-    public String productShow(
-            Model model,
-            HttpSession session,
-            @PathVariable(value = "productId", required = false) Integer productId
-    ) {
+    public String productShow(Model model, HttpSession session, @PathVariable(value = "productId", required = false) Integer productId) {
 
         @Data
         class productAndRanting {
@@ -123,6 +114,14 @@ public class search {
         model.addAttribute("search_product_ranting", getRanting(productId));
         // 获取商品评论,放入model中
         model.addAttribute("reviewList", pageService.getComment(productId));
+        // 获取参数信息
+        Map<String, String> attributeMap = pageService.getAttribute(product.getDescription());
+        String main = attributeMap.get("main");
+        attributeMap.remove("main");
+        // 获取主要展示信息
+        model.addAttribute("attributeMain", main);
+        // 将商品信息放入model中
+        model.addAttribute("attributeMap", attributeMap);
         return "product";
     }
 }
