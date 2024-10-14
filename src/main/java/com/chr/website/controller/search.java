@@ -107,12 +107,15 @@ public class search {
         // 获取商品评论,放入model中，将用户id换成用户名
         List<review> reviews = pageService.getComment(productId, 1);
         PageInfo<review> pageInfo = new PageInfo<>(reviews, 1);
+        // 当前页
+        model.addAttribute("currentPage", pageInfo.getPageNum());
+        // 总页数
+        model.addAttribute("maxPage", pageInfo.getPages());
         // 通过评论中的用户id获得用户名进行展示
         model.addAttribute("reviewAndUserNameList", getReviewAndUserName(reviews));
 
         return "product";
     }
-
 
 
     @Data

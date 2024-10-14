@@ -224,7 +224,8 @@
                                 <i class="fa fa-star"
                                    th:each="star : ${#numbers.sequence(1, search_product_ranting)}"></i>
                                 <i class="fa fa-star-o"
-                                   th:each="star : ${#numbers.sequence(search_product_ranting + 1, 5)}" th:if="${search_product_ranting < 5}"></i>
+                                   th:each="star : ${#numbers.sequence(search_product_ranting + 1, 5)}"
+                                   th:if="${search_product_ranting < 5}"></i>
                             </th:block>
                             <!-- 如果ranting小于或等于-1，则显示“暂无评分” -->
                             <span th:if="${search_product_ranting} == -1">暂无评分</span>
@@ -359,7 +360,8 @@
                                                 <i class="fa fa-star"
                                                    th:each="star : ${#numbers.sequence(1, search_product_ranting)}"></i>
                                                 <i class="fa fa-star-o empty"
-                                                   th:each="star : ${#numbers.sequence(search_product_ranting + 1, 5)}" th:if="${search_product_ranting < 5}"></i>
+                                                   th:each="star : ${#numbers.sequence(search_product_ranting + 1, 5)}"
+                                                   th:if="${search_product_ranting < 5}"></i>
                                             </th:block>
                                             <!-- 如果ranting小于或等于-1，则显示“暂无评分” -->
                                             <span th:if="${search_product_ranting} == -1">暂无评分</span>
@@ -443,10 +445,15 @@
                                             <li th:each="reviewAndUserName : ${reviewAndUserNameList}">
                                                 <div class="review-heading">
                                                     <h5 class="name" th:text="${reviewAndUserName.userName}">用户1</h5>
-                                                    <p class="date" th:text="${#dates.format(reviewAndUserName.review.getReviewTime(),'yyyy-MM-dd HH:mm:ss')}">2024 年 1 月 1 日</p>
+                                                    <p class="date"
+                                                       th:text="${#dates.format(reviewAndUserName.review.getReviewTime(),'yyyy-MM-dd HH:mm:ss')}">
+                                                        2024 年 1 月 1 日</p>
                                                     <div class="review-rating">
-                                                        <i class="fa fa-star" th:each="star : ${#numbers.sequence(1, reviewAndUserName.review.getRating)}"></i>
-                                                        <i class="fa fa-star-o empty" th:each="star : ${#numbers.sequence(reviewAndUserName.review.getRating + 1 , 5)}" th:if="${reviewAndUserName.review.getRating < 5}"></i>
+                                                        <i class="fa fa-star"
+                                                           th:each="star : ${#numbers.sequence(1, reviewAndUserName.review.getRating)}"></i>
+                                                        <i class="fa fa-star-o empty"
+                                                           th:each="star : ${#numbers.sequence(reviewAndUserName.review.getRating + 1 , 5)}"
+                                                           th:if="${reviewAndUserName.review.getRating < 5}"></i>
                                                     </div>
                                                 </div>
                                                 <div class="review-body">
@@ -454,17 +461,31 @@
                                                 </div>
                                             </li>
                                         </ul>
+
                                         <!--TODO-->
                                         <ul class="reviews-pagination">
-                                            <!-- 向前一页 -->
-                                            <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                                            <li class="active">1</li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <!-- 向后一页 -->
-                                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                            <!-- 向前一页，仅在当前页大于1时显示 -->
+                                            <li th:if="${currentPage > 1}">
+                                                <a href="#">
+                                                    <i class="fa fa-angle-left"></i>
+                                                </a>
+                                            </li>
+
+                                            <!-- 中间页码显示逻辑 -->
+                                            <li th:class="${currentPage eq page} ? 'active'"
+                                                th:each="page : ${#numbers.sequence(1, maxPage)}"
+                                                th:if="${(page >= currentPage - 2 and page <= currentPage + 2) or (currentPage == 1 and page <= 5) or (currentPage == maxPage and page >= maxPage - 4)}">
+                                                <a href="#" th:text="${page}">页码</a>
+                                            </li>
+
+                                            <!-- 向后一页，仅在当前页小于总页数时显示 -->
+                                            <li th:if="${currentPage < maxPage}">
+                                                <a href="#">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </a>
+                                            </li>
                                         </ul>
+
                                     </div>
                                 </div>
                                 <!-- /评论 -->
@@ -521,7 +542,8 @@
                                 <i class="fa fa-star"
                                    th:each="star : ${#numbers.sequence(1, productAndRanting.ranting)}"></i>
                                 <i class="fa fa-star-o"
-                                   th:each="star : ${#numbers.sequence(search_product_ranting + 1, 5)}" th:if="${search_product_ranting < 5}"></i>
+                                   th:each="star : ${#numbers.sequence(search_product_ranting + 1, 5)}"
+                                   th:if="${search_product_ranting < 5}"></i>
                             </th:block>
                             <!-- 如果ranting小于或等于-1，则显示“暂无评分” -->
                             <span th:if="${productAndRanting.ranting} == -1">暂无评分</span>
