@@ -8,7 +8,6 @@ import com.github.pagehelper.PageInfo;
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -149,26 +148,18 @@ public class search {
 
 
     @RequestMapping(value = "/comments", method = RequestMethod.GET)
-    public ResponseEntity<List<reviewAndUserName>> getReviewsByPage(
-            Model model,
+    public ResponseEntity<Map<String, Object>> getReviewsByPage(
             @RequestParam("productId") Integer productId,
             @RequestParam("page") Integer page) {
-        // 通过评论中的用户id获得用户名进行展示
         List<review> reviews = pageService.getComment(productId, page);
-        List<reviewAndUserName> reviewAndUserName = getReviewAndUserName(reviews);
+        List<reviewAndUserName> reviewAndUserNameList = getReviewAndUserName(reviews);
         PageInfo<review> pageInfo = new PageInfo<>(reviews, page);
 
-        // 当前页
-//        model.addAttribute("currentPage", pageInfo.getPageNum());
-        // 更新评论内容
-//        model.addAttribute("reviewAndUserNameList", reviewAndUserName);
-        // 返回数据
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("X-Current-Page", String.valueOf(pageInfo.getPageNum()));
+        Map<String, Object> response = new HashMap<>();
+        response.put("reviewAndUserNameList", reviewAndUserNameList);
+        response.put("currentPage", pageInfo.getPageNum());
 
-        return ResponseEntity.ok()
-                .headers(headers)
-                .body(reviewAndUserName);
+        return ResponseEntity.ok(response);
     }
 
 
