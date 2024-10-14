@@ -58,7 +58,7 @@ public interface pageService {
     /**
      * 获取商品评价
      */
-    List<review> getComment(Integer productId);
+    List<review> getComment(Integer productId, Integer pageNumber);
 
     /**
      * 通过商品id获得商品属性

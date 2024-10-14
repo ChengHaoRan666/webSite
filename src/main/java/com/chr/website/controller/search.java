@@ -4,6 +4,7 @@ import com.chr.website.entity.product;
 import com.chr.website.entity.review;
 import com.chr.website.service.Impl.pageServiceImpl;
 import com.chr.website.service.Impl.shippingServiceImpl;
+import com.github.pagehelper.PageInfo;
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,7 +105,11 @@ public class search {
         // 所有评分的数量
         model.addAttribute("search_product_ranting_count", rating.size());
         // 获取商品评论,放入model中，将用户id换成用户名
-        model.addAttribute("reviewAndUserNameList", getReviewAndUserName(pageService.getComment(productId)));
+        List<review> reviews = pageService.getComment(productId, 1);
+        PageInfo<review> pageInfo = new PageInfo<>(reviews, 1);
+        System.out.println("11111111111111111111111");
+        System.out.println(pageInfo);
+        model.addAttribute("reviewAndUserNameList", getReviewAndUserName(reviews));
 
         return "product";
     }

@@ -3,6 +3,7 @@ package com.chr.website.service.Impl;
 import com.chr.website.dao.*;
 import com.chr.website.entity.*;
 import com.chr.website.service.pageService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -129,7 +130,8 @@ public class pageServiceImpl implements pageService {
      * 获取商品评价
      */
     @Override
-    public List<review> getComment(Integer productId) {
+    public List<review> getComment(Integer productId,Integer pageNumber) {
+        PageHelper.startPage(pageNumber, 3); // 开启分页功能
         return reviewDao.selectReviewByproductId(productId);
     }
 

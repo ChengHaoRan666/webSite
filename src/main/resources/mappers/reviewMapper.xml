@@ -21,6 +21,6 @@
 
     <!--查 List<review> selectReviewByproductId(@Param("productId") Integer productId);;-->
     <select id="selectReviewByproductId" resultMap="reviewMapper">
-        select * from Reviews where ProductID = #{productId};
+        select * from Reviews where ProductID = #{productId}
     </select>
 </mapper>
