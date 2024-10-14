@@ -131,7 +131,7 @@ public class pageServiceImpl implements pageService {
      */
     @Override
     public List<review> getComment(Integer productId,Integer pageNumber) {
-        PageHelper.startPage(pageNumber, 3); // 开启分页功能,设置每次查3个
+        PageHelper.startPage(pageNumber, 3); // 开启分页功能
         return reviewDao.selectReviewByproductId(productId);
     }
 
