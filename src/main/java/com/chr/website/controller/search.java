@@ -108,7 +108,8 @@ public class search {
         // 获取商品评论,放入model中，将用户id换成用户名
         List<review> reviews = pageService.getComment(productId, 1);
         PageInfo<review> pageInfo = new PageInfo<>(reviews, 1);
-
+        // 将评论总数放入model中
+        model.addAttribute("reviewCount", pageInfo.getTotal());
         /*
         TODO
          */

@@ -229,7 +229,7 @@
                             <!-- 如果ranting小于或等于-1，则显示“暂无评分” -->
                             <span th:if="${search_product_ranting} == -1">暂无评分</span>
                         </div>
-                        <a class="review-link" th:text="|${reviewAndUserNameList.size()} 条评论|">10 条评论</a>
+                        <a class="review-link" th:text="|${reviewCount} 条评论|">10 条评论</a>
                     </div>
                     <div>
                         <h3 class="product-price" th:text="${search_product.getPrice()}">￥980.00</h3>
