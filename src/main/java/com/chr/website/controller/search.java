@@ -26,6 +26,17 @@ public class search {
     @Autowired
     private pageServiceImpl pageService;
 
+    @Data
+    class reviewAndUserName {
+        review review;
+        String userName;
+
+        public reviewAndUserName(review review, String userName) {
+            this.review = review;
+            this.userName = userName;
+        }
+    }
+
     /**
      * 将获取的评论中的userid换成username
      */
@@ -118,16 +129,7 @@ public class search {
     }
 
 
-    @Data
-    class reviewAndUserName {
-        review review;
-        String userName;
 
-        public reviewAndUserName(review review, String userName) {
-            this.review = review;
-            this.userName = userName;
-        }
-    }
 
     /**
      * 产品类别映射
