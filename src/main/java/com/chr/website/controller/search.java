@@ -8,6 +8,8 @@ import com.github.pagehelper.PageInfo;
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,6 +47,19 @@ public class search {
         for (review review : reviewList)
             reviewAndUserNames.add(new reviewAndUserName(review, shippingService.getUserNameByUserId(review.getUserId())));
         return reviewAndUserNames;
+    }
+
+    /**
+     * 产品类别映射
+     */
+    @ModelAttribute("categoryMap")
+    public Map<Integer, String> populateCategoryMap() {
+        Map<Integer, String> categoryMap = new HashMap<>();
+        categoryMap.put(1, "电脑");
+        categoryMap.put(2, "手机");
+        categoryMap.put(3, "相机");
+        categoryMap.put(4, "配件");
+        return categoryMap;
     }
 
     /**
@@ -94,7 +109,7 @@ public class search {
             productAndRantings.add(new productAndRanting(product1, getRanting(product1.getId())));
 
         model.addAttribute("categoryMap", populateCategoryMap());
-        session.setAttribute("product_recommend", productAndRantings);
+        model.addAttribute("product_recommend", productAndRantings);
         // 将商品放入域中
         model.addAttribute("search_product", product);
         // 商品平均评分
@@ -122,6 +137,10 @@ public class search {
         model.addAttribute("currentPage", pageInfo.getPageNum());
         // 总页数
         model.addAttribute("maxPage", pageInfo.getPages());
+        // 总条数
+        model.addAttribute("reviewCount", pageInfo.getTotal());
+        // 商品id
+        model.addAttribute("productId", productId);
         // 通过评论中的用户id获得用户名进行展示
         model.addAttribute("reviewAndUserNameList", getReviewAndUserName(reviews));
 
@@ -129,19 +148,27 @@ public class search {
     }
 
 
+    @RequestMapping(value = "/comments", method = RequestMethod.GET)
+    public ResponseEntity<List<reviewAndUserName>> getReviewsByPage(
+            Model model,
+            @RequestParam("productId") Integer productId,
+            @RequestParam("page") Integer page) {
+        // 通过评论中的用户id获得用户名进行展示
+        List<review> reviews = pageService.getComment(productId, page);
+        List<reviewAndUserName> reviewAndUserName = getReviewAndUserName(reviews);
+        PageInfo<review> pageInfo = new PageInfo<>(reviews, page);
 
+        // 当前页
+//        model.addAttribute("currentPage", pageInfo.getPageNum());
+        // 更新评论内容
+//        model.addAttribute("reviewAndUserNameList", reviewAndUserName);
+        // 返回数据
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Current-Page", String.valueOf(pageInfo.getPageNum()));
 
-    /**
-     * 产品类别映射
-     */
-    @ModelAttribute("categoryMap")
-    public Map<Integer, String> populateCategoryMap() {
-        Map<Integer, String> categoryMap = new HashMap<>();
-        categoryMap.put(1, "电脑");
-        categoryMap.put(2, "手机");
-        categoryMap.put(3, "相机");
-        categoryMap.put(4, "配件");
-        return categoryMap;
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(reviewAndUserName);
     }
 
 

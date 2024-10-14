@@ -463,10 +463,10 @@
                                         </ul>
 
                                         <!--TODO-->
-                                        <ul class="reviews-pagination">
+                                        <ul class="reviews-pagination" th:data-product-id="${productId}">
                                             <!-- 向前一页，仅在当前页大于1时显示 -->
                                             <li th:if="${currentPage > 1}">
-                                                <a href="#">
+                                                <a href="#" th:data-page="${currentPage - 1}">
                                                     <i class="fa fa-angle-left"></i>
                                                 </a>
                                             </li>
@@ -475,12 +475,12 @@
                                             <li th:class="${currentPage eq page} ? 'active'"
                                                 th:each="page : ${#numbers.sequence(1, maxPage)}"
                                                 th:if="${(page >= currentPage - 2 and page <= currentPage + 2) or (currentPage == 1 and page <= 5) or (currentPage == maxPage and page >= maxPage - 4)}">
-                                                <a href="#" th:text="${page}">页码</a>
+                                                <a href="#" th:data-page="${page}" th:text="${page}">页码</a>
                                             </li>
 
                                             <!-- 向后一页，仅在当前页小于总页数时显示 -->
                                             <li th:if="${currentPage < maxPage}">
-                                                <a href="#">
+                                                <a href="#" th:data-page="${currentPage + 1}">
                                                     <i class="fa fa-angle-right"></i>
                                                 </a>
                                             </li>
@@ -520,7 +520,7 @@
             </div>
 
             <!-- product -->
-            <div class="col-md-3 col-xs-6" th:each="productAndRanting : ${session.product_recommend}">
+            <div class="col-md-3 col-xs-6" th:each="productAndRanting : ${product_recommend}">
                 <div class="product">
                     <div class="product-img">
                         <img alt="" th:src="${productAndRanting.product.imageUrl.split(';')[0]}">
@@ -692,6 +692,7 @@
 <script src="/website/static/js/addStar.js"></script>
 <script src="/website/static/js/addCart.js"></script>
 <script src="/website/static/js/copyBun.js"></script>
+<script src="/website/static/js/comment.js"></script>
 
 </body>
 </html>
