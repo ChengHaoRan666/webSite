@@ -107,6 +107,7 @@ public class homepage {
         orderStatusMap.put("1", "已支付");
         orderStatusMap.put("2", "已发货");
         orderStatusMap.put("3", "已收货");
+        orderStatusMap.put("4", "已评价");
         return orderStatusMap;
     }
 
