@@ -26,22 +26,22 @@ public class search {
     @Autowired
     private pageServiceImpl pageService;
 
+    /**
+     * 将获取的评论中的userid换成username
+     */
+    List<reviewAndUserName> getReviewAndUserName(List<review> reviewList) {
+        List<reviewAndUserName> reviewAndUserNames = new ArrayList<>();
+        for (review review : reviewList)
+            reviewAndUserNames.add(new reviewAndUserName(review, shippingService.getUserNameByUserId(review.getUserId())));
+        return reviewAndUserNames;
+    }
 
     /**
      * 查看单个商品详情页
      */
     @RequestMapping(value = "/product/{productId}", method = RequestMethod.GET)
     public String productShow(Model model, HttpSession session, @PathVariable(value = "productId", required = false) Integer productId) {
-        @Data
-        class reviewAndUserName {
-            review review;
-            String userName;
 
-            public reviewAndUserName(review review, String userName) {
-                this.review = review;
-                this.userName = userName;
-            }
-        }
 
         @Data
         class productAndRanting {
@@ -78,7 +78,6 @@ public class search {
         productList.remove(product);
         List<product> products = productList.subList(0, 4);
 
-
         List<productAndRanting> productAndRantings = new ArrayList<>();
         for (product product1 : products)
             productAndRantings.add(new productAndRanting(product1, getRanting(product1.getId())));
@@ -108,23 +107,24 @@ public class search {
         // 获取商品评论,放入model中，将用户id换成用户名
         List<review> reviews = pageService.getComment(productId, 1);
         PageInfo<review> pageInfo = new PageInfo<>(reviews, 1);
-        // 将评论总数放入model中
-        model.addAttribute("reviewCount", pageInfo.getTotal());
-        /*
-        TODO
-         */
-        System.out.println("11111111111111111111111");
-        System.out.println(pageInfo);
-
         // 通过评论中的用户id获得用户名进行展示
-        List<reviewAndUserName> reviewAndUserNames = new ArrayList<>();
-        for (review review : reviews)
-            reviewAndUserNames.add(new reviewAndUserName(review, shippingService.getUserNameByUserId(review.getUserId())));
-        model.addAttribute("reviewAndUserNameList", reviewAndUserNames);
+        model.addAttribute("reviewAndUserNameList", getReviewAndUserName(reviews));
 
         return "product";
     }
 
+
+
+    @Data
+    class reviewAndUserName {
+        review review;
+        String userName;
+
+        public reviewAndUserName(review review, String userName) {
+            this.review = review;
+            this.userName = userName;
+        }
+    }
 
     /**
      * 产品类别映射
