@@ -1,6 +1,7 @@
 package com.chr.website.controller;
 
 import com.chr.website.entity.product;
+import com.chr.website.entity.review;
 import com.chr.website.service.Impl.pageServiceImpl;
 import com.chr.website.service.Impl.shippingServiceImpl;
 import jakarta.servlet.http.HttpSession;
@@ -24,43 +25,14 @@ public class search {
     @Autowired
     private pageServiceImpl pageService;
 
-
     /**
-     * 产品类别映射
+     * 将获取的评论中的userid换成username
      */
-    @ModelAttribute("categoryMap")
-    public Map<Integer, String> populateCategoryMap() {
-        Map<Integer, String> categoryMap = new HashMap<>();
-        categoryMap.put(1, "电脑");
-        categoryMap.put(2, "手机");
-        categoryMap.put(3, "相机");
-        categoryMap.put(4, "配件");
-        return categoryMap;
-    }
-
-
-    /**
-     * 获取商品的评分
-     */
-    public Integer getRanting(Integer productId) {
-        List<Integer> ratings = pageService.getRating(productId);
-        Integer rating = -1;
-        if (!ratings.isEmpty()) {
-            int size = ratings.size();
-            int sun = ratings.stream().mapToInt(Integer::intValue).sum();
-            rating = sun / size;
-        }
-        return rating;
-    }
-
-
-    /**
-     * 搜索结果页面
-     */
-    @RequestMapping("/search")
-    public String search(@RequestParam(value = "keyWord", required = false) String keyWord, @RequestParam(value = "CategoryId", required = false) String CategoryId, @RequestParam(value = "price_min", required = false) String price_min, @RequestParam(value = "price_max", required = false) String price_max) {
-        System.out.println(keyWord + "  " + CategoryId + " " + price_max + " " + price_min);
-        return "store";
+    List<reviewAndUserName> getReviewAndUserName(List<review> reviewList) {
+        List<reviewAndUserName> reviewAndUserNames = new ArrayList<>();
+        for (review review : reviewList)
+            reviewAndUserNames.add(new reviewAndUserName(review, shippingService.getUserNameByUserId(review.getUserId())));
+        return reviewAndUserNames;
     }
 
     /**
@@ -79,6 +51,8 @@ public class search {
                 this.ranting = ranting;
             }
         }
+
+
         // 更新收藏和购物车红点
         // 获取收藏列表，购物车列表
         Map<product, Integer> starMap = pageService.collectShow((Integer) session.getAttribute("userId"));
@@ -113,8 +87,6 @@ public class search {
         model.addAttribute("search_product", product);
         // 商品平均评分
         model.addAttribute("search_product_ranting", getRanting(productId));
-        // 获取商品评论,放入model中
-        model.addAttribute("reviewList", pageService.getComment(productId));
         // 获取参数信息
         Map<String, String> attributeMap = pageService.getAttribute(product.getDescription());
         String main = attributeMap.get("main");
@@ -131,6 +103,58 @@ public class search {
         model.addAttribute("ratingCount", ratingCount);
         // 所有评分的数量
         model.addAttribute("search_product_ranting_count", rating.size());
+        // 获取商品评论,放入model中，将用户id换成用户名
+        model.addAttribute("reviewAndUserNameList", getReviewAndUserName(pageService.getComment(productId)));
+
         return "product";
+    }
+
+
+    /**
+     * 产品类别映射
+     */
+    @ModelAttribute("categoryMap")
+    public Map<Integer, String> populateCategoryMap() {
+        Map<Integer, String> categoryMap = new HashMap<>();
+        categoryMap.put(1, "电脑");
+        categoryMap.put(2, "手机");
+        categoryMap.put(3, "相机");
+        categoryMap.put(4, "配件");
+        return categoryMap;
+    }
+
+
+    /**
+     * 获取商品的评分
+     */
+    public Integer getRanting(Integer productId) {
+        List<Integer> ratings = pageService.getRating(productId);
+        Integer rating = -1;
+        if (!ratings.isEmpty()) {
+            int size = ratings.size();
+            int sun = ratings.stream().mapToInt(Integer::intValue).sum();
+            rating = sun / size;
+        }
+        return rating;
+    }
+
+    /**
+     * 搜索结果页面
+     */
+    @RequestMapping("/search")
+    public String search(@RequestParam(value = "keyWord", required = false) String keyWord, @RequestParam(value = "CategoryId", required = false) String CategoryId, @RequestParam(value = "price_min", required = false) String price_min, @RequestParam(value = "price_max", required = false) String price_max) {
+        System.out.println(keyWord + "  " + CategoryId + " " + price_max + " " + price_min);
+        return "store";
+    }
+
+    @Data
+    static class reviewAndUserName {
+        review review;
+        String userName;
+
+        public reviewAndUserName(review review, String userName) {
+            this.review = review;
+            this.userName = userName;
+        }
     }
 }

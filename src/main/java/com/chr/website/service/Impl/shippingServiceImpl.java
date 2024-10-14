@@ -28,6 +28,8 @@ public class shippingServiceImpl implements shippingService {
     private starDao starDao;
     @Autowired
     private reviewDao reviewDao;
+    @Autowired
+    private userDao userDao;
 
 
     /**
@@ -158,5 +160,14 @@ public class shippingServiceImpl implements shippingService {
     @Override
     public void setOrderShippingDate(Integer orderId, Date shippingDate) {
         orderDao.updateOrderShippingDate(orderId, shippingDate);
+    }
+
+    /**
+     * 通过用户id获取用户名
+     */
+    @Override
+    public String getUserNameByUserId(Integer userId) {
+        user user = userDao.selectUserById(userId);
+        return user.getUsername();
     }
 }

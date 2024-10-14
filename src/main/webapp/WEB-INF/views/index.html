@@ -546,7 +546,7 @@
                                                 <i class="fa fa-star"
                                                    th:each="star : ${#numbers.sequence(1, productAndRanting.ranting)}"></i>
                                                 <i class="fa fa-star-o"
-                                                   th:each="star : ${#numbers.sequence(productAndRanting.ranting + 1, 5)}"></i>
+                                                   th:each="star : ${#numbers.sequence(productAndRanting.ranting + 1, 5)}" th:if="${productAndRanting.ranting < 5}"></i>
                                             </th:block>
                                             <!-- 如果ranting小于或等于-1，则显示“暂无评分” -->
                                             <span th:if="${productAndRanting.ranting} == -1">暂无评分</span>

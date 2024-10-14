@@ -87,9 +87,14 @@ public interface shippingService {
      * 设置订单收货时间
      */
     void setOrderDeliveryDate(Integer orderId, Date deliveryDate);
+
     /**
      * 设置订单发货时间
      */
     void setOrderShippingDate(Integer orderId, Date shippingDate);
 
+    /**
+     * 通过用户id获取用户名
+     */
+    String getUserNameByUserId(Integer userId);
 }
