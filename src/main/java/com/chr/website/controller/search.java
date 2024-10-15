@@ -158,6 +158,7 @@ public class search {
         Map<String, Object> response = new HashMap<>();
         response.put("reviewAndUserNameList", reviewAndUserNameList);
         response.put("currentPage", pageInfo.getPageNum());
+        response.put("maxPage", pageInfo.getPages());
 
         return ResponseEntity.ok(response);
     }

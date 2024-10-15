@@ -1,12 +1,12 @@
 // 当文档加载完毕后绑定事件
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // 假设评论列表的类名是 'reviews'
     const reviewsList = document.querySelector('.reviews');
     // 假设分页导航的类名是 'reviews-pagination'
     const reviewsPagination = document.querySelector('.reviews-pagination');
 
     // 为分页导航绑定点击事件
-    reviewsPagination.addEventListener('click', function(event) {
+    reviewsPagination.addEventListener('click', function (event) {
         const pageLink = event.target.closest('a');
         if (pageLink) {
             const page = pageLink.getAttribute('data-page');
@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 // 假设服务器返回的数据结构是 { reviewAndUserNameList: [], currentPage: 1 }
                 displayComments(data.reviewAndUserNameList);
+                updatePagination(page, data.maxPage); // 更新分页导航
             })
             .catch(error => console.error('Error loading comments:', error));
     }
@@ -90,4 +91,59 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+function updatePagination(currentPage, maxPage) {
+    const paginationContainer = document.querySelector('.reviews-pagination');
+    paginationContainer.innerHTML = '';
 
+    // 添加向前一页的按钮
+    if (currentPage > 1) {
+        const prevLi = document.createElement('li');
+        const prevLink = document.createElement('a');
+        prevLink.href = '#';
+        prevLink.setAttribute('data-page', (currentPage - 1).toString());
+        prevLink.innerHTML = '<i class="fa fa-angle-left"></i>';
+        prevLi.appendChild(prevLink);
+        paginationContainer.appendChild(prevLi);
+    }
+
+
+    // 计算显示的页码范围
+    let startPage = Math.max(1, currentPage - 2);
+    let endPage = Math.min(maxPage, parseInt(currentPage, 10) + 2);
+
+    // 如果当前页接近开始页，则调整显示范围
+    if (currentPage <= 3) {
+        startPage = 1;
+        endPage = Math.min(5, maxPage);
+    }
+
+    // 如果当前页接近结束页，则调整显示范围
+    if (currentPage >= maxPage - 2) {
+        endPage = maxPage;
+        startPage = Math.max(1, maxPage - 4);
+    }
+
+    // 添加页码
+    for (let page = startPage; page <= endPage; page++) {
+        const pageLi = document.createElement('li');
+        pageLi.className = page === parseInt(currentPage, 10) ? 'active' : '';
+        const pageLink = document.createElement('a');
+        pageLink.href = '#';
+        pageLink.setAttribute('data-page', page);
+        pageLink.textContent = page;
+        pageLi.appendChild(pageLink);
+        paginationContainer.appendChild(pageLi);
+    }
+
+
+    // 添加向后一页的按钮
+    if (currentPage < maxPage) {
+        const nextLi = document.createElement('li');
+        const nextLink = document.createElement('a');
+        nextLink.href = '#';
+        nextLink.setAttribute('data-page', parseInt(currentPage, 10) + 1);
+        nextLink.innerHTML = '<i class="fa fa-angle-right"></i>';
+        nextLi.appendChild(nextLink);
+        paginationContainer.appendChild(nextLi);
+    }
+}
