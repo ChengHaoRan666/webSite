@@ -211,7 +211,7 @@
                             <label for="category-1">
                                 <span></span>
                                 电脑
-                                <small>(120)</small>
+                                <small th:text="${session.computerCount != null ? '(' + session.computerCount + ')' : '(0)'}">(120)</small>
                             </label>
                         </div>
 
@@ -220,7 +220,7 @@
                             <label for="category-2">
                                 <span></span>
                                 手机
-                                <small>(740)</small>
+                                <small th:text="${session.phoneCount != null ? '(' + session.phoneCount + ')' : '(0)'}">(120)</small>
                             </label>
                         </div>
 
@@ -229,7 +229,7 @@
                             <label for="category-3">
                                 <span></span>
                                 相机
-                                <small>(1450)</small>
+                                <small th:text="${session.cameraCount != null ? '(' + session.cameraCount + ')' : '(0)'}">(120)</small>
                             </label>
                         </div>
 
@@ -238,7 +238,7 @@
                             <label for="category-4">
                                 <span></span>
                                 配件
-                                <small>(578)</small>
+                                <small th:text="${session.partsCount != null ? '(' + session.partsCount + ')' : '(0)'}">(120)</small>
                             </label>
                         </div>
                     </div>
@@ -298,6 +298,7 @@
                 </div>
                 <!-- /store top filter -->
 
+
                 <!-- store products -->
                 <div class="row">
                     <!-- product -->
@@ -332,6 +333,7 @@
                                 </button>
                             </div>
                         </div>
+                        <br><br>
                     </div>
                     <!-- /product -->
                 </div>

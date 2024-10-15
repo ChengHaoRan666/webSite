@@ -201,9 +201,35 @@ public class search {
         // 收藏，购物车列表
         session.setAttribute("starMap", starMap);
         session.setAttribute("cartMap", cartMap);
+
+        // 将各个种类的数量加入model
+        // 获取四个种类的 新产品 商品列表（每个大小限制为40）
+        List<product> computer = pageService.search(null, 1, null, null);
+        List<product> phone = pageService.search(null, 2, null, null);
+        List<product> camera = pageService.search(null, 3, null, null);
+        List<product> parts = pageService.search(null, 4, null, null);
+        session.setAttribute("computerCount", computer.size());
+        session.setAttribute("phoneCount", phone.size());
+        session.setAttribute("cameraCount", camera.size());
+        session.setAttribute("partsCount", parts.size());
+
         //向model中加入List<product> 搜索结果
-        List<product> searchProductList = pageService.search(keyWord, CategoryId, price_min, price_max);
-        model.addAttribute("searchProductList", searchProductList);
+        CategoryId--;
+        // 如果选择的是热销
+        if (CategoryId == 0) {
+            System.out.println("热销");
+            System.out.println("1111111111111111111111111111111111111");
+        }
+        // 如果选择的是全部
+        else if (CategoryId == -1) {
+            List<product> searchProductList = pageService.search(keyWord, null, price_min, price_max);
+            model.addAttribute("searchProductList", searchProductList);
+        }
+        // 如果选择的是分类
+        else {
+            List<product> searchProductList = pageService.search(keyWord, CategoryId, price_min, price_max);
+            model.addAttribute("searchProductList", searchProductList);
+        }
         return "store";
     }
 }
