@@ -182,9 +182,28 @@ public class search {
      * 搜索结果页面
      */
     @RequestMapping("/search")
-    public String search(@RequestParam(value = "keyWord", required = false) String keyWord, @RequestParam(value = "CategoryId", required = false) String CategoryId, @RequestParam(value = "price_min", required = false) String price_min, @RequestParam(value = "price_max", required = false) String price_max) {
-        System.out.println("11111111111111111111111111111111111111111");
-        System.out.println(keyWord + "  " + CategoryId + " " + price_max + " " + price_min);
+    public String search(
+            Model model,
+            HttpSession session,
+            @RequestParam(value = "keyWord", required = false) String keyWord, // 关键词，必须在商品名中
+            @RequestParam(value = "CategoryId", required = false) Integer CategoryId,
+            @RequestParam(value = "price_min", required = false) Integer price_min,
+            @RequestParam(value = "price_max", required = false) Integer price_max) {
+        // 更新收藏和购物车红点
+        // 获取收藏列表，购物车列表
+        Map<product, Integer> starMap = pageService.collectShow((Integer) session.getAttribute("userId"));
+        Map<product, Integer> cartMap = pageService.cartShow((Integer) session.getAttribute("userId"));
+
+        // 购物车数量
+        session.setAttribute("starCount", starMap.size());
+        // 收藏数量
+        session.setAttribute("cartCount", cartMap.size());
+        // 收藏，购物车列表
+        session.setAttribute("starMap", starMap);
+        session.setAttribute("cartMap", cartMap);
+        //向model中加入List<product> 搜索结果
+        List<product> searchProductList = pageService.search(keyWord, CategoryId, price_min, price_max);
+        model.addAttribute("searchProductList", searchProductList);
         return "store";
     }
 }
