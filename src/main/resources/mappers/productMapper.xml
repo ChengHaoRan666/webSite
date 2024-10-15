@@ -67,7 +67,7 @@
     <select id="search" resultMap="productMapper">
         select * from Products where 1 = 1
         <if test="CategoryId != '' and CategoryId != null">
-            and CategoryID = #{CategoryId}
+            and CategoryID in (#{CategoryId})
         </if>
         <if test="min != '' and min != null">
             and Price >= #{min}
