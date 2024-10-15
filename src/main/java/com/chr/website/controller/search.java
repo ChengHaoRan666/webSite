@@ -178,6 +178,26 @@ public class search {
         return rating;
     }
 
+    private List<product> sortByRantingAndSun(List<product> products) {
+        List<productAndRanting> productAndRantings = new ArrayList<>();
+        for (product product : products) {
+            List<Integer> ratings = pageService.getRating(product.getId());
+            Integer rating = -1;
+            if (!ratings.isEmpty()) {
+                int size = ratings.size();
+                int sun = ratings.stream().mapToInt(Integer::intValue).sum();
+                rating = sun / size;
+            }
+            productAndRantings.add(new productAndRanting(product, rating));
+        }
+        productAndRantings.sort((o1, o2) -> o2.ranting - o1.ranting);
+        List<product> products1 = new ArrayList<>();
+        for (productAndRanting productAndRanting : productAndRantings) {
+            products1.add(productAndRanting.getProduct());
+        }
+        return products1;
+    }
+
     /**
      * 搜索结果页面
      */
@@ -217,8 +237,9 @@ public class search {
         CategoryId--;
         // 如果选择的是热销
         if (CategoryId == 0) {
-            System.out.println("热销");
-            System.out.println("1111111111111111111111111111111111111");
+            List<product> searchProductList = pageService.search(keyWord, null, price_min, price_max);
+            model.addAttribute("searchProductList", sortByRantingAndSun(searchProductList));
+
         }
         // 如果选择的是全部
         else if (CategoryId == -1) {
@@ -231,5 +252,19 @@ public class search {
             model.addAttribute("searchProductList", searchProductList);
         }
         return "store";
+    }
+
+    /**
+     * 内部类，商品和它的评分
+     */
+    @Data
+    private class productAndRanting {
+        product product;
+        Integer ranting;
+
+        public productAndRanting(product product, Integer ranting) {
+            this.product = product;
+            this.ranting = ranting;
+        }
     }
 }
