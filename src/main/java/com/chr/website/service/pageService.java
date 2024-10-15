@@ -47,7 +47,7 @@ public interface pageService {
     /**
      * 关键词，商品类别，价格区间，三个搜索条件可有可无进行搜索
      */
-    List<product> search(String keyword, Integer CategoryId, Integer min, Integer max);
+    List<product> search(String keyword, Integer CategoryId, Double min, Double max);
 
     /**
      * 获取商品评分

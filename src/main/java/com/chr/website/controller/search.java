@@ -206,9 +206,12 @@ public class search {
             Model model,
             HttpSession session,
             @RequestParam(value = "keyWord", required = false) String keyWord, // 关键词，必须在商品名中
-            @RequestParam(value = "CategoryId", required = false) Integer CategoryId,
-            @RequestParam(value = "price_min", required = false) Integer price_min,
-            @RequestParam(value = "price_max", required = false) Integer price_max) {
+            @RequestParam(value = "CategoryId", required = false) String CategoryIdString,
+            @RequestParam(value = "price_min", required = false) String price_min_string,
+            @RequestParam(value = "price_max", required = false) String price_max_string) {
+        Integer CategoryId = CategoryIdString == null ? null : Integer.parseInt(CategoryIdString);
+        Double price_min = price_min_string == null ? null : Double.parseDouble(price_min_string);
+        Double price_max = price_max_string == null ? null : Double.parseDouble(price_max_string);
         // 更新收藏和购物车红点
         // 获取收藏列表，购物车列表
         Map<product, Integer> starMap = pageService.collectShow((Integer) session.getAttribute("userId"));
@@ -221,17 +224,6 @@ public class search {
         // 收藏，购物车列表
         session.setAttribute("starMap", starMap);
         session.setAttribute("cartMap", cartMap);
-
-        // 将各个种类的数量加入model
-        // 获取四个种类的 新产品 商品列表（每个大小限制为40）
-        List<product> computer = pageService.search(null, 1, null, null);
-        List<product> phone = pageService.search(null, 2, null, null);
-        List<product> camera = pageService.search(null, 3, null, null);
-        List<product> parts = pageService.search(null, 4, null, null);
-        session.setAttribute("computerCount", computer.size());
-        session.setAttribute("phoneCount", phone.size());
-        session.setAttribute("cameraCount", camera.size());
-        session.setAttribute("partsCount", parts.size());
 
         //向model中加入List<product> 搜索结果
         CategoryId--;

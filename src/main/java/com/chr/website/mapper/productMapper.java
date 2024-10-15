@@ -53,6 +53,6 @@ public interface productMapper {
      */
     List<product> search(@Param("keyword") String keyword,
                          @Param("CategoryId") Integer CategoryId,
-                         @Param("min") Integer min,
-                         @Param("max") Integer max);
+                         @Param("min") Double min,
+                         @Param("max") Double max);
 }
