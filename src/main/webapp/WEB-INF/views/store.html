@@ -201,7 +201,6 @@
             <!-- ASIDE -->
             <div id="aside" class="col-md-3">
                 <!-- aside Widget -->
-                <!--TODO 搜索页价格区间-->
                 <form method="get" th:action="@{/search}">
                     <!-- 隐藏字段用于传递keyWord categoryId -->
                     <input name="CategoryId" th:value="${param.CategoryId[0]}" type="hidden"/>
@@ -290,13 +289,27 @@
 
                 <!-- 底部导航条 -->
                 <div class="store-filter clearfix">
-                    <span class="store-qty">显示 x - x 页</span>
-                    <ul class="store-pagination">
-                        <li class="active">1</li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                    <ul class="reviews-pagination" th:data-product-id="${productId}">
+                        <!-- 向前一页，仅在当前页大于1时显示 -->
+                        <li th:if="${currentPage > 1}">
+                            <a href="#" th:data-page="${currentPage - 1}">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        </li>
+
+                        <!-- 中间页码显示逻辑 -->
+                        <li th:class="${currentPage eq page} ? 'active'"
+                            th:each="page : ${#numbers.sequence(1, maxPage)}"
+                            th:if="${(page >= currentPage - 2 and page <= currentPage + 2) or (currentPage == 1 and page <= 5) or (currentPage == maxPage and page >= maxPage - 4)}">
+                            <a href="#" th:data-page="${page}" th:text="${page}">页码</a>
+                        </li>
+
+                        <!-- 向后一页，仅在当前页小于总页数时显示 -->
+                        <li th:if="${currentPage < maxPage}">
+                            <a href="#" th:data-page="${currentPage + 1}">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- /store bottom filter -->
