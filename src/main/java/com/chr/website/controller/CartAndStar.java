@@ -108,8 +108,9 @@ public class CartAndStar {
             @RequestParam("orderId") Integer orderId
     ) {
         Integer userId = (Integer) session.getAttribute("userId");
-        System.out.println(rating + " " + comment + " " + productId + " " + orderId);
+        // 修改订单状态为4：已评价
         shippingService.delivery(orderId, "4");
+        // 将评价写入数据库
         shippingService.evaluate(userId, productId, rating, comment);
         return "forward:/evaluate";
     }

@@ -183,6 +183,7 @@ public class search {
      */
     @RequestMapping("/search")
     public String search(@RequestParam(value = "keyWord", required = false) String keyWord, @RequestParam(value = "CategoryId", required = false) String CategoryId, @RequestParam(value = "price_min", required = false) String price_min, @RequestParam(value = "price_max", required = false) String price_max) {
+        System.out.println("11111111111111111111111111111111111111111");
         System.out.println(keyWord + "  " + CategoryId + " " + price_max + " " + price_min);
         return "store";
     }
