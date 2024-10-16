@@ -71,7 +71,7 @@ public class productDao implements productMapper {
     /**
      * 关键词，商品类别，价格区间，三个搜索条件可有可无进行搜索
      */
-    public List<product> search(String keyword, Integer CategoryId, Integer min, Integer max) {
+    public List<product> search(String keyword, Integer CategoryId, Double min, Double max) {
         return productMapper.search(keyword, CategoryId, min, max);
     }
 }

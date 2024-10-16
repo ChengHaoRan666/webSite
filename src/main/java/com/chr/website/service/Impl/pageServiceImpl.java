@@ -110,7 +110,7 @@ public class pageServiceImpl implements pageService {
      * 关键词，商品类别，价格区间，三个搜索条件可有可无进行搜索
      */
     @Override
-    public List<product> search(String keyword, Integer CategoryId, Integer min, Integer max) {
+    public List<product> search(String keyword, Integer CategoryId, Double min, Double max) {
         return productDao.search(keyword, CategoryId, min, max);
     }
 
