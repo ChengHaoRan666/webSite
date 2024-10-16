@@ -200,31 +200,33 @@
         <div class="row">
             <!-- ASIDE -->
             <div id="aside" class="col-md-3">
+
                 <!-- aside Widget -->
                 <!--TODO 搜索页价格区间-->
-                <div class="aside">
-                    <h3 class="aside-title">价格</h3>
-                    <div class="price-filter">
-                        <div id="price-slider"></div>
-                        <div class="input-number price-min">
-                            <input id="price-min" type="number">
-                            <span class="qty-up">+</span>
-                            <span class="qty-down">-</span>
-                        </div>
-                        <span>-</span>
-                        <div class="input-number price-max">
-                            <input id="price-max" type="number">
-                            <span class="qty-up">+</span>
-                            <span class="qty-down">-</span>
+                <form method="get" th:action="@{/search}">
+                    <input name="keyWord" th:value="" type="hidden">
+                    <input name="CategoryId" th:value="" type="hidden">
+
+                    <div class="aside">
+                        <h3 class="aside-title">价格</h3>
+                        <div class="price-filter">
+                            <div id="price-slider"></div>
+                            <div class="input-number price-min">
+                                <input id="price-min" name="price_min" type="number">
+                                <span class="qty-up">+</span>
+                                <span class="qty-down">-</span>
+                            </div>
+                            <span>-</span>
+                            <div class="input-number price-max">
+                                <input id="price-max" name="price_max" type="number">
+                                <span class="qty-up">+</span>
+                                <span class="qty-down">-</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- /aside Widget -->
-<!--                <br>-->
-<!--                <div class="col-lg-3"></div>-->
-<!--                <div class="col-md-6">-->
-<!--                    <a class="primary-btn order-submit" href="#" style="height: 40px">搜索</a>-->
-<!--                </div>-->
+                    <br>
+                    <button class="primary-btn" >搜索</button>
+                </form>
             </div>
             <!-- /ASIDE -->
 
