@@ -82,10 +82,10 @@ public class index {
         Map<product, Integer> cartMap = pageService.cartShow((Integer) session.getAttribute("userId"));
 
         // 获取四个种类的 新产品 商品列表（每个大小限制为40）
-        List<product> newProducts1 = pageService.search(null, 1, null, null);
-        List<product> newProducts2 = pageService.search(null, 2, null, null);
-        List<product> newProducts3 = pageService.search(null, 3, null, null);
-        List<product> newProducts4 = pageService.search(null, 4, null, null);
+        List<product> newProducts1 = pageService.search(null, 1, null, null, null);
+        List<product> newProducts2 = pageService.search(null, 2, null, null, null);
+        List<product> newProducts3 = pageService.search(null, 3, null, null, null);
+        List<product> newProducts4 = pageService.search(null, 4, null, null, null);
         // 进行排序，取前40
         newProducts1 = newProducts1.stream().sorted(Comparator.comparing(product::getListedDate).reversed()).limit(40).toList();
         newProducts2 = newProducts2.stream().sorted(Comparator.comparing(product::getListedDate).reversed()).limit(40).toList();
@@ -97,13 +97,13 @@ public class index {
 
         // 获取四个种类的 各个畅销榜单 商品列表（每个大小限制为30）
         List<product> BestsellerProducts1 = new ArrayList<>();
-        for (productAndRanting productAndRanting : sortByRantingAndSun(pageService.search(null, 1, null, null), 30))
+        for (productAndRanting productAndRanting : sortByRantingAndSun(pageService.search(null, 1, null, null, null), 30))
             BestsellerProducts1.add(productAndRanting.product);
         List<product> BestsellerProducts2 = new ArrayList<>();
-        for (productAndRanting productAndRanting : sortByRantingAndSun(pageService.search(null, 2, null, null), 30))
+        for (productAndRanting productAndRanting : sortByRantingAndSun(pageService.search(null, 2, null, null, null), 30))
             BestsellerProducts2.add(productAndRanting.product);
         List<product> BestsellerProducts3 = new ArrayList<>();
-        for (productAndRanting productAndRanting : sortByRantingAndSun(pageService.search(null, 3, null, null), 30))
+        for (productAndRanting productAndRanting : sortByRantingAndSun(pageService.search(null, 3, null, null, null), 30))
             BestsellerProducts3.add(productAndRanting.product);
 
 

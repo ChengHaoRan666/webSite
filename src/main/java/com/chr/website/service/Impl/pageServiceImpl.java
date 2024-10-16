@@ -110,7 +110,10 @@ public class pageServiceImpl implements pageService {
      * 关键词，商品类别，价格区间，三个搜索条件可有可无进行搜索
      */
     @Override
-    public List<product> search(String keyword, Integer CategoryId, Double min, Double max) {
+    public List<product> search(String keyword, Integer CategoryId, Double min, Double max, Integer pageNumber) {
+        if (pageNumber != null) {
+            PageHelper.startPage(pageNumber, 12);
+        }
         return productDao.search(keyword, CategoryId, min, max);
     }
 
@@ -130,7 +133,7 @@ public class pageServiceImpl implements pageService {
      * 获取商品评价
      */
     @Override
-    public List<review> getComment(Integer productId,Integer pageNumber) {
+    public List<review> getComment(Integer productId, Integer pageNumber) {
         PageHelper.startPage(pageNumber, 3); // 开启分页功能
         return reviewDao.selectReviewByproductId(productId);
     }

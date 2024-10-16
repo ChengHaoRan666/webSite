@@ -98,7 +98,7 @@ public class search {
         product product = pageService.commodityShow(productId); // 商品
         Integer categoryId = product.getCategoryId(); // 类型
         // 获取相同类型的商品
-        List<product> productList = pageService.search(null, categoryId, null, null);
+        List<product> productList = pageService.search(null, categoryId, null, null, null);
         Collections.shuffle(productList);
         productList.remove(product);
         List<product> products = productList.subList(0, 4);
@@ -207,9 +207,11 @@ public class search {
             HttpSession session,
             @RequestParam(value = "keyWord", required = false) String keyWord, // 关键词，必须在商品名中
             @RequestParam(value = "CategoryId", required = false) String CategoryIdString,
+            @RequestParam(value = "pageNumber", required = false) String pageNumberString,
             @RequestParam(value = "price_min", required = false) String price_min_string,
             @RequestParam(value = "price_max", required = false) String price_max_string) {
         Integer CategoryId = CategoryIdString == null ? null : Integer.parseInt(CategoryIdString);
+        Integer pageNumber = pageNumberString == null ? 1 : Integer.parseInt(pageNumberString);
         Double price_min = price_min_string == null ? null : Double.parseDouble(price_min_string);
         Double price_max = price_max_string == null ? null : Double.parseDouble(price_max_string);
         // 更新收藏和购物车红点
@@ -227,22 +229,30 @@ public class search {
 
         //向model中加入List<product> 搜索结果
         CategoryId--;
+        List<product> searchProductList = new ArrayList<>();
         // 如果选择的是热销
         if (CategoryId == 0) {
-            List<product> searchProductList = pageService.search(keyWord, null, price_min, price_max);
+            searchProductList = pageService.search(keyWord, null, price_min, price_max, pageNumber);
             model.addAttribute("searchProductList", sortByRantingAndSun(searchProductList));
 
         }
         // 如果选择的是全部
         else if (CategoryId == -1) {
-            List<product> searchProductList = pageService.search(keyWord, null, price_min, price_max);
+           searchProductList = pageService.search(keyWord, null, price_min, price_max, pageNumber);
             model.addAttribute("searchProductList", searchProductList);
         }
         // 如果选择的是分类
         else {
-            List<product> searchProductList = pageService.search(keyWord, CategoryId, price_min, price_max);
+             searchProductList = pageService.search(keyWord, CategoryId, price_min, price_max, pageNumber);
             model.addAttribute("searchProductList", searchProductList);
         }
+        PageInfo<product> productPageInfo = new PageInfo<>(searchProductList, pageNumber);
+        // 当前页
+        model.addAttribute("currentPage", productPageInfo.getPageNum());
+        // 总页数
+        model.addAttribute("maxPage", productPageInfo.getPages());
+        // 总条数
+        model.addAttribute("reviewCount", productPageInfo.getTotal());
         return "store";
     }
 
