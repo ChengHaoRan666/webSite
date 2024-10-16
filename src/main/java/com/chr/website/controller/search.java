@@ -233,19 +233,17 @@ public class search {
         // 如果选择的是热销
         if (CategoryId == 0) {
             searchProductList = pageService.search(keyWord, null, price_min, price_max, pageNumber);
-            model.addAttribute("searchProductList", sortByRantingAndSun(searchProductList));
-
+            searchProductList = sortByRantingAndSun(searchProductList);
         }
         // 如果选择的是全部
-        else if (CategoryId == -1) {
-           searchProductList = pageService.search(keyWord, null, price_min, price_max, pageNumber);
-            model.addAttribute("searchProductList", searchProductList);
-        }
-        // 如果选择的是分类
-        else {
-             searchProductList = pageService.search(keyWord, CategoryId, price_min, price_max, pageNumber);
-            model.addAttribute("searchProductList", searchProductList);
-        }
+        else if (CategoryId == -1)
+            searchProductList = pageService.search(keyWord, null, price_min, price_max, pageNumber);
+
+            // 如果选择的是分类
+        else
+            searchProductList = pageService.search(keyWord, CategoryId, price_min, price_max, pageNumber);
+
+        model.addAttribute("searchProductList", searchProductList);
         PageInfo<product> productPageInfo = new PageInfo<>(searchProductList, pageNumber);
         // 当前页
         model.addAttribute("currentPage", productPageInfo.getPageNum());
@@ -254,6 +252,47 @@ public class search {
         // 总条数
         model.addAttribute("reviewCount", productPageInfo.getTotal());
         return "store";
+    }
+
+    @RequestMapping("/search2")
+    public ResponseEntity<Map<String, Object>> search2(
+            @RequestParam(value = "keyWord", required = false) String keyWord, // 关键词，必须在商品名中
+            @RequestParam(value = "CategoryId", required = false) String CategoryIdString,
+            @RequestParam(value = "pageNumber", required = false) String pageNumberString,
+            @RequestParam(value = "price_min", required = false) String price_min_string,
+            @RequestParam(value = "price_max", required = false) String price_max_string) {
+        Integer CategoryId = CategoryIdString == null || CategoryIdString.equals("null") ? null : Integer.parseInt(CategoryIdString);
+        Integer pageNumber = pageNumberString == null || pageNumberString.equals("null") ? 1 : Integer.parseInt(pageNumberString);
+        Double price_min = price_min_string == null || price_min_string.equals("null") ? null : Double.parseDouble(price_min_string);
+        Double price_max = price_max_string == null || price_max_string.equals("null") ? null : Double.parseDouble(price_max_string);
+
+        //向model中加入List<product> 搜索结果
+        CategoryId--;
+        List<product> searchProductList = new ArrayList<>();
+        // 如果选择的是热销
+        if (CategoryId == 0) {
+            searchProductList = pageService.search(keyWord, null, price_min, price_max, pageNumber);
+            searchProductList = sortByRantingAndSun(searchProductList);
+        }
+        // 如果选择的是全部
+        else if (CategoryId == -1) {
+            searchProductList = pageService.search(keyWord, null, price_min, price_max, pageNumber);
+        }
+        // 如果选择的是分类
+        else {
+            searchProductList = pageService.search(keyWord, CategoryId, price_min, price_max, pageNumber);
+        }
+        PageInfo<product> productPageInfo = new PageInfo<>(searchProductList, pageNumber);
+        Map<String, Object> response = new HashMap<>();
+        // 当前页
+        response.put("currentPage", productPageInfo.getPageNum());
+        // 总页数
+        response.put("maxPage", productPageInfo.getPages());
+        // 总条数
+        response.put("reviewCount", productPageInfo.getTotal());
+        // 数据
+        response.put("searchProductList", searchProductList);
+        return ResponseEntity.ok(response);
     }
 
     /**

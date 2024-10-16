@@ -248,7 +248,7 @@
 
 
                 <!-- store products -->
-                <div class="row">
+                <div class="row products">
                     <!-- product -->
                     <div class="col-md-4 col-xs-6" th:each="product:${searchProductList}">
                         <div class="product">
@@ -290,7 +290,7 @@
                 <!-- 底部导航条 -->
                 <div class="store-filter clearfix">
                     <!--TODO-->
-                    <ul class="reviews-pagination" th:data-product-id="${currentPage}">
+                    <ul class="reviews-pagination">
                         <!-- 向前一页，仅在当前页大于1时显示 -->
                         <li th:if="${currentPage > 1}">
                             <a href="#" th:data-page="${currentPage - 1}">
