@@ -224,6 +224,7 @@
     <!-- /container -->
 </div>
 <!-- /SECTION -->
+
 <!-- FOOTER -->
 <footer id="footer">
     <!-- top footer -->
@@ -237,9 +238,9 @@
                         <h3 class="footer-title">关于我们</h3>
                         <p>介绍</p>
                         <ul class="footer-links">
-                            <li><a href="#"><i class="fa fa-map-marker"></i>许昌学院</a></li>
-                            <li><a href="#"><i class="fa fa-phone"></i>181 3312 6910</a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i>2640708884@qq.com</a></li>
+                            <li><a><i class="fa fa-map-marker"></i>许昌学院</a></li>
+                            <li><a><i class="fa fa-phone"></i>181 3312 6910</a></li>
+                            <li><a><i class="fa fa-envelope-o"></i>2640708884@qq.com</a></li>
                         </ul>
                     </div>
                 </div>
@@ -248,11 +249,11 @@
                     <div class="footer">
                         <h3 class="footer-title">类别</h3>
                         <ul class="footer-links">
-                            <li><a href="#">热门交易</a></li>
-                            <li><a href="#">电脑</a></li>
-                            <li><a href="#">手机</a></li>
-                            <li><a href="#">相机</a></li>
-                            <li><a href="#">配件</a></li>
+                            <li><a th:href="@{/search?CategoryId=1}">热门交易</a></li>
+                            <li><a th:href="@{/search?CategoryId=2}">电脑</a></li>
+                            <li><a th:href="@{/search?CategoryId=3}">手机</a></li>
+                            <li><a th:href="@{/search?CategoryId=4}">相机</a></li>
+                            <li><a th:href="@{/search?CategoryId=5}">配件</a></li>
                         </ul>
                     </div>
                 </div>
@@ -263,11 +264,11 @@
                     <div class="footer">
                         <h3 class="footer-title">咨询</h3>
                         <ul class="footer-links">
-                            <li><a href="#">关于我们</a></li>
-                            <li><a href="#">联系我们</a></li>
-                            <li><a href="#">隐私政策</a></li>
-                            <li><a href="#">订单和退货</a></li>
-                            <li><a href="#">条款与条件</a></li>
+                            <li><a>关于我们</a></li>
+                            <li><a>联系我们</a></li>
+                            <li><a>隐私政策</a></li>
+                            <li><a>条款与条件</a></li>
+                            <li><a>帮助</a></li>
                         </ul>
                     </div>
                 </div>
@@ -276,11 +277,11 @@
                     <div class="footer">
                         <h3 class="footer-title">服务</h3>
                         <ul class="footer-links">
-                            <li><a href="#">我的账户</a></li>
-                            <li><a href="#">查看购物车</a></li>
-                            <li><a href="#">愿望清单</a></li>
-                            <li><a href="#">我的订单</a></li>
-                            <li><a href="#">帮助</a></li>
+                            <li><a th:href="@{/profile}">个人首页</a></li>
+                            <li><a th:href="@{/view?id=3}">查看购物车</a></li>
+                            <li><a th:href="@{/view?id=2}">收藏清单</a></li>
+                            <li><a th:href="@{/view?id=1}">我的订单</a></li>
+                            <li><a th:href="@{/view?id=4}">待收货</a></li>
                         </ul>
                     </div>
                 </div>
