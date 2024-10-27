@@ -48,7 +48,9 @@
                 <li><a href="#"><i class="fa fa-map-marker"></i> 许昌学院</a></li>
             </ul>
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-user-o"></i> 登录/注册</a></li>
+                <th:block th:if="${session.sellerId != null}">
+                    <li><a th:href="@{/sellerProfile}"><i class="fa fa-user"></i> 店铺中心</a></li>
+                </th:block>
             </ul>
         </div>
     </div>
@@ -63,102 +65,12 @@
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
-                        <a href="#" class="logo">
+                        <a class="logo" th:href="@{/sellerProfile}">
                             <img src="/website/static/img/logo.png" alt="">
                         </a>
                     </div>
                 </div>
                 <!-- /LOGO -->
-
-                <!-- SEARCH BAR -->
-                <div class="col-md-6">
-                    <div class="header-search">
-                        <form>
-                            <select class="input-select">
-                                <option value="0">所有类别</option>
-                                <option value="1">电脑</option>
-                                <option value="3">手机</option>
-                                <option value="4">相机</option>
-                                <option value="5">配件</option>
-                            </select>
-                            <input class="input" placeholder="点击搜索">
-                            <button class="search-btn">搜索</button>
-                        </form>
-                    </div>
-                </div>
-                <!-- /SEARCH BAR -->
-
-                <!-- ACCOUNT -->
-                <div class="col-md-3 clearfix">
-                    <div class="header-ctn">
-                        <!-- Wishlist -->
-                        <div>
-                            <a href="#">
-                                <i class="fa fa-heart-o"></i>
-                                <span>收藏</span>
-                                <div class="qty">21</div>
-                            </a>
-                        </div>
-                        <!-- /Wishlist -->
-
-                        <!-- 购物车下拉菜单 -->
-                        <div class="dropdown">
-                            <a aria-expanded="true" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-shopping-cart"></i>
-                                <span>购物车</span>
-                                <div class="qty">12</div>
-                            </a>
-                            <div class="cart-dropdown">
-                                <div class="cart-list">
-                                    <!--第一个商品-->
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img alt="" src="/website/static/img/product01.png">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                            <h4 class="product-price"><span class="qty">1x</span>￥980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
-
-                                    <!--第二个商品-->
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img alt="" src="/website/static/img/product02.png">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">产品名称</a></h3>
-                                            <h4 class="product-price"><span class="qty">3x</span>￥980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
-                                </div>
-
-                                <!--购物车摘要-->
-                                <div class="cart-summary">
-                                    <small>已选择 3 件商品</small>
-                                    <h5>总价：￥100</h5>
-                                </div>
-                                <div class="cart-btns">
-                                    <a href="#">查看购物车</a>
-                                    <a href="#">结账 <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Cart -->
-
-                        <!-- Menu Toogle -->
-                        <div class="menu-toggle">
-                            <a href="#">
-                                <i class="fa fa-bars"></i>
-                                <span>Menu</span>
-                            </a>
-                        </div>
-                        <!-- /Menu Toogle -->
-                    </div>
-                </div>
-                <!-- /ACCOUNT -->
             </div>
             <!-- row -->
         </div>
@@ -174,16 +86,6 @@
     <div class="container">
         <!-- responsive-nav -->
         <div id="responsive-nav">
-            <!-- NAV -->
-            <ul class="main-nav nav navbar-nav">
-                <li><a href="#">主页</a></li>
-                <li><a href="#">热销</a></li>
-                <li><a href="#">电脑</a></li>
-                <li><a href="#">手机</a></li>
-                <li><a href="#">相机</a></li>
-                <li><a href="#">配件</a></li>
-            </ul>
-            <!-- /NAV -->
         </div>
         <!-- /responsive-nav -->
     </div>
@@ -204,6 +106,8 @@
 </div>
 <!-- /SECTION -->
 
+
+<!--TODO:商家操作-->
 <div class="col-md-5"></div>
 <h4><a href="#">订单管理</a></h4>
 

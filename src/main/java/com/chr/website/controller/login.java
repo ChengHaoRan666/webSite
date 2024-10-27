@@ -1,6 +1,5 @@
 package com.chr.website.controller;
 
-import com.chr.website.entity.product;
 import com.chr.website.service.Impl.loginServiceImpl;
 import com.chr.website.service.Impl.pageServiceImpl;
 import com.chr.website.service.Impl.sellerServiceImpl;
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Map;
 
 /**
  * @Author: 程浩然
@@ -98,26 +95,5 @@ public class login {
                 return "register";
         }
         return "register";
-    }
-
-
-    /**
-     * 商家页面
-     */
-    @RequestMapping("/sellerProfile")
-    public String sellerShow(HttpSession session) {
-        // 更新数据
-        // 获取收藏列表，购物车列表
-        Map<product, Integer> starMap = pageService.collectShow((Integer) session.getAttribute("userId"));
-        Map<product, Integer> cartMap = pageService.cartShow((Integer) session.getAttribute("userId"));
-
-        // 购物车数量
-        session.setAttribute("starCount", starMap.size());
-        // 收藏数量
-        session.setAttribute("cartCount", cartMap.size());
-        // 收藏，购物车列表
-        session.setAttribute("starMap", starMap);
-        session.setAttribute("cartMap", cartMap);
-        return "merchantHomepage";
     }
 }
