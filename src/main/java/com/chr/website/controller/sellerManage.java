@@ -60,10 +60,11 @@ public class sellerManage {
         return "merchantModifyInformation";
     }
 
-    @RequestMapping("/seller/sellerLogoff")
+
     /**
      * 商家注销
      */
+    @RequestMapping("/seller/sellerLogoff")
     public String sellerLogoff(HttpSession session) {
         Integer sellerId = (Integer) session.getAttribute("sellerId");
         session.removeAttribute("sellerId");

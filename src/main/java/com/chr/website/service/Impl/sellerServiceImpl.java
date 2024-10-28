@@ -151,7 +151,6 @@ public class sellerServiceImpl implements sellerService {
         sellerDao.deleteSeller(sellerId);
         // 获取这个商家的全部商品
         List<product> products = productDao.selectProductByProductStoreID(sellerId);
-        // TODO:将商品状态改变，改为下架
         for (product product : products)
             productDao.updateProduct(product.getId(), new product(product.getName(), product.getProductStoreID(), product.getDescription(), product.getPrice(), product.getStockQuantity(), product.getCategoryId(), product.getImageUrl(), product.getListedDate(), "3"));
     }
