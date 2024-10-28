@@ -1,9 +1,6 @@
 package com.chr.website.service.Impl;
 
-import com.chr.website.dao.orderDao;
-import com.chr.website.dao.productDao;
-import com.chr.website.dao.sellerDao;
-import com.chr.website.dao.userDao;
+import com.chr.website.dao.*;
 import com.chr.website.entity.order;
 import com.chr.website.entity.product;
 import com.chr.website.entity.seller;
@@ -29,6 +26,10 @@ public class sellerServiceImpl implements sellerService {
     private productDao productDao;
     @Autowired
     private orderDao orderDao;
+    @Autowired
+    private reviewDao reviewDao;
+    @Autowired
+    private starDao starDao;
 
     /**
      * 商家登录<br>
@@ -106,7 +107,6 @@ public class sellerServiceImpl implements sellerService {
     }
 
 
-
     /**
      * 修改商家信息<br>
      * 成功修改  0<br>
@@ -146,7 +146,11 @@ public class sellerServiceImpl implements sellerService {
      * 商家注销
      */
     @Override
-    public Integer sellerLogoff(Integer sellerId) {
-        return sellerDao.deleteSeller(sellerId);
+    public void sellerLogoff(Integer sellerId) {
+        // 在商家表中删除商家
+        sellerDao.deleteSeller(sellerId);
+        // 获取这个商家的全部商品
+        List<product> products = productDao.selectProductByProductStoreID(sellerId);
+        // TODO:将商品状态改变，改为下架
     }
 }

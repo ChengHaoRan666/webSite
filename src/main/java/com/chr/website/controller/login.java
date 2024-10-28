@@ -45,7 +45,8 @@ public class login {
         Integer j = sellerService.sellerLogin(name, password, password, phone, inputVerificationCode, codeTrue);
         if (j > 0) {
             session.setAttribute("sellerId", j);
-            return "redirect:/sellerProfile";
+            session.setAttribute("sellerName", name);
+            return "redirect:/seller/sellerProfile";
         }
         switch (i) {
             case -1, -4:

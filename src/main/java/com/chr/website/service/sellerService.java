@@ -34,7 +34,6 @@ public interface sellerService {
      */
     List<order> orderManage(Integer sellerId);
 
-
     /**
      * 修改商家信息
      */
@@ -43,5 +42,5 @@ public interface sellerService {
     /**
      * 商家注销
      */
-    Integer sellerLogoff(Integer sellerId);
+    void sellerLogoff(Integer sellerId);
 }
