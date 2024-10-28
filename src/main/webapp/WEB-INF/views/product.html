@@ -233,8 +233,13 @@
                         <a class="review-link" th:text="|${reviewCount} 条评论|">10 条评论</a>
                     </div>
                     <div>
-                        <h3 class="product-price" th:text="${search_product.getPrice()}">￥980.00</h3>
-                        <span class="product-available">现货</span>
+                        <h3 class="product-price" th:text="'￥ '+${search_product.getPrice()}">￥980.00</h3>
+                        <div th:switch="${search_product.getStatus()}">
+                            <span class="product-available" th:case="'0'">特价</span>
+                            <span class="product-available" th:case="'1'">现售</span>
+                            <span class="product-available" th:case="'2'">预售</span>
+                            <span class="product-available" th:case="'3'">已下架</span>
+                        </div>
                     </div>
 
 
