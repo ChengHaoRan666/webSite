@@ -234,6 +234,7 @@
                     </div>
                     <div>
                         <h3 class="product-price" th:text="'￥ '+${search_product.getPrice()}">￥980.00</h3>
+                        <!--TODO-->
                         <div th:switch="${search_product.getStatus()}">
                             <span class="product-available" th:case="'0'">特价</span>
                             <span class="product-available" th:case="'1'">现售</span>
