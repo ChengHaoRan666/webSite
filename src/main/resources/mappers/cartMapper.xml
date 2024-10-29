@@ -16,6 +16,10 @@
     <delete id="deleteCartByUserId">
         delete from carts where UserID = #{userId};
     </delete>
+<!--删 int deleteCartByProductId(@Param("productId") Integer productId);-->
+    <delete id="deleteCartByProductId">
+        delete from carts where ProductID=#{productId}
+    </delete>
 
 
     <!--int deleteCartByUserIdProductId(@Param("userId") Integer userId, @Param("ProductId") Integer ProductId);-->

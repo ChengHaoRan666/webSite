@@ -30,6 +30,8 @@ public class sellerServiceImpl implements sellerService {
     private reviewDao reviewDao;
     @Autowired
     private starDao starDao;
+    @Autowired
+    private cartDao cartDao;
 
     /**
      * 商家登录<br>
@@ -151,7 +153,23 @@ public class sellerServiceImpl implements sellerService {
         sellerDao.deleteSeller(sellerId);
         // 获取这个商家的全部商品
         List<product> products = productDao.selectProductByProductStoreID(sellerId);
+        // 将全部商品下架
         for (product product : products)
-            productDao.updateProduct(product.getId(), new product(product.getName(), product.getProductStoreID(), product.getDescription(), product.getPrice(), product.getStockQuantity(), product.getCategoryId(), product.getImageUrl(), product.getListedDate(), "3"));
+            noShelf(product.getId());
+    }
+
+    /**
+     * 商品下架
+     */
+    @Override
+    public void noShelf(Integer productId) {
+        // 1. 在商品表中删除商品
+        productDao.deleteProduct(productId);
+        // 2. 在收藏表中删除商品
+        starDao.deleteStarByProductId(productId);
+        // 3. 在购物车表中删除商品
+        cartDao.deleteCartByProductId(productId);
+        // 4. 在评论表中删除商品
+        reviewDao.deleteByproductId(productId);
     }
 }

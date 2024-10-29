@@ -13,7 +13,7 @@ import java.util.List;
  * @Description: 评价表
  */
 @Component
-public class reviewDao implements reviewMapper{
+public class reviewDao implements reviewMapper {
     @Autowired
     private reviewMapper reviewMapper;
 
@@ -29,6 +29,14 @@ public class reviewDao implements reviewMapper{
      */
     public List<review> selectReviewByproductId(Integer productId) {
         return reviewMapper.selectReviewByproductId(productId);
+    }
+
+    /**
+     * 通过商品id删除
+     */
+    @Override
+    public int deleteByproductId(Integer productId) {
+        return reviewMapper.deleteByproductId(productId);
     }
 
 }

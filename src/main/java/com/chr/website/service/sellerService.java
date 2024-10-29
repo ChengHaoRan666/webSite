@@ -17,7 +17,7 @@ public interface sellerService {
     /**
      * 商家登录
      */
-    Integer sellerLogin(String username, String password1, String password2, String phone, String code,String codeTrue);
+    Integer sellerLogin(String username, String password1, String password2, String phone, String code, String codeTrue);
 
     /**
      * 商家注册
@@ -37,10 +37,15 @@ public interface sellerService {
     /**
      * 修改商家信息
      */
-    Integer sellerModifyInformation(Integer sellerId, String sellerName, String password1, String password2, String code,String codeTrue, String Description, String email, String phone);
+    Integer sellerModifyInformation(Integer sellerId, String sellerName, String password1, String password2, String code, String codeTrue, String Description, String email, String phone);
 
     /**
      * 商家注销
      */
     void sellerLogoff(Integer sellerId);
+
+    /**
+     * 商品下架
+     */
+    void noShelf(Integer productId);
 }

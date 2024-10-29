@@ -16,6 +16,10 @@
     <delete id="deleteStarByUserId">
         delete from stars where UserID = #{userId};
     </delete>
+    <!--删除 int deleteStarByProductId(@Param("productId") Integer productId);-->
+    <delete id="deleteStarByProductId">
+        delete from stars where ProductID = #{productId};
+    </delete>
 
     <!--public int deleteStarByUserIdProductId(@Param("userId") Integer userId, @Param("productId") Integer productId);-->
     <delete id="deleteStarByUserIdProductId">

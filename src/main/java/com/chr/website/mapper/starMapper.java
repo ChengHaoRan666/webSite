@@ -31,7 +31,12 @@ public interface starMapper {
     /**
      * 通过用户id和商品id删
      */
-    public int deleteStarByUserIdProductId(@Param("userId") Integer userId, @Param("productId") Integer productId);
+    int deleteStarByUserIdProductId(@Param("userId") Integer userId, @Param("productId") Integer productId);
+
+    /**
+     * 通过商品id删（商品下架）
+     */
+    int deleteStarByProductId(@Param("productId") Integer productId);
 
     /**
      * 改

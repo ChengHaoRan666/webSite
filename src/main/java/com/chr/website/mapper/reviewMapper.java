@@ -22,4 +22,9 @@ public interface reviewMapper {
      * 通过商品id查找
      */
     List<review> selectReviewByproductId(@Param("productId") Integer productId);
+
+    /**
+     * 通过商品id删除
+     */
+    int deleteByproductId(@Param("productId") Integer productId);
 }

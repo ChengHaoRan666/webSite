@@ -48,6 +48,14 @@ public class starDao implements starMapper {
         return starMapper.deleteStarByUserIdProductId(userId, productId);
     }
 
+    /**
+     * 通过商品id删（商品下架）
+     */
+    @Override
+    public int deleteStarByProductId(Integer productId) {
+        return starMapper.deleteStarByProductId(productId);
+    }
+
 
     /**
      * 改

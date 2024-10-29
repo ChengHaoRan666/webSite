@@ -10,6 +10,11 @@
         #{review.reviewTime});
     </insert>
 
+<!--删除 int deleteByproductId(@Param("productId") Integer productId);-->
+    <delete id="deleteByproductId">
+        delete from reviews where ProductID=#{productId}
+    </delete>
+
     <resultMap id="reviewMapper" type="review">
         <id property="reviewId" column="ReviewID"/>
         <result property="productId" column="ProductID"/>

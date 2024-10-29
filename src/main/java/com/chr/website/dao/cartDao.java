@@ -48,6 +48,14 @@ public class cartDao implements cartMapper {
     }
 
     /**
+     * 根据商品id删除购物车（下架）
+     */
+    @Override
+    public int deleteCartByProductId(Integer productId) {
+        return cartMapper.deleteCartByProductId(productId);
+    }
+
+    /**
      * 改
      */
     public int updateCart(Integer cartID, cart cart) {
