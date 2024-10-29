@@ -1,6 +1,7 @@
 package com.chr.website.controller;
 
 import com.chr.website.entity.order;
+import com.chr.website.entity.product;
 import com.chr.website.service.Impl.sellerServiceImpl;
 import com.chr.website.utils.loginUtil;
 import jakarta.servlet.http.HttpSession;
@@ -84,6 +85,16 @@ public class sellerManage {
     public String orderManage(HttpSession session) {
         Integer sellerId = (Integer) session.getAttribute("sellerId");
         List<order> orders = sellerService.orderManage(sellerId);
+
+    }
+
+    /**
+     * 商品管理
+     */
+    @RequestMapping("/seller/productManage")
+    public String productManage(HttpSession session){
+        Integer sellerId=(Integer) session.getAttribute("sellerId");
+        List<product> products = sellerService.manage(sellerId);
 
     }
 }
