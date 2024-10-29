@@ -1,5 +1,6 @@
 package com.chr.website.controller;
 
+import com.chr.website.entity.order;
 import com.chr.website.service.Impl.sellerServiceImpl;
 import com.chr.website.utils.loginUtil;
 import jakarta.servlet.http.HttpSession;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * @Author: 程浩然
@@ -71,5 +74,16 @@ public class sellerManage {
         session.removeAttribute("sellerName");
         sellerService.sellerLogoff(sellerId);
         return "redirect:/";
+    }
+
+
+    /**
+     * 订单管理
+     */
+    @RequestMapping("/seller/orderManage")
+    public String orderManage(HttpSession session) {
+        Integer sellerId = (Integer) session.getAttribute("sellerId");
+        List<order> orders = sellerService.orderManage(sellerId);
+
     }
 }
