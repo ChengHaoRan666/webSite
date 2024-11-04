@@ -85,6 +85,9 @@ public class sellerManage {
     public String orderManage(HttpSession session) {
         Integer sellerId = (Integer) session.getAttribute("sellerId");
         List<order> orders = sellerService.orderManage(sellerId);
+        session.setAttribute("tableVal", orders);
+        session.setAttribute("tableName", "订单管理");
+        return "sellerView";
     }
 
     /**
@@ -94,6 +97,7 @@ public class sellerManage {
     public String productManage(HttpSession session) {
         Integer sellerId = (Integer) session.getAttribute("sellerId");
         List<product> products = sellerService.manage(sellerId);
-
+        session.setAttribute("tableName", "商品管理");
+        return "sellerView";
     }
 }
