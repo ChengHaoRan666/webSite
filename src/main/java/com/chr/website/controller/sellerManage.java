@@ -79,17 +79,16 @@ public class sellerManage {
 
 
     /**
-     * 订单管理
+     *TODO 订单管理
      */
     @RequestMapping("/seller/orderManage")
     public String orderManage(HttpSession session) {
         Integer sellerId = (Integer) session.getAttribute("sellerId");
         List<order> orders = sellerService.orderManage(sellerId);
-        // TODO：订单管理
     }
 
     /**
-     * 商品管理
+     *TODO 商品管理
      */
     @RequestMapping("/seller/productManage")
     public String productManage(HttpSession session){
