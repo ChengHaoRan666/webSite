@@ -85,7 +85,7 @@ public class sellerManage {
     public String orderManage(HttpSession session) {
         Integer sellerId = (Integer) session.getAttribute("sellerId");
         List<order> orders = sellerService.orderManage(sellerId);
-
+        // TODO：订单管理
     }
 
     /**
