@@ -79,20 +79,20 @@ public class sellerManage {
 
 
     /**
-     *TODO 订单管理
+     * TODO 订单管理
      */
-    @RequestMapping("/seller/orderManage")
+    @RequestMapping(value = "/seller/orderManage", method = RequestMethod.GET)
     public String orderManage(HttpSession session) {
         Integer sellerId = (Integer) session.getAttribute("sellerId");
         List<order> orders = sellerService.orderManage(sellerId);
     }
 
     /**
-     *TODO 商品管理
+     * TODO 商品管理
      */
-    @RequestMapping("/seller/productManage")
-    public String productManage(HttpSession session){
-        Integer sellerId=(Integer) session.getAttribute("sellerId");
+    @RequestMapping(value = "/seller/productManage", method = RequestMethod.GET)
+    public String productManage(HttpSession session) {
+        Integer sellerId = (Integer) session.getAttribute("sellerId");
         List<product> products = sellerService.manage(sellerId);
 
     }
