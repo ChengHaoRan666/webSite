@@ -66,8 +66,6 @@ public class search {
      */
     @RequestMapping(value = "/product/{productId}", method = RequestMethod.GET)
     public String productShow(Model model, HttpSession session, @PathVariable(value = "productId", required = false) Integer productId) {
-
-
         @Data
         class productAndRanting {
             product product;
