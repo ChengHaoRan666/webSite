@@ -30,7 +30,7 @@
         where ProductID = #{id};
     </update>
 
-    <resultMap id="productMapper" type="product">
+    <resultMap id="productMapper" type="com.chr.website.entity.product">
         <id property="id" column="ProductID"/>
         <result property="name" column="ProductName"/>
         <result property="productStoreID" column="ProductStoreID"/>
@@ -64,19 +64,37 @@
     </select>
 
     <!--关键词，商品类别，价格区间，三个搜索条件可有可无进行搜索-->
+    <!--    <select id="search" resultMap="productMapper">-->
+    <!--        select * from Products where 1 = 1-->
+    <!--        <if test="CategoryId != null">-->
+    <!--            and CategoryID = #{CategoryId}-->
+    <!--        </if>-->
+    <!--        <if test="min != '' and min != null">-->
+    <!--            and Price >= #{min}-->
+    <!--        </if>-->
+    <!--        <if test="max != '' and max != null">-->
+    <!--            and Price &lt;= #{max}-->
+    <!--        </if>-->
+    <!--        <if test="keyword != '' and keyword != null">-->
+    <!--            and ProductName like "%"#{keyword}"%"-->
+    <!--        </if>-->
+    <!--    </select>-->
     <select id="search" resultMap="productMapper">
-        select * from Products where 1 = 1
-        <if test="CategoryId != '' and CategoryId != null">
-            and CategoryID in (#{CategoryId})
-        </if>
-        <if test="min != '' and min != null">
-            and Price >= #{min}
-        </if>
-        <if test="max != '' and max != null">
-            and Price &lt;= #{max}
-        </if>
-        <if test="keyword != '' and keyword != null">
-            and ProductName like "%"#{keyword}"%"
-        </if>
+        select * from Products
+        <where>
+            <if test="CategoryId != null">
+                and CategoryID = #{CategoryId}
+            </if>
+            <if test="min != null">
+                and Price >= #{min}
+            </if>
+            <if test="max != null">
+                and Price &lt;= #{max}
+            </if>
+            <if test="keyword!='' and keyword != null">
+                and ProductName like concat('%', #{keyword}, '%')
+            </if>
+        </where>
     </select>
+
 </mapper>

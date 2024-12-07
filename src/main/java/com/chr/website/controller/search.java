@@ -268,7 +268,7 @@ public class search {
         Integer pageNumber = pageNumberString == null || pageNumberString.equals("null") ? 1 : Integer.parseInt(pageNumberString);
         Double price_min = price_min_string == null || price_min_string.equals("null") ? null : Double.parseDouble(price_min_string);
         Double price_max = price_max_string == null || price_max_string.equals("null") ? null : Double.parseDouble(price_max_string);
-
+        keyWord = keyWord.equals("null") ? null : keyWord;
         //向model中加入List<product> 搜索结果
         CategoryId--;
         List<product> searchProductList = new ArrayList<>();
