@@ -381,7 +381,7 @@
                                                     <i class="fa fa-star"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div th:style="'width: ' + (${ratingCount[5]} /${search_product_ranting_count} * 100) + '%;'"></div>
+                                                    <div th:style="'width: ' + (${search_product_ranting_count} != null and${search_product_ranting_count} != 0 ? (${ratingCount[5]} /${search_product_ranting_count} * 100) : 0) + '%;'"></div>
                                                 </div>
                                                 <span class="sum" th:text="${ratingCount[5]}">评分5的数量</span>
                                             </li>
@@ -394,7 +394,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div th:style="'width: ' + (${ratingCount[4]} /${search_product_ranting_count} * 100) + '%;'"></div>
+                                                    <div th:style="'width: ' + (${search_product_ranting_count} != null and${search_product_ranting_count} != 0 ? (${ratingCount[4]} /${search_product_ranting_count} * 100) : 0) + '%;'"></div>
                                                 </div>
                                                 <span class="sum" th:text="${ratingCount[4]}">评分4的数量</span>
                                             </li>
@@ -407,7 +407,8 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div th:style="'width: ' + (${ratingCount[3]} /${search_product_ranting_count} * 100) + '%;'"></div>
+                                                    <div th:style="'width: ' + (${search_product_ranting_count} != null and${search_product_ranting_count} != 0 ? (${ratingCount[3]} /${search_product_ranting_count} * 100) : 0) + '%;'"></div>
+
                                                 </div>
                                                 <span class="sum" th:text="${ratingCount[3]}">评分3的数量</span>
                                             </li>
@@ -420,7 +421,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div th:style="'width: ' + (${ratingCount[2]} /${search_product_ranting_count} * 100) + '%;'"></div>
+                                                    <div th:style="'width: ' + (${search_product_ranting_count} != null and${search_product_ranting_count} != 0 ? (${ratingCount[2]} /${search_product_ranting_count} * 100) : 0) + '%;'"></div>
                                                 </div>
                                                 <span class="sum" th:text="${ratingCount[2]}">评分2的数量</span>
                                             </li>
@@ -433,7 +434,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div th:style="'width: ' + (${ratingCount[1]} /${search_product_ranting_count} * 100) + '%;'"></div>
+                                                    <div th:style="'width: ' + (${search_product_ranting_count} != null and${search_product_ranting_count} != 0 ? (${ratingCount[1]} /${search_product_ranting_count} * 100) : 0) + '%;'"></div>
                                                 </div>
                                                 <span class="sum" th:text="${ratingCount[1]}">评分1的数量</span>
                                             </li>

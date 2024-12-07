@@ -7,6 +7,7 @@ import com.chr.website.service.Impl.shippingServiceImpl;
 import com.github.pagehelper.PageInfo;
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import java.util.*;
  * @Description: 搜索页
  */
 @Controller
+@Slf4j
 public class search {
     @Autowired
     private shippingServiceImpl shippingService;
@@ -99,8 +101,10 @@ public class search {
         List<product> productList = pageService.search(null, categoryId, null, null, null);
         Collections.shuffle(productList);
         productList.remove(product);
-        List<product> products = productList.subList(0, 4);
-
+        List<product> products = new ArrayList<>();
+        if (productList.size() >= 4) {
+            products = productList.subList(0, 4);
+        }
         List<productAndRanting> productAndRantings = new ArrayList<>();
         for (product product1 : products)
             productAndRantings.add(new productAndRanting(product1, getRanting(product1.getId())));
@@ -117,6 +121,7 @@ public class search {
         attributeMap.remove("main");
         // 获取主要展示信息
         model.addAttribute("attributeMain", main);
+        log.info("attributeMain的值：{}", main);
         // 将商品信息放入model中
         model.addAttribute("attributeMap", attributeMap);
         // 商品评分
