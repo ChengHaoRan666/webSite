@@ -59,7 +59,7 @@ CREATE TABLE Products
     StockQuantity  INT                  NOT NULL COMMENT '库存数量',
     CategoryID     INT COMMENT '商品分类id',
     ImageURL       Text(25500) COMMENT '图片url', # 前四张是图片展示，后面是介绍
-        ListedDate     DATE COMMENT '上架日期',
+    ListedDate     DATE COMMENT '上架日期',
     Status         ENUM ('0', '1', '2') NOT NULL COMMENT '状态：特价，现售，预售'
 );
 
@@ -123,3 +123,6 @@ values ('电脑'),
        ('手机'),
        ('相机'),
        ('配件');
+
+
+INSERT INTO users VALUE (null, '1', '1', '1', '12345678901', '2024-12-07 15:26:26', '2024-12-07 18:58:06');
