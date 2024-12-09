@@ -1,3 +1,4 @@
+# 添加商品
 use ssm;
 
 INSERT INTO products (ProductName, ProductStoreID, Description, Price, StockQuantity, CategoryID, ImageURL,
